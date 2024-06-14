@@ -11,23 +11,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 
 /**
  *
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbEditorial")
+@Table(name = "tb_editorial")
 public class Editorial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     private String nombre;
-    private int anhoFundacion;
+    private LocalDate fecha_fundacion;
     
     @ManyToOne
-    @JoinColumn(name = "direccion")
+    @JoinColumn(name = "id_direccion")
     private Direccion direccion;
     
     public Editorial(){}
@@ -48,12 +49,12 @@ public class Editorial {
         this.nombre = nombre;
     }
 
-    public int getAnhoFundacion() {
-        return anhoFundacion;
+    public LocalDate getFechaFundacion() {
+        return fecha_fundacion;
     }
 
-    public void setAnhoFundacion(int anhoFundacion) {
-        this.anhoFundacion = anhoFundacion;
+    public void setFechaFundacion(LocalDate fecha_fundacion) {
+        this.fecha_fundacion = fecha_fundacion;
     }
 
     public Direccion getDireccion() {

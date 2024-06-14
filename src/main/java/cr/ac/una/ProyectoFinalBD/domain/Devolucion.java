@@ -18,7 +18,7 @@ import java.util.Date;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbDevolucion")
+@Table(name = "tb_devolucion")
 public class Devolucion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Devolucion {
     private Date fechaDevolucionEfectuada;
     
     @OneToOne
-    @JoinColumn(name = "prestamo")
+    @JoinColumn(name = "id_prestamo")
     private Prestamo prestamo;
     
     public Devolucion(){}

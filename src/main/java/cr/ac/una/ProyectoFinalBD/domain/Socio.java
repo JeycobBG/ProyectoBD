@@ -22,7 +22,7 @@ import java.util.List;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbSocio")
+@Table(name = "tb_socio")
 public class Socio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Socio {
     private Date fechaRegistro;
     
     @ManyToOne
-    @JoinColumn(name = "persona")
+    @JoinColumn(name = "id_persona")
     private Persona persona;
     
     @OneToMany(mappedBy = "socio", fetch = FetchType.LAZY)

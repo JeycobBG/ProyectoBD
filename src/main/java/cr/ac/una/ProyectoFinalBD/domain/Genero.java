@@ -18,7 +18,7 @@ import java.util.List;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbGenero")
+@Table(name = "tb_genero")
 public class Genero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

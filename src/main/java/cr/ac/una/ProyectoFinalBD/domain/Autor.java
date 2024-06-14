@@ -26,7 +26,7 @@ public class Autor {
     private String bibliografia;
     
     @ManyToOne
-    @JoinColumn(name = "persona")
+    @JoinColumn(name = "id_persona")
     private Persona persona;
     
     public Autor(){}

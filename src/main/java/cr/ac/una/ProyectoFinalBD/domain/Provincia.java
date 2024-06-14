@@ -19,7 +19,7 @@ import java.util.List;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbProvincia")
+@Table(name = "tb_provincia")
 public class Provincia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

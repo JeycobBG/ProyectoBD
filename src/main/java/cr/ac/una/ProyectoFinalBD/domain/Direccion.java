@@ -21,7 +21,7 @@ import java.util.List;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbDireccion")
+@Table(name = "tb_direccion")
 public class Direccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class Direccion {
     private List<Editorial> editorial;
     
     @ManyToOne
-    @JoinColumn(name = "distrito")
+    @JoinColumn(name = "id_distrito")
     private Distrito distrito;
     
     public Direccion(){

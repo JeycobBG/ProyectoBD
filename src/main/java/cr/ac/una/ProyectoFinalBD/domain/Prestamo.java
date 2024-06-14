@@ -20,7 +20,7 @@ import java.util.Date;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbPrestamo")
+@Table(name = "tb_prestamo")
 public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +30,11 @@ public class Prestamo {
     private Date fechaDevolucionPrevista;
     
     @ManyToOne()
-    @JoinColumn(name = "libro")
+    @JoinColumn(name = "id_libro")
     private Libro libro;
     
     @ManyToOne()
-    @JoinColumn(name = "socio")
+    @JoinColumn(name = "id_socio")
     private Socio socio;
     
     @OneToOne(mappedBy = "prestamo", cascade = CascadeType.ALL)

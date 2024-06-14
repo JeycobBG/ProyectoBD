@@ -21,7 +21,7 @@ import java.util.List;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbPersona")
+@Table(name = "tb_persona")
 public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Persona {
     private String identificacion;
     
     @ManyToOne
-    @JoinColumn(name = "direccion")
+    @JoinColumn(name = "id_direccion")
     private Direccion direccion;
     
     @OneToMany(mappedBy = "persona", fetch = FetchType.LAZY)

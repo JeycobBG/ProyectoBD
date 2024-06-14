@@ -24,7 +24,7 @@ import java.util.List;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbLibro")
+@Table(name = "tb_libro")
 public class Libro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,18 +37,18 @@ public class Libro {
     private int cantidad;
     
     @ManyToOne
-    @JoinColumn(name = "autor")
+    @JoinColumn(name = "id_autor")
     private Autor autor;
     
      @ManyToOne
-     @JoinColumn(name = "editorial")
+     @JoinColumn(name = "id_editorial")
      private Editorial editorial;
      
      @ManyToMany(fetch = FetchType.LAZY)
      @JoinTable(
-             name = "tbLibro_Genero",
-             joinColumns = @JoinColumn(name = "idLibro"),
-             inverseJoinColumns = @JoinColumn(name = "idGenero")
+             name = "tb_libro_genero",
+             joinColumns = @JoinColumn(name = "id_libro"),
+             inverseJoinColumns = @JoinColumn(name = "id_genero")
      )
      private List<Genero> generos;
      

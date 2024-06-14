@@ -21,7 +21,7 @@ import java.util.List;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbCanton")
+@Table(name = "tb_canton")
 public class Canton {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Canton {
     private List<Distrito> distrito;
     
     @ManyToOne()
-    @JoinColumn(name = "provincia")
+    @JoinColumn(name = "id_provincia")
     private Provincia provincia;
 
     public Canton(){

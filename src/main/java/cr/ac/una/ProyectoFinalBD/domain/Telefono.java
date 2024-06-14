@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
  * @author JEYCOB
  */
 @Entity
-@Table(name="tbTelefono")
+@Table(name="tb_telefono")
 public class Telefono {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Telefono {
     private String numero;
     
     @ManyToOne
-    @JoinColumn(name = "persona")
+    @JoinColumn(name = "id_persona")
     private Persona persona;
     
     

@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbDistrito")
+@Table(name = "tb_distrito")
 public class Distrito {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Distrito {
     private String nombre;
     
     @ManyToOne()
-    @JoinColumn(name = "canton")
+    @JoinColumn(name = "id_canton")
     private Canton canton;
     
     public Distrito(){}
