@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Autor</title>
+</head>
+<body>
+    <h1>Actualizar Autor</h1>
+    
+    <form action="/autores/actualizarAutor" method="post">
+        <input type="hidden" name="id" th:value="${autor.id}" />
+
+        <label for="bibliografia">Bibliografía:</label><br>
+        <input type="text" id="bibliografia" name="bibliografia" th:value="${autor.bibliografia}" required><br><br>
+
+
+        <label for="persona">Persona asociada:</label><br>
+        <select id="persona" name="persona" required>
+            <option value="">Selecciona una persona</option>
+
+            <option value="persona1">Persona 1</option>
+            <option value="persona2">Persona 2</option>
+            <option value="persona3">Persona 3</option>
+            <!-- Fin de las opciones de ejemplo -->
+        </select><br><br>
+
+        <input type="submit" value="Guardar cambios">
+    </form>
+
+    <script>
+    </script>
+</body>
+</html>

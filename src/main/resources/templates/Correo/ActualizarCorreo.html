@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Correo Electrónico</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Actualizar Correo Electrónico</h2>
+    
+    <a href="/correos/listar" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+    <div class="container">
+        <div>
+            <form action="/correos/actualizarCorreo" method="post">
+                
+                <input type="hidden" id="id" name="id" th:value="${correo.id}" />
+                
+                <label for="email">Correo Electrónico:</label><br>
+                <input type="email" id="email" name="email" th:value="${correo.email}" required><br><br>
+                
+                <!-- Combo box para seleccionar la persona asociada -->
+                <label for="persona">Persona asociada:</label><br>
+                <select id="persona" name="persona" required>
+                    <option value="">Selecciona una persona</option>
+                    <!-- Aquí puedes cargar dinámicamente las opciones de persona desde tu backend -->
+                    <!-- Por ejemplo, podrías iterar sobre una lista de personas disponibles -->
+                    <!-- y generar opciones para cada una -->
+                    <option value="persona1">Persona 1</option>
+                    <option value="persona2">Persona 2</option>
+                    <option value="persona3">Persona 3</option>
+                    <!-- Fin de las opciones de ejemplo -->
+                </select><br><br>
+                
+                <!-- Puedes agregar más campos según necesites para el correo electrónico -->
+                
+                <input type="submit" value="Actualizar Correo Electrónico">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
