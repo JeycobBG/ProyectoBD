@@ -34,10 +34,10 @@ public class EditorialController {
         @RequestParam("error")String error);
         */
         
-        String nombre = "editorial1";
+        String nombre = "editorial3";
         Date fecha_fundacion = Date.from(Instant.now());
-        String codigo_postal = "codigo1";
-        String descripcion_direccion = "descipcion1";
+        String codigo_postal = "codigo3";
+        String descripcion_direccion = "descipcion3";
         Integer id_distrito = 1;
         String error = "";
         

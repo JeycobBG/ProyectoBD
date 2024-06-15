@@ -34,8 +34,8 @@ public class PrestamoController {
         */
         Date fecha_prestamo = Date.from(Instant.now());
         Date fecha_devolucion_prevista = Date.from(Instant.now());
-        Integer id_libro = 1;
-        Integer id_socio = 1;
+        Integer id_libro = 3;
+        Integer id_socio = 2;
         String error = "";
         
         boolean resultado = prestamoService.add(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio, error);

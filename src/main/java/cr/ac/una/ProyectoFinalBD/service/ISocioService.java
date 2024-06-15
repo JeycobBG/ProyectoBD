@@ -28,4 +28,9 @@ public interface ISocioService {
             Integer id_distrito,          String numero_telefono,
             String email,                       Date fecha_registro,
             String error_message);
+    
+    
+    public boolean delete(
+            Integer id_socio,
+            String error_message);
 }

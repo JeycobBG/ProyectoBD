@@ -19,4 +19,8 @@ public interface ILibroService {
             Integer idEditorial, String idGeneros, String error);
     
     public ArrayList<Libro> leer(String error);
+    
+    public boolean update(Integer id_libro, String ISBN,String titulo, String sinopsis,
+            Date fechaPublicacion, Integer cantidad, Integer idAutor,
+            Integer idEditorial, String idGeneros, String error);
 }

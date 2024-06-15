@@ -37,4 +37,18 @@ public interface LibroRepository extends CrudRepository<Libro, Integer>{
     @Transactional
     public ArrayList<Libro> leer(@Param("error") String error);
     
+
+    @Modifying
+    @Query(
+            value = "{ call [dbo].[sp_actualizar_libro](:id_libro,:ISBN,:titulo,:sinopsis,:fecha_publicacion,:cantidad,:id_autor,:id_editorial,:id_generos,:error) }",
+            nativeQuery = true)
+    @Transactional
+    public void actualizar(
+            @Param("id_libro")Integer id_libro,
+            @Param("ISBN")String ISBN,               @Param("titulo")String titulo,
+            @Param("sinopsis")String sinopsis,       @Param("fecha_publicacion") Date fechaPublicacion,
+            @Param("cantidad")Integer cantidad,      @Param("id_autor") Integer idAutor,
+            @Param("id_editorial")Integer idEditorial,@Param("id_generos") String idGeneros,
+            @Param("error")String error);
+    
 }

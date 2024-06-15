@@ -41,14 +41,14 @@ public class LibroController {
             @RequestParam("id_editorial") Integer idEditorial,
             @RequestParam("id_generos") Integer idGeneros
         */
-            String isbn = "isbn1";
-            String titulo = "titulo1";
-            String sinopsis = "sinopsis1";
+            String isbn = "isbn3";
+            String titulo = "titulo3";
+            String sinopsis = "sinopsis3";
             Date fechaPublicacion = Date.from(Instant.now());
-            Integer cantidad = 1;
-            Integer idAutor = 1;
-            Integer idEditorial = 1;
-            String idGeneros = "1,2,3";
+            Integer cantidad = 3;
+            Integer idAutor = 3;
+            Integer idEditorial = 3;
+            String idGeneros = "1,2,3,4";
             String error = "";
             
         boolean resultado = libroService.add(
@@ -83,6 +83,47 @@ public class LibroController {
        }
        
        return "/";
+    }
+    
+    @GetMapping("/actualizar")
+    public String update(){
+        
+        /*
+        @PathVariable("id_libro") Integer id_libro,
+        @RequestParam("ISBN") String isbn,
+            @RequestParam("titulo") String titulo,
+            @RequestParam("sinopsis") String sinopsis,
+            @RequestParam("fecha_publicacion") Date fechaPublicacion,
+            @RequestParam("cantidad") Integer cantidad,
+            @RequestParam("id_autor") Integer idAutor,
+            @RequestParam("id_editorial") Integer idEditorial,
+            @RequestParam("id_generos") Integer idGeneros
+        */
+            Integer id_libro = 1;
+            String isbn = "Modificado";
+            String titulo = "Modificado";
+            String sinopsis = "Modificado";
+            Date fechaPublicacion = Date.from(Instant.now());
+            Integer cantidad = 1;
+            Integer idAutor = 1;
+            Integer idEditorial = 1;
+            String idGeneros = "1,2,3,4";
+            String error = "";
+            
+        boolean resultado = libroService.update(
+                id_libro,
+                isbn,
+                titulo,
+                sinopsis,
+                fechaPublicacion,
+                cantidad,
+                idAutor,
+                idEditorial,
+                idGeneros,
+                error);
+        
+        System.out.println("resultado = " + resultado);
+        return "/";
     }
     
 }

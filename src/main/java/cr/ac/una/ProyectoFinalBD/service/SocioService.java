@@ -48,4 +48,14 @@ public class SocioService implements ISocioService{
         }
         return false;
     }
+    
+    @Override
+    public boolean delete(Integer id_socio, String error_message) {
+        try {
+            socioRepo.eliminar(id_socio, error_message);
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
 }

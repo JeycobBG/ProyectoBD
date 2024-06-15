@@ -33,15 +33,15 @@ public class SocioController {
             @RequestParam("email")String email,                       @RequestParam("fecha_registro")Date fecha_registro
         */
         
-        String nombre = "socio1";
-        String primer_apellido = "apellido1";
-        String segundo_apellido = "apellido2";
-        String identificacion = "identificacion1";
-        String codigo_postal = "codigo1";
-        String descripcion_direccion = "direccion1";
+        String nombre = "socio3";
+        String primer_apellido = "apellido3";
+        String segundo_apellido = "apellido3";
+        String identificacion = "identificacion3";
+        String codigo_postal = "codigo3";
+        String descripcion_direccion = "direccion3";
         Integer id_distrito = 1;
-        String numero_telefono = "11111111";
-        String email = "socio1@gmail.com";
+        String numero_telefono = "33333333";
+        String email = "socio3@gmail.com";
         Date fecha_registro = Date.from(Instant.now());
         String error_message = "";
         
@@ -105,6 +105,24 @@ public class SocioController {
         );
         
         System.out.println("resultado = " + resultado);
+        return "/";
+    }
+    
+    @GetMapping("/eliminar")
+    public String delete(){
+        
+        /*
+        @PathVariable("id")Integer id_socio
+        
+        */
+        
+        Integer id_socio = 1;
+        String error_message = "";
+        
+        boolean resultado = socioService.delete(id_socio, error_message);
+        
+        System.out.println("resultado = " + resultado);
+        
         return "/";
     }
 }

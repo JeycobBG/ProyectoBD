@@ -34,7 +34,7 @@ public class DevolucionController {
         */
         
         Date fecha_devolucion_efectuada = Date.from(Instant.now());
-        Integer id_prestamo = 1;
+        Integer id_prestamo = 3;
         String error = "";
         String advertencia_multa = "";
         

@@ -32,16 +32,16 @@ public class AutorController {
             @RequestParam("email")String email,                       @RequestParam("bibliografia")String bibliografia
         */
         
-        String nombre = "autor1";
-        String primer_apellido = "apellido1";
-        String segundo_apellido = "apellido2";
-        String identificacion = "identificacion1";
-        String codigo_postal = "codigo1";
-        String descripcion_direccion = "direccion1";
+        String nombre = "autor3";
+        String primer_apellido = "apellido3";
+        String segundo_apellido = "apellido3";
+        String identificacion = "identificacion3";
+        String codigo_postal = "codigo3";
+        String descripcion_direccion = "direccion3";
         Integer id_distrito = 1;
-        String numero_telefono = "22222222";
-        String email = "autor1@gmail.com";
-        String bibliografia = "bibliografia1";
+        String numero_telefono = "44444444";
+        String email = "autor3@gmail.com";
+        String bibliografia = "bibliografia3";
         String error = "";
         
         

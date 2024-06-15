@@ -37,4 +37,17 @@ public class LibroService implements ILibroService {
     public ArrayList<Libro> leer(String error) {
         return libroRepo.leer(error);
     }
+    
+    @Override
+    public boolean update(Integer id_libro, String ISBN,String titulo, String sinopsis,
+            Date fechaPublicacion, Integer cantidad, Integer idAutor,
+            Integer idEditorial, String idGeneros, String error){
+        try {
+            libroRepo.actualizar(id_libro, ISBN, titulo, sinopsis, fechaPublicacion,
+                cantidad, idAutor, idEditorial, idGeneros, error);
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
 }

@@ -31,10 +31,10 @@ public class MultaController {
             @RequestParam("error")String error
         */
         
-        Double monto = 0.0;
+        Double monto = 8000.0;
         Integer dias_atraso = 2;
         Boolean cancelada = true;
-        Integer id_prestamo = 1;
+        Integer id_prestamo = 4;
         String error = "";
         
         boolean resultado = multaService.add(monto, dias_atraso, cancelada, id_prestamo, error);
