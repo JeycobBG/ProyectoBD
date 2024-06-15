@@ -62,7 +62,7 @@ public class LibroController {
                 error);
         
         System.out.println("resultado = " + resultado);
-        return "/";
+        return "Libro/CrearLibro";
     }
     
     @GetMapping("/leer")

@@ -42,7 +42,7 @@ public class PrestamoController {
         
         System.out.println("resultado = "+  resultado);
         
-        return "/";
+        return "Prestamo/CrearPrestamo";
     }
     
     @GetMapping("/actualizar")

@@ -40,7 +40,7 @@ public class MultaController {
         boolean resultado = multaService.add(monto, dias_atraso, cancelada, id_prestamo, error);
         
         System.out.println("resultado = " + resultado);
-        return "/";
+        return "Multa/CrearMulta";
     }
     
     @GetMapping("/actualizar")

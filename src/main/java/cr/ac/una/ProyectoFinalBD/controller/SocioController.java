@@ -61,7 +61,7 @@ public class SocioController {
         );
         
         System.out.println("resultado = " + resultado);
-        return "/";
+        return "Socio/CrearSocio";
     }
     
     @GetMapping("/actualizar")

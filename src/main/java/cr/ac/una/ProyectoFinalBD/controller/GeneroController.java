@@ -36,7 +36,7 @@ public class GeneroController {
         
         System.out.println("resultado = " + resultado);
         
-        return "/";
+        return "Genero/CrearGenero";
     }
     
     @GetMapping("/actualizar")

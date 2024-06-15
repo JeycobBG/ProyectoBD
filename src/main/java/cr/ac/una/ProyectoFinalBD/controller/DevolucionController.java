@@ -42,6 +42,6 @@ public class DevolucionController {
         
         System.out.println("resultado = " + resultado);
         
-        return "/";
+        return "Devolucion/CrearDevolucion";
     }
 }

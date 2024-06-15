@@ -52,12 +52,11 @@ public class AutorController {
         
         System.out.println("resultado = " + resultado);
         
-        return "/";
+        return "Autor/CrearAutor";
     }
     
     @GetMapping("/actualizar")
     public String update(){
-        
         
         /*
         @PathVariable("id_autor") Integer id_autor,

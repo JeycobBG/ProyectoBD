@@ -47,7 +47,7 @@ public class EditorialController {
         
         System.out.println("resultado = " + resultado);
         
-        return "/";
+        return "Editorial/CrearEditorial";
     }
     
     @GetMapping("/actualizar")
