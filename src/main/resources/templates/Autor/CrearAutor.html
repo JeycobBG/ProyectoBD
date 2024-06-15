@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Autor</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <h2>Registrar un nuevo Autor</h2>
@@ -10,9 +9,6 @@
 <div class="container">
     <div>
     <form action="/autor/guardar" method="post">
-
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id" readonly><br>
         
         <label for="bibliografia">Bibliografía:</label><br>
         <textarea id="bibliografia" name="bibliografia" rows="4" cols="50" required></textarea><br>

@@ -50,7 +50,7 @@ public class LibroController {
             String idGeneros = "1,2,3";
             String error = "";
             
-        boolean resultado = libroService.add(
+       /* boolean resultado = libroService.add(
                 isbn,
                 titulo,
                 sinopsis,
@@ -61,7 +61,7 @@ public class LibroController {
                 idGeneros,
                 error);
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
         return "Libro/CrearLibro";
     }
     

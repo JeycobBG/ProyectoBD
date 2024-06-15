@@ -42,10 +42,10 @@ public class EditorialController {
         String error = "";
         
         
-        boolean resultado = editorialService.add(nombre, fecha_fundacion, codigo_postal,
+        /*boolean resultado = editorialService.add(nombre, fecha_fundacion, codigo_postal,
                 descripcion_direccion, id_distrito, error);
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
         
         return "Editorial/CrearEditorial";
     }

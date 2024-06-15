@@ -45,12 +45,12 @@ public class AutorController {
         String error = "";
         
         
-        boolean resultado = autorService.add(nombre, primer_apellido, segundo_apellido,
+        /*boolean resultado = autorService.add(nombre, primer_apellido, segundo_apellido,
                 identificacion, codigo_postal, descripcion_direccion, id_distrito,
                 numero_telefono, email, bibliografia, error);
         
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
         
         return "Autor/CrearAutor";
     }

@@ -38,9 +38,9 @@ public class DevolucionController {
         String error = "";
         String advertencia_multa = "";
         
-        boolean resultado = devolucionService.add(fecha_devolucion_efectuada, id_prestamo, error, advertencia_multa);
+        /*boolean resultado = devolucionService.add(fecha_devolucion_efectuada, id_prestamo, error, advertencia_multa);
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
         
         return "Devolucion/CrearDevolucion";
     }

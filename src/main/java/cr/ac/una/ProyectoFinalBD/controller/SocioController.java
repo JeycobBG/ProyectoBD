@@ -46,7 +46,7 @@ public class SocioController {
         String error_message = "";
         
         
-        boolean resultado = socioService.add(
+        /*boolean resultado = socioService.add(
         nombre,
         primer_apellido,
         segundo_apellido,
@@ -60,7 +60,8 @@ public class SocioController {
         error_message
         );
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
+        
         return "Socio/CrearSocio";
     }
     

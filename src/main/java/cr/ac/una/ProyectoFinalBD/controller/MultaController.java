@@ -37,9 +37,9 @@ public class MultaController {
         Integer id_prestamo = 1;
         String error = "";
         
-        boolean resultado = multaService.add(monto, dias_atraso, cancelada, id_prestamo, error);
+        /*boolean resultado = multaService.add(monto, dias_atraso, cancelada, id_prestamo, error);
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
         return "Multa/CrearMulta";
     }
     

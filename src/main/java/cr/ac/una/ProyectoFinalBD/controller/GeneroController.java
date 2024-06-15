@@ -32,9 +32,9 @@ public class GeneroController {
         String descripcion = "descripcion1";
         String error = "";
 
-        boolean resultado = generoService.add(nombre, descripcion, error);
+        /*boolean resultado = generoService.add(nombre, descripcion, error);
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
         
         return "Genero/CrearGenero";
     }

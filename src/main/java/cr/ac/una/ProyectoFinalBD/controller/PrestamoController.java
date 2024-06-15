@@ -38,9 +38,9 @@ public class PrestamoController {
         Integer id_socio = 1;
         String error = "";
         
-        boolean resultado = prestamoService.add(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio, error);
+        /*boolean resultado = prestamoService.add(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio, error);
         
-        System.out.println("resultado = "+  resultado);
+        System.out.println("resultado = "+  resultado);*/
         
         return "Prestamo/CrearPrestamo";
     }
