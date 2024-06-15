@@ -6,21 +6,10 @@
 </head>
 <body>
     <h2>Registrar una nueva Devolución</h2>
-       
-    <a href="/devoluciones/listarAdmin" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
+
 <div class="container">
     <div>
-    <form action="/devoluciones/guardar-devolucion" method="post">
-
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id" readonly><br>
+    <form action="/devolucion/guardar" method="post">
         
         <label for="fechaDevolucionEfectuada">Fecha de Devolución Efectuada:</label><br>
         <input type="date" id="fechaDevolucionEfectuada" name="fechaDevolucionEfectuada" required><br>

@@ -1,15 +1,69 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Editorial</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Registrar una nueva editorial</h2>
+       
+    
+    <div class="container">
+        <div>
+            <form id="registrarEditorialForm" action="/editorial/guardar" method="post">
+
+                <!-- Campo para el nombre de la editorial -->
+                <label for="nombre">Nombre de la editorial:</label><br>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+                
+                <!-- Campo para la fecha de fundación -->
+                <label for="fechaFundacion">Fecha de fundación:</label><br>
+                <input type="date" id="fechaFundacion" name="fechaFundacion" required><br><br>
+                
+                <!-- Combo box para seleccionar la dirección asociada -->
+                <label for="direccion">Dirección asociada:</label><br>
+                <select id="direccion" name="direccion" required>
+                    <option value="">Selecciona una dirección</option>
+                    <!-- Cargar dinámicamente las opciones de dirección desde el backend -->
+                    <option th:each="direccion : ${direcciones}" 
+                            th:value="${direccion.id}" 
+                            th:text="${direccion.detalle}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
+    </div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("registrarEditorialForm").addEventListener("submit", function(event) {
+            var nombre = document.getElementById("nombre").value;
+            var fechaFundacion = document.getElementById("fechaFundacion").value;
+            var direccion = document.getElementById("direccion").value;
+            
+            // Validar que el nombre de la editorial no esté vacío
+            if (nombre.trim() === "") {
+                alert("Por favor ingrese el nombre de la editorial.");
+                event.preventDefault();
+            }
+            
+            // Validar que la fecha de fundación no esté vacía
+            if (fechaFundacion.trim() === "") {
+                alert("Por favor ingrese la fecha de fundación.");
+                event.preventDefault();
+            }
+            
+            // Validar que se haya seleccionado una dirección
+            if (direccion === "") {
+                alert("Por favor seleccione una dirección.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
 </html>

@@ -6,21 +6,10 @@
 </head>
 <body>
     <h2>Registrar una nueva Multa</h2>
-       
-    <a href="/multas/listarAdmin" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
     
 <div class="container">
     <div>
-    <form action="/multas/guardar-multa" method="post">
-
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id" readonly><br>
+    <form action="/multa/guardar" method="post">
         
         <label for="monto">Monto:</label><br>
         <input type="number" id="monto" name="monto" step="0.01" required><

@@ -6,22 +6,10 @@
 </head>
 <body>
     <h2>Registrar un nuevo teléfono</h2>
-       
-    <a href="/telefonos/listar" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
+
 <div class="container">
     <div>
-    <form action="/telefonos/guardar" method="post">
-
-        <!-- Campo para el ID del teléfono -->
-        <label for="id">ID del teléfono:</label><br>
-        <input type="text" id="id" name="id" required><br>
+    <form action="/telefono/guardar" method="post">
         
         <!-- Campo para el número del teléfono -->
         <label for="numero">Número de teléfono:</label><br>

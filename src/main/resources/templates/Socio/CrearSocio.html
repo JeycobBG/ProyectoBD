@@ -6,22 +6,10 @@
 </head>
 <body>
     <h2>Registrar un nuevo socio</h2>
-       
-    <a href="/socios/listar" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
+
 <div class="container">
     <div>
-    <form action="/socios/guardar" method="post">
-
-        <!-- Campo para el ID del socio -->
-        <label for="id">ID del socio:</label><br>
-        <input type="text" id="id" name="id" required><br>
+    <form action="/socio/guardar" method="post">
         
         <!-- Campo para la fecha de registro -->
         <label for="fechaRegistro">Fecha de registro:</label><br>

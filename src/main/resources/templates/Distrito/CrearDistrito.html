@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Distrito</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Registrar un nuevo distrito</h2>
+       
+
+    <div class="container">
+        <div>
+            <form id="registrarDistritoForm" action="/distrito/guardar" method="post">
+
+                <!-- Campo para el nombre del distrito -->
+                <label for="nombre">Nombre del distrito:</label><br>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+                
+                <!-- Combo box para seleccionar el cantón asociado -->
+                <label for="canton">Cantón asociado:</label><br>
+                <select id="canton" name="canton" required>
+                    <option value="">Selecciona un cantón</option>
+                    <!-- Cargar dinámicamente las opciones de cantón desde el backend -->
+                    <option th:each="canton : ${cantones}" 
+                            th:value="${canton.id}" 
+                            th:text="${canton.nombre}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
+    </div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("registrarDistritoForm").addEventListener("submit", function(event) {
+            var nombre = document.getElementById("nombre").value;
+            var canton = document.getElementById("canton").value;
+            
+            // Validar que el nombre del distrito no esté vacío
+            if (nombre.trim() === "") {
+                alert("Por favor ingrese el nombre del distrito.");
+                event.preventDefault();
+            }
+            
+            // Validar que se haya seleccionado un cantón
+            if (canton === "") {
+                alert("Por favor seleccione un cantón.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
 </html>

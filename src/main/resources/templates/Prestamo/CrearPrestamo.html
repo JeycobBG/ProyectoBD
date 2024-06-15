@@ -6,21 +6,11 @@
 </head>
 <body>
     <h2>Registrar un nuevo Préstamo</h2>
-       
-    <a href="/prestamos/listarAdmin" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
+        
 <div class="container">
     <div>
-    <form action="/prestamos/guardar-prestamo" method="post">
+    <form action="/prestamo/guardar" method="post">
 
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id" readonly><br>
         
         <label for="fechaPrestamo">Fecha de Préstamo:</label><br>
         <input type="date" id="fechaPrestamo" name="fechaPrestamo" required><br>

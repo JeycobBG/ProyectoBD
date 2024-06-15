@@ -9,20 +9,11 @@
 <body>
     <h2>Registrar una nueva Dirección</h2>
        
-    <a href="/direcciones/listarAdmin" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
     
 <div class="container">
     <div>
-    <form action="/direcciones/guardar-direccion" method="post">
+    <form action="/direccion/guardar" method="post">
 
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id" readonly><br>
         
         <label for="codigoPostal">Código Postal:</label><br>
         <input type="text" id="codigoPostal" name="codigoPostal" required><br>

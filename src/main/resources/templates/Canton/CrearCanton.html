@@ -6,21 +6,10 @@
 </head>
 <body>
     <h2>Registrar un nuevo Cantón</h2>
-       
-    <a href="/cantones/listarAdmin" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
+
 <div class="container">
     <div>
-    <form action="/cantones/guardar-canton" method="post">
-
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id" readonly><br>
+    <form action="/canton/guardar" method="post">
         
         <label for="nombre">Nombre:</label><br>
         <input type="text" id="nombre" name="nombre" required><br>

@@ -6,22 +6,11 @@
 </head>
 <body>
     <h2>Registrar un nuevo Correo Electrónico</h2>
-       
-    <a href="/correos/listarAdmin" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
+
 <div class="container">
     <div>
-    <form action="/correos/guardar-correo" method="post">
-
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id" readonly><br>
-        
+    <form action="/correo/guardar" method="post">
+     
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" required><br>
         

@@ -1,15 +1,67 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Género</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Registrar un nuevo género</h2>  
+    
+    <div class="container">
+        <div>
+            <form id="registrarGeneroForm" action="/genero/guardar" method="post">
+
+                <!-- Campo para el nombre del género -->
+                <label for="nombre">Nombre del género:</label><br>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+                
+                <!-- Campo para la descripción del género -->
+                <label for="descripcion">Descripción del género:</label><br>
+                <input type="text" id="descripcion" name="descripcion" required><br><br>
+                
+                <!-- Combo box para seleccionar los libros asociados -->
+                <label for="libros">Libros asociados:</label><br>
+                <select id="libros" name="libros" multiple required>
+                    <!-- Cargar dinámicamente las opciones de libros desde el backend -->
+                    <option th:each="libro : ${libros}" 
+                            th:value="${libro.id}" 
+                            th:text="${libro.titulo}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
+    </div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("registrarGeneroForm").addEventListener("submit", function(event) {
+            var nombre = document.getElementById("nombre").value;
+            var descripcion = document.getElementById("descripcion").value;
+            var libros = document.getElementById("libros").selectedOptions;
+            
+            // Validar que el nombre del género no esté vacío
+            if (nombre.trim() === "") {
+                alert("Por favor ingrese el nombre del género.");
+                event.preventDefault();
+            }
+            
+            // Validar que la descripción no esté vacía
+            if (descripcion.trim() === "") {
+                alert("Por favor ingrese la descripción del género.");
+                event.preventDefault();
+            }
+            
+            // Validar que se haya seleccionado al menos un libro
+            if (libros.length === 0) {
+                alert("Por favor seleccione al menos un libro.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
 </html>

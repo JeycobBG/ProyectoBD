@@ -1,15 +1,98 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Libro</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Registrar un nuevo libro</h2>
+       
+    
+    <div class="container">
+        <div>
+            <form id="registrarLibroForm" action="/libro/guardar" method="post">
+
+                <!-- Campo para el ISBN del libro -->
+                <label for="isbn">ISBN:</label><br>
+                <input type="text" id="isbn" name="isbn" required><br><br>
+                
+                <!-- Campo para el título del libro -->
+                <label for="titulo">Título:</label><br>
+                <input type="text" id="titulo" name="titulo" required><br><br>
+                
+                <!-- Campo para la sinopsis del libro -->
+                <label for="sinopsis">Sinopsis:</label><br>
+                <textarea id="sinopsis" name="sinopsis" required></textarea><br><br>
+                
+                <!-- Campo para la fecha de publicación del libro -->
+                <label for="fechaPublicacion">Fecha de Publicación:</label><br>
+                <input type="date" id="fechaPublicacion" name="fechaPublicacion" required><br><br>
+                
+                <!-- Campo para la cantidad de libros disponibles -->
+                <label for="cantidad">Cantidad:</label><br>
+                <input type="number" id="cantidad" name="cantidad" required><br><br>
+                
+                <!-- Combo box para seleccionar el autor -->
+                <label for="autor">Autor:</label><br>
+                <select id="autor" name="autor" required>
+                    <option value="">Selecciona un autor</option>
+                    <!-- Cargar dinámicamente las opciones de autor desde el backend -->
+                    <option th:each="autor : ${autores}" 
+                            th:value="${autor.id}" 
+                            th:text="${autor.nombre}">
+                    </option>
+                </select><br><br>
+                
+                <!-- Combo box para seleccionar la editorial -->
+                <label for="editorial">Editorial:</label><br>
+                <select id="editorial" name="editorial" required>
+                    <option value="">Selecciona una editorial</option>
+                    <!-- Cargar dinámicamente las opciones de editorial desde el backend -->
+                    <option th:each="editorial : ${editoriales}" 
+                            th:value="${editorial.id}" 
+                            th:text="${editorial.nombre}">
+                    </option>
+                </select><br><br>
+                
+                <!-- Combo box para seleccionar los géneros -->
+                <label for="generos">Géneros:</label><br>
+                <select id="generos" name="generos" multiple required>
+                    <option value="">Selecciona uno o más géneros</option>
+                    <!-- Cargar dinámicamente las opciones de géneros desde el backend -->
+                    <option th:each="genero : ${generos}" 
+                            th:value="${genero.id}" 
+                            th:text="${genero.nombre}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
+    </div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("registrarLibroForm").addEventListener("submit", function(event) {
+            var isbn = document.getElementById("isbn").value;
+            var titulo = document.getElementById("titulo").value;
+            var sinopsis = document.getElementById("sinopsis").value;
+            var fechaPublicacion = document.getElementById("fechaPublicacion").value;
+            var cantidad = document.getElementById("cantidad").value;
+            var autor = document.getElementById("autor").value;
+            var editorial = document.getElementById("editorial").value;
+            var generos = document.getElementById("generos").selectedOptions;
+            
+            // Validaciones
+            if (isbn.trim() === "" || titulo.trim() === "" || sinopsis.trim() === "" || 
+                fechaPublicacion.trim() === "" || cantidad.trim() === "" || autor === "" || 
+                editorial === "" || generos.length === 0) {
+                alert("Por favor complete todos los campos.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
 </html>
