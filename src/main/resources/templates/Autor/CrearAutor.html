@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Autor</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Registrar un nuevo Autor</h2>
+       
+    <a href="/autores/listarAdmin" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+<div class="container">
+    <div>
+    <form action="/autores/guardar-autor" method="post">
+
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id" readonly><br>
+        
+        <label for="bibliografia">Bibliografía:</label><br>
+        <textarea id="bibliografia" name="bibliografia" rows="4" cols="50" required></textarea><br>
+        
+        <label for="persona">Persona:</label><br>
+        <input type="text" id="persona" name="persona" required><br>
+        
+        <input type="submit" value="Guardar">
+    </form>
+    </div>
+</div>
+  <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+  <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
 </html>

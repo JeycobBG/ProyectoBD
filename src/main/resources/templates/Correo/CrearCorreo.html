@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registrar Devolución</title>
+    <title>Registrar Correo Electrónico</title>
     <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <h2>Registrar una nueva Devolución</h2>
+    <h2>Registrar un nuevo Correo Electrónico</h2>
        
-    <a href="/devoluciones/listarAdmin" class="boton-volver">
+    <a href="/correos/listarAdmin" class="boton-volver">
     <img src="/img/volver.png" alt="Volver" width="20" height="20">
     </a>    
     
@@ -17,16 +17,16 @@
     
 <div class="container">
     <div>
-    <form action="/devoluciones/guardar-devolucion" method="post">
+    <form action="/correos/guardar-correo" method="post">
 
         <label for="id">ID:</label><br>
         <input type="text" id="id" name="id" readonly><br>
         
-        <label for="fechaDevolucionEfectuada">Fecha de Devolución Efectuada:</label><br>
-        <input type="date" id="fechaDevolucionEfectuada" name="fechaDevolucionEfectuada" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
         
-        <label for="prestamo">Préstamo:</label><br>
-        <input type="text" id="prestamo" name="prestamo" required><br>
+        <label for="persona">Persona:</label><br>
+        <input type="text" id="persona" name="persona" required><br>
         
         <input type="submit" value="Guardar">
     </form>
