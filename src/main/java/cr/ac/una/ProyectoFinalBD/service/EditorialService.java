@@ -31,4 +31,16 @@ public class EditorialService implements IEditorialService{
         return false;
     }
     
+    @Override
+    public boolean update(Integer id, String nombre, Date fecha_fundacion, String codigo_postal,
+            String descripcion_direccion, Integer id_distrito, String error) {
+        
+        try {
+            editorialRepo.update(id, nombre, fecha_fundacion, codigo_postal, descripcion_direccion, id_distrito, error);
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    
 }

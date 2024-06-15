@@ -49,4 +49,34 @@ public class EditorialController {
         
         return "/";
     }
+    
+    @GetMapping("/actualizar")
+    public String update(){
+        
+        /*
+        @PathVariable("id") Integer id,
+        @RequestParam("nombre")String nombre,                     
+        @RequestParam("fecha_fundacion")Date fecha_fundacion,
+        @RequestParam("codigo_postal")String codigo_postal, 
+        @RequestParam("descripcion_direccion") String descripcion_direccion,
+        @RequestParam("id_distrito")Integer id_distrito, 
+        @RequestParam("error")String error);
+        */
+        
+        Integer id = 2;
+        String nombre = "modificado";
+        Date fecha_fundacion = Date.from(Instant.now());
+        String codigo_postal = "modificado";
+        String descripcion_direccion = "modificado";
+        Integer id_distrito = 1;
+        String error = "";
+        
+        
+        boolean resultado = editorialService.update(id, nombre, fecha_fundacion, codigo_postal,
+                descripcion_direccion, id_distrito, error);
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
 }

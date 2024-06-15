@@ -4,20 +4,25 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
+import java.util.Date;
+
 /**
  *
  * @author JEYCOB
  */
-public interface IGeneroService {
-    
+public interface IMultaService {
+
     public boolean add(
-            String nombre,                     
-            String descripcion,
+            Double monto,
+            Integer dias_atraso,                     
+            Boolean cancelada,
+            Integer id_prestamo,
             String error);
     
     public boolean update(
-            Integer id,
-            String nombre,                     
-            String descripcion,
+            Integer id_multa,
+            Double monto,
+            Integer dias_atraso,                     
+            Boolean cancelada,
             String error);
 }

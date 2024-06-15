@@ -4,7 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
-import cr.ac.una.ProyectoFinalBD.jpa.GeneroRepository;
+import cr.ac.una.ProyectoFinalBD.jpa.MultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,30 +13,27 @@ import org.springframework.stereotype.Service;
  * @author JEYCOB
  */
 @Service
-public class GeneroService implements IGeneroService{
-
+public class MultaService implements IMultaService{
     @Autowired
-    GeneroRepository generoRepo;
-    
+    MultaRepository multaRepo;
+
     @Override
-    public boolean add(String nombre, String descripcion, String error) {
-        
+    public boolean add(Double monto, Integer dias_atraso, Boolean cancelada, Integer id_prestamo, String error) {
         try {
-            generoRepo.insertar(nombre, descripcion, error);
+            multaRepo.insertar(monto, dias_atraso, cancelada, id_prestamo, error);
             return true;
         } catch (Exception e) {
         }
         return false;
-    }
+    }   
     
     @Override
-    public boolean update(Integer id, String nombre, String descripcion, String error) {
-        
+    public boolean update(Integer id_multa, Double monto, Integer dias_atraso, Boolean cancelada, String error) {
         try {
-            generoRepo.actualizar(id, nombre, descripcion, error);
+            multaRepo.actualizar(id_multa, monto, dias_atraso, cancelada, error);
             return true;
         } catch (Exception e) {
         }
         return false;
-    }
+    }   
 }

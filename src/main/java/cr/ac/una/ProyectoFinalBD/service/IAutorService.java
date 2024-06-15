@@ -23,4 +23,18 @@ public interface IAutorService {
             String email,                  
             String bibliografia,
             String error);
+    
+    public boolean update(
+            Integer id_autor,
+            String nombre,                     
+            String primer_apellido,
+            String segundo_apellido,
+            String identificacion,
+            String codigo_postal,
+            String descripcion_direccion,
+            Integer id_distrito,          
+            String numero_telefono,
+            String email,                  
+            String bibliografia,
+            String error);
 }

@@ -34,4 +34,23 @@ public interface GeneroRepository extends CrudRepository<Genero, Integer>{
             @Param("nombre")String nombre, 
             @Param("descripcion")String descripcion,
             @Param("error")String error);
+    //--------------------------------------------------------------------------
+    /*
+    @id_genero INT,
+    @nombre NVARCHAR(23),
+    @descripcion NVARCHAR(127),
+    @error NVARCHAR(127) OUT
+    */
+    
+    @Modifying
+    @Query(
+            value = "{ call [dbo].[sp_actualizar_genero](:id,:nombre,:descripcion,:error) }",
+            nativeQuery = true)
+    @Transactional
+    public void actualizar(
+            @Param("id")Integer id,
+            @Param("nombre")String nombre, 
+            @Param("descripcion")String descripcion,
+            @Param("error")String error);
+    //--------------------------------------------------------------------------
 }

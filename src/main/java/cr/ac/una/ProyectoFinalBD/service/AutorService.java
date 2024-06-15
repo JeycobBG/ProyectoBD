@@ -35,5 +35,20 @@ public class AutorService implements IAutorService{
         return false;
     }
     
-    
+    @Override
+    public boolean update(Integer id_autor, String nombre, String primer_apellido, String segundo_apellido,
+            String identificacion, String codigo_postal, String descripcion_direccion,
+            Integer id_distrito, String numero_telefono, String email, String bibliografia,
+            String error) {
+
+        try {
+            autorRepo.actualizar(id_autor, nombre, primer_apellido, segundo_apellido, identificacion,
+                    codigo_postal, descripcion_direccion, id_distrito, numero_telefono, email,
+                    bibliografia, error);
+            return true;
+        } catch (Exception e) {
+        }
+        
+        return false;
+    }
 }

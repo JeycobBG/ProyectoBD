@@ -19,4 +19,13 @@ public interface IEditorialService {
             String descripcion_direccion,
             Integer id_distrito,
             String error);
+    
+    public boolean update(
+            Integer id,
+            String nombre,                     
+            Date fecha_fundacion,
+            String codigo_postal,
+            String descripcion_direccion,
+            Integer id_distrito,
+            String error);
 }

@@ -38,4 +38,24 @@ public class GeneroController {
         
         return "/";
     }
+    
+    @GetMapping("/actualizar")
+    public String update(){
+        
+        /*
+        @PathVariable("id")Integer id,
+        @RequestParam("nombre")String nombre, 
+            @RequestParam("descripcion")String descripcion
+        */
+        Integer id = 1;
+        String nombre = "modificado";
+        String descripcion = "modificado";
+        String error = "";
+
+        boolean resultado = generoService.update(id, nombre, descripcion, error);
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
 }

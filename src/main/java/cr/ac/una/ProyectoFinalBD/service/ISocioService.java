@@ -19,4 +19,13 @@ public interface ISocioService {
             Integer id_distrito,          String numero_telefono,
             String email,                       Date fecha_registro,
             String error_message);
+    
+    public boolean update(
+            Integer id,
+            String nombre,                     String primer_apellido,
+            String segundo_apellido,String identificacion,
+            String codigo_postal,       String descripcion_direccion,
+            Integer id_distrito,          String numero_telefono,
+            String email,                       Date fecha_registro,
+            String error_message);
 }

@@ -33,4 +33,19 @@ public class SocioService implements ISocioService{
         }
         return false;
     }
+    
+    @Override
+    public boolean update(Integer id, String nombre, String primer_apellido, String segundo_apellido,
+            String identificacion, String codigo_postal, String descripcion_direccion,
+            Integer id_distrito, String numero_telefono, String email, Date fecha_registro,
+            String error_message) {
+        try {
+            socioRepo.actualizar(id, nombre, primer_apellido, segundo_apellido, identificacion,
+                    codigo_postal, descripcion_direccion, id_distrito, numero_telefono, email,
+                    fecha_registro, error_message);
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
 }

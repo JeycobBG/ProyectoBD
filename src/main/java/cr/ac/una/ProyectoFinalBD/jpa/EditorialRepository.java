@@ -39,4 +39,27 @@ public interface EditorialRepository extends CrudRepository<Editorial, Integer> 
             @Param("nombre")String nombre,                     @Param("fecha_fundacion")Date fecha_fundacion,
             @Param("codigo_postal")String codigo_postal,       @Param("descripcion_direccion") String descripcion_direccion,
             @Param("id_distrito")Integer id_distrito,          @Param("error")String error);
+    //--------------------------------------------------------------------------
+    /*
+    @id_editorial INT,
+    @nombre NVARCHAR(63),
+    @fecha_fundacion DATE,
+    @codigo_postal NVARCHAR(5),
+    @descripcion_direccion NVARCHAR(127),
+    @id_distrito INT,
+    @error NVARCHAR(127) OUT
+    */
+    @Modifying
+    @Query(
+            value = "{ call [dbo].[sp_actualizar_editorial](:id_editorial,:nombre,:fecha_fundacion,"
+                    + ":codigo_postal,:descripcion_direccion,"
+                    + ":id_distrito,:error) }",
+            nativeQuery = true)
+    @Transactional
+    public void update(
+            @Param("id_editorial")Integer id_editorial,
+            @Param("nombre")String nombre,                     @Param("fecha_fundacion")Date fecha_fundacion,
+            @Param("codigo_postal")String codigo_postal,       @Param("descripcion_direccion") String descripcion_direccion,
+            @Param("id_distrito")Integer id_distrito,          @Param("error")String error);
+    //--------------------------------------------------------------------------
 }
