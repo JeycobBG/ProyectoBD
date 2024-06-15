@@ -113,7 +113,6 @@ public class SocioController {
         
         /*
         @PathVariable("id")Integer id_socio
-        
         */
         
         Integer id_socio = 1;
