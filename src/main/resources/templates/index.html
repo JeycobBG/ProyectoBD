@@ -1,85 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menú de Navegación</title>
-<script text="text/javascript" th:src="@{/js/slider.js}"></script>
-<link href="/CSS/indexStyle.css" rel="stylesheet" type="text/css"/>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Menú de Navegación</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                background: #f4f4f4;
+            }
+            .navbar {
+                background-color: #333;
+                overflow: hidden;
+                font-size: 16px;
+            }
+            .navbar ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+            .navbar ul li {
+                float: left;
+            }
+            .navbar ul li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 20px;
+                text-decoration: none;
+            }
+            .navbar ul li a:hover,
+            .navbar ul li ul li a:hover {
+                background-color: #555;
+            }
+            .navbar ul li ul {
+                display: none;
+                position: absolute;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                background-color: #333;
+            }
+            .navbar ul li:hover ul {
+                display: block;
+            }
+            .navbar ul li ul li {
+                float: none;
+            }
+            .navbar ul li ul li a {
+                padding: 12px 16px;
+            }
+        </style>
+    </head>
+    <body>
 
-</head>
-<body>
+        <div class="navbar">
+            <ul>
+                <li><a href="#">Persona</a>
+                    <ul>
+                        <li><a href="/">Ver Personas</a></li>
+                        <li><a href="/">Registrar Personas</a></li>
+                    </ul>
+                </li>
 
-<div class="navbar">
-  <ul>
-    <li><a href="#">Artículos</a>
-      <ul>
-        <li><a href="/articulos/listar">Lista de Artículos</a></li>
-        <li><a href="/articulos/listarAdmin">Administrar Artículo</a></li>
-      </ul>
-    </li>
-    
-    <li><a href="#">Eventos Turísticos</a>
-      <ul>
-        <li><a href="/eventoTuristico/listar">Lista de Eventos Turístico</a></li>
-        <li><a href="/eventoTuristico/listarAdmin">Administrar Eventos Turísticos</a></li>
-      </ul>
-    </li>
-    
-    
-    <li><a href="#">Usuarios</a>
-      <ul>
-        <li><a href="/usuarios/formRegistrar">Registrar Usuario</a></li>
-        <li><a href="/usuarios/listaUsuarios">Administrar Usuarios</a></li>
-      </ul>
-    </li>
-    
-    
-    <li><a href="#">Lugares</a>
-      <ul>
-        <li><a href="/lugares/form_registrar">Registrar Lugar</a></li>
-        <li><a href="/lugares/listar_admin">Administrar Lugares</a></li>
-      </ul>
-    </li>
+                <li><a href="#">Teléfono</a>
+                    <ul>
+                        <li><a href="/">Ver Teléfonos</a></li>
+                        <li><a href="/">Registrar Teléfonos</a></li>
+                    </ul>
+                </li>
 
-     <li><a href="#">Álbumes</a>
-      <ul>
-        <li><a href="/albums/formularioAlbum">Registrar Álbum</a></li>
-        <li><a href="/albums/listarAdmin">Administrar Álbum</a></li>
-      </ul>
-    </li>
-    
-    <li><a href="#">Colaboradores Empresariales</a>
-      <ul>
-        <li><a href="/colaboradores/formColaborador">Crear Colaborador</a></li>
-        <li><a href="/colaboradores/listaColaboradores">Administrar Colaboradores</a></li>
-      </ul>
-    </li>
-    
-    <li><a href="#">Clima</a>
-      <ul>
-        <li><a href="/climas/formClima">Crear Clima</a></li>
-        <li><a href="/climas/listaClima">Administrar Clima</a></li>
-      </ul>
-    </li>
-    
-    <li><a href="#">Calificaciones</a>
-  <ul>
-  <li><a href="/calificaciones/form_registrar">Registrar Calificación</a></li>
-<li><a href="/calificaciones/listarCalificacion">Listar Calificaciones</a></li>
+                <li><a href="#">Correo Eletrónico</a>
+                    <ul>
+                        <li><a href="/">Ver Correos</a></li>
+                        <li><a href="/">Registrar Correos</a></li>
+                    </ul>
+                </li>
 
-  </ul>
-</li>
+                <li><a href="#">Dirección</a>
+                    <ul>
+                        <li><a href="/">Ver Direcciónes</a></li>
+                        <li><a href="/">Registrar Direcciónes</a></li>
+                    </ul>
+                </li>
 
-    <li><a href="#">Ruta Recomendada</a>
-      <ul>
-        <li><a href="/rutasRecomendadas/form_RutaRecomendada">Registrar Ruta Recomendada</a></li>
-        <li><a href="/rutasRecomendadas/listarRutas">Listar Rutas Recomendadas</a></li>
-      </ul>
-    </li>
+                <li><a href="#">Cantón</a>
+                    <ul>
+                        <li><a href="/">Ver Cantónes</a></li>
+                        <li><a href="/">Registrar Cantónes</a></li>
+                    </ul>
+                </li>
 
-  </ul>
-</div>
-    
-</body>
+                <li><a href="#">Distrito</a>
+                    <ul>
+                        <li><a href="/">Ver Distritos</a></li>
+                        <li><a href="/">Registrar Distritos</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Provincia</a>
+                    <ul>
+                        <li><a href="/">Ver Provincias</a></li>
+                        <li><a href="/">Registrar Provincias</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Autor</a>
+                    <ul>
+                        <li><a href="/">Ver Autores</a></li>
+                        <li><a href="/">Registrar Autores</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Libro</a>
+                    <ul>
+                        <li><a href="/">Ver Libros</a></li>
+                        <li><a href="/">Registrar Libros</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Editorial</a>
+                    <ul>
+                        <li><a href="/">Ver Editoriales</a></li>
+                        <li><a href="/">Registrar Editoriales</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Género</a>
+                    <ul>
+                        <li><a href="/">Ver Géneros</a></li>
+                        <li><a href="/">Registrar Géneros</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Socio</a>
+                    <ul>
+                        <li><a href="/">Ver Socios</a></li>
+                        <li><a href="/">Registrar Socios</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Préstamo</a>
+                    <ul>
+                        <li><a href="/">Ver Préstamos</a></li>
+                        <li><a href="/">Registrar Préstamos</a></li>
+                    </ul>
+                </li>    
+
+                <li><a href="#">Multa</a>
+                    <ul>
+                        <li><a href="/">Ver Multas</a></li>
+                        <li><a href="/">Registrar Multas</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Devolución</a>
+                    <ul>
+                        <li><a href="/">Ver Devoluciones</a></li>
+                        <li><a href="/">Registrar Devoluciones</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+    </body>
 </html>

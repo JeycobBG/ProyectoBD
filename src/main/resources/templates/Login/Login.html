@@ -11,31 +11,32 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
         }
 
         .login-container {
-            background-color: white;
-            padding: 20px 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #333;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 400px;
+            max-width: 360px;
+            text-align: center;
+            color: white;
         }
 
         .login-container h2 {
             margin-bottom: 20px;
             font-size: 24px;
-            color: #333;
-            text-align: center;
+            color: white;
         }
 
         .login-container label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
+            font-weight: 600;
+            color: white;
         }
 
         .login-container input[type="text"],
@@ -46,6 +47,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
+            color: #333;
         }
 
         .login-container button {
@@ -64,18 +66,18 @@
             background-color: #0056b3;
         }
 
-        .login-container .footer {
+        .footer {
             text-align: center;
             margin-top: 15px;
         }
 
-        .login-container .footer a {
+        .footer a {
             color: #007bff;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .login-container .footer a:hover {
+        .footer a:hover {
             color: #0056b3;
         }
 
@@ -114,8 +116,7 @@
 
             if (username === 'admin' && password === '1234') {
                 alert('Inicio de sesión exitoso');
-
-                window.location.href = '/menu';
+                window.location.href = '/menu'; // Redirige a la página del menú principal
             } else {
                 errorMessage.textContent = 'Nombre de usuario o contraseña incorrectos';
             }
@@ -123,3 +124,5 @@
     </script>
 </body>
 </html>
+
+    
