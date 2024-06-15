@@ -6,6 +6,7 @@ package cr.ac.una.ProyectoFinalBD.jpa;
 
 import cr.ac.una.ProyectoFinalBD.domain.Libro;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -29,4 +30,11 @@ public interface LibroRepository extends CrudRepository<Libro, Integer>{
             @Param("cantidad")Integer cantidad,      @Param("id_autor") Integer idAutor,
             @Param("id_editorial")Integer idEditorial,@Param("id_generos") String idGeneros,
             @Param("error")String error);
+    
+    @Query(
+            value = "{ call [dbo].[sp_leer_libro](:error) }",
+            nativeQuery = true)
+    @Transactional
+    public ArrayList<Libro> leer(@Param("error") String error);
+    
 }

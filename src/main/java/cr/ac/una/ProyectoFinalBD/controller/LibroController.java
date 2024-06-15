@@ -4,11 +4,16 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Genero;
+import cr.ac.una.ProyectoFinalBD.domain.Libro;
 import cr.ac.una.ProyectoFinalBD.service.LibroService;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/libro")
-public class LibroController {
+public class LibroController { 
     @Autowired
     private LibroService libroService;
     
@@ -60,4 +65,24 @@ public class LibroController {
         System.out.println("resultado = " + resultado);
         return "/";
     }
+    
+    @GetMapping("/leer")
+    public String leer(Model modelo){
+       String error = "";
+       ArrayList<Libro> libros = libroService.leer(error);
+       
+       for(Libro lib : libros){
+           List<Genero> generos = lib.getGeneros();
+           System.out.print("Nuevo libro> " + lib.getTitulo() + " con generos: ");
+           
+           for(Genero gen : generos){
+               System.out.print(gen.getNombre() + ", ");
+           }
+           
+           System.out.print("\n");
+       }
+       
+       return "/";
+    }
+    
 }

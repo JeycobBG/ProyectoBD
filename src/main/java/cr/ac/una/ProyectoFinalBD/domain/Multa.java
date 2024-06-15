@@ -4,6 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,14 +20,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_multa")
 public class Multa {
-    /*
-    monto double
-    dias atraso int
-    cancelada boolean
-    id_prestamo
-    */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_multa")
     private int id;
     
     private double monto;
