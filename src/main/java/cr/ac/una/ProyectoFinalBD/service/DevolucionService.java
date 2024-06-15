@@ -29,4 +29,14 @@ public class DevolucionService implements IDevolucionService{
         return false;
     }
     
+    @Override
+    public boolean update(Integer id_prestamo,Date fecha_devolucion, String error) {
+        try {
+            devolucionRepo.actualizar(id_prestamo, fecha_devolucion, error);
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    
 }

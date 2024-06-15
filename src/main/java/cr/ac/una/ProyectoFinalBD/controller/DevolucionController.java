@@ -44,4 +44,24 @@ public class DevolucionController {
         
         return "/";
     }
+    
+    @GetMapping("/actualizar")
+    public String update(){
+        
+        /*
+            @RequestParam("id_prestamo")Integer id_prestamo,
+            @RequestParam("fecha_devolucion")Data fecha_devolucion,
+            @RequestParam("error")String error
+        */
+        
+        Integer id_prestamo = 1;
+        Date fecha_devolucion = Date.from(Instant.now());
+        String error = "";
+        
+        boolean resultado = devolucionService.update(id_prestamo, fecha_devolucion, error);
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
 }

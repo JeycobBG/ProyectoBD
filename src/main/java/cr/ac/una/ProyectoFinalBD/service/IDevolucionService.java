@@ -17,4 +17,9 @@ public interface IDevolucionService {
             Integer id_prestamo,
             String error,
             String advertencia_multa);
+    
+    public boolean update(
+            Integer id_prestamo,
+            Date fecha_devoluciona,
+            String error);
 }
