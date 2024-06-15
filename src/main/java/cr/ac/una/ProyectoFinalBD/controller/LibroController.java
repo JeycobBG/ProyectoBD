@@ -8,7 +8,6 @@ import cr.ac.una.ProyectoFinalBD.domain.Genero;
 import cr.ac.una.ProyectoFinalBD.domain.Libro;
 import cr.ac.una.ProyectoFinalBD.service.LibroService;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class LibroController {
     
     
     @GetMapping("/guardar")
-    public String add(){
+    public String guardar(){
         
         /*
         @RequestParam("ISBN") String isbn,
@@ -46,12 +45,12 @@ public class LibroController {
             String sinopsis = "sinopsis3";
             Date fechaPublicacion = Date.from(Instant.now());
             Integer cantidad = 3;
-            Integer idAutor = 3;
-            Integer idEditorial = 3;
+            Integer idAutor = 11;
+            Integer idEditorial = 1;
             String idGeneros = "1,2,3,4";
             String error = "";
             
-        boolean resultado = libroService.add(
+        String resultado = libroService.insertar(
                 isbn,
                 titulo,
                 sinopsis,
@@ -69,9 +68,12 @@ public class LibroController {
     @GetMapping("/leer")
     public String leer(Model modelo){
        String error = "";
-       ArrayList<Libro> libros = libroService.leer(error);
+       List<Libro> libros = libroService.leer();
        
-       for(Libro lib : libros){
+       if(error.isBlank()){
+           modelo.addAttribute("libros", libros);
+           
+           for(Libro lib : libros){
            List<Genero> generos = lib.getGeneros();
            System.out.print("Nuevo libro> " + lib.getTitulo() + " con generos: ");
            
@@ -81,12 +83,16 @@ public class LibroController {
            
            System.out.print("\n");
        }
+       }else{
+           modelo.addAttribute("error", error);
+           System.out.println("error = " + error);
+       }
        
        return "/";
     }
     
     @GetMapping("/actualizar")
-    public String update(){
+    public String actualizar(){
         
         /*
         @PathVariable("id_libro") Integer id_libro,
@@ -110,7 +116,7 @@ public class LibroController {
             String idGeneros = "1,2,3,4";
             String error = "";
             
-        boolean resultado = libroService.update(
+        String resultado = libroService.actualizar(
                 id_libro,
                 isbn,
                 titulo,
