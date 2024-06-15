@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Devolución</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Actualizar Devolución</h2>
+    
+    <a href="/devoluciones/listar" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+    <div class="container">
+        <div>
+            <form action="/devoluciones/actualizarDevolucion" method="post">
+                
+                <input type="hidden" id="id" name="id" th:value="${devolucion.id}" />
+                
+                <label for="fechaDevolucion">Fecha de Devolución:</label><br>
+                <input type="date" id="fechaDevolucion" name="fechaDevolucion" th:value="${devolucion.fechaDevolucionEfectuada}" required><br><br>
+                
+                <!-- Combo box para seleccionar el préstamo asociado -->
+                <label for="prestamo">Préstamo asociado:</label><br>
+                <select id="prestamo" name="prestamo" required>
+                    <option value="">Selecciona un préstamo</option>
+                    <!-- Aquí puedes cargar dinámicamente las opciones de préstamo desde tu backend -->
+                    <!-- Por ejemplo, podrías iterar sobre una lista de préstamos disponibles -->
+                    <!-- y generar opciones para cada uno -->
+                    <option value="prestamo1">Préstamo 1</option>
+                    <option value="prestamo2">Préstamo 2</option>
+                    <option value="prestamo3">Préstamo 3</option>
+                    <!-- Fin de las opciones de ejemplo -->
+                </select><br><br>
+                
+                <!-- Puedes agregar más campos según necesites para la devolución -->
+                
+                <input type="submit" value="Actualizar Devolución">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

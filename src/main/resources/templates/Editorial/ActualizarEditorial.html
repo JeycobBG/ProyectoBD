@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Editorial</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Actualizar Editorial</h2>
+    
+    <a href="/editoriales/listar" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+    <div class="container">
+        <div>
+            <form action="/editoriales/actualizarEditorial" method="post">
+                
+                <input type="hidden" id="id" name="id" th:value="${editorial.id}" />
+                
+                <label for="nombre">Nombre de la Editorial:</label><br>
+                <input type="text" id="nombre" name="nombre" th:value="${editorial.nombre}" required><br><br>
+                
+                <label for="fechaFundacion">Fecha de Fundación:</label><br>
+                <input type="date" id="fechaFundacion" name="fechaFundacion" th:value="${editorial.fechaFundacion}" required><br><br>
+                
+                <!-- Combo box para seleccionar la dirección asociada -->
+                <label for="direccion">Dirección asociada:</label><br>
+                <select id="direccion" name="direccion" required>
+                    <option value="">Selecciona una dirección</option>
+                    <!-- Aquí puedes cargar dinámicamente las opciones de dirección desde tu backend -->
+                    <!-- Por ejemplo, podrías iterar sobre una lista de direcciones disponibles -->
+                    <!-- y generar opciones para cada una -->
+                    <option value="direccion1">Dirección 1</option>
+                    <option value="direccion2">Dirección 2</option>
+                    <option value="direccion3">Dirección 3</option>
+                    <!-- Fin de las opciones de ejemplo -->
+                </select><br><br>
+                
+                <!-- Puedes agregar más campos según necesites para la editorial -->
+                
+                <input type="submit" value="Actualizar Editorial">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
