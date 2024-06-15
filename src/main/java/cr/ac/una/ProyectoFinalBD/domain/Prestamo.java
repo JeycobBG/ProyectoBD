@@ -5,6 +5,7 @@
 package cr.ac.una.ProyectoFinalBD.domain;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +28,7 @@ import java.util.List;
 public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_prestamo")
     private int id;
     
     private Date fechaPrestamo;

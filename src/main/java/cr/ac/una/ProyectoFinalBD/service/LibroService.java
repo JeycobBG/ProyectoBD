@@ -4,7 +4,9 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
+import cr.ac.una.ProyectoFinalBD.domain.Libro;
 import cr.ac.una.ProyectoFinalBD.jpa.LibroRepository;
+import java.util.ArrayList;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +31,10 @@ public class LibroService implements ILibroService {
         } catch (Exception e) {
         }
         return false;
+    }
+
+    @Override
+    public ArrayList<Libro> leer(String error) {
+        return libroRepo.leer(error);
     }
 }

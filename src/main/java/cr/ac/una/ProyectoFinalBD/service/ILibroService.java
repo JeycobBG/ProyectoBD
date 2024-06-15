@@ -4,6 +4,8 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
+import cr.ac.una.ProyectoFinalBD.domain.Libro;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -15,4 +17,6 @@ public interface ILibroService {
     public boolean add(String ISBN,String titulo, String sinopsis,
             Date fechaPublicacion, Integer cantidad, Integer idAutor,
             Integer idEditorial, String idGeneros, String error);
+    
+    public ArrayList<Libro> leer(String error);
 }
