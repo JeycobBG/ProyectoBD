@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Cantón</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/usuarios/menuPrincipal" class="boton-volver">
+            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
+        </a>
+        <h3 class="listado-titulo">Lista de Cantones</h3>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/cantones/agregar" class="button">Agregar un nuevo cantón</a>
+        </div>
+
+        <form action="/cantones/buscarPorNombre" method="GET">
+            <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre del cantón">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Provincia</th>
+                <th>Número de Distritos</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="canton : ${cantones}">
+                <td th:text="${canton.id}"></td>
+                <td th:text="${canton.nombre}"></td>
+                <td th:text="${canton.provincia.nombre}"></td>
+                <td th:text="${#lists.size(canton.distrito)}"></td>
+                <td><a class="editar-button" th:href="@{'/cantones/actualizar?id=' + ${canton.id}}">Editar</a></td>
+                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${canton.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+
+        <script>
+            function confirmarEliminacion(enlace, idCanton) {
+                if (confirm("¿Está seguro de que desea eliminar este cantón?")) {
+                    window.location.href = '/cantones/eliminar?id=' + idCanton;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
+</html>

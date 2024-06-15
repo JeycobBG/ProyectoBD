@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Género</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/usuarios/menuPrincipal" class="boton-volver">
+            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
+        </a>
+        <h3 class="listado-titulo">Lista de Géneros Literarios</h3>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/generos/agregar" class="button">Agregar un nuevo género</a>
+        </div>
+
+        <form action="/generos/buscarPorNombre" method="GET">
+            <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre del género">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Número de Libros</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="genero : ${generos}">
+                <td th:text="${genero.id}"></td>
+                <td th:text="${genero.nombre}"></td>
+                <td th:text="${genero.descripcion}"></td>
+                <td th:text="${#lists.size(genero.libros)}"></td>
+                <td><a class="editar-button" th:href="@{'/generos/actualizar?id=' + ${genero.id}}">Editar</a></td>
+                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${genero.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+
+        <script>
+            function confirmarEliminacion(enlace, idGenero) {
+                if (confirm("¿Está seguro de que desea eliminar este género literario?")) {
+                    window.location.href = '/generos/eliminar?id=' + idGenero;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
 </html>

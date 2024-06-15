@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Teléfono</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/usuarios/menuPrincipal" class="boton-volver">
+            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
+        </a>
+        <h3 class="listado-titulo">Lista de Teléfonos Registrados</h3>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/telefonos/agregar" class="button">Agregar un nuevo teléfono</a>
+        </div>
+
+        <form action="/telefonos/buscarPorNumero" method="GET">
+            <input type="text" id="numero" name="numero" placeholder="Ingrese el número de teléfono">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Número</th>
+                <th>Propietario</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="telefono : ${telefonos}">
+                <td th:text="${telefono.id}"></td>
+                <td th:text="${telefono.numero}"></td>
+                <td th:text="${telefono.persona.nombre} + ' ' + ${telefono.persona.apellido}"></td>
+                <td><a class="editar-button" th:href="@{'/telefonos/actualizar?id=' + ${telefono.id}}">Editar</a></td>
+                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${telefono.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+
+        <script>
+            function confirmarEliminacion(enlace, idTelefono) {
+                if (confirm("¿Está seguro de que desea eliminar este teléfono?")) {
+                    window.location.href = '/telefonos/eliminar?id=' + idTelefono;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
+</html>

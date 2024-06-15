@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Correo Electrónico</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/usuarios/menuPrincipal" class="boton-volver">
+            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
+        </a>
+        <h3 class="listado-titulo">Lista de Correos Electrónicos</h3>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/correos/agregar" class="button">Agregar un nuevo correo electrónico</a>
+        </div>
+
+        <form action="/correos/buscarPorEmail" method="GET">
+            <input type="text" id="email" name="email" placeholder="Ingrese el correo electrónico">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Persona Asociada</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="correo : ${correos}">
+                <td th:text="${correo.id}"></td>
+                <td th:text="${correo.email}"></td>
+                <td th:text="${correo.persona.nombre} + ' ' + ${correo.persona.primerApellido}"></td>
+                <td><a class="editar-button" th:href="@{'/correos/actualizar?id=' + ${correo.id}}">Editar</a></td>
+                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${correo.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+
+        <script>
+            function confirmarEliminacion(enlace, idCorreo) {
+                if (confirm("¿Está seguro de que desea eliminar este correo electrónico?")) {
+                    window.location.href = '/correos/eliminar?id=' + idCorreo;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
+</html>

@@ -32,7 +32,6 @@ public class Telefono {
     @JoinColumn(name = "id_persona")
     private Persona persona;
     
-    
     public Telefono(){}
 
     public Telefono(int id, String numero, Persona persona) {

@@ -88,7 +88,6 @@ public class SocioController {
         Date fecha_registro = Date.from(Instant.now());
         String error_message = "";
         
-        
         boolean resultado = socioService.update(
         id,
         nombre,

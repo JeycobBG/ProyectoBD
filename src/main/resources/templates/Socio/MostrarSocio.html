@@ -1,15 +1,56 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Socio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/usuarios/menuPrincipal" class="boton-volver">
+            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
+        </a>
+        <h3 class="listado-titulo">Lista de Socios Registrados</h3>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/socios/agregar" class="button">Agregar un nuevo socio</a>
+        </div>
+
+        <form action="/socios/buscarPorPersona" method="GET">
+            <input type="text" id="nombrePersona" name="nombrePersona" placeholder="Ingrese el nombre de la persona">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Fecha de Registro</th>
+                <th>Nombre del Socio</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="socio : ${socios}">
+                <td th:text="${socio.id}"></td>
+                <td th:text="${#dates.format(socio.fechaRegistro, 'dd-MM-yyyy')}"></td>
+                <td th:text="${socio.persona.nombre} + ' ' + ${socio.persona.apellido}"></td>
+                <td><a class="editar-button" th:href="@{'/socios/actualizar?id=' + ${socio.id}}">Editar</a></td>
+                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${socio.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+
+        <script>
+            function confirmarEliminacion(enlace, idSocio) {
+                if (confirm("¿Está seguro de que desea eliminar este socio?")) {
+                    window.location.href = '/socios/eliminar?id=' + idSocio;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
 </html>

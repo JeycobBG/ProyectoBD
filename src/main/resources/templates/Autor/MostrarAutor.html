@@ -1,15 +1,56 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Autor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/usuarios/menuPrincipal" class="boton-volver">
+            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
+        </a>
+        <h3 class="listado-titulo">Lista de Autores</h3>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/autores/agregar" class="button">Agregar un nuevo autor</a>
+        </div>
+
+        <form action="/autores/buscarPorNombre" method="GET">
+            <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre del autor">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Nombre Completo</th>
+                <th>Bibliografía</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="autor : ${autores}">
+                <td th:text="${autor.id}"></td>
+                <td th:text="${autor.persona.nombre} + ' ' + ${autor.persona.primerApellido} + ' ' + ${autor.persona.segundoApellido}"></td>
+                <td th:text="${autor.bibliografia}"></td>
+                <td><a class="editar-button" th:href="@{'/autores/actualizar?id=' + ${autor.id}}">Editar</a></td>
+                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${autor.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+
+        <script>
+            function confirmarEliminacion(enlace, idAutor) {
+                if (confirm("¿Está seguro de que desea eliminar este autor?")) {
+                    window.location.href = '/autores/eliminar?id=' + idAutor;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
 </html>
