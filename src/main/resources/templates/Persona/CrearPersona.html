@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Persona</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Registrar una nueva Persona</h2>
+       
+    <a href="/personas/listarAdmin" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+<div class="container">
+    <div>
+    <form action="/personas/guardar-persona" method="post">
+
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id" readonly><br>
+        
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre" required><br>
+        
+        <label for="primerApellido">Primer Apellido:</label><br>
+        <input type="text" id="primerApellido" name="primerApellido" required><br>
+        
+        <label for="segundoApellido">Segundo Apellido:</label><br>
+        <input type="text" id="segundoApellido" name="segundoApellido"><br>
+        
+        <label for="identificacion">Identificación:</label><br>
+        <input type="text" id="identificacion" name="identificacion" required><br>
+        
+        <label for="direccion">Dirección:</label><br>
+        <select id="direccion" name="direccion" required>
+            <option value="">Seleccione una dirección</option>
+            <!-- Aquí puedes generar las opciones dinámicamente -->
+            <option value="1">Dirección 1</option>
+            <option value="2">Dirección 2</option>
+            <option value="3">Dirección 3</option>
+        </select><br>
+        
+        <label for="telefono">Teléfono:</label><br>
+        <select id="telefono" name="telefono" required>
+            <option value="">Seleccione un teléfono</option>
+            <!-- Aquí puedes generar las opciones dinámicamente -->
+            <option value="1">Teléfono 1</option>
+            <option value="2">Teléfono 2</option>
+            <option value="3">Teléfono 3</option>
+        </select><br>
+        
+        <label for="correoElectronico">Correo Electrónico:</label><br>
+        <select id="correoElectronico" name="correoElectronico" required>
+            <option value="">Seleccione un correo electrónico</option>
+            <!-- Aquí puedes generar las opciones dinámicamente -->
+            <option value="1">Correo 1</option>
+            <option value="2">Correo 2</option>
+            <option value="3">Correo 3</option>
+        </select><br>
+        
+        <label for="autor">Autor:</label><br>
+        <select id="autor" name="autor" required>
+            <option value="">Seleccione un autor</option>
+            <!-- Aquí puedes generar las opciones dinámicamente -->
+            <option value="1">Autor 1</option>
+            <option value="2">Autor 2</option>
+            <option value="3">Autor 3</option>
+        </select><br>
+        
+        <label for="socio">Socio:</label><br>
+        <select id="socio" name="socio" required>
+            <option value="">Seleccione un socio</option>
+            <!-- Aquí puedes generar las opciones dinámicamente -->
+            <option value="1">Socio 1</option>
+            <option value="2">Socio 2</option>
+            <option value="3">Socio 3</option>
+        </select><br>
+        
+        <input type="submit" value="Guardar">
+    </form>
+    </div>
+</div>
+  <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+  <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
+</html>

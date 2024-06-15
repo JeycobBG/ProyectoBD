@@ -1,15 +1,51 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Provincia</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Registrar una nueva provincia</h2>
+       
+    <a href="/provincias/listar" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+<div class="container">
+    <div>
+    <form action="/provincias/guardar" method="post">
+
+        <label for="nombre">Nombre de la provincia:</label><br>
+        <input type="text" id="nombre" name="nombre" required><br>
+        
+        <!-- Campo para el identificador de la provincia -->
+        <label for="id">Identificador:</label><br>
+        <input type="text" id="id" name="id" required><br>
+        
+        <!-- Combo box para seleccionar el cantón -->
+        <label for="canton">Cantón:</label><br>
+        <select id="canton" name="canton" required>
+            <option value="">Selecciona un cantón</option>
+            <!-- Aquí puedes cargar dinámicamente las opciones de cantón desde tu backend -->
+            <!-- Por ejemplo, podrías iterar sobre una lista de cantones disponibles -->
+            <!-- y generar opciones para cada uno -->
+            <option value="canton1">Cantón 1</option>
+            <option value="canton2">Cantón 2</option>
+            <option value="canton3">Cantón 3</option>
+            <!-- Fin de las opciones de ejemplo -->
+        </select><br>
+        
+        <!-- Puedes agregar más campos según necesites para la provincia -->
+        
+        <input type="submit" value="Guardar">
+    </form>
+    </div>
+</div>
+  <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+  <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
 </html>

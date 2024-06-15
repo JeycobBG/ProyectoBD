@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registrar Préstamo</title>
+    <title>Registrar Multa</title>
     <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <h2>Registrar un nuevo Préstamo</h2>
+    <h2>Registrar una nueva Multa</h2>
        
-    <a href="/prestamos/listarAdmin" class="boton-volver">
+    <a href="/multas/listarAdmin" class="boton-volver">
     <img src="/img/volver.png" alt="Volver" width="20" height="20">
     </a>    
     
@@ -17,22 +17,21 @@
     
 <div class="container">
     <div>
-    <form action="/prestamos/guardar-prestamo" method="post">
+    <form action="/multas/guardar-multa" method="post">
 
         <label for="id">ID:</label><br>
         <input type="text" id="id" name="id" readonly><br>
         
-        <label for="fechaPrestamo">Fecha de Préstamo:</label><br>
-        <input type="date" id="fechaPrestamo" name="fechaPrestamo" required><br>
+        <label for="monto">Monto:</label><br>
+        <input type="number" id="monto" name="monto" step="0.01" required><
+        <label for="dias_atraso">Días de Atraso:</label><br>
+        <input type="number" id="dias_atraso" name="dias_atraso" required><br>
         
-        <label for="fechaDevolucionPrevista">Fecha de Devolución Prevista:</label><br>
-        <input type="date" id="fechaDevolucionPrevista" name="fechaDevolucionPrevista" required><br>
+        <label for="cancelada">Cancelada:</label><br>
+        <input type="checkbox" id="cancelada" name="cancelada"><br>
         
-        <label for="libro">Libro:</label><br>
-        <input type="text" id="libro" name="libro" required><br>
-        
-        <label for="socio">Socio:</label><br>
-        <input type="text" id="socio" name="socio" required><br>
+        <label for="prestamo">Préstamo:</label><br>
+        <input type="text" id="prestamo" name="prestamo" required><br>
         
         <input type="submit" value="Guardar">
     </form>
