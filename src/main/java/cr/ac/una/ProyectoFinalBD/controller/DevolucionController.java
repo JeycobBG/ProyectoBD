@@ -5,11 +5,10 @@
 package cr.ac.una.ProyectoFinalBD.controller;
 
 import cr.ac.una.ProyectoFinalBD.domain.Devolucion;
-import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
 import cr.ac.una.ProyectoFinalBD.service.DevolucionService;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,7 @@ public class DevolucionController {
     DevolucionService devolucionService;
     
     @GetMapping("/guardar")
-    public String add(){
+    public String guardar(){
         
         /*
             @RequestParam("fecha_devolucion_efectuada")Data fecha_devolucion_efectuada,
@@ -36,13 +35,10 @@ public class DevolucionController {
         */
         
         Date fecha_devolucion_efectuada = Date.from(Instant.now());
-        Integer id_prestamo = 3;
-        String error = "";
-        String advertencia_multa = "";
+        Integer id_prestamo = 4;
+        String[] resultado = devolucionService.insertar(fecha_devolucion_efectuada, id_prestamo);
         
-        boolean resultado = devolucionService.add(fecha_devolucion_efectuada, id_prestamo, error, advertencia_multa);
-        
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
         
         return "/";
     }
@@ -50,27 +46,29 @@ public class DevolucionController {
     @GetMapping("/leer")
     public String leer(){
        String error = "";
+       List<Devolucion> devoluciones = devolucionService.leer();
        
+       for(Devolucion dev : devoluciones){
+           System.out.print("Nueva devolucion: " + dev.getPrestamo().getSocio().getPersona().getNombre() + "\n");
+       }
         
-        return "/";
+       return "/";
     }
     
     @GetMapping("/actualizar")
-    public String update(){
+    public String actualizar(){
         
         /*
             @RequestParam("id_prestamo")Integer id_prestamo,
             @RequestParam("fecha_devolucion")Data fecha_devolucion,
             @RequestParam("error")String error
-        */
+        */  
         
         Integer id_prestamo = 1;
-        Date fecha_devolucion = Date.from(Instant.now());
-        String error = "";
+        Date fecha_devolucion_efectuada = Date.from(Instant.now());
+        String[] resultado = devolucionService.actualizar(id_prestamo, fecha_devolucion_efectuada);
         
-        boolean resultado = devolucionService.update(id_prestamo, fecha_devolucion, error);
-        
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
         
         return "/";
     }

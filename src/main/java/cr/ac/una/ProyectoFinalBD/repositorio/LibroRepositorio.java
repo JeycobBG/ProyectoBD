@@ -4,7 +4,6 @@
  */
 package cr.ac.una.ProyectoFinalBD.repositorio;
 
-import cr.ac.una.ProyectoFinalBD.repositorio.ILibroRepositorio;
 import cr.ac.una.ProyectoFinalBD.domain.Libro;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
@@ -28,7 +27,7 @@ public class LibroRepositorio implements ILibroRepositorio{
     
     @Override
     @Transactional
-    public String insertar(String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos, String error) {
+    public String insertar(String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos) {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_insertar_libro");
         query.registerStoredProcedureParameter("ISBN", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("titulo", String.class, ParameterMode.IN);
@@ -50,24 +49,24 @@ public class LibroRepositorio implements ILibroRepositorio{
         query.setParameter("id_generos", id_generos);
 
         query.execute();
-        return error = (String) query.getOutputParameterValue("error");
+        return (String) query.getOutputParameterValue("error");
     }
 
     @Override
     @Transactional
-    public List<Libro> leer(String error) {
+    public List<Libro> leer() {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_leer_libro", Libro.class);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
 
         query.execute();
-        error = (String) query.getOutputParameterValue("error");
+        System.out.print((String) query.getOutputParameterValue("error"));
 
         return query.getResultList();
     }
     
     @Override
     @Transactional
-    public String actualizar(Integer id_libro, String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos, String error) {
+    public String actualizar(Integer id_libro, String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos) {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_actualizar_libro");
         query.registerStoredProcedureParameter("id_libro", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("ISBN", String.class, ParameterMode.IN);
@@ -91,7 +90,7 @@ public class LibroRepositorio implements ILibroRepositorio{
         query.setParameter("id_generos", id_generos);
 
         query.execute();
-        return error = (String) query.getOutputParameterValue("error");
+        return (String) query.getOutputParameterValue("error");
     }
     
 }

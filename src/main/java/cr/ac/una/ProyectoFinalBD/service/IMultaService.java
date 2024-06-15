@@ -4,7 +4,8 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
-import java.util.Date;
+import cr.ac.una.ProyectoFinalBD.domain.Multa;
+import java.util.List;
 
 /**
  *
@@ -12,17 +13,17 @@ import java.util.Date;
  */
 public interface IMultaService {
 
-    public boolean add(
+    public String guardar(
             Double monto,
             Integer dias_atraso,                     
             Boolean cancelada,
-            Integer id_prestamo,
-            String error);
+            Integer id_prestamo);
     
-    public boolean update(
+    public List<Multa> leer();
+    
+    public String actualizar(
             Integer id_multa,
             Double monto,
             Integer dias_atraso,                     
-            Boolean cancelada,
-            String error);
+            Boolean cancelada);
 }
