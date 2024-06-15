@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,9 +47,11 @@ public class Prestamo {
     private Devolucion devolucion;
     
     @OneToMany(mappedBy = "prestamo", fetch = FetchType.LAZY)
-     private List<Multa> multas;
+    private List<Multa> multas;
     
-    public Prestamo(){}
+    public Prestamo(){
+         multas = new ArrayList<>();
+    }
 
     public int getId() {
         return id;

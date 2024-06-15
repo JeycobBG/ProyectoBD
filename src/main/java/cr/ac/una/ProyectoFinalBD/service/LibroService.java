@@ -5,9 +5,9 @@
 package cr.ac.una.ProyectoFinalBD.service;
 
 import cr.ac.una.ProyectoFinalBD.domain.Libro;
-import cr.ac.una.ProyectoFinalBD.jpa.LibroRepository;
-import java.util.ArrayList;
+import cr.ac.una.ProyectoFinalBD.repositorio.ILibroRepositorio;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,37 +17,27 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LibroService implements ILibroService {
+    
     @Autowired
-    private LibroRepository libroRepo;
+    private ILibroRepositorio libroRepo;
     
     @Override
-    public boolean add(String ISBN,String titulo, String sinopsis,
-            Date fechaPublicacion, Integer cantidad, Integer idAutor,
-            Integer idEditorial, String idGeneros, String error){
-        try {
-            libroRepo.insertarLibro(ISBN, titulo, sinopsis, fechaPublicacion,
-                cantidad, idAutor, idEditorial, idGeneros, error);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
-    }
-
-    @Override
-    public ArrayList<Libro> leer(String error) {
-        return libroRepo.leer(error);
+    public String insertar(String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos, String error){
+        return libroRepo.insertar(ISBN, titulo, sinopsis, fecha_publicacion, cantidad, id_autor, id_editorial, id_generos, error);
     }
     
     @Override
-    public boolean update(Integer id_libro, String ISBN,String titulo, String sinopsis,
-            Date fechaPublicacion, Integer cantidad, Integer idAutor,
-            Integer idEditorial, String idGeneros, String error){
-        try {
-            libroRepo.actualizar(id_libro, ISBN, titulo, sinopsis, fechaPublicacion,
-                cantidad, idAutor, idEditorial, idGeneros, error);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
+    public List<Libro> leer(){
+        String error = "";
+        List<Libro> libros = libroRepo.leer(error);
+        System.out.println("Error: " + error);
+        return libros;
+    }
+    
+    @Override
+    public String actualizar(Integer id_libro, String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos, String error){
+        
+        return libroRepo.actualizar(id_libro, ISBN, titulo, sinopsis, fecha_publicacion,
+                cantidad, id_autor, id_editorial, id_generos, error);
     }
 }

@@ -4,10 +4,12 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Devolucion;
+import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
 import cr.ac.una.ProyectoFinalBD.service.DevolucionService;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
-import javax.xml.crypto.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +43,14 @@ public class DevolucionController {
         boolean resultado = devolucionService.add(fecha_devolucion_efectuada, id_prestamo, error, advertencia_multa);
         
         System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
+    
+    @GetMapping("/leer")
+    public String leer(){
+       String error = "";
+       
         
         return "/";
     }
