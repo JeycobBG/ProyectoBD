@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Dirección</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/usuarios/menuPrincipal" class="boton-volver">
+            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
+        </a>
+        <h3 class="listado-titulo">Lista de Direcciones</h3>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/direcciones/agregar" class="button">Agregar una nueva dirección</a>
+        </div>
+
+        <form action="/direcciones/buscarPorCodigoPostal" method="GET">
+            <input type="text" id="codigoPostal" name="codigoPostal" placeholder="Ingrese el código postal">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Código Postal</th>
+                <th>Descripción</th>
+                <th>Distrito</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="direccion : ${direcciones}">
+                <td th:text="${direccion.id}"></td>
+                <td th:text="${direccion.codigoPostal}"></td>
+                <td th:text="${direccion.descripcion}"></td>
+                <td th:text="${direccion.distrito.nombre}"></td>
+                <td><a class="editar-button" th:href="@{'/direcciones/actualizar?id=' + ${direccion.id}}">Editar</a></td>
+                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${direccion.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+
+        <script>
+            function confirmarEliminacion(enlace, idDireccion) {
+                if (confirm("¿Está seguro de que desea eliminar esta dirección?")) {
+                    window.location.href = '/direcciones/eliminar?id=' + idDireccion;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
 </html>
