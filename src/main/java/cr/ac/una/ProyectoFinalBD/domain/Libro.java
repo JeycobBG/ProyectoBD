@@ -6,9 +6,7 @@ package cr.ac.una.ProyectoFinalBD.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityResult;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.FieldResult;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,7 +15,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.SqlResultSetMapping;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,25 +42,25 @@ public class Libro {
     @JoinColumn(name = "id_autor")
     private Autor autor;
     
-     @ManyToOne
-     @JoinColumn(name = "id_editorial")
-     private Editorial editorial;
+    @ManyToOne
+    @JoinColumn(name = "id_editorial")
+    private Editorial editorial;
      
-     @ManyToMany(fetch = FetchType.LAZY)
-     @JoinTable(
-             name = "tb_libro_genero",
-             joinColumns = @JoinColumn(name = "id_libro"),
-             inverseJoinColumns = @JoinColumn(name = "id_genero")
-     )
-     private List<Genero> generos;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "tb_libro_genero",
+            joinColumns = @JoinColumn(name = "id_libro"),
+            inverseJoinColumns = @JoinColumn(name = "id_genero")
+    )
+    private List<Genero> generos;
      
-     @OneToMany(mappedBy = "libro", fetch = FetchType.LAZY)
-     private List<Prestamo> prestamos;
+    @OneToMany(mappedBy = "libro", fetch = FetchType.LAZY)
+    private List<Prestamo> prestamos;
      
-     public Libro(){
-         generos = new ArrayList<>();
-         prestamos = new ArrayList<>();
-     }
+    public Libro(){
+        generos = new ArrayList<>();
+        prestamos = new ArrayList<>();
+    }
 
     public int getId() {
         return id;
