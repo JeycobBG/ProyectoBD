@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Préstamo</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Actualizar Préstamo</h2>
+    
+    <a href="/prestamos/listar" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+    <div class="container">
+        <div>
+            <form action="/prestamos/actualizarPrestamo" method="post">
+                
+                <input type="hidden" id="id" name="id" th:value="${prestamo.id}" />
+                
+                <label for="fechaPrestamo">Fecha de Préstamo:</label><br>
+                <input type="date" id="fechaPrestamo" name="fechaPrestamo" th:value="${prestamo.fechaPrestamo}" required><br><br>
+                
+                <label for="fechaDevolucionPrevista">Fecha de Devolución Prevista:</label><br>
+                <input type="date" id="fechaDevolucionPrevista" name="fechaDevolucionPrevista" th:value="${prestamo.fechaDevolucionPrevista}" required><br><br>
+                
+                <label for="libro">Libro:</label><br>
+                <select id="libro" name="libro">
+                    <option th:each="l : ${libros}" 
+                            th:value="${l.id}" 
+                            th:text="${l.titulo}">
+                    </option>
+                </select><br><br>
+                
+                <label for="socio">Socio:</label><br>
+                <select id="socio" name="socio">
+                    <option th:each="s : ${socios}" 
+                            th:value="${s.id}" 
+                            th:text="${s.persona.nombre} ${s.persona.primerApellido}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Actualizar Préstamo">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

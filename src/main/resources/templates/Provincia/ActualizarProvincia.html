@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Provincia</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Actualizar Provincia</h2>
+    
+    <a href="/provincias/listar" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+    <div class="container">
+        <div>
+            <form action="/provincias/actualizarProvincia" method="post">
+                
+                <input type="hidden" id="id" name="id" th:value="${provincia.id}" />
+                
+                <label for="nombre">Nombre de la Provincia:</label><br>
+                <input type="text" id="nombre" name="nombre" th:value="${provincia.nombre}" required><br><br>
+                
+                <label for="canton">Seleccione un cantón:</label><br>
+                <select id="canton" name="canton" required>
+                    <option th:each="canton : ${provincia.canton}" 
+                            th:value="${canton.id}" 
+                            th:text="${canton.nombre}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Actualizar Provincia">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

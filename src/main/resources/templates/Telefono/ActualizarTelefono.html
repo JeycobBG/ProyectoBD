@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Teléfono</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Actualizar Teléfono</h2>
+    
+    <a href="/telefonos/listar" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+    <div class="container">
+        <div>
+            <form id="actualizarTelefonoForm" action="/telefonos/actualizarTelefono" method="post">
+                
+                <input type="hidden" id="id" name="id" th:value="${telefono.id}" />
+                
+                <label for="numero">Número de Teléfono:</label><br>
+                <input type="text" id="numero" name="numero" th:value="${telefono.numero}" required><br><br>
+                
+                <label for="persona">Seleccione una persona:</label><br>
+                <select id="persona" name="persona" required>
+                    <option value="">Seleccionar</option>
+                    <option th:each="persona : ${personas}" 
+                            th:value="${persona.id}" 
+                            th:text="${persona.nombre + ' ' + persona.primerApellido + ' ' + persona.segundoApellido}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Actualizar Teléfono">
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("actualizarTelefonoForm").addEventListener("submit", function(event) {
+            var numero = document.getElementById("numero").value;
+            var persona = document.getElementById("persona").value;
+            
+            // Validar que el número de teléfono tenga al menos 8 caracteres
+            if (numero.length < 8) {
+                alert("El número de teléfono debe tener al menos 8 caracteres.");
+                event.preventDefault();
+            }
+            
+            // Validar que se haya seleccionado una persona
+            if (persona === "") {
+                alert("Por favor seleccione una persona.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

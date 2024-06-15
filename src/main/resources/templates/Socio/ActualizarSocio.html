@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Socio</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Actualizar Socio</h2>
+    
+    <a href="/socios/listar" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+    <div class="container">
+        <div>
+            <form id="actualizarSocioForm" action="/socios/actualizarSocio" method="post">
+                
+                <input type="hidden" id="id" name="id" th:value="${socio.id}" />
+                
+                <label for="fechaRegistro">Fecha de Registro:</label><br>
+                <input type="date" id="fechaRegistro" name="fechaRegistro" th:value="${socio.fechaRegistro}" required><br><br>
+                
+                <label for="persona">Seleccione una persona:</label><br>
+                <select id="persona" name="persona" required>
+                    <option value="">Seleccionar</option>
+                    <option th:each="persona : ${personas}" 
+                            th:value="${persona.id}" 
+                            th:text="${persona.nombre + ' ' + persona.primerApellido + ' ' + persona.segundoApellido}">
+                    </option>
+                </select><br><br>
+
+                <label for="prestamo">Seleccione un préstamo:</label><br>
+                <select id="prestamo" name="prestamo" required>
+                    <option value="">Seleccionar</option>
+                    <option th:each="prestamo : ${prestamos}" 
+                            th:value="${prestamo.id}" 
+                            th:text="${prestamo.id}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Actualizar Socio">
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("actualizarSocioForm").addEventListener("submit", function(event) {
+            var fechaRegistro = document.getElementById("fechaRegistro").value;
+            var persona = document.getElementById("persona").value;
+            var prestamo = document.getElementById("prestamo").value;
+            
+            // Validar que la fecha de registro no sea en el futuro
+            var hoy = new Date().toISOString().split('T')[0];
+            if (fechaRegistro > hoy) {
+                alert("La fecha de registro no puede ser en el futuro.");
+                event.preventDefault();
+            }
+            
+            // Validar que se haya seleccionado una persona
+            if (persona === "") {
+                alert("Por favor seleccione una persona.");
+                event.preventDefault();
+            }
+
+            // Validar que se haya seleccionado un préstamo
+            if (prestamo === "") {
+                alert("Por favor seleccione un préstamo.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

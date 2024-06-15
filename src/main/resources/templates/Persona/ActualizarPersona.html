@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Persona</title>
+    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Actualizar Persona</h2>
+    
+    <a href="/personas/listar" class="boton-volver">
+    <img src="/img/volver.png" alt="Volver" width="20" height="20">
+    </a>    
+    
+    <a href="/usuarios/menuPrincipal" class="boton-volver">
+    <img src="/img/home.png" alt="Volver" width="20" height="20">
+    </a>
+    
+    <div class="container">
+        <div>
+            <form action="/personas/actualizarPersona" method="post">
+                
+                <input type="hidden" id="id" name="id" th:value="${persona.id}" />
+                
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" th:value="${persona.nombre}" required><br><br>
+                
+                <label for="primerApellido">Primer Apellido:</label><br>
+                <input type="text" id="primerApellido" name="primerApellido" th:value="${persona.primerApellido}" required><br><br>
+                
+                <label for="segundoApellido">Segundo Apellido:</label><br>
+                <input type="text" id="segundoApellido" name="segundoApellido" th:value="${persona.segundoApellido}"><br><br>
+                
+                <label for="identificacion">Identificación:</label><br>
+                <input type="text" id="identificacion" name="identificacion" th:value="${persona.identificacion}" required><br><br>
+                
+                <label for="telefono">Teléfono:</label><br>
+                <select id="telefono" name="telefono">
+                    <option th:each="tel : ${persona.telefono}" 
+                            th:value="${tel.id}" 
+                            th:text="${tel.numero}">
+                    </option>
+                </select><br><br>
+                
+                <label for="correoElectronico">Correo Electrónico:</label><br>
+                <select id="correoElectronico" name="correoElectronico">
+                    <option th:each="correo : ${persona.correoElectronico}" 
+                            th:value="${correo.id}" 
+                            th:text="${correo.email}">
+                    </option>
+                </select><br><br>
+                
+                <label for="autor">Autor:</label><br>
+                <select id="autor" name="autor">
+                    <option th:each="a : ${persona.autor}" 
+                            th:value="${a.id}" 
+                            th:text="${a.bibliografia}">
+                    </option>
+                </select><br><br>
+                
+                <label for="socio">Socio:</label><br>
+                <select id="socio" name="socio">
+                    <option th:each="s : ${persona.socio}" 
+                            th:value="${s.id}" 
+                            th:text="${s.fechaRegistro}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Actualizar Persona">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
