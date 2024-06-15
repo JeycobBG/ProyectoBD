@@ -5,22 +5,46 @@
 </head>
 <body>
     <h2>Registrar un nuevo Autor</h2>
- 
-<div class="container">
-    <div>
-    <form action="/autor/guardar" method="post">
-        
-        <label for="bibliografia">Bibliografía:</label><br>
-        <textarea id="bibliografia" name="bibliografia" rows="4" cols="50" required></textarea><br>
-        
-        <label for="persona">Persona:</label><br>
-        <input type="text" id="persona" name="persona" required><br>
-        
-        <input type="submit" value="Guardar">
-    </form>
+
+    <div class="container">
+        <div>
+            <form id="registrarAutorForm" action="/autor/guardar" method="post">
+                
+                <!-- Combo box para seleccionar la persona -->
+                <label for="persona">Persona:</label><br>
+                <select id="persona" name="persona" required>
+                    <option value="">Selecciona una persona</option>
+                    <!-- Cargar dinámicamente las opciones de persona desde el backend -->
+                    <option th:each="persona : ${personas}" 
+                            th:value="${persona.id}" 
+                            th:text="${persona.nombre}">
+                    </option>
+                </select><br><br>
+                
+                <!-- Campo para la bibliografía del autor -->
+                <label for="bibliografia">Bibliografía:</label><br>
+                <textarea id="bibliografia" name="bibliografia" rows="4" cols="50" required></textarea><br><br>
+                
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
     </div>
-</div>
-  <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-  <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("registrarAutorForm").addEventListener("submit", function(event) {
+            var persona = document.getElementById("persona").value;
+            var bibliografia = document.getElementById("bibliografia").value;
+            
+            // Validaciones
+            if (persona.trim() === "" || bibliografia.trim() === "") {
+                alert("Por favor complete todos los campos.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>

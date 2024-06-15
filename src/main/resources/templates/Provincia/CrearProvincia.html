@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Provincia</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <h2>Registrar una nueva provincia</h2>
     
 <div class="container">
     <div>
-    <form action="/provincia/guardar" method="post">
+    <form id="registrarProvinciaForm" action="/provincia/guardar" method="post">
 
         <label for="nombre">Nombre de la provincia:</label><br>
         <input type="text" id="nombre" name="nombre" required><br>
@@ -39,5 +38,20 @@
 </div>
   <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
   <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+
+<script>
+    // Validación del formulario
+    document.getElementById("registrarProvinciaForm").addEventListener("submit", function(event) {
+        var nombre = document.getElementById("nombre").value;
+        var id = document.getElementById("id").value;
+        var canton = document.getElementById("canton").value;
+        
+        // Validar que todos los campos estén completos
+        if (nombre.trim() === "" || id.trim() === "" || canton === "") {
+            alert("Por favor completa todos los campos.");
+            event.preventDefault();
+        }
+    });
+</script>
 </body>
 </html>

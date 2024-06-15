@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Teléfono</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <h2>Registrar un nuevo teléfono</h2>
 
 <div class="container">
     <div>
-    <form action="/telefono/guardar" method="post">
+    <form id="registrarTelefonoForm" action="/telefono/guardar" method="post">
         
         <!-- Campo para el número del teléfono -->
         <label for="numero">Número de teléfono:</label><br>
@@ -36,5 +35,27 @@
 </div>
   <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
   <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+
+<script>
+    // Validación del formulario
+    document.getElementById("registrarTelefonoForm").addEventListener("submit", function(event) {
+        var numero = document.getElementById("numero").value;
+        var persona = document.getElementById("persona").value;
+        
+        // Validar que todos los campos estén completos
+        if (numero.trim() === "" || persona === "") {
+            alert("Por favor completa todos los campos.");
+            event.preventDefault();
+            return;
+        }
+        
+        // Validar que el número de teléfono contenga solo números
+        if (!/^\d+$/.test(numero)) {
+            alert("El número de teléfono solo puede contener números.");
+            event.preventDefault();
+            return;
+        }
+    });
+</script>
 </body>
 </html>

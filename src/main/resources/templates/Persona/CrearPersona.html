@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Persona</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <h2>Registrar una nueva Persona</h2>
@@ -10,7 +9,7 @@
     
 <div class="container">
     <div>
-    <form action="/persona/guardar" method="post">
+    <form id="registrarPersonaForm" action="/persona/guardar" method="post">
 
 
         <label for="nombre">Nombre:</label><br>
@@ -76,5 +75,26 @@
 </div>
   <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
   <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+
+<script>
+    // Validación del formulario
+    document.getElementById("registrarPersonaForm").addEventListener("submit", function(event) {
+        var nombre = document.getElementById("nombre").value;
+        var primerApellido = document.getElementById("primerApellido").value;
+        var identificacion = document.getElementById("identificacion").value;
+        var direccion = document.getElementById("direccion").value;
+        var telefono = document.getElementById("telefono").value;
+        var correoElectronico = document.getElementById("correoElectronico").value;
+        var autor = document.getElementById("autor").value;
+        var socio = document.getElementById("socio").value;
+        
+        // Validaciones
+        if (nombre.trim() === "" || primerApellido.trim() === "" || identificacion.trim() === "" || 
+            direccion === "" || telefono === "" || correoElectronico === "" || autor === "" || socio === "") {
+            alert("Por favor complete todos los campos.");
+            event.preventDefault();
+        }
+    });
+</script>
 </body>
 </html>

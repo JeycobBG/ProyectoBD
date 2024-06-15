@@ -2,26 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Devolución</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <h2>Registrar una nueva Devolución</h2>
 
-<div class="container">
-    <div>
-    <form action="/devolucion/guardar" method="post">
-        
-        <label for="fechaDevolucionEfectuada">Fecha de Devolución Efectuada:</label><br>
-        <input type="date" id="fechaDevolucionEfectuada" name="fechaDevolucionEfectuada" required><br>
-        
-        <label for="prestamo">Préstamo:</label><br>
-        <input type="text" id="prestamo" name="prestamo" required><br>
-        
-        <input type="submit" value="Guardar">
-    </form>
+    <div class="container">
+        <div>
+            <form id="registrarDevolucionForm" action="/devolucion/guardar" method="post">
+                
+                <!-- Campo para la fecha de devolución efectuada -->
+                <label for="fechaDevolucionEfectuada">Fecha de Devolución Efectuada:</label><br>
+                <input type="date" id="fechaDevolucionEfectuada" name="fechaDevolucionEfectuada" required><br><br>
+                
+                <!-- Combo box para seleccionar el préstamo -->
+                <label for="prestamo">Préstamo:</label><br>
+                <select id="prestamo" name="prestamo" required>
+                    <option value="">Selecciona un préstamo</option>
+                    <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
+                    <option th:each="prestamo : ${prestamos}" 
+                            th:value="${prestamo.id}" 
+                            th:text="${prestamo.detalle}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
     </div>
-</div>
-  <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-  <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("registrarDevolucionForm").addEventListener("submit", function(event) {
+            var fechaDevolucionEfectuada = document.getElementById("fechaDevolucionEfectuada").value;
+            var prestamo = document.getElementById("prestamo").value;
+            
+            // Obtener la fecha actual
+            var fechaActual = new Date().toISOString().split('T')[0];
+            
+            // Validaciones
+            if (fechaDevolucionEfectuada === "" || prestamo.trim() === "") {
+                alert("Por favor complete todos los campos.");
+                event.preventDefault();
+            } else if (fechaDevolucionEfectuada > fechaActual) {
+                alert("La fecha de devolución efectuada no puede ser una fecha futura.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>

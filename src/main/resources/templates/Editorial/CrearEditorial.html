@@ -2,12 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Editorial</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <h2>Registrar una nueva editorial</h2>
-       
-    
+
     <div class="container">
         <div>
             <form id="registrarEditorialForm" action="/editorial/guardar" method="post">
@@ -56,6 +54,19 @@
             if (fechaFundacion.trim() === "") {
                 alert("Por favor ingrese la fecha de fundación.");
                 event.preventDefault();
+            } else {
+                // Obtener la fecha actual
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
+                var dd = String(today.getDate()).padStart(2, '0');
+                var currentDate = yyyy + '-' + mm + '-' + dd;
+                
+                // Validar que la fecha de fundación no sea en el futuro
+                if (fechaFundacion > currentDate) {
+                    alert("La fecha de fundación no puede ser en el futuro.");
+                    event.preventDefault();
+                }
             }
             
             // Validar que se haya seleccionado una dirección

@@ -6,21 +6,45 @@
 <body>
     <h2>Registrar un nuevo Cantón</h2>
 
-<div class="container">
-    <div>
-    <form action="/canton/guardar" method="post">
-        
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" required><br>
-        
-        <label for="provincia">Provincia:</label><br>
-        <input type="text" id="provincia" name="provincia" required><br>
-        
-        <input type="submit" value="Guardar">
-    </form>
+    <div class="container">
+        <div>
+            <form id="registrarCantonForm" action="/canton/guardar" method="post">
+                
+                <!-- Campo para el nombre del cantón -->
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+                
+                <!-- Combo box para seleccionar la provincia -->
+                <label for="provincia">Provincia:</label><br>
+                <select id="provincia" name="provincia" required>
+                    <option value="">Selecciona una provincia</option>
+                    <!-- Cargar dinámicamente las opciones de provincia desde el backend -->
+                    <option th:each="provincia : ${provincias}" 
+                            th:value="${provincia.id}" 
+                            th:text="${provincia.nombre}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
     </div>
-</div>
-  <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-  <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("registrarCantonForm").addEventListener("submit", function(event) {
+            var nombre = document.getElementById("nombre").value;
+            var provincia = document.getElementById("provincia").value;
+            
+            // Validaciones
+            if (nombre.trim() === "" || provincia.trim() === "") {
+                alert("Por favor complete todos los campos.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>

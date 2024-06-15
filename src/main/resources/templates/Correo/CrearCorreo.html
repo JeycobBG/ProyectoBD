@@ -2,26 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Correo Electrónico</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <h2>Registrar un nuevo Correo Electrónico</h2>
 
-<div class="container">
-    <div>
-    <form action="/correo/guardar" method="post">
-     
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
-        
-        <label for="persona">Persona:</label><br>
-        <input type="text" id="persona" name="persona" required><br>
-        
-        <input type="submit" value="Guardar">
-    </form>
+    <div class="container">
+        <div>
+            <form id="registrarCorreoForm" action="/correo/guardar" method="post">
+                
+                <!-- Campo para el email -->
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                
+                <!-- Combo box para seleccionar la persona -->
+                <label for="persona">Persona:</label><br>
+                <select id="persona" name="persona" required>
+                    <option value="">Selecciona una persona</option>
+                    <!-- Cargar dinámicamente las opciones de persona desde el backend -->
+                    <option th:each="persona : ${personas}" 
+                            th:value="${persona.id}" 
+                            th:text="${persona.nombre}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Guardar">
+            </form>
+        </div>
     </div>
-</div>
-  <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-  <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("registrarCorreoForm").addEventListener("submit", function(event) {
+            var email = document.getElementById("email").value;
+            var persona = document.getElementById("persona").value;
+            
+            // Validaciones
+            if (email.trim() === "" || persona.trim() === "") {
+                alert("Por favor complete todos los campos.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>

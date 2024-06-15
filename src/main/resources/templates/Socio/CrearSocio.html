@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Socio</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <h2>Registrar un nuevo socio</h2>
 
 <div class="container">
     <div>
-    <form action="/socio/guardar" method="post">
+    <form id="registrarSocioForm" action="/socio/guardar" method="post">
         
         <!-- Campo para la fecha de registro -->
         <label for="fechaRegistro">Fecha de registro:</label><br>
@@ -49,5 +48,28 @@
 </div>
   <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
   <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+
+<script>
+    // Validación del formulario
+    document.getElementById("registrarSocioForm").addEventListener("submit", function(event) {
+        var fechaRegistro = document.getElementById("fechaRegistro").value;
+        var persona = document.getElementById("persona").value;
+        var prestamo = document.getElementById("prestamo").value;
+        
+        // Validar que todos los campos estén completos
+        if (fechaRegistro.trim() === "" || persona === "" || prestamo === "") {
+            alert("Por favor completa todos los campos.");
+            event.preventDefault();
+            return;
+        }
+        
+        // Validar que la fecha de registro no sea en el futuro
+        var fechaHoy = new Date().toISOString().split("T")[0]; // Obtener la fecha de hoy en formato ISO
+        if (fechaRegistro > fechaHoy) {
+            alert("La fecha de registro no puede ser en el futuro.");
+            event.preventDefault();
+        }
+    });
+</script>
 </body>
 </html>
