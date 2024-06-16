@@ -4,9 +4,12 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Genero;
 import cr.ac.una.ProyectoFinalBD.service.GeneroService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,13 +31,13 @@ public class GeneroController {
             @RequestParam("descripcion")String descripcion
         */
         
-        String nombre = "nombre1";
-        String descripcion = "descripcion1";
+        String nombre = "eliminar";
+        String descripcion = "eliminar";
         String error = "";
 
-        /*boolean resultado = generoService.add(nombre, descripcion, error);
+        String resultado = generoService.add(nombre, descripcion, error);
         
-        System.out.println("resultado = " + resultado);*/
+        System.out.println("resultado = " + resultado);
         
         return "Genero/CrearGenero";
     }
@@ -52,16 +55,67 @@ public class GeneroController {
         String descripcion = "modificado";
         String error = "";
 
-        boolean resultado = generoService.update(id, nombre, descripcion, error);
+        String resultado = generoService.update(id, nombre, descripcion, error);
         
         System.out.println("resultado = " + resultado);
         
         return "/";
     }
     
-    //Esto es una prueba para ver las tablas, Atte Jamel
-    @GetMapping("/mostrar")
-    public String verTabla(){
+    @GetMapping("/eliminar")
+    public String delete(){
+        
+        /*
+        @PathVariable("id")Integer id,
+            @RequestParam("descripcion")String descripcion
+        */
+        Integer id = 1;
+        String error = "";
+
+        String resultado = generoService.delete(id, error);
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
+    
+    @GetMapping("/leer")
+    public String leer(Model modelo){
+     
+        /*
+        @RequestParam("top_n")Integer top_n
+        */
+        
+        String error = "";
+        
+        List<Genero> generos = generoService.leer(error);
+        
+        for(Genero genero: generos){
+            System.out.println("genero: " + genero.getNombre());
+        }
+        
+        modelo.addAttribute("generos", generos);  
         return "Genero/MostrarGenero";
+    }
+    
+    // Filtro
+    @GetMapping("/filtrarConMasLibrosPublicados")
+    public String filtrarConMasLibrosPublicados(Model modelo){
+     
+        /*
+        @RequestParam("top_n")Integer top_n
+        */
+        
+        Integer top_n = 5;
+        String error = "";
+        
+        List<Genero> generos = generoService.filtrarConMasLibrosPublicados(top_n, error);
+        
+        for(Genero genero: generos){
+            System.out.println("editorial: " + genero.getNombre());
+        }
+        
+        modelo.addAttribute("generos", generos);  
+        return "/";
     }
 }

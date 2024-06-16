@@ -24,7 +24,7 @@
                 <th>Segundo Apellido</th>
                 <th>Advertencia de Multa</th>
                 <th>Acciones</th>     
-            <tr th:each="devolucion : ${devoluciones}">
+            <tr th:each="devolucion : ${devoluciones}">              
                 <td><a class="editar-button" th:href="@{'/devolucion/actualizar?id=' + ${devolucion.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${devolucion.id} + '\')'">Eliminar</a></td>
             </tr>

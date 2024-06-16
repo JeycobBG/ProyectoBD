@@ -78,4 +78,18 @@ public interface SocioRepository extends CrudRepository<Socio, Integer>{
             @Param("email")String email,                       @Param("fecha_registro")Date fecha_registro,
             @Param("error_message")String error_message);
     //--------------------------------------------------------------------------
+    
+    /*
+    @id_socio INT,
+    @error_message NVARCHAR(255) OUTPUT
+    */
+    
+    @Modifying
+    @Query(
+            value = "{ call [dbo].[sp_eliminar_socio](:id_socio,:error_message) }",
+            nativeQuery = true)
+    @Transactional
+    public void eliminar(
+            @Param("id_socio")Integer id_socio,
+            @Param("error_message")String error_message);
 }

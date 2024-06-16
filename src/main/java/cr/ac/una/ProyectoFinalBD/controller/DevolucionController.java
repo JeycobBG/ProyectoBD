@@ -4,10 +4,11 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Devolucion;
 import cr.ac.una.ProyectoFinalBD.service.DevolucionService;
 import java.time.Instant;
 import java.util.Date;
-import javax.xml.crypto.Data;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class DevolucionController {
     DevolucionService devolucionService;
     
     @GetMapping("/guardar")
-    public String add(){
+    public String guardar(){
         
         /*
             @RequestParam("fecha_devolucion_efectuada")Data fecha_devolucion_efectuada,
@@ -34,13 +35,52 @@ public class DevolucionController {
         */
         
         Date fecha_devolucion_efectuada = Date.from(Instant.now());
+        Integer id_prestamo = 4;
+        String[] resultado = devolucionService.insertar(fecha_devolucion_efectuada, id_prestamo);
+        
+        System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
+        
+        return "/";
+    }
+    
+    @GetMapping("/leer")
+    public String leer(){
+       String error = "";
+       List<Devolucion> devoluciones = devolucionService.leer();
+       
+       for(Devolucion dev : devoluciones){
+           System.out.print("Nueva devolucion: " + dev.getPrestamo().getSocio().getPersona().getNombre() + "\n");
+       }
+        
+       return "Devolucion/MostrarDevolucion";
+    }
+    
+    @GetMapping("/actualizar")
+    public String actualizar(){
+        
+        /*
+            @RequestParam("id_prestamo")Integer id_prestamo,
+            @RequestParam("fecha_devolucion")Data fecha_devolucion,
+            @RequestParam("error")String error
+        */  
+        
         Integer id_prestamo = 1;
-        String error = "";
-        String advertencia_multa = "";
+        Date fecha_devolucion_efectuada = Date.from(Instant.now());
+        String[] resultado = devolucionService.actualizar(id_prestamo, fecha_devolucion_efectuada);
         
-        /*boolean resultado = devolucionService.add(fecha_devolucion_efectuada, id_prestamo, error, advertencia_multa);
+        System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
         
-        System.out.println("resultado = " + resultado);*/
+        return "/";
+    }
+    
+    @GetMapping("/eliminar")
+    public String eliminar(){
+        /*
+        @PathVariable("id_prestamo") Integer id_prestamo
+        */
+        Integer id_prestamo = 1;
+        String resultado = devolucionService.eliminar(id_prestamo);
+        System.out.println("resultado = " + resultado);
         
         return "Devolucion/CrearDevolucion";
     }

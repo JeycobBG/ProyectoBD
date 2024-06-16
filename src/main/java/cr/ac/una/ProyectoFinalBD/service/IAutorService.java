@@ -4,6 +4,9 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
+import cr.ac.una.ProyectoFinalBD.domain.Autor;
+import java.util.List;
+
 
 /**
  *
@@ -11,7 +14,7 @@ package cr.ac.una.ProyectoFinalBD.service;
  */
 public interface IAutorService {
     
-    public boolean add(
+    public String add(
             String nombre,                     
             String primer_apellido,
             String segundo_apellido,
@@ -24,7 +27,7 @@ public interface IAutorService {
             String bibliografia,
             String error);
     
-    public boolean update(
+    public String update(
             Integer id_autor,
             String nombre,                     
             String primer_apellido,
@@ -37,4 +40,8 @@ public interface IAutorService {
             String email,                  
             String bibliografia,
             String error);
+    
+    public String delete(Integer id_autor, String error);
+    
+    public List<Autor> leer(String error);
 }

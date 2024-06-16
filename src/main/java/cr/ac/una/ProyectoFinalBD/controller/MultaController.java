@@ -4,9 +4,12 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Multa;
 import cr.ac.una.ProyectoFinalBD.service.MultaService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +24,7 @@ public class MultaController {
     MultaService multaService;
     
     @GetMapping("/guardar")
-    public String add(){
+    public String guardar(){
         
         /*
             @RequestParam("monto")Double monto,
@@ -31,20 +34,31 @@ public class MultaController {
             @RequestParam("error")String error
         */
         
-        Double monto = 0.0;
+        Double monto = 8000.0;
         Integer dias_atraso = 2;
         Boolean cancelada = true;
-        Integer id_prestamo = 1;
-        String error = "";
+        Integer id_prestamo = 4;
         
-        /*boolean resultado = multaService.add(monto, dias_atraso, cancelada, id_prestamo, error);
+        String resultado = multaService.guardar(monto, dias_atraso, cancelada, id_prestamo);
         
-        System.out.println("resultado = " + resultado);*/
+        System.out.println("resultado = " + resultado);
         return "Multa/CrearMulta";
     }
     
+    @GetMapping("/leer")
+    public String leer(){
+        List<Multa> multas = multaService.leer();
+        
+        for(Multa mul : multas){
+            System.out.print("Nueva multa: " + mul.getPrestamo().getLibro().getTitulo());
+        }
+        
+        System.out.print("\n");
+        return "Multa/MostrarMulta";
+    }
+    
     @GetMapping("/actualizar")
-    public String update(){
+    public String actualizar(){
         
         /*
         @PathVariable("id") Integer id_multa,
@@ -59,18 +73,38 @@ public class MultaController {
         Double monto = 12000.0;
         Integer dias_atraso = 2;
         Boolean cancelada = true;
-        String error = "";
         
-        boolean resultado = multaService.update(id_multa, monto, dias_atraso, cancelada, error);
+        String resultado = multaService.actualizar(id_multa, monto, dias_atraso, cancelada);
         
         System.out.println("resultado = " + resultado);
         return "/";
     }
     
-     //Esto es una prueba para ver las tablas, Atte Jamel
-    @GetMapping("/mostrar")
-    public String verTabla(){
-        return "Multa/MostrarMulta";
+    @GetMapping("/eliminar")
+    public String eliminar(){
+        /*
+        @PathVariable("id") Integer id_multa,
+        */
+        Integer id_multa = 1;
+        String resultado = multaService.eliminar(id_multa);
+        System.out.print("resultado = " + resultado);
+        
+        return "/";
     }
     
+    // Filtro
+    @GetMapping("/filtrarPorSociosMasMultados")
+    public String filtrarPorSociosMasMultados(Model modelo){
+        
+        String error = "";
+        
+        List<Multa> multas = multaService.multasPorSociosMasMultados(error);
+        
+        for(Multa multa: multas){
+            System.out.println("editorial: " + multa.getMonto());
+        }
+        
+        modelo.addAttribute("multas", multas);  
+        return "/";
+    }
 }

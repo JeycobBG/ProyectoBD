@@ -37,7 +37,7 @@ public class Socio {
     private Persona persona;
     
     @OneToMany(mappedBy = "socio", fetch = FetchType.LAZY)
-     private List<Prestamo> prestamos;
+    private List<Prestamo> prestamos;
     
     public Socio(){
         prestamos = new ArrayList<>();

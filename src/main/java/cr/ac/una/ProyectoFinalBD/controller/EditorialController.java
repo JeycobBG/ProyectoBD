@@ -4,11 +4,14 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Editorial;
 import cr.ac.una.ProyectoFinalBD.service.EditorialService;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,18 +37,18 @@ public class EditorialController {
         @RequestParam("error")String error);
         */
         
-        String nombre = "editorial1";
+        String nombre = "eliminar";
         Date fecha_fundacion = Date.from(Instant.now());
-        String codigo_postal = "codigo1";
-        String descripcion_direccion = "descipcion1";
+        String codigo_postal = "eliminar";
+        String descripcion_direccion = "eliminar";
         Integer id_distrito = 1;
         String error = "";
         
         
-        /*boolean resultado = editorialService.add(nombre, fecha_fundacion, codigo_postal,
+        String resultado = editorialService.add(nombre, fecha_fundacion, codigo_postal,
                 descripcion_direccion, id_distrito, error);
         
-        System.out.println("resultado = " + resultado);*/
+        System.out.println("resultado = " + resultado);
         
         return "Editorial/CrearEditorial";
     }
@@ -72,7 +75,7 @@ public class EditorialController {
         String error = "";
         
         
-        boolean resultado = editorialService.update(id, nombre, fecha_fundacion, codigo_postal,
+        String resultado = editorialService.update(id, nombre, fecha_fundacion, codigo_postal,
                 descripcion_direccion, id_distrito, error);
         
         System.out.println("resultado = " + resultado);
@@ -80,9 +83,58 @@ public class EditorialController {
         return "/";
     }
     
-      //Esto es una prueba para ver las tablas, Atte Jamel
-    @GetMapping("/mostrar")
-    public String verTabla(){
+    @GetMapping("/eliminar")
+    public String delete(){
+        
+        /*
+        @PathVariable("id") Integer id,
+        @RequestParam("error")String error);
+        */
+        
+        Integer id_editorial = 2;
+        String error = "";
+        
+        String resultado = editorialService.delete(id_editorial, error);
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
+    
+    @GetMapping("/leer")
+    public String leer(Model modelo){
+        String error = "";
+        
+        List<Editorial> editoriales = editorialService.leer(error);
+     
+        for(int i = 0; i < editoriales.size(); i++){
+            System.out.print("editorial: " + editoriales.get(i).getNombre());
+        }
+            
+        
+        modelo.addAttribute("editoriales", editoriales);  
         return "Editorial/MostrarEditorial";
+    }
+    
+    // Filtro
+    @GetMapping("/filtrarConMasLibros")
+    public String filtrarConMasLibros(Model modelo){
+     
+        /*
+        @RequestParam("top_n")Integer top_n
+        */
+        
+        Integer top_n = 1;
+        String error = "";
+        
+        List<Editorial> editoriales = editorialService.editorialConMasLibros(top_n, error);
+     
+        for(int i = 0; i < editoriales.size(); i++){
+            System.out.print("editorial: " + editoriales.get(i).getNombre());
+        }
+            
+        
+        modelo.addAttribute("editoriales", editoriales);  
+        return "/";
     }
 }

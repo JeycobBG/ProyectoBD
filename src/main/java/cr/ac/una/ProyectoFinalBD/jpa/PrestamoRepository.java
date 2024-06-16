@@ -6,6 +6,7 @@ package cr.ac.una.ProyectoFinalBD.jpa;
 
 import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -38,6 +39,12 @@ public interface PrestamoRepository extends CrudRepository<Prestamo, Integer>{
             @Param("id_libro")Integer id_libro,
             @Param("id_socio")Integer id_socio, 
             @Param("error")String error);
+    
+    @Query(
+            value = "{ call [dbo].[sp_leer_prestamo](:error) }",
+            nativeQuery = true)
+    @Transactional
+    public ArrayList<Prestamo> leer(@Param("error") String error);
     
     //--------------------------------------------------------------------------
     /*

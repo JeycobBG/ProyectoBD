@@ -8,7 +8,6 @@ import cr.ac.una.ProyectoFinalBD.domain.Genero;
 import cr.ac.una.ProyectoFinalBD.domain.Libro;
 import cr.ac.una.ProyectoFinalBD.service.LibroService;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class LibroController {
     private LibroService libroService;
     
     @GetMapping("/guardar")
-    public String add(){
+    public String guardar(){
         
         /*
         @RequestParam("ISBN") String isbn,
@@ -40,17 +39,16 @@ public class LibroController {
             @RequestParam("id_editorial") Integer idEditorial,
             @RequestParam("id_generos") Integer idGeneros
         */
-            String isbn = "isbn1";
-            String titulo = "titulo1";
-            String sinopsis = "sinopsis1";
+            String isbn = "isbn3";
+            String titulo = "titulo3";
+            String sinopsis = "sinopsis3";
             Date fechaPublicacion = Date.from(Instant.now());
-            Integer cantidad = 1;
-            Integer idAutor = 1;
+            Integer cantidad = 3;
+            Integer idAutor = 11;
             Integer idEditorial = 1;
-            String idGeneros = "1,2,3";
-            String error = "";
+            String idGeneros = "1,2,3,4";
             
-       /* boolean resultado = libroService.add(
+        String resultado = libroService.insertar(
                 isbn,
                 titulo,
                 sinopsis,
@@ -58,19 +56,21 @@ public class LibroController {
                 cantidad,
                 idAutor,
                 idEditorial,
-                idGeneros,
-                error);
+                idGeneros);
         
-        System.out.println("resultado = " + resultado);*/
+        System.out.println("resultado = " + resultado);
         return "Libro/CrearLibro";
     }
     
     @GetMapping("/leer")
     public String leer(Model modelo){
        String error = "";
-       ArrayList<Libro> libros = libroService.leer(error);
+       List<Libro> libros = libroService.leer();
        
-       for(Libro lib : libros){
+       if(error.isBlank()){
+           modelo.addAttribute("libros", libros);
+           
+           for(Libro lib : libros){
            List<Genero> generos = lib.getGeneros();
            System.out.print("Nuevo libro> " + lib.getTitulo() + " con generos: ");
            
@@ -80,14 +80,173 @@ public class LibroController {
            
            System.out.print("\n");
        }
+       }else{
+           modelo.addAttribute("error", error);
+           System.out.println("error = " + error);
+       }
        
-       return "/";
+       return "Libro/MostrarLibro";
     }
     
-    //Esto es una prueba para ver las tablas, Atte Jamel
-    @GetMapping("/mostrar")
-    public String verTabla(){
-        return "Libro/MostrarLibro";
+    @GetMapping("/actualizar")
+    public String actualizar(){
+        
+        /*
+        @PathVariable("id_libro") Integer id_libro,
+        @RequestParam("ISBN") String isbn,
+            @RequestParam("titulo") String titulo,
+            @RequestParam("sinopsis") String sinopsis,
+            @RequestParam("fecha_publicacion") Date fechaPublicacion,
+            @RequestParam("cantidad") Integer cantidad,
+            @RequestParam("id_autor") Integer idAutor,
+            @RequestParam("id_editorial") Integer idEditorial,
+            @RequestParam("id_generos") Integer idGeneros
+        */
+            Integer id_libro = 1;
+            String isbn = "Modificado";
+            String titulo = "Modificado";
+            String sinopsis = "Modificado";
+            Date fechaPublicacion = Date.from(Instant.now());
+            Integer cantidad = 1;
+            Integer idAutor = 1;
+            Integer idEditorial = 1;
+            String idGeneros = "1,2,3,4";
+            
+        String resultado = libroService.actualizar(
+                id_libro,
+                isbn,
+                titulo,
+                sinopsis,
+                fechaPublicacion,
+                cantidad,
+                idAutor,
+                idEditorial,
+                idGeneros);
+        
+        System.out.println("resultado = " + resultado);
+        return "/";
+    }
+    
+    @GetMapping("/eliminar")
+    public String eliminar(){
+        /*
+        @PathVariable("id_libro") Integer id_libro
+        */
+        
+        Integer id_libro = 2;
+        String resultado = libroService.eliminar(id_libro);
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
+    
+    // filtros -----------------------------------------------------------------
+    @GetMapping("/filtrarPorEditorial")
+    public String filtrarPorEditorial(Model modelo){
+     
+        /*
+        @RequestParam("editorial")String editorial
+        */
+        
+        String editorial = "editorial2";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorEditorial(editorial, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorGenero")
+    public String filtrarPorGenero(Model modelo){
+     
+        /*
+        @RequestParam("genero")String genero
+        */
+        
+        String genero = "No Ficción";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorGenero(genero, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorISBN")
+    public String filtrarPorISBN(Model modelo){
+     
+        /*
+        @RequestParam("ISBN")String ISBN
+        */
+        
+        String ISBN = "isbn2";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorISBN(ISBN, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorMasPrestamos")
+    public String filtrarPorMasPrestamos(Model modelo){
+       
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorMasPrestamos(error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorTitulo")
+    public String filtrarPorTitulo(Model modelo){
+       
+         /*
+        @RequestParam("titulo")String titulo
+        */
+        
+        String titulo = "titulo2";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorTitulo(titulo, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorAutor")
+    public String filtrarPorAutor(Model modelo){
+       
+         /*
+        @RequestParam("nombre_autor")String nombre_autor,
+        @RequestParam("primer_apellido_autor")String primer_apellido_autor
+        */
+        
+        String nombre_autor = "autor2";
+        String primer_apellido_autor = "apellido2";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorAutor(nombre_autor, primer_apellido_autor, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorAnioPublicacion")
+    public String filtrarPorAnioPublicacion(Model modelo){
+       
+         /*
+        @RequestParam("anio_publicacion")String anio_publicacion
+        */
+        
+        Integer anio_publicacion = 2024;
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorAnioPublicacion(anio_publicacion, error);
+        
+        for(Libro lib : libros){
+           System.out.println("libro: " + lib.getTitulo());
+        }
+        
+        
+        modelo.addAttribute("libros", libros);  
+        return "/";
     }
     
 }

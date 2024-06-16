@@ -4,11 +4,14 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Socio;
 import cr.ac.una.ProyectoFinalBD.service.SocioService;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -33,20 +36,20 @@ public class SocioController {
             @RequestParam("email")String email,                       @RequestParam("fecha_registro")Date fecha_registro
         */
         
-        String nombre = "socio1";
-        String primer_apellido = "apellido1";
-        String segundo_apellido = "apellido2";
-        String identificacion = "identificacion1";
-        String codigo_postal = "codigo1";
-        String descripcion_direccion = "direccion1";
+        String nombre = "eliminar";
+        String primer_apellido = "eliminar";
+        String segundo_apellido = "eliminar";
+        String identificacion = "eliminar";
+        String codigo_postal = "eliminar";
+        String descripcion_direccion = "eliminar";
         Integer id_distrito = 1;
-        String numero_telefono = "11111111";
-        String email = "socio1@gmail.com";
+        String numero_telefono = "33333333";
+        String email = "eliminar@gmail.com";
         Date fecha_registro = Date.from(Instant.now());
         String error_message = "";
         
         
-        /*boolean resultado = socioService.add(
+        String resultado = socioService.add(
         nombre,
         primer_apellido,
         segundo_apellido,
@@ -60,7 +63,7 @@ public class SocioController {
         error_message
         );
         
-        System.out.println("resultado = " + resultado);*/
+        System.out.println("resultado = " + resultado);
         
         return "Socio/CrearSocio";
     }
@@ -89,7 +92,8 @@ public class SocioController {
         Date fecha_registro = Date.from(Instant.now());
         String error_message = "";
         
-        boolean resultado = socioService.update(
+        
+        String resultado = socioService.update(
         id,
         nombre,
         primer_apellido,
@@ -108,9 +112,35 @@ public class SocioController {
         return "/";
     }
     
-     //Esto es una prueba para ver las tablas, Atte Jamel
-    @GetMapping("/mostrar")
-    public String verTabla(){
+    @GetMapping("/eliminar")
+    public String delete(){
+        
+        /*
+        @PathVariable("id")Integer id_socio
+        */
+        
+        Integer id_socio = 4;
+        String error_message = "";
+        
+        String resultado = socioService.delete(id_socio, error_message);
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
+    
+    @GetMapping("/leer")
+    public String read(Model modelo){
+        
+        List<Socio> socios = socioService.read();
+        
+        modelo.addAttribute("socios", socios);
+        
+        for(Socio socio: socios){
+            System.out.println("id_socio" + socio.getId());
+            System.out.println("nombre" + socio.getPersona().getNombre());
+        }
+        
         return "Socio/MostrarSocio";
     }
 }

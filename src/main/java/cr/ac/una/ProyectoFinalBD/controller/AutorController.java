@@ -4,9 +4,12 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Autor;
 import cr.ac.una.ProyectoFinalBD.service.AutorService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -32,25 +35,25 @@ public class AutorController {
             @RequestParam("email")String email,                       @RequestParam("bibliografia")String bibliografia
         */
         
-        String nombre = "autor1";
-        String primer_apellido = "apellido1";
-        String segundo_apellido = "apellido2";
-        String identificacion = "identificacion1";
-        String codigo_postal = "codigo1";
-        String descripcion_direccion = "direccion1";
+        String nombre = "eliminar";
+        String primer_apellido = "eliminar";
+        String segundo_apellido = "eliminar";
+        String identificacion = "eliminar";
+        String codigo_postal = "eliminar";
+        String descripcion_direccion = "eliminar";
         Integer id_distrito = 1;
-        String numero_telefono = "22222222";
-        String email = "autor1@gmail.com";
-        String bibliografia = "bibliografia1";
+        String numero_telefono = "44444444";
+        String email = "eliminar@gmail.com";
+        String bibliografia = "eliminar";
         String error = "";
         
         
-        /*boolean resultado = autorService.add(nombre, primer_apellido, segundo_apellido,
+        String resultado = autorService.add(nombre, primer_apellido, segundo_apellido,
                 identificacion, codigo_postal, descripcion_direccion, id_distrito,
                 numero_telefono, email, bibliografia, error);
         
         
-        System.out.println("resultado = " + resultado);*/
+        System.out.println("resultado = " + resultado);
         
         return "Autor/CrearAutor";
     }
@@ -80,7 +83,7 @@ public class AutorController {
         String error = "";
         
         
-        boolean resultado = autorService.update(id_autor, nombre, primer_apellido, segundo_apellido,
+        String resultado = autorService.update(id_autor, nombre, primer_apellido, segundo_apellido,
                 identificacion, codigo_postal, descripcion_direccion, id_distrito,
                 numero_telefono, email, bibliografia, error);
         
@@ -90,9 +93,32 @@ public class AutorController {
         return "/";
     }
     
-    //Esto es una prueba para ver las tablas nada más Atte Jamel
-    @GetMapping("/mostrar")
-    public String verTabla(){
-        return "Autor/MostrarAutor";
+    @GetMapping("/eliminar")
+    public String delete(){
+        /*
+        @PathVariable("id_autor") Integer id_autor
+        */
+        Integer id_autor = 1;
+        String error = "";
+        
+        String resultado = autorService.delete(id_autor, error);
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
+    
+    @GetMapping("/leer")
+    public String leer(Model modelo){
+        
+        String error = "";
+        
+        List<Autor> autores = autorService.leer(error);
+        
+        for(Autor autor: autores){
+            System.out.println("autor: " + autor.getPersona().getNombre());
+        }
+        modelo.addAttribute("autores", autores);
+        return "Autor/MostarAutor";
     }
 }

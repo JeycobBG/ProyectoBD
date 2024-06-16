@@ -4,8 +4,10 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
-import cr.ac.una.ProyectoFinalBD.jpa.DevolucionRepository;
+import cr.ac.una.ProyectoFinalBD.domain.Devolucion;
+import cr.ac.una.ProyectoFinalBD.repositorio.IDevolucionRepositorio;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +19,27 @@ import org.springframework.stereotype.Service;
 public class DevolucionService implements IDevolucionService{
 
     @Autowired
-    DevolucionRepository devolucionRepo;
+    IDevolucionRepositorio devolucionRepo;
     
     @Override
-    public boolean add(Date fecha_devolucion_efectuada, Integer id_prestamo, String error, String advertencia_multa) {
-        try {
-            devolucionRepo.insertar(fecha_devolucion_efectuada, id_prestamo, error, advertencia_multa);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
+    public String[] insertar(Date fecha_devolucion_efectuada, Integer id_prestamo) {
+        return devolucionRepo.insertar(fecha_devolucion_efectuada, id_prestamo);
+    }
+    
+    @Override
+    public List<Devolucion> leer() {
+        List<Devolucion> devoluciones = devolucionRepo.leer();
+        return devoluciones;
+    }
+    
+    @Override
+    public String[] actualizar(Integer id_prestamo,Date fecha_devolucion_efectuada) {
+        return devolucionRepo.actualizar(id_prestamo, fecha_devolucion_efectuada);
+    }
+    
+    @Override
+    public String eliminar(Integer id_prestamo){
+        return devolucionRepo.eliminar(id_prestamo);
     }
     
 }

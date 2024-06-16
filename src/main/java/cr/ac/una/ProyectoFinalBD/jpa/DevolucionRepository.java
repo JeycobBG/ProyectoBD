@@ -36,4 +36,21 @@ public interface DevolucionRepository extends CrudRepository<Devolucion, Integer
             @Param("id_prestamo")Integer id_prestamo,
             @Param("error")String error,
             @Param("advertencia_multa")String advertencia_multa);
+    
+    //--------------------------------------------------------------------------
+    /*
+    @id_prestamo INT,
+    @fecha_devolucion_efectuada DATE,
+    @error VARCHAR(127) OUT
+    */
+    
+    @Modifying
+    @Query(
+            value = "{ call [dbo].[sp_actualizar_devolucion](:id_prestamo,:fecha_devolucion,:error) }",
+            nativeQuery = true)
+    @Transactional
+    public void actualizar(
+            @Param("id_prestamo")Integer id_prestamo,
+            @Param("fecha_devolucion")Date fecha_devolucion,
+            @Param("error")String error);
 }

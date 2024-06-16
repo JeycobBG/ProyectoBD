@@ -4,10 +4,11 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
 import cr.ac.una.ProyectoFinalBD.service.PrestamoService;
 import java.time.Instant;
 import java.util.Date;
-import static org.aspectj.bridge.MessageUtil.error;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class PrestamoController {
     PrestamoService prestamoService;
     
     @GetMapping("/guardar")
-    public String add(){
+    public String guardar(){
         /*
             @RequestParam("fecha_prestamo")Date fecha_prestamo,
             @RequestParam("fecha_devolucion_prevista")Date fecha_devolucion_prevista,
@@ -34,19 +35,31 @@ public class PrestamoController {
         */
         Date fecha_prestamo = Date.from(Instant.now());
         Date fecha_devolucion_prevista = Date.from(Instant.now());
-        Integer id_libro = 1;
+        Integer id_libro = 3;
         Integer id_socio = 1;
-        String error = "";
         
-        /*boolean resultado = prestamoService.add(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio, error);
-        
-        System.out.println("resultado = "+  resultado);*/
+        String resultado = prestamoService.guardar(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio);
+       
+        System.out.println("resultado = "+  resultado);
         
         return "Prestamo/CrearPrestamo";
     }
     
+    @GetMapping("/leer")
+    public String leer(){
+       List<Prestamo> prestamos = prestamoService.leer();
+       
+       for(Prestamo prest : prestamos){
+           System.out.print("Nuevo prestamo de: " + prest.getSocio().getPersona().getNombre());
+           System.out.print("\n");
+       }
+       
+       return "Prestamo/MostrarPrestamo";
+        
+    }
+    
     @GetMapping("/actualizar")
-    public String update(){
+    public String actualizar(){
         /*
             @PathVariable("id") Integer id_prestamo,
             @RequestParam("fecha_prestamo")Date fecha_prestamo,
@@ -60,18 +73,24 @@ public class PrestamoController {
         Date fecha_devolucion_prevista = Date.from(Instant.now());
         Integer id_libro = 2;
         Integer id_socio = 1;
-        String error = "";
         
-        boolean resultado = prestamoService.update(id_prestamo, fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio, error);
+        String resultado = prestamoService.actualizar(id_prestamo, fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio);
         
         System.out.println("resultado = "+  resultado);
         
         return "/";
     }
     
-    //Esto es una prueba para ver las tablas, Atte Jamel
-    @GetMapping("/mostrar")
-    public String verTabla(){
-        return "Prestamo/MostrarPrestamo";
+    @GetMapping("/eliminar")
+    public String eliminar(){
+        /*
+        @PathVariable("id") Integer id_prestamo
+        */
+        Integer id_prestamo = 1;
+        String resultado = prestamoService.eliminar(id_prestamo);
+        System.out.println("resultado = "+  resultado);
+        
+        return "/";
     }
+    
 }

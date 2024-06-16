@@ -4,8 +4,10 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
-import cr.ac.una.ProyectoFinalBD.jpa.EditorialRepository;
+import cr.ac.una.ProyectoFinalBD.domain.Editorial;
+import cr.ac.una.ProyectoFinalBD.repositorio.IEditorialRepositorio;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,30 +19,34 @@ import org.springframework.stereotype.Service;
 public class EditorialService implements IEditorialService{
 
     @Autowired
-    EditorialRepository editorialRepo;
+    IEditorialRepositorio editorialRepo;
     
     @Override
-    public boolean add(String nombre, Date fecha_fundacion, String codigo_postal,
+    public String add(String nombre, Date fecha_fundacion, String codigo_postal,
             String descripcion_direccion, Integer id_distrito, String error) {
-        
-        try {
-            editorialRepo.insertar(nombre, fecha_fundacion, codigo_postal, descripcion_direccion, id_distrito, error);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
+        return editorialRepo.insertar(nombre, fecha_fundacion, codigo_postal, descripcion_direccion, id_distrito, error);
     }
     
     @Override
-    public boolean update(Integer id, String nombre, Date fecha_fundacion, String codigo_postal,
+    public String update(Integer id_editorial, String nombre, Date fecha_fundacion, String codigo_postal,
             String descripcion_direccion, Integer id_distrito, String error) {
-        
-        try {
-            editorialRepo.update(id, nombre, fecha_fundacion, codigo_postal, descripcion_direccion, id_distrito, error);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
+            return editorialRepo.actualizar(id_editorial, nombre, fecha_fundacion, codigo_postal, descripcion_direccion, id_distrito, error);
     }
+    
+    @Override
+    public String delete(Integer id_editorial, String error) {
+            return editorialRepo.eliminar(id_editorial, error);
+    }
+
+    @Override
+    public List<Editorial> editorialConMasLibros(Integer top_n, String error) {
+        return editorialRepo.editorialConMasLibros(top_n, error);
+    }
+
+    @Override
+    public List<Editorial> leer(String error) {
+        return editorialRepo.leer(error);
+    }
+    
     
 }
