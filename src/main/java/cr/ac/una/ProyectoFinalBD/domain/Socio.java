@@ -4,6 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,20 +23,21 @@ import java.util.List;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbSocio")
+@Table(name = "tb_socio")
 public class Socio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_socio")
     private int id;
     
     private Date fechaRegistro;
     
     @ManyToOne
-    @JoinColumn(name = "persona")
+    @JoinColumn(name = "id_persona")
     private Persona persona;
     
     @OneToMany(mappedBy = "socio", fetch = FetchType.LAZY)
-     private List<Prestamo> prestamos;
+    private List<Prestamo> prestamos;
     
     public Socio(){
         prestamos = new ArrayList<>();

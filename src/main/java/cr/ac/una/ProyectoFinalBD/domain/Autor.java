@@ -4,6 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,16 +18,17 @@ import jakarta.persistence.Table;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbAutor")
+@Table(name = "tb_autor")
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_autor")
     private int id;
     
     private String bibliografia;
     
     @ManyToOne
-    @JoinColumn(name = "persona")
+    @JoinColumn(name = "id_persona")
     private Persona persona;
     
     public Autor(){}

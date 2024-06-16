@@ -4,6 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,16 +19,17 @@ import java.util.Date;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbDevolucion")
+@Table(name = "tb_devolucion")
 public class Devolucion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_devolucion")
     private int id;
     
     private Date fechaDevolucionEfectuada;
     
     @OneToOne
-    @JoinColumn(name = "prestamo")
+    @JoinColumn(name = "id_prestamo")
     private Prestamo prestamo;
     
     public Devolucion(){}

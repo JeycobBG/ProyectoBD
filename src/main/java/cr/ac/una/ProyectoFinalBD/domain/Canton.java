@@ -4,6 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -21,10 +22,11 @@ import java.util.List;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbCanton")
+@Table(name = "tb_canton")
 public class Canton {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_canton")
     private int id;
     
     private String nombre;
@@ -33,7 +35,7 @@ public class Canton {
     private List<Distrito> distrito;
     
     @ManyToOne()
-    @JoinColumn(name = "provincia")
+    @JoinColumn(name = "id_provincia")
     private Provincia provincia;
 
     public Canton(){

@@ -4,6 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,16 +18,17 @@ import jakarta.persistence.Table;
  * @author JEYCOB
  */
 @Entity
-@Table(name = "tbCorreoElectronico")
+@Table(name = "tb_correo_electronico")
 public class CorreoElectronico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_correo_electronico")
     private int id;
     
     private String email;
     
     @ManyToOne
-    @JoinColumn(name = "persona")
+    @JoinColumn(name = "id_persona")
     private Persona persona;
     
     public CorreoElectronico(){}
