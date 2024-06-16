@@ -47,6 +47,7 @@ public class MultaController {
     
     @GetMapping("/leer")
     public String leer(){
+        /*
         List<Multa> multas = multaService.leer();
         
         for(Multa mul : multas){
@@ -54,6 +55,7 @@ public class MultaController {
         }
         
         System.out.print("\n");
+        */
         return "Multa/MostrarMulta";
     }
     

@@ -110,8 +110,8 @@ public class AutorController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        
-        String error = "";
+        /*
+         String error = "";
         
         List<Autor> autores = autorService.leer(error);
         
@@ -119,6 +119,8 @@ public class AutorController {
             System.out.println("autor: " + autor.getPersona().getNombre());
         }
         modelo.addAttribute("autores", autores);
+        */
+       
         return "Autor/MostarAutor";
     }
 }

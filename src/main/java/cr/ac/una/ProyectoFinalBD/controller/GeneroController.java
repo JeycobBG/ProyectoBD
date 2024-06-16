@@ -80,7 +80,13 @@ public class GeneroController {
     }
     
     @GetMapping("/leer")
-    public String leer(Model modelo){   
+    public String leer(Model modelo){
+        /*
+     
+        
+        @RequestParam("top_n")Integer top_n
+        
+        
         String error = "";
         
         List<Genero> generos = generoService.leer(error);
@@ -90,6 +96,7 @@ public class GeneroController {
         }
         
         modelo.addAttribute("generos", generos);  
+        */
         return "Genero/MostrarGenero";
     }
     
