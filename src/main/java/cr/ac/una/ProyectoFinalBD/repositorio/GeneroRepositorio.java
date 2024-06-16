@@ -4,11 +4,12 @@
  */
 package cr.ac.una.ProyectoFinalBD.repositorio;
 
+import cr.ac.una.ProyectoFinalBD.domain.Genero;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureQuery;
 import jakarta.transaction.Transactional;
-import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -65,5 +66,21 @@ public class GeneroRepositorio implements IGeneroRepositorio{
 
         query.execute();
         return error = (String) query.getOutputParameterValue("error");
+    }
+    
+    // Filtro
+    @Override
+    @Transactional
+    public List<Genero> filtrarConMasLibrosPublicados(Integer top_n, String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_generos_mas_libros");
+        query.registerStoredProcedureParameter("top_n", Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+
+        query.setParameter("top_n", top_n);
+
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
     }
 }

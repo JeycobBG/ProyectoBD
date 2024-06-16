@@ -106,4 +106,107 @@ public class LibroRepositorio implements ILibroRepositorio{
         return (String) query.getOutputParameterValue("error");
     }
     
+    @Override
+    @Transactional
+    public List<Libro> librosPorEditorial(String editorial, String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_editorial");
+        query.registerStoredProcedureParameter("editorial", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("editorial", editorial);
+        
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
+    }
+    
+    @Override
+    @Transactional
+    public List<Libro> librosPorGenero(String genero, String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_genero");
+        query.registerStoredProcedureParameter("genero", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("genero", genero);
+        
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
+    }
+    
+    @Override
+    @Transactional
+    public List<Libro> librosPorISBN(String ISBN, String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_ISBN");
+        query.registerStoredProcedureParameter("ISBN", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("ISBN", ISBN);
+        
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
+    }
+    
+    @Override
+    @Transactional
+    public List<Libro> librosPorMasPrestamos(String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_mas_prestamos");
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
+    }
+    
+    @Override
+    @Transactional
+    public List<Libro> librosPorTitulo(String titulo, String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_titulo");
+        query.registerStoredProcedureParameter("titulo", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("titulo", titulo);
+        
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
+    }
+    
+    @Override
+    @Transactional
+    public List<Libro> librosPorAutor(String nombre_autor, String primer_apellido_autor, String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_autor");
+        query.registerStoredProcedureParameter("nombre_autor", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("primer_apellido_autor", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("nombre_autor", nombre_autor);
+        query.setParameter("primer_apellido_autor", primer_apellido_autor);
+        
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
+    }
+    
+    @Override
+    @Transactional
+    public List<Libro> librosPorAnioPublicacion(Integer anio_publicacion, String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_anio_publicacion");
+        query.registerStoredProcedureParameter("anio_publicacion", Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("anio_publicacion", anio_publicacion);
+        
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
+    }
 }

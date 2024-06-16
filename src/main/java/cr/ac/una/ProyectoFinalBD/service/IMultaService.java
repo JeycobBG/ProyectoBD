@@ -29,4 +29,7 @@ public interface IMultaService {
     
     public String eliminar(Integer id_multa);
     
+    // Filtro
+    public List<Multa> multasPorSociosMasMultados(String error);
+    
 }

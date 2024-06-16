@@ -19,4 +19,18 @@ public interface ILibroRepositorio {
     public String actualizar(Integer id_libro, String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos);
     public String eliminar(Integer id_libro);
     
+    //filtros
+    public List<Libro> librosPorEditorial(String editorial, String error);
+    
+    public List<Libro> librosPorGenero(String genero, String error);
+    
+    public List<Libro> librosPorISBN(String ISBN, String error);
+    
+    public List<Libro> librosPorMasPrestamos(String error);
+    
+    public List<Libro> librosPorTitulo(String titulo, String error);
+    
+    public List<Libro> librosPorAutor(String nombre_autor, String primer_apellido_autor, String error);
+    
+    public List<Libro> librosPorAnioPublicacion(Integer anio_publicacion, String error);
 }

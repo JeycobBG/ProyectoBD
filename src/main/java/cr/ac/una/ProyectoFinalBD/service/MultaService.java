@@ -39,4 +39,9 @@ public class MultaService implements IMultaService{
         return multaRepo.eliminar(id_multa);
     }
 
+    @Override
+    public List<Multa> multasPorSociosMasMultados(String error) {
+        return multaRepo.multasPorSociosMasMultados(error);
+    }
+
 }

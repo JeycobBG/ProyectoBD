@@ -4,7 +4,9 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
+import cr.ac.una.ProyectoFinalBD.domain.Genero;
 import cr.ac.una.ProyectoFinalBD.repositorio.IGeneroRepositorio;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,10 @@ public class GeneroService implements IGeneroService{
 
         return generoRepo.eliminar(id, error);
  
+    }
+
+    @Override
+    public List<Genero> filtrarConMasLibrosPublicados(Integer top_n, String error) {
+        return generoRepo.filtrarConMasLibrosPublicados(top_n, error);
     }
 }

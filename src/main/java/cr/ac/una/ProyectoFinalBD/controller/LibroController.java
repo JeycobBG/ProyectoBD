@@ -140,4 +140,112 @@ public class LibroController {
         return "/";
     }
     
+    // filtros -----------------------------------------------------------------
+    @GetMapping("/filtrarPorEditorial")
+    public String filtrarPorEditorial(Model modelo){
+     
+        /*
+        @RequestParam("editorial")String editorial
+        */
+        
+        String editorial = "editorial2";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorEditorial(editorial, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorGenero")
+    public String filtrarPorGenero(Model modelo){
+     
+        /*
+        @RequestParam("genero")String genero
+        */
+        
+        String genero = "No Ficción";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorGenero(genero, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorISBN")
+    public String filtrarPorISBN(Model modelo){
+     
+        /*
+        @RequestParam("ISBN")String ISBN
+        */
+        
+        String ISBN = "isbn2";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorISBN(ISBN, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorMasPrestamos")
+    public String filtrarPorMasPrestamos(Model modelo){
+       
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorMasPrestamos(error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorTitulo")
+    public String filtrarPorTitulo(Model modelo){
+       
+         /*
+        @RequestParam("titulo")String titulo
+        */
+        
+        String titulo = "titulo2";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorTitulo(titulo, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorAutor")
+    public String filtrarPorAutor(Model modelo){
+       
+         /*
+        @RequestParam("nombre_autor")String nombre_autor,
+        @RequestParam("primer_apellido_autor")String primer_apellido_autor
+        */
+        
+        String nombre_autor = "autor2";
+        String primer_apellido_autor = "apellido2";
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorAutor(nombre_autor, primer_apellido_autor, error);
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
+    @GetMapping("/filtrarPorAnioPublicacion")
+    public String filtrarPorAnioPublicacion(Model modelo){
+       
+         /*
+        @RequestParam("anio_publicacion")String anio_publicacion
+        */
+        
+        Integer anio_publicacion = 2024;
+        String error = "";
+        
+        List<Libro> libros = libroService.librosPorAnioPublicacion(anio_publicacion, error);
+        
+        for(Libro libro: libros){
+            System.out.println("editorial: " + libro.getTitulo());
+        }
+        
+        modelo.addAttribute("libros", libros);  
+        return "/";
+    }
+    
 }

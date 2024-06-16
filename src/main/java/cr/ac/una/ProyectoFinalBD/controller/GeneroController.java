@@ -4,9 +4,12 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Genero;
 import cr.ac.una.ProyectoFinalBD.service.GeneroService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -73,6 +76,27 @@ public class GeneroController {
         
         System.out.println("resultado = " + resultado);
         
+        return "/";
+    }
+    
+    // Filtro
+    @GetMapping("/filtrarConMasLibrosPublicados")
+    public String filtrarConMasLibrosPublicados(Model modelo){
+     
+        /*
+        @RequestParam("top_n")Integer top_n
+        */
+        
+        Integer top_n = 5;
+        String error = "";
+        
+        List<Genero> generos = generoService.filtrarConMasLibrosPublicados(top_n, error);
+        
+        for(Genero genero: generos){
+            System.out.println("editorial: " + genero.getNombre());
+        }
+        
+        modelo.addAttribute("generos", generos);  
         return "/";
     }
 }

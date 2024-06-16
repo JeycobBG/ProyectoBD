@@ -41,4 +41,41 @@ public class LibroService implements ILibroService {
     public String eliminar(Integer id_libro){
         return libroRepo.eliminar(id_libro);
     }
+
+    @Override
+    public List<Libro> librosPorEditorial(String editorial, String error) {
+        return libroRepo.librosPorEditorial(editorial, error);
+    }
+
+    @Override
+    public List<Libro> librosPorGenero(String genero, String error) {
+        return libroRepo.librosPorGenero(genero, error);
+    }
+
+    @Override
+    public List<Libro> librosPorISBN(String ISBN, String error) {
+        return libroRepo.librosPorISBN(ISBN, error);
+    }
+
+    @Override
+    public List<Libro> librosPorMasPrestamos(String error) {
+        return libroRepo.librosPorMasPrestamos(error);
+    }
+
+    @Override
+    public List<Libro> librosPorTitulo(String titulo, String error) {
+        return libroRepo.librosPorTitulo(titulo, error);
+    }
+
+    @Override
+    public List<Libro> librosPorAutor(String nombre_autor, String primer_apellido_autor, String error) {
+        return libroRepo.librosPorAutor(nombre_autor, primer_apellido_autor, error);
+    }
+
+    @Override
+    public List<Libro> librosPorAnioPublicacion(Integer anio_publicacion, String error) {
+        return libroRepo.librosPorAnioPublicacion(anio_publicacion, error);
+    }
+    
+    
 }

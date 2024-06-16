@@ -4,7 +4,9 @@
  */
 package cr.ac.una.ProyectoFinalBD.repositorio;
 
+import cr.ac.una.ProyectoFinalBD.domain.Editorial;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -30,4 +32,6 @@ public interface IEditorialRepositorio {
             String error);
     
     public String eliminar(Integer id_editorial, String error);
+    
+    public List<Editorial> editorialConMasLibros(Integer top_n, String error);
 }

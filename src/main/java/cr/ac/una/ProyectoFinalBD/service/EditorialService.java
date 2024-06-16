@@ -4,9 +4,10 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
-import cr.ac.una.ProyectoFinalBD.jpa.EditorialRepository;
+import cr.ac.una.ProyectoFinalBD.domain.Editorial;
 import cr.ac.una.ProyectoFinalBD.repositorio.IEditorialRepositorio;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,10 @@ public class EditorialService implements IEditorialService{
     @Override
     public String delete(Integer id_editorial, String error) {
             return editorialRepo.eliminar(id_editorial, error);
+    }
+
+    @Override
+    public List<Editorial> editorialConMasLibros(Integer top_n, String error) {
+        return editorialRepo.editorialConMasLibros(top_n, error);
     }
 }

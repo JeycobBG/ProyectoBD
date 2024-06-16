@@ -4,11 +4,14 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Editorial;
 import cr.ac.una.ProyectoFinalBD.service.EditorialService;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -95,6 +98,28 @@ public class EditorialController {
         
         System.out.println("resultado = " + resultado);
         
+        return "/";
+    }
+    
+    // Filtro
+    @GetMapping("/filtrarConMasLibros")
+    public String filtrarConMasLibros(Model modelo){
+     
+        /*
+        @RequestParam("top_n")Integer top_n
+        */
+        
+        Integer top_n = 1;
+        String error = "";
+        
+        List<Editorial> editoriales = editorialService.editorialConMasLibros(top_n, error);
+     
+        for(int i = 0; i < editoriales.size(); i++){
+            System.out.print("editorial: " + editoriales.get(i).getNombre());
+        }
+            
+        
+        modelo.addAttribute("editoriales", editoriales);  
         return "/";
     }
 }
