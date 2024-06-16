@@ -97,11 +97,11 @@ public class AutorRepositorio implements IAutorRepositorio{
     @Override
     @Transactional
     public String eliminar(Integer id_autor, String error_message){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_eliminar_socio");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_eliminar_autor");
         query.registerStoredProcedureParameter("id_autor", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error_message", String.class, ParameterMode.OUT);
         
-        query.setParameter("id_socio", id_autor);
+        query.setParameter("id_autor", id_autor);
         
         query.execute();
         return error_message = (String) query.getOutputParameterValue("error_message");

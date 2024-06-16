@@ -131,7 +131,7 @@ public class SocioController {
     
     @GetMapping("/leer")
     public String read(Model modelo){
-        /*
+        
         
         String error = "";
         
@@ -145,7 +145,7 @@ public class SocioController {
         }
         
         modelo.addAttribute("socios", socios);
-       */
+       
         return "Socio/MostrarSocio";
     }
 }

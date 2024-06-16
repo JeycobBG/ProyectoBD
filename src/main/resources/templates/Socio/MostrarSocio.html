@@ -40,8 +40,16 @@
                 <td th:text="${socio.persona.direccion.codigoPostal}"></td>
                 <td th:text="${socio.persona.direccion.descripcion}"></td>
                 <td th:text="${socio.persona.direccion.distrito.nombre}"></td>
-                <td th:text="${socio.persona.telefono.numero}"></td>
-                <td th:text="${socio.persona.correoElectronico.email}"></td>
+                <td>
+                    <ul th:if="${not #lists.isEmpty(socio.persona.telefono)}">
+                        <li th:each="tel : ${socio.persona.telefono}" th:text="${tel.numero}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul th:if="${not #lists.isEmpty(socio.persona.correoElectronico)}">
+                        <li th:each="email : ${socio.persona.correoElectronico}" th:text="${email.email}"></li>
+                    </ul>
+                </td>
                 <td th:text="${socio.bibliografia}"></td>    
                 <td><a class="editar-button" th:href="@{'/socio/actualizar?id=' + ${socio.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${socio.id} + '\')'">Eliminar</a></td>

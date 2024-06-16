@@ -51,10 +51,6 @@ public class Persona {
     private List<Socio> socio;
     
     public Persona(){
-        telefono = new ArrayList<>();
-        correoElectronico = new ArrayList<>();
-        autor = new ArrayList<>();
-        socio = new ArrayList<>();
     }
 
     public Persona(int id, String nombre, String primerApellido, String segundoApellido, String identificacion, Direccion direccion) {

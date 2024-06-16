@@ -103,7 +103,7 @@ public class EditorialController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        /*
+        
         String error = "";
         
         List<Editorial> editoriales = editorialService.leer(error);
@@ -114,7 +114,7 @@ public class EditorialController {
             
         
         modelo.addAttribute("editoriales", editoriales);  
-        */
+        
         return "Editorial/MostrarEditorial";
     }
     

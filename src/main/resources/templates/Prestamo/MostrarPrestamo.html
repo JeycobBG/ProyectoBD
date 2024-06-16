@@ -20,16 +20,18 @@
         <table class="table table-bordered">
             <tr>
                 <th>Fecha Préstamo</th>
-                <th>Fecha Devolución Prevista</th>   
-                <th>Id Libro</th> 
-                <th>Id Socio</th> 
+                <th>Fecha Devolución Prevista</th> 
+                <th>Identif. Socio</th> 
+                <th>Nombre Socio</th> 
+                <th>Libro</th> 
                 <th>Acciones</th>     
             </tr >
             <tr th:each="prestamo : ${prestamos}"> 
                 <td th:text="${prestamo.fechaPrestamo}"></td>
                 <td th:text="${prestamo.fechaDevolucionPrevista}"></td>
-                <td th:text="${prestamo.libro.id}"></td>
-                <td th:text="${prestamo.socio.id}"></td>
+                <td th:text="${prestamo.socio.persona.identificacion}"></td>
+                <td th:text="${prestamo.socio.persona.nombre}"></td>
+                <td th:text="${prestamo.libro.titulo}"></td>
                 <td><a class="editar-button" th:href="@{'/prestamo/actualizar?id=' + ${prestamo.id}}">Editar</a>
                 <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${prestamo.id} + '\')'">Eliminar</a></td>
             </tr>

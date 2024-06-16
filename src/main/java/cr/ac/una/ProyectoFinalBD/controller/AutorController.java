@@ -1,10 +1,11 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
 import cr.ac.una.ProyectoFinalBD.domain.Autor;
+import cr.ac.una.ProyectoFinalBD.domain.Telefono;
 import cr.ac.una.ProyectoFinalBD.service.AutorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,17 +111,20 @@ public class AutorController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        /*
-         String error = "";
+        
+        String error = "";
         
         List<Autor> autores = autorService.leer(error);
         
         for(Autor autor: autores){
             System.out.println("autor: " + autor.getPersona().getNombre());
+            
+            System.out.println("\n");
         }
+        
+        
+        
         modelo.addAttribute("autores", autores);
-        */
-       
-        return "Autor/MostarAutor";
+        return "Autor/MostrarAutor";
     }
 }

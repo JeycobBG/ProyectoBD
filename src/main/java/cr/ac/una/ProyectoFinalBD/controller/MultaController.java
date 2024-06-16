@@ -46,8 +46,8 @@ public class MultaController {
     }
     
     @GetMapping("/leer")
-    public String leer(){
-        /*
+    public String leer(Model modelo){
+        
         List<Multa> multas = multaService.leer();
         
         for(Multa mul : multas){
@@ -55,7 +55,8 @@ public class MultaController {
         }
         
         System.out.print("\n");
-        */
+        
+        modelo.addAttribute("multas", multas);
         return "Multa/MostrarMulta";
     }
     
