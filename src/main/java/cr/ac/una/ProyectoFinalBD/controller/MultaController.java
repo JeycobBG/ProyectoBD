@@ -67,4 +67,10 @@ public class MultaController {
         return "/";
     }
     
+     //Esto es una prueba para ver las tablas, Atte Jamel
+    @GetMapping("/mostrar")
+    public String verTabla(){
+        return "Multa/MostrarMulta";
+    }
+    
 }

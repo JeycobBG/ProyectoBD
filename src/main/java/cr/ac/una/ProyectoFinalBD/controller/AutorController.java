@@ -89,4 +89,10 @@ public class AutorController {
         
         return "/";
     }
+    
+    //Esto es una prueba para ver las tablas nada más Atte Jamel
+    @GetMapping("/mostrar")
+    public String verTabla(){
+        return "Autor/MostrarAutor";
+    }
 }

@@ -4,39 +4,28 @@
     <title>Módulo Devolución</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/css/mostrar.css">
 </head>
 <body>
     <div class="encabezado">
-        <a href="/usuarios/menuPrincipal" class="boton-volver">
-            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
-        </a>
-        <h3 class="listado-titulo">Lista de Devoluciones</h3>
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Devoluciones</h2>
     </div>
     <div class="botonYBuscador"> 
         <div>
-            <a href="/devoluciones/agregar" class="button">Agregar una nueva devolución</a>
+            <a href="/devolucion/guardar" class="button">Agregar una nueva devolución</a>
         </div>
-
-        <form action="/devoluciones/buscarPorFecha" method="GET">
-            <input type="date" id="fechaDevolucion" name="fechaDevolucion" placeholder="Seleccione la fecha de devolución">
-            <button type="submit">Buscar</button>
-        </form>
     </div>
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>ID</th>
-                <th>Fecha de Devolución Efectuada</th>
-                <th>ID del Préstamo Asociado</th>
-                <th></th>
-                <th></th>
-            </tr>
+                <th>Fecha Devolución</th>
+                <th>Id Préstamo</th>
+                <th>Segundo Apellido</th>
+                <th>Advertencia de Multa</th>
+                <th>Acciones</th>     
             <tr th:each="devolucion : ${devoluciones}">
-                <td th:text="${devolucion.id}"></td>
-                <td th:text="${#dates.format(devolucion.fechaDevolucionEfectuada, 'dd-MM-yyyy')}"></td>
-                <td th:text="${devolucion.prestamo.id}"></td>
-                <td><a class="editar-button" th:href="@{'/devoluciones/actualizar?id=' + ${devolucion.id}}">Editar</a></td>
+                <td><a class="editar-button" th:href="@{'/devolucion/actualizar?id=' + ${devolucion.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${devolucion.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
@@ -44,7 +33,7 @@
         <script>
             function confirmarEliminacion(enlace, idDevolucion) {
                 if (confirm("¿Está seguro de que desea eliminar esta devolución?")) {
-                    window.location.href = '/devoluciones/eliminar?id=' + idDevolucion;
+                    window.location.href = '/devolucion/eliminar?id=' + idDevolucion;
                 }
             }
         </script>

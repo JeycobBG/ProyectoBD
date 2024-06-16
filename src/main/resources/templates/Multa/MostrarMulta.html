@@ -4,46 +4,29 @@
     <title>Módulo Multa</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/css/mostrar.css">
 </head>
 <body>
     <div class="encabezado">
-        <a href="/usuarios/menuPrincipal" class="boton-volver">
-            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
-        </a>
-        <h3 class="listado-titulo">Lista de Multas</h3>
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Multas</h2>
     </div>
     <div class="botonYBuscador"> 
         <div>
-            <a href="/multas/agregar" class="button">Agregar una nueva multa</a>
+            <a href="/multa/guardar" class="button">Agregar una nueva Multa</a>
         </div>
-
-        <form action="/multas/buscarPorEstado" method="GET">
-            <select id="cancelada" name="cancelada">
-                <option value="true">Canceladas</option>
-                <option value="false">No Canceladas</option>
-            </select>
-            <button type="submit">Buscar</button>
-        </form>
     </div>
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>ID</th>
                 <th>Monto</th>
-                <th>Días de Atraso</th>
-                <th>Estado</th>
-                <th>Préstamo Asociado</th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr th:each="multa : ${multas}">
-                <td th:text="${multa.id}"></td>
-                <td th:text="${multa.monto}"></td>
-                <td th:text="${multa.dias_atraso}"></td>
-                <td th:text="${multa.cancelada ? 'Cancelada' : 'No Cancelada'}"></td>
-                <td th:text="${multa.prestamo.id}"></td>
-                <td><a class="editar-button" th:href="@{'/multas/actualizar?id=' + ${multa.id}}">Editar</a></td>
+                <th>Días de Atraso</th>   
+                <th>Cancelada</th> 
+                <th>Id Préstamo</th> 
+                <th>Acciones</th>     
+            </tr >
+            <tr th:each="multa : ${multas}"> 
+                <td><a class="editar-button" th:href="@{'/multa/actualizar?id=' + ${multa.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${multa.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
@@ -51,7 +34,7 @@
         <script>
             function confirmarEliminacion(enlace, idMulta) {
                 if (confirm("¿Está seguro de que desea eliminar esta multa?")) {
-                    window.location.href = '/multas/eliminar?id=' + idMulta;
+                    window.location.href = '/multa/eliminar?id=' + idMulta;
                 }
             }
         </script>

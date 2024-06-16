@@ -1,70 +1,124 @@
-
 /* 
     Created on : 16 jun 2024, 8:31:10
     Author     : jamel
 */
 
-/* Estilos generales de la tabla */
-.table-container {
-    margin: 20px auto;
-    width: 95%;
+/* Estilos generales de la página */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.encabezado {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.botonYBuscador {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-collapse: collapse;
-    overflow: hidden;
-    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.botonYBuscador form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.botonYBuscador input[type="text"] {
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.botonYBuscador button {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botonYBuscador button:hover {
+    background-color: #45a049;
+}
+
+.button, .editar-button, .eliminar-button {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.button {
+    background-color: #5cb85c; /* Botón de agregar */
+}
+
+.editar-button {
+    background-color: #337ab7; /* Botón de editar */
+}
+
+.eliminar-button {
+    background-color: #d9534f; /* Botón de eliminar */
+}
+
+.button:hover, .editar-button:hover, .eliminar-button:hover {
+    opacity: 0.9;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse; /* Elimina el espacio entre las celdas */
+    margin-top: 20px;
+    border-collapse: collapse;
 }
 
-/* Cabecera de la tabla */
-th {
-    background-color: #333; 
-    color: white;
-    font-weight: bold;
-    padding: 12px 15px;
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
     text-align: left;
+    background-color: #333; /* Fondo oscuro para cabezales y celdas */
+    color: white; /* Texto en blanco para mejor contraste */
 }
 
-/* Celdas de la tabla */
-td {
-    padding: 10px 15px;
-    border-top: 1px solid #ddd; 
-    color: #333; 
+th {
+    background-color: #4f4f4f; /* Un tono ligeramente más claro para la cabecera */
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #454545; /* Alternando los colores para filas para facilitar la lectura */
 }
 
-/* Botones dentro de la tabla */
-.btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.alert {
+    padding: 10px;
+    color: #fff;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
 }
 
-/* Botón Actualizar */
-.btn-update {
-    background-color: #4CAF50; /* Verde */
-    color: white;
+.alert-success {
+    background-color: #4CAF50;
 }
 
-.btn-update:hover {
-    background-color: #45a049;
-}
-
-/* Botón Eliminar */
-.btn-delete {
-    background-color: #f44336; /* Rojo */
-    color: white;
-}
-
-.btn-delete:hover {
-    background-color: #da190b;
+.alert-error {
+    background-color: #f44336;
 }

@@ -4,43 +4,29 @@
     <title>Módulo Préstamo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/css/mostrar.css">
 </head>
 <body>
     <div class="encabezado">
-        <a href="/usuarios/menuPrincipal" class="boton-volver">
-            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
-        </a>
-        <h3 class="listado-titulo">Lista de Préstamos</h3>
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Préstamos</h2>
     </div>
     <div class="botonYBuscador"> 
         <div>
-            <a href="/prestamos/agregar" class="button">Agregar un nuevo préstamo</a>
+            <a href="/prestamo/guardar" class="button">Agregar un nuevo préstamo</a>
         </div>
-
-        <form action="/prestamos/buscarPorFecha" method="GET">
-            <input type="date" id="fechaPrestamo" name="fechaPrestamo" placeholder="Seleccione la fecha de préstamo">
-            <button type="submit">Buscar</button>
-        </form>
     </div>
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>ID</th>
-                <th>Fecha de Préstamo</th>
-                <th>Fecha Devolución Prevista</th>
-                <th>Libro</th>
-                <th>Socio</th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr th:each="prestamo : ${prestamos}">
-                <td th:text="${prestamo.id}"></td>
-                <td th:text="${#dates.format(prestamo.fechaPrestamo, 'dd-MM-yyyy')}"></td>
-                <td th:text="${#dates.format(prestamo.fechaDevolucionPrevista, 'dd-MM-yyyy')}"></td>
-                <td th:text="${prestamo.libro.titulo}"></td>
-                <td th:text="${prestamo.socio.persona.nombre} + ' ' + ${prestamo.socio.persona.apellido}"></td>
-                <td><a class="editar-button" th:href="@{'/prestamos/actualizar?id=' + ${prestamo.id}}">Editar</a></td>
+                <th>Fecha Préstamo</th>
+                <th>Fecha Devolución Prevista</th>   
+                <th>Id Libro</th> 
+                <th>Id Socio</th> 
+                <th>Acciones</th>     
+            </tr >
+            <tr th:each="prestamo : ${prestamos}"> 
+                <td><a class="editar-button" th:href="@{'/prestamo/actualizar?id=' + ${prestamo.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${prestamo.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
@@ -48,7 +34,7 @@
         <script>
             function confirmarEliminacion(enlace, idPrestamo) {
                 if (confirm("¿Está seguro de que desea eliminar este préstamo?")) {
-                    window.location.href = '/prestamos/eliminar?id=' + idPrestamo;
+                    window.location.href = '/prestamo/eliminar?id=' + idPrestamo;
                 }
             }
         </script>

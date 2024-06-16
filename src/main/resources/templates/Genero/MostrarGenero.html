@@ -4,49 +4,35 @@
     <title>Módulo Género</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/css/mostrar.css">
 </head>
 <body>
     <div class="encabezado">
-        <a href="/usuarios/menuPrincipal" class="boton-volver">
-            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
-        </a>
-        <h3 class="listado-titulo">Lista de Géneros Literarios</h3>
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Géneros</h2>
     </div>
     <div class="botonYBuscador"> 
         <div>
-            <a href="/generos/agregar" class="button">Agregar un nuevo género</a>
+            <a href="/genero/guardar" class="button">Agregar un nuevo Género</a>
         </div>
-
-        <form action="/generos/buscarPorNombre" method="GET">
-            <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre del género">
-            <button type="submit">Buscar</button>
-        </form>
     </div>
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Número de Libros</th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr th:each="genero : ${generos}">
-                <td th:text="${genero.id}"></td>
-                <td th:text="${genero.nombre}"></td>
-                <td th:text="${genero.descripcion}"></td>
-                <td th:text="${#lists.size(genero.libros)}"></td>
-                <td><a class="editar-button" th:href="@{'/generos/actualizar?id=' + ${genero.id}}">Editar</a></td>
+                <th>Descripción</th>    
+                <th>Acciones</th>     
+            </tr >
+            <tr th:each="genero : ${generos}"> 
+                <td><a class="editar-button" th:href="@{'/genero/actualizar?id=' + ${genero.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${genero.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
 
         <script>
             function confirmarEliminacion(enlace, idGenero) {
-                if (confirm("¿Está seguro de que desea eliminar este género literario?")) {
-                    window.location.href = '/generos/eliminar?id=' + idGenero;
+                if (confirm("¿Está seguro de que desea eliminar esta Género?")) {
+                    window.location.href = '/genero/eliminar?id=' + idGenero;
                 }
             }
         </script>

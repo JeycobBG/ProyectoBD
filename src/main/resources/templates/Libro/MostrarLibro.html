@@ -4,58 +4,40 @@
     <title>Módulo Libro</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" th:src="@{/js/listados.js}"></script>
-    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/css/mostrar.css">
 </head>
 <body>
     <div class="encabezado">
-        <a href="/usuarios/menuPrincipal" class="boton-volver">
-            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
-        </a>
-        <h3 class="listado-titulo">Lista de libros registrados</h3>
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Libros</h2>
     </div>
     <div class="botonYBuscador"> 
         <div>
-            <a href="/libros/agregar" class="button">Agregar un nuevo libro</a>
+            <a href="/libro/guardar" class="button">Agregar un nuevo Libro</a>
         </div>
-
-        <div class="campito"> 
-            <a href="/libros/listar" class="button">Vista de usuario regular</a>
-        </div>
-
-        <form action="/libros/buscarPorTitulo" method="GET">
-            <input type="text" id="titulo" name="titulo" placeholder="Ingrese el título del libro">
-            <button type="submit">Buscar</button>
-        </form>
     </div>
     <div>
         <table class="table table-bordered">
             <tr>
                 <th>ISBN</th>
                 <th>Título</th>
+                <th>Sinopsis</th>
                 <th>Fecha de Publicación</th>
-                <th>Autor</th>
-                <th>Editorial</th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr th:each="libro : ${libros}">
-                <td th:text="${libro.isbn}"></td>
-                <td th:text="${libro.titulo}"></td>
-                <td th:text="${#dates.format(libro.fechaPublicacion, 'dd-MM-yyyy')}"></td>
-                <td th:text="${libro.autor.nombre}"></td>
-                <td th:text="${libro.editorial.nombre}"></td>
-                <td><a class="editar-button" th:href="@{'/libros/actualizar?id=' + ${libro.id}}">Editar</a></td>
+                <th>Cantidad</th>
+                <th>Id Autor</th>
+                <th>Id Editorial</th>
+                 <th>Id Género</th>  
+            </tr >
+            <tr th:each="libro : ${libros}"> 
+                <td><a class="editar-button" th:href="@{'/libro/actualizar?id=' + ${libro.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${libro.id} + '\')'">Eliminar</a></td>
-                <td><a class="ver-detalles" th:href="@{'/libros/detalles?id=' + ${libro.id}}">Ver Detalles</a></td>
             </tr>
         </table>
 
         <script>
             function confirmarEliminacion(enlace, idLibro) {
-                if (confirm("¿Está seguro de que desea eliminar este libro?")) {
-                    window.location.href = '/libros/eliminar?id=' + idLibro;
+                if (confirm("¿Está seguro de que desea eliminar este Libro?")) {
+                    window.location.href = '/libro/eliminar?id=' + idLibro;
                 }
             }
         </script>
@@ -65,3 +47,9 @@
     <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
 </body>
 </html>
+
+
+
+
+
+                

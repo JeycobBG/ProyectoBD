@@ -4,39 +4,36 @@
     <title>Módulo Autor</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/css/mostrar.css">
 </head>
 <body>
     <div class="encabezado">
-        <a href="/usuarios/menuPrincipal" class="boton-volver">
-            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
-        </a>
-        <h3 class="listado-titulo">Lista de Autores</h3>
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Autores</h2>
     </div>
     <div class="botonYBuscador"> 
         <div>
-            <a href="/autores/agregar" class="button">Agregar un nuevo autor</a>
+            <a href="/autor/guardar" class="button">Agregar un nuevo autor</a>
         </div>
-
-        <form action="/autores/buscarPorNombre" method="GET">
-            <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre del autor">
-            <button type="submit">Buscar</button>
-        </form>
+>
     </div>
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>ID</th>
                 <th>Nombre Completo</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+                <th>Identificación</th>
+                <th>Código Postal</th>
+                <th>Dirección</th>
+                <th>Distrito</th>
+                <th>Teléfono</th>
+                <th>Email</th>
                 <th>Bibliografía</th>
-                <th></th>
-                <th></th>
+                <th>Acciones</th>
             </tr>
-            <tr th:each="autor : ${autores}">
-                <td th:text="${autor.id}"></td>
-                <td th:text="${autor.persona.nombre} + ' ' + ${autor.persona.primerApellido} + ' ' + ${autor.persona.segundoApellido}"></td>
-                <td th:text="${autor.bibliografia}"></td>
-                <td><a class="editar-button" th:href="@{'/autores/actualizar?id=' + ${autor.id}}">Editar</a></td>
+            <tr th:each="autor : ${autores}">              
+                <td><a class="editar-button" th:href="@{'/autor/actualizar?id=' + ${autor.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${autor.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
@@ -44,7 +41,7 @@
         <script>
             function confirmarEliminacion(enlace, idAutor) {
                 if (confirm("¿Está seguro de que desea eliminar este autor?")) {
-                    window.location.href = '/autores/eliminar?id=' + idAutor;
+                    window.location.href = '/autor/eliminar?id=' + idAutor;
                 }
             }
         </script>

@@ -44,4 +44,10 @@ public class DevolucionController {
         
         return "Devolucion/CrearDevolucion";
     }
+    
+    //Esto es una prueba para ver las tablas nada más Atte Jamel
+    @GetMapping("/mostrar")
+    public String verTabla(){
+        return "Devolucion/MostrarDevolucion";
+    }
 }

@@ -107,4 +107,10 @@ public class SocioController {
         System.out.println("resultado = " + resultado);
         return "/";
     }
+    
+     //Esto es una prueba para ver las tablas, Atte Jamel
+    @GetMapping("/mostrar")
+    public String verTabla(){
+        return "Socio/MostrarSocio";
+    }
 }

@@ -4,39 +4,36 @@
     <title>Módulo Socio</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/CSS/ADMIN_STYLES.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/css/mostrar.css">
 </head>
 <body>
     <div class="encabezado">
-        <a href="/usuarios/menuPrincipal" class="boton-volver">
-            <img src="/img/LOGO.png" alt="Volver" width="95" height="80">
-        </a>
-        <h3 class="listado-titulo">Lista de Socios Registrados</h3>
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Socios</h2>
     </div>
     <div class="botonYBuscador"> 
         <div>
-            <a href="/socios/agregar" class="button">Agregar un nuevo socio</a>
+            <a href="/socio/guardar" class="button">Agregar un nuevo Socio</a>
         </div>
-
-        <form action="/socios/buscarPorPersona" method="GET">
-            <input type="text" id="nombrePersona" name="nombrePersona" placeholder="Ingrese el nombre de la persona">
-            <button type="submit">Buscar</button>
-        </form>
+   
     </div>
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>ID</th>
-                <th>Fecha de Registro</th>
-                <th>Nombre del Socio</th>
-                <th></th>
-                <th></th>
+                <th>Nombre Completo</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+                <th>Identificación</th>
+                <th>Código Postal</th>
+                <th>Dirección</th>
+                <th>Distrito</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Bibliografía</th>
+                <th>Acciones</th>
             </tr>
-            <tr th:each="socio : ${socios}">
-                <td th:text="${socio.id}"></td>
-                <td th:text="${#dates.format(socio.fechaRegistro, 'dd-MM-yyyy')}"></td>
-                <td th:text="${socio.persona.nombre} + ' ' + ${socio.persona.apellido}"></td>
-                <td><a class="editar-button" th:href="@{'/socios/actualizar?id=' + ${socio.id}}">Editar</a></td>
+            <tr th:each="socio : ${socios}">              
+                <td><a class="editar-button" th:href="@{'/socio/actualizar?id=' + ${socio.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${socio.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
@@ -44,7 +41,7 @@
         <script>
             function confirmarEliminacion(enlace, idSocio) {
                 if (confirm("¿Está seguro de que desea eliminar este socio?")) {
-                    window.location.href = '/socios/eliminar?id=' + idSocio;
+                    window.location.href = '/socio/eliminar?id=' + idSocio;
                 }
             }
         </script>
