@@ -1,0 +1,39 @@
+
+/* 
+    Created on : 15 jun 2024, 20:17:23
+    Author     : jamel
+*/
+/* gallery.css */
+.header-title {
+    text-align: center;
+    font-size: 45px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 5px;  
+    margin: 10px 0;  
+}
+
+.image-gallery img {
+    width: calc(100% / 7 - 10px); 
+    height: auto; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 800px) {
+    .image-gallery img {
+        width: calc(50% - 10px); /* Dos imágenes por fila en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 500px) {
+    .image-gallery img {
+        width: 100%; 
+    }
+}
+
