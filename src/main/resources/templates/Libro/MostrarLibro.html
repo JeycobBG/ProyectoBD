@@ -1,68 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Módulo Libro</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/mostrar.css">
-</head>
-<body>
-    <div class="encabezado">
-        <a href="/menu" class="boton-volver"></a>
-        <h2 class="listado-titulo">Lista de Libros</h2>
-    </div>
-    <div class="botonYBuscador"> 
-        <div>
-            <a href="/libro/guardar" class="button">Agregar un nuevo Libro</a>
+    <head>
+        <title>Módulo Libro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/mostrar.css">
+    </head>
+    <body>
+        <div class="encabezado">
+            <a href="/menu" class="boton-volver"></a>
+            <h2 class="listado-titulo">Lista de Libros</h2>
         </div>
-    </div>
-    <div>
-        <table class="table table-bordered">
-            <tr>
-                <th>ISBN</th>
-                <th>Título</th>
-                <th>Sinopsis</th>
-                <th>Fecha de Publicación</th>
-                <th>Cantidad</th>
-                <th>Autor</th>
-                <th>Editorial</th>
-                <th>Géneros</th>  
-                <th>Acciones</th>
-            </tr >
-            <tr th:each="libro : ${libros}"> 
-                <td th:text="${libro.isbn}"></td>
-                <td th:text="${libro.titulo}"></td>
-                <td th:text="${libro.sinopsis}"></td>
-                <td th:text="${libro.fechaPublicacion}"></td>
-                <td th:text="${libro.cantidad}"></td>
-                <td th:text="${libro.autor.persona.nombre}"></td>
-                <td th:text="${libro.editorial.nombre}"></td>
-                <td>
-                    <ul th:if="${not #lists.isEmpty(libro.generos)}">
-                        <li th:each="gen : ${libro.generos}" th:text="${gen.nombre}"></li>
-                    </ul>
-                </td>
-                <td><a class="editar-button" th:href="@{'/libro/actualizar?id=' + ${libro.id}}">Editar</a>
-                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${libro.id} + '\')'">Eliminar</a>
-            </tr>
-        </table>
+        <div class="botonYBuscador">
+            <div>
+                <a href="/libro/guardar" class="button">Agregar un nuevo Libro</a>
+            </div>
+            <form th:action="@{/filtrar}" th:method="get">
+                <select name="tipoFiltro" class="select-filtro">
+                    <option value="editorial">Editorial</option>
+                    <option value="genero">Género</option>
+                    <option value="ISBN">ISBN</option>
+                    <option value="masPrestamos">Más Préstamos</option>
+                    <option value="titulo">Título</option>
+                    <option value="autor">Autor</option>
+                    <option value="anioPublicacion">Año de Publicación</option>
+                </select>
+                <input type="text" name="valorFiltro" placeholder="Ingrese el filtro"/>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
 
-        <script>
-            function confirmarEliminacion(enlace, idLibro) {
-                if (confirm("¿Está seguro de que desea eliminar este Libro?")) {
-                    window.location.href = '/libro/eliminar?id=' + idLibro;
+
+        <div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>ISBN</th>
+                    <th>Título</th>
+                    <th>Sinopsis</th>
+                    <th>Fecha de Publicación</th>
+                    <th>Cantidad</th>
+                    <th>Autor</th>
+                    <th>Editorial</th>
+                    <th>Géneros</th>  
+                    <th>Acciones</th>
+                </tr >
+                <tr th:each="libro : ${libros}"> 
+                    <td th:text="${libro.isbn}"></td>
+                    <td th:text="${libro.titulo}"></td>
+                    <td th:text="${libro.sinopsis}"></td>
+                    <td th:text="${libro.fechaPublicacion}"></td>
+                    <td th:text="${libro.cantidad}"></td>
+                    <td th:text="${libro.autor.persona.nombre}"></td>
+                    <td th:text="${libro.editorial.nombre}"></td>
+                    <td>
+                        <ul th:if="${not #lists.isEmpty(libro.generos)}">
+                            <li th:each="gen : ${libro.generos}" th:text="${gen.nombre}"></li>
+                        </ul>
+                    </td>
+                    <td><a class="editar-button" th:href="@{'/libro/actualizar?id=' + ${libro.id}}">Editar</a>
+                        <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${libro.id} + '\')'">Eliminar</a>
+                </tr>
+            </table>
+
+            <script>
+                function confirmarEliminacion(enlace, idLibro) {
+                    if (confirm("¿Está seguro de que desea eliminar este Libro?")) {
+                        window.location.href = '/libro/eliminar?id=' + idLibro;
+                    }
                 }
-            }
-        </script>
-    </div>
+            </script>
+        </div>
 
-    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
-</body>
+        <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+        <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+    </body>
 </html>
 
 
 
 
 
-                

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Módulo Autor</title>
+    <title>Módulo Libro</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/mostrar.css">
@@ -9,57 +9,48 @@
 <body>
     <div class="encabezado">
         <a href="/menu" class="boton-volver"></a>
-        <h2 class="listado-titulo">Lista de Autores</h2>
+        <h2 class="listado-titulo">Lista de Libros</h2>
     </div>
     <div class="botonYBuscador"> 
         <div>
-            <a href="/autor/guardar" class="button">Agregar un nuevo autor</a>
+            <a href="/libro/guardar" class="button">Agregar un nuevo Libro</a>
         </div>
-
     </div>
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>Nombre Completo</th>
-                <th>Primer Apellido</th>
-                <th>Segundo Apellido</th>
-                <th>Identificación</th>
-                <th>Código Postal</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Email</th>
-                <th>Distrito</th>
-                <th>Bibliografía</th>
+                <th>ISBN</th>
+                <th>Título</th>
+                <th>Sinopsis</th>
+                <th>Fecha de Publicación</th>
+                <th>Cantidad</th>
+                <th>Autor</th>
+                <th>Editorial</th>
+                <th>Géneros</th>  
                 <th>Acciones</th>
-            </tr>
-            <tr th:each="autor : ${autores}">    
-                <td th:text="${autor.persona.nombre}"></td>
-                <td th:text="${autor.persona.primerApellido}"></td>
-                <td th:text="${autor.persona.segundoApellido}"></td>
-                <td th:text="${autor.persona.identificacion}"></td>
-                <td th:text="${autor.persona.direccion.codigoPostal}"></td>
-                <td th:text="${autor.persona.direccion.descripcion}"></td>
-                <td th:text="${autor.persona.direccion.distrito.nombre}"></td>
+            </tr >
+            <tr th:each="libro : ${libros}"> 
+                <td th:text="${libro.isbn}"></td>
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.sinopsis}"></td>
+                <td th:text="${libro.fechaPublicacion}"></td>
+                <td th:text="${libro.cantidad}"></td>
+                <td th:text="${libro.autor.persona.nombre}"></td>
+                <td th:text="${libro.editorial.nombre}"></td>
                 <td>
-                    <ul th:if="${not #lists.isEmpty(autor.persona.telefono)}">
-                        <li th:each="tel : ${autor.persona.telefono}" th:text="${tel.numero}"></li>
+                    <ul th:if="${not #lists.isEmpty(libro.generos)}">
+                        <li th:each="gen : ${libro.generos}" th:text="${gen.nombre}"></li>
                     </ul>
                 </td>
-                <td>
-                    <ul th:if="${not #lists.isEmpty(autor.persona.correoElectronico)}">
-                        <li th:each="email : ${autor.persona.correoElectronico}" th:text="${email.email}"></li>
-                    </ul>
-                </td>
-                <td th:text="${autor.bibliografia}"></td>               
-                <td><a class="editar-button" th:href="@{'/autor/actualizar?id=' + ${autor.id}}">Editar</a>
-               <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${autor.id} + '\')'">Eliminar</a></td>
+                <td><a class="editar-button" th:href="@{'/libro/actualizar?id=' + ${libro.id}}">Editar</a>
+                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${libro.id} + '\')'">Eliminar</a>
             </tr>
         </table>
 
         <script>
-            function confirmarEliminacion(enlace, idAutor) {
-                if (confirm("¿Está seguro de que desea eliminar este autor?")) {
-                    window.location.href = '/autor/eliminar?id=' + idAutor;
+            function confirmarEliminacion(enlace, idLibro) {
+                if (confirm("¿Está seguro de que desea eliminar este Libro?")) {
+                    window.location.href = '/libro/eliminar?id=' + idLibro;
                 }
             }
         </script>
