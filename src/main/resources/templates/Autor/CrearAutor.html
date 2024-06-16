@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Autor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/crear.css">
 </head>
 <body>
     <h2>Registrar un nuevo Autor</h2>
@@ -10,18 +13,15 @@
         <div>
             <form id="registrarAutorForm" action="/autor/guardar" method="post">
                 
-                <!-- Combo box para seleccionar la persona -->
                 <label for="persona">Persona:</label><br>
                 <select id="persona" name="persona" required>
                     <option value="">Selecciona una persona</option>
-                    <!-- Cargar dinámicamente las opciones de persona desde el backend -->
                     <option th:each="persona : ${personas}" 
                             th:value="${persona.id}" 
                             th:text="${persona.nombre}">
                     </option>
                 </select><br><br>
-                
-                <!-- Campo para la bibliografía del autor -->
+
                 <label for="bibliografia">Bibliografía:</label><br>
                 <textarea id="bibliografia" name="bibliografia" rows="4" cols="50" required></textarea><br><br>
                 
