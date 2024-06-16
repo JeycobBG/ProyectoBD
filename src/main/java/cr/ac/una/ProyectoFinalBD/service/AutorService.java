@@ -4,7 +4,9 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
+import cr.ac.una.ProyectoFinalBD.domain.Autor;
 import cr.ac.una.ProyectoFinalBD.repositorio.IAutorRepositorio;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +46,11 @@ public class AutorService implements IAutorService{
     @Override
     public String delete(Integer id_autor, String error) {
         return autorRepo.eliminar(id_autor, error);
+    }
+
+    @Override
+    public List<Autor> leer(String error) {
+        return autorRepo.leer(error);
     }
     
     

@@ -79,6 +79,25 @@ public class GeneroController {
         return "/";
     }
     
+    @GetMapping("/leer")
+    public String leer(Model modelo){
+     
+        /*
+        @RequestParam("top_n")Integer top_n
+        */
+        
+        String error = "";
+        
+        List<Genero> generos = generoService.leer(error);
+        
+        for(Genero genero: generos){
+            System.out.println("genero: " + genero.getNombre());
+        }
+        
+        modelo.addAttribute("generos", generos);  
+        return "/";
+    }
+    
     // Filtro
     @GetMapping("/filtrarConMasLibrosPublicados")
     public String filtrarConMasLibrosPublicados(Model modelo){

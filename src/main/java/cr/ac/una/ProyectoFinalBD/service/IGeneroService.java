@@ -24,6 +24,8 @@ public interface IGeneroService {
             String descripcion,
             String error);
     
+    public List<Genero> leer(String error);
+    
     public String delete(Integer id_genero, String error);
     
     //filtros

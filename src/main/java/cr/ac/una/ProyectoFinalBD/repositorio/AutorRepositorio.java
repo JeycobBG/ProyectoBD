@@ -4,11 +4,12 @@
  */
 package cr.ac.una.ProyectoFinalBD.repositorio;
 
+import cr.ac.una.ProyectoFinalBD.domain.Autor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureQuery;
 import jakarta.transaction.Transactional;
-import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -104,5 +105,16 @@ public class AutorRepositorio implements IAutorRepositorio{
         
         query.execute();
         return error_message = (String) query.getOutputParameterValue("error_message");
+    }
+
+    @Override
+    public List<Autor> leer(String error) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_leer_autor", Autor.class);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+
+        query.execute();
+        System.out.print((String) query.getOutputParameterValue("error"));
+
+        return query.getResultList();
     }
 }

@@ -42,4 +42,11 @@ public class EditorialService implements IEditorialService{
     public List<Editorial> editorialConMasLibros(Integer top_n, String error) {
         return editorialRepo.editorialConMasLibros(top_n, error);
     }
+
+    @Override
+    public List<Editorial> leer(String error) {
+        return editorialRepo.leer(error);
+    }
+    
+    
 }

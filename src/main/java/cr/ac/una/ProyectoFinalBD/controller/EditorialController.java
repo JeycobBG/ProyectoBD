@@ -101,6 +101,21 @@ public class EditorialController {
         return "/";
     }
     
+    @GetMapping("/leer")
+    public String leer(Model modelo){
+        String error = "";
+        
+        List<Editorial> editoriales = editorialService.leer(error);
+     
+        for(int i = 0; i < editoriales.size(); i++){
+            System.out.print("editorial: " + editoriales.get(i).getNombre());
+        }
+            
+        
+        modelo.addAttribute("editoriales", editoriales);  
+        return "/";
+    }
+    
     // Filtro
     @GetMapping("/filtrarConMasLibros")
     public String filtrarConMasLibros(Model modelo){

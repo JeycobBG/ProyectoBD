@@ -4,9 +4,12 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Autor;
 import cr.ac.una.ProyectoFinalBD.service.AutorService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -103,6 +106,20 @@ public class AutorController {
         
         System.out.println("resultado = " + resultado);
         
+        return "/";
+    }
+    
+    @GetMapping("/leer")
+    public String leer(Model modelo){
+        
+        String error = "";
+        
+        List<Autor> autores = autorService.leer(error);
+        
+        for(Autor autor: autores){
+            System.out.println("autor: " + autor.getPersona().getNombre());
+        }
+        modelo.addAttribute("autores", autores);
         return "/";
     }
 }

@@ -4,6 +4,9 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
+import cr.ac.una.ProyectoFinalBD.domain.Autor;
+import java.util.List;
+
 
 /**
  *
@@ -38,6 +41,7 @@ public interface IAutorService {
             String bibliografia,
             String error);
     
-    public String delete(
-            Integer id_autor, String error);
+    public String delete(Integer id_autor, String error);
+    
+    public List<Autor> leer(String error);
 }

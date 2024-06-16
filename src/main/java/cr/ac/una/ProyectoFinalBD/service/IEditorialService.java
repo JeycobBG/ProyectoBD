@@ -36,4 +36,6 @@ public interface IEditorialService {
             String error);
     
     public List<Editorial> editorialConMasLibros(Integer top_n, String error);
+    
+    public List<Editorial> leer(String error);
 }

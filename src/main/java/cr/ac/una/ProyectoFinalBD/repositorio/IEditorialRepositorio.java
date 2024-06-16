@@ -34,4 +34,6 @@ public interface IEditorialRepositorio {
     public String eliminar(Integer id_editorial, String error);
     
     public List<Editorial> editorialConMasLibros(Integer top_n, String error);
+    
+    public List<Editorial> leer(String error);
 }

@@ -97,4 +97,15 @@ public class EditorialRepositorio implements IEditorialRepositorio{
         
         return query.getResultList();
     }
+    
+    @Override
+    @Transactional
+    public List<Editorial> leer(String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_leer_editorial", Editorial.class);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
+    }
 }

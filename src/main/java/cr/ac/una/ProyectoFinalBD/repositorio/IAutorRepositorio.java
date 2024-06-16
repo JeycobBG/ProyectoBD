@@ -4,6 +4,9 @@
  */
 package cr.ac.una.ProyectoFinalBD.repositorio;
 
+import cr.ac.una.ProyectoFinalBD.domain.Autor;
+import java.util.List;
+
 /**
  *
  * @author JEYCOB
@@ -21,4 +24,6 @@ public interface IAutorRepositorio {
             String error);
     
     String eliminar(Integer id_autor, String error);
+    
+    public List<Autor> leer(String error);
 }

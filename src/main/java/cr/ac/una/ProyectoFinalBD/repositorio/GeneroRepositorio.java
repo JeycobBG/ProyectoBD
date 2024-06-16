@@ -57,6 +57,18 @@ public class GeneroRepositorio implements IGeneroRepositorio{
     
     @Override
     @Transactional
+    public List<Genero> leer(String error) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_leer_genero", Genero.class);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+
+        query.execute();
+        System.out.print((String) query.getOutputParameterValue("error"));
+
+        return query.getResultList();
+    }
+    
+    @Override
+    @Transactional
     public String eliminar(Integer id_genero, String error){
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_eliminar_genero");
         query.registerStoredProcedureParameter("id_genero", String.class, ParameterMode.IN);

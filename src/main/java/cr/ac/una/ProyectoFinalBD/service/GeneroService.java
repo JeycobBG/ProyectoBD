@@ -45,4 +45,9 @@ public class GeneroService implements IGeneroService{
     public List<Genero> filtrarConMasLibrosPublicados(Integer top_n, String error) {
         return generoRepo.filtrarConMasLibrosPublicados(top_n, error);
     }
+
+    @Override
+    public List<Genero> leer(String error) {
+        return generoRepo.leer(error);
+    }
 }
