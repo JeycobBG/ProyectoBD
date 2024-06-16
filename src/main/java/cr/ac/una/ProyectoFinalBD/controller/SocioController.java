@@ -132,13 +132,15 @@ public class SocioController {
     @GetMapping("/leer")
     public String read(Model modelo){
         
-        List<Socio> socios = socioService.read();
+        String error = "";
+        
+        List<Socio> socios = socioService.read(error);
         
         modelo.addAttribute("socios", socios);
         
         for(Socio socio: socios){
-            System.out.println("id_socio" + socio.getId());
-            System.out.println("nombre" + socio.getPersona().getNombre());
+            System.out.println("id_socio: " + socio.getId());
+            System.out.println("nombre: " + socio.getPersona().getNombre());
         }
         
         modelo.addAttribute("socios", socios);

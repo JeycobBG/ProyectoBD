@@ -153,6 +153,11 @@ public class LibroController {
         String error = "";
         
         List<Libro> libros = libroService.librosPorEditorial(editorial, error);
+        
+        for(Libro libro: libros){
+            System.out.println("libro por editorial: " + libro.getEditorial().getNombre());
+        }
+        
         modelo.addAttribute("libros", libros);  
         return "/";
     }
@@ -168,6 +173,11 @@ public class LibroController {
         String error = "";
         
         List<Libro> libros = libroService.librosPorGenero(genero, error);
+        
+        for(Libro libro: libros){
+            System.out.println("libro por genero: " + libro.getTitulo());
+        }
+        
         modelo.addAttribute("libros", libros);  
         return "/";
     }
@@ -183,6 +193,10 @@ public class LibroController {
         String error = "";
         
         List<Libro> libros = libroService.librosPorISBN(ISBN, error);
+        
+        for(Libro libro: libros){
+            System.out.println("libro por ISBN: " + libro.getIsbn());
+        }
         modelo.addAttribute("libros", libros);  
         return "/";
     }
@@ -193,6 +207,11 @@ public class LibroController {
         String error = "";
         
         List<Libro> libros = libroService.librosPorMasPrestamos(error);
+        
+        for(Libro libro: libros){
+            System.out.println("libro por más prestamos: " + libro.getTitulo());
+        }
+        
         modelo.addAttribute("libros", libros);  
         return "/";
     }
@@ -208,6 +227,11 @@ public class LibroController {
         String error = "";
         
         List<Libro> libros = libroService.librosPorTitulo(titulo, error);
+        
+        for(Libro libro: libros){
+            System.out.println("libro por titulo: " + libro.getTitulo());
+        }
+        
         modelo.addAttribute("libros", libros);  
         return "/";
     }
@@ -225,6 +249,11 @@ public class LibroController {
         String error = "";
         
         List<Libro> libros = libroService.librosPorAutor(nombre_autor, primer_apellido_autor, error);
+        
+        for(Libro libro: libros){
+            System.out.println("libro por autor: " + libro.getTitulo());
+        }
+        
         modelo.addAttribute("libros", libros);  
         return "/";
     }
@@ -242,9 +271,8 @@ public class LibroController {
         List<Libro> libros = libroService.librosPorAnioPublicacion(anio_publicacion, error);
         
         for(Libro lib : libros){
-           System.out.println("libro: " + lib.getTitulo());
+           System.out.println("libro por año: " + lib.getTitulo());
         }
-        
         
         modelo.addAttribute("libros", libros);  
         return "/";

@@ -50,7 +50,7 @@ public class SocioService implements ISocioService{
     }
 
     @Override
-    public List<Socio> read() {
-        return socioRepo.leer();
+    public List<Socio> read(String error) {
+        return socioRepo.leer(error);
     }
 }

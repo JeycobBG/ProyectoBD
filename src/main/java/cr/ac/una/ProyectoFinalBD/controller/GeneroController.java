@@ -80,12 +80,7 @@ public class GeneroController {
     }
     
     @GetMapping("/leer")
-    public String leer(Model modelo){
-     
-        /*
-        @RequestParam("top_n")Integer top_n
-        */
-        
+    public String leer(Model modelo){   
         String error = "";
         
         List<Genero> generos = generoService.leer(error);
@@ -112,7 +107,7 @@ public class GeneroController {
         List<Genero> generos = generoService.filtrarConMasLibrosPublicados(top_n, error);
         
         for(Genero genero: generos){
-            System.out.println("editorial: " + genero.getNombre());
+            System.out.println("genero con más libros publicados: " + genero.getNombre());
         }
         
         modelo.addAttribute("generos", generos);  

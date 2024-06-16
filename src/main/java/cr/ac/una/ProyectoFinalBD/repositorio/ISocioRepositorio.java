@@ -24,7 +24,7 @@ public interface ISocioRepositorio {
             Integer id_distrito, String numero_telefono, String email, Date fecha_registro,
             String error_message);
     
-    List<Socio> leer();
+    List<Socio> leer(String error);
     
     String eliminar(Integer id_socio, String error_message);
 }
