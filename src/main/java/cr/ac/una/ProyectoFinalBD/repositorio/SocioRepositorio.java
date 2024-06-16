@@ -100,7 +100,7 @@ public class SocioRepositorio implements ISocioRepositorio{
     @Override
     @Transactional
     public List<Socio> leer(){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_leer_socio");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_leer_socio", Socio.class);
         query.execute();
         return query.getResultList();
     }

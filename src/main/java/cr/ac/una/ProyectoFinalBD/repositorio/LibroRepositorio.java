@@ -109,7 +109,7 @@ public class LibroRepositorio implements ILibroRepositorio{
     @Override
     @Transactional
     public List<Libro> librosPorEditorial(String editorial, String error){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_editorial");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_editorial", Libro.class);
         query.registerStoredProcedureParameter("editorial", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         
@@ -124,7 +124,7 @@ public class LibroRepositorio implements ILibroRepositorio{
     @Override
     @Transactional
     public List<Libro> librosPorGenero(String genero, String error){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_genero");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_genero", Libro.class);
         query.registerStoredProcedureParameter("genero", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         
@@ -139,7 +139,7 @@ public class LibroRepositorio implements ILibroRepositorio{
     @Override
     @Transactional
     public List<Libro> librosPorISBN(String ISBN, String error){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_ISBN");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_ISBN", Libro.class);
         query.registerStoredProcedureParameter("ISBN", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         
@@ -154,7 +154,7 @@ public class LibroRepositorio implements ILibroRepositorio{
     @Override
     @Transactional
     public List<Libro> librosPorMasPrestamos(String error){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_mas_prestamos");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_mas_prestamos", Libro.class);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         
         query.execute();
@@ -166,7 +166,7 @@ public class LibroRepositorio implements ILibroRepositorio{
     @Override
     @Transactional
     public List<Libro> librosPorTitulo(String titulo, String error){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_titulo");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_titulo", Libro.class);
         query.registerStoredProcedureParameter("titulo", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         
@@ -181,7 +181,7 @@ public class LibroRepositorio implements ILibroRepositorio{
     @Override
     @Transactional
     public List<Libro> librosPorAutor(String nombre_autor, String primer_apellido_autor, String error){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_autor");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_autor", Libro.class);
         query.registerStoredProcedureParameter("nombre_autor", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("primer_apellido_autor", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
@@ -198,7 +198,7 @@ public class LibroRepositorio implements ILibroRepositorio{
     @Override
     @Transactional
     public List<Libro> librosPorAnioPublicacion(Integer anio_publicacion, String error){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_anio_publicacion");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_anio_publicacion", Libro.class);
         query.registerStoredProcedureParameter("anio_publicacion", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         

@@ -72,7 +72,7 @@ public class GeneroRepositorio implements IGeneroRepositorio{
     @Override
     @Transactional
     public List<Genero> filtrarConMasLibrosPublicados(Integer top_n, String error){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_generos_mas_libros");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_generos_mas_libros", Genero.class);
         query.registerStoredProcedureParameter("top_n", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
 

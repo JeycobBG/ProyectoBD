@@ -86,7 +86,7 @@ public class EditorialRepositorio implements IEditorialRepositorio{
     @Override
     @Transactional
     public List<Editorial> editorialConMasLibros(Integer top_n, String error){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_editoriales_mas_libros");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_editoriales_mas_libros", Editorial.class);
         query.registerStoredProcedureParameter("top_n", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         

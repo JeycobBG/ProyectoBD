@@ -240,9 +240,10 @@ public class LibroController {
         
         List<Libro> libros = libroService.librosPorAnioPublicacion(anio_publicacion, error);
         
-        for(Libro libro: libros){
-            System.out.println("editorial: " + libro.getTitulo());
+        for(Libro lib : libros){
+           System.out.println("libro: " + lib.getTitulo());
         }
+        
         
         modelo.addAttribute("libros", libros);  
         return "/";
