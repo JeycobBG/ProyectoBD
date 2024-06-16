@@ -30,29 +30,11 @@
                 <input type="submit" value="Guardar">
             </form>
 
-            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
-            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+            <div class="alert alert-success" id="exitoMessage" style="display: none;"></div>
+            <div class="alert alert-error" id="errorMessage" style="display: none;"></div>
         </div>
     </div>
 
-    <script>
-        // Validación del formulario
-        document.getElementById("registrarDevolucionForm").addEventListener("submit", function(event) {
-            var fechaDevolucionEfectuada = new Date(document.getElementById("fechaDevolucionEfectuada").value);
-            var prestamo = document.getElementById("prestamo").value;
-            
-            // Obtener la fecha actual
-            var fechaActual = new Date();
-            
-            // Validaciones
-            if (fechaDevolucionEfectuada === "" || prestamo.trim() === "") {
-                alert("Por favor complete todos los campos.");
-                event.preventDefault();
-            } else if (fechaDevolucionEfectuada > fechaActual) {
-                alert("La fecha de devolución efectuada no puede ser una fecha futura.");
-                event.preventDefault();
-            }
-        });
-    </script>
+    <script src="validacion.js"></script>
 </body>
 </html>

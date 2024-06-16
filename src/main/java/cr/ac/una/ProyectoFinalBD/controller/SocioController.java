@@ -35,7 +35,7 @@ public class SocioController {
             @RequestParam("id_distrito")Integer id_distrito,          @RequestParam("numero_telefono") String numero_telefono,
             @RequestParam("email")String email,                       @RequestParam("fecha_registro")Date fecha_registro
         */
-        
+        /*
         String nombre = "eliminar";
         String primer_apellido = "eliminar";
         String segundo_apellido = "eliminar";
@@ -64,7 +64,7 @@ public class SocioController {
         );
         
         System.out.println("resultado = " + resultado);
-        
+        */
         return "Socio/CrearSocio";
     }
     

@@ -41,16 +41,16 @@ public class LibroController {
             @RequestParam("id_autor") Integer idAutor,
             @RequestParam("id_editorial") Integer idEditorial,
             @RequestParam("id_generos") Integer idGeneros
-         */
-        String isbn = "isbn3";
-        String titulo = "titulo3";
-        String sinopsis = "sinopsis3";
-        Date fechaPublicacion = Date.from(Instant.now());
-        Integer cantidad = 3;
-        Integer idAutor = 11;
-        Integer idEditorial = 1;
-        String idGeneros = "1,2,3,4";
-
+        *//*
+            String isbn = "isbn3";
+            String titulo = "titulo3";
+            String sinopsis = "sinopsis3";
+            Date fechaPublicacion = Date.from(Instant.now());
+            Integer cantidad = 3;
+            Integer idAutor = 11;
+            Integer idEditorial = 1;
+            String idGeneros = "1,2,3,4";
+            
         String resultado = libroService.insertar(
                 isbn,
                 titulo,
@@ -60,8 +60,8 @@ public class LibroController {
                 idAutor,
                 idEditorial,
                 idGeneros);
-
-        System.out.println("resultado = " + resultado);
+        
+        System.out.println("resultado = " + resultado);*/
         return "Libro/CrearLibro";
     }
 

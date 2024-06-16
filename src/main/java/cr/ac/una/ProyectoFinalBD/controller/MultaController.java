@@ -33,7 +33,7 @@ public class MultaController {
             @RequestParam("id_prestamo")Integer id_prestamo, 
             @RequestParam("error")String error
         */
-        
+        /*
         Double monto = 8000.0;
         Integer dias_atraso = 2;
         Boolean cancelada = true;
@@ -41,7 +41,7 @@ public class MultaController {
         
         String resultado = multaService.guardar(monto, dias_atraso, cancelada, id_prestamo);
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
         return "Multa/CrearMulta";
     }
     

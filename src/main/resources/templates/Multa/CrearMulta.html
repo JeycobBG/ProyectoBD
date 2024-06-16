@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Multa</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+    <link href="/CSS/crear.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <h2>Registrar una nueva Multa</h2>
-    
     <div class="container">
         <div>
             <form id="registrarMultaForm" action="/multa/guardar" method="post">
+                
+                <h2>Registrar una nueva Multa</h2>
                 
                 <!-- Campo para el monto de la multa -->
                 <label for="monto">Monto:</label><br>
@@ -21,7 +21,8 @@
                 
                 <!-- Campo para indicar si la multa está cancelada -->
                 <label for="cancelada">Cancelada:</label><br>
-                <input type="checkbox" id="cancelada" name="cancelada"><br><br>
+                <!-- Aumentar el tamaño del checkbox y agregar margen izquierdo -->
+                <input type="checkbox" id="cancelada" name="cancelada" style="width: 20px; height: 20px; margin-left: 30px;"><br><br>
                 
                 <!-- Combo box para seleccionar el préstamo -->
                 <label for="prestamo">Préstamo:</label><br>
