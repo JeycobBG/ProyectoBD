@@ -85,6 +85,7 @@ public class LibroController {
            System.out.println("error = " + error);
        }
        
+       modelo.addAttribute("libros", libros);
        return "Libro/MostrarLibro";
     }
     

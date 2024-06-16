@@ -141,6 +141,7 @@ public class SocioController {
             System.out.println("nombre" + socio.getPersona().getNombre());
         }
         
+        modelo.addAttribute("socios", socios);
         return "Socio/MostrarSocio";
     }
 }

@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -66,4 +67,12 @@ public class Editorial {
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }   
+    
+    public String getFechaFundacionFormateada() {
+        if (fecha_fundacion != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return fecha_fundacion.format(formatter);
+        }
+        return "";
+    }
 }

@@ -23,12 +23,15 @@
                 <th>Fecha Fundación</th>
                 <th>Código Postal</th>
                 <th>Dirección</th>
-                <th>Id Distrito</th>
                 <th>Acciones</th>     
             </tr >
             <tr th:each="editorial : ${editoriales}"> 
-                <td><a class="editar-button" th:href="@{'/editorial/actualizar?id=' + ${editorial.id}}">Editar</a></td>
-                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${editorial.id} + '\')'">Eliminar</a></td>
+                <td th:text="${editorial.nombre}"></td>
+                <td th:text="${editorial.fechaFundacionFormateada}"></td>
+                <td th:text="${editorial.direccion.codigoPostal}"></td>
+                <td th:text="${editorial.direccion.descripcion}"></td>
+                <td><a class="editar-button" th:href="@{'/editorial/actualizar?id=' + ${editorial.id}}">Editar</a>
+                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${editorial.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
 
