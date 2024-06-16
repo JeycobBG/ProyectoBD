@@ -48,7 +48,6 @@ public class LibroController {
             Integer idAutor = 11;
             Integer idEditorial = 1;
             String idGeneros = "1,2,3,4";
-            String error = "";
             
         String resultado = libroService.insertar(
                 isbn,
@@ -58,8 +57,7 @@ public class LibroController {
                 cantidad,
                 idAutor,
                 idEditorial,
-                idGeneros,
-                error);
+                idGeneros);
         
         System.out.println("resultado = " + resultado);
         return "/";
@@ -114,7 +112,6 @@ public class LibroController {
             Integer idAutor = 1;
             Integer idEditorial = 1;
             String idGeneros = "1,2,3,4";
-            String error = "";
             
         String resultado = libroService.actualizar(
                 id_libro,
@@ -125,8 +122,7 @@ public class LibroController {
                 cantidad,
                 idAutor,
                 idEditorial,
-                idGeneros,
-                error);
+                idGeneros);
         
         System.out.println("resultado = " + resultado);
         return "/";

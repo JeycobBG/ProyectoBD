@@ -4,8 +4,10 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
-import cr.ac.una.ProyectoFinalBD.jpa.PrestamoRepository;
+import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
+import cr.ac.una.ProyectoFinalBD.repositorio.IPrestamoRepositorio;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,38 +19,20 @@ import org.springframework.stereotype.Service;
 public class PrestamoService implements IPrestamoService {
 
     @Autowired
-    PrestamoRepository prestamoRepo;
+    IPrestamoRepositorio prestamoRepo;
     
     @Override
-    public boolean add(
-            Date fecha_prestamo,
-            Date fecha_devolucion_prevista,
-            Integer id_libro,
-            Integer id_socio,
-            String error) {
-        
-        try {
-            prestamoRepo.insertar(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio, error);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
+    public String guardar(Date fecha_prestamo, Date fecha_devolucion_prevista, Integer id_libro, Integer id_socio){
+        return prestamoRepo.insertar(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio);
     }
     
     @Override
-    public boolean update(
-            Integer id_prestamo,
-            Date fecha_prestamo,
-            Date fecha_devolucion_prevista,
-            Integer id_libro,
-            Integer id_socio,
-            String error) {
-        
-        try {
-            prestamoRepo.actualizar(id_prestamo, fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio, error);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
+    public List<Prestamo> leer(){
+        return prestamoRepo.leer();
+    }
+    
+    @Override
+    public String actualizar(Integer id_prestamo, Date fecha_prestamo, Date fecha_devolucion_prevista, Integer id_libro, Integer id_socio) {
+        return prestamoRepo.actualizar(id_prestamo, fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio);
     }
 }

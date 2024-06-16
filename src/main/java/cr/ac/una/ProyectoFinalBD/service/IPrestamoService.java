@@ -4,7 +4,9 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
+import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -12,18 +14,18 @@ import java.util.Date;
  */
 public interface IPrestamoService {
     
-    public boolean add(
+    public String guardar(
             Date fecha_prestamo,
             Date fecha_devolucion_prevista,                     
             Integer id_libro,
-            Integer id_socio,
-            String error);
+            Integer id_socio);
     
-    public boolean update(
+    public List<Prestamo> leer();
+    
+    public String actualizar(
             Integer id_prestamo,
             Date fecha_prestamo,
             Date fecha_devolucion_prevista,                     
             Integer id_libro,
-            Integer id_socio,
-            String error);
+            Integer id_socio);
 }
