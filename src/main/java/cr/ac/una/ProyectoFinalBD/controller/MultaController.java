@@ -79,4 +79,16 @@ public class MultaController {
         return "/";
     }
     
+    @GetMapping("/eliminar")
+    public String eliminar(){
+        /*
+        @PathVariable("id") Integer id_multa,
+        */
+        Integer id_multa = 1;
+        String resultado = multaService.eliminar(id_multa);
+        System.out.print("resultado = " + resultado);
+        
+        return "/";
+    }
+    
 }

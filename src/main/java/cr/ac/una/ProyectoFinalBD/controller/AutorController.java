@@ -91,7 +91,7 @@ public class AutorController {
         return "/";
     }
     
-    @GetMapping("/actualizar")
+    @GetMapping("/eliminar")
     public String delete(){
         /*
         @PathVariable("id_autor") Integer id_autor

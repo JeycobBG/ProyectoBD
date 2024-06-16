@@ -80,4 +80,17 @@ public class PrestamoController {
         
         return "/";
     }
+    
+    @GetMapping("/eliminar")
+    public String eliminar(){
+        /*
+        @PathVariable("id") Integer id_prestamo
+        */
+        Integer id_prestamo = 1;
+        String resultado = prestamoService.eliminar(id_prestamo);
+        System.out.println("resultado = "+  resultado);
+        
+        return "/";
+    }
+    
 }

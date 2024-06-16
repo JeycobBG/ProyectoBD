@@ -35,4 +35,10 @@ public class PrestamoService implements IPrestamoService {
     public String actualizar(Integer id_prestamo, Date fecha_prestamo, Date fecha_devolucion_prevista, Integer id_libro, Integer id_socio) {
         return prestamoRepo.actualizar(id_prestamo, fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio);
     }
+    
+    @Override
+    public String eliminar(Integer id_prestamo){
+        return prestamoRepo.eliminar(id_prestamo);
+    }
+    
 }

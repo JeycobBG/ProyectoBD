@@ -93,4 +93,17 @@ public class LibroRepositorio implements ILibroRepositorio{
         return (String) query.getOutputParameterValue("error");
     }
     
+    @Override
+    @Transactional
+    public String eliminar(Integer id_libro){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_eliminar_libro");
+        query.registerStoredProcedureParameter("id_libro", Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("id_libro", id_libro);
+        
+        query.execute();
+        return (String) query.getOutputParameterValue("error");
+    }
+    
 }

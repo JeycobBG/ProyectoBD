@@ -72,6 +72,18 @@ public class MultaRepositorio implements IMultaRepositorio {
         query.execute();
         return (String) query.getOutputParameterValue("error");
     }
+    
+    @Override
+    @Transactional
+    public String eliminar(Integer id_multa){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_eliminar_multa");
+        query.registerStoredProcedureParameter("id_multa", Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("id_multa", id_multa);
+        
+        query.execute();
+        return (String) query.getOutputParameterValue("error");
+    }
 
 }
-

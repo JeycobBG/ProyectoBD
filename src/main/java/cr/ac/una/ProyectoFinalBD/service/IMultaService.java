@@ -26,4 +26,7 @@ public interface IMultaService {
             Double monto,
             Integer dias_atraso,                     
             Boolean cancelada);
+    
+    public String eliminar(Integer id_multa);
+    
 }

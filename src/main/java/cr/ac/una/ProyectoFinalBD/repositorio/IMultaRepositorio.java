@@ -16,5 +16,6 @@ public interface IMultaRepositorio {
     public String insertar(Double monto, Integer dias_atraso, Boolean cancelada, Integer id_prestamo);
     public List<Multa> leer();
     public String actualizar(Integer id_multa, Double monto, Integer dias_atraso, Boolean cancelada);
+    public String eliminar(Integer id_multa);
     
 }

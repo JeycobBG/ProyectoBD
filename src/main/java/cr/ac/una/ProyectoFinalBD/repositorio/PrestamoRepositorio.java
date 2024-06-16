@@ -75,4 +75,18 @@ public class PrestamoRepositorio implements IPrestamoRepositorio {
         query.execute();
         return (String) query.getOutputParameterValue("error");
     }
+    
+    @Override
+    @Transactional
+    public String eliminar(Integer id_prestamo){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_eliminar_prestamo");
+        query.registerStoredProcedureParameter("id_prestamo", Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("id_prestamo", id_prestamo);
+        
+        query.execute();
+        return (String) query.getOutputParameterValue("error");
+    }
+    
 }

@@ -36,4 +36,9 @@ public class LibroService implements ILibroService {
         return libroRepo.actualizar(id_libro, ISBN, titulo, sinopsis, fecha_publicacion,
                 cantidad, id_autor, id_editorial, id_generos);
     }
+    
+    @Override
+    public String eliminar(Integer id_libro){
+        return libroRepo.eliminar(id_libro);
+    }
 }

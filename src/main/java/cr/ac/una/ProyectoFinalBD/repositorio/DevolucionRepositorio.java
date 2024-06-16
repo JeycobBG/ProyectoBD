@@ -73,5 +73,18 @@ public class DevolucionRepositorio implements IDevolucionRepositorio{
         String[] resultado = {error, advertencia_multa};
         return resultado;
     }
+    
+    @Override
+    @Transactional
+    public String eliminar(Integer id_prestamo){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_eliminar_devolucion");
+        query.registerStoredProcedureParameter("id_prestamo", Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("id_prestamo", id_prestamo);
+        
+        query.execute();
+        return (String) query.getOutputParameterValue("error");
+    }
 
 }

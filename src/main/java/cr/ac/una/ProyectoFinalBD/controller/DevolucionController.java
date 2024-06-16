@@ -72,4 +72,16 @@ public class DevolucionController {
         
         return "/";
     }
+    
+    @GetMapping("/eliminar")
+    public String eliminar(){
+        /*
+        @PathVariable("id_prestamo") Integer id_prestamo
+        */
+        Integer id_prestamo = 1;
+        String resultado = devolucionService.eliminar(id_prestamo);
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
 }

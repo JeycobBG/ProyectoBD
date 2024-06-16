@@ -28,4 +28,6 @@ public interface IPrestamoService {
             Date fecha_devolucion_prevista,                     
             Integer id_libro,
             Integer id_socio);
+    
+    public String eliminar(Integer id_prestamo);
 }

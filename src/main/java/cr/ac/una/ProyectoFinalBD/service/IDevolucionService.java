@@ -17,5 +17,6 @@ public interface IDevolucionService {
     public String[] insertar(Date fecha_devolucion_efectuada, Integer id_prestamo);
     public List<Devolucion> leer();
     public String[] actualizar(Integer id_prestamo, Date fecha_devolucion_efectuada);
+    public String eliminar(Integer id_prestamo);
     
 }

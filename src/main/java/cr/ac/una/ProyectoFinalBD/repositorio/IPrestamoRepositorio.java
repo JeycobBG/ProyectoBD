@@ -17,5 +17,6 @@ public interface IPrestamoRepositorio {
     public String insertar(Date fecha_prestamo, Date fecha_devolucion_prevista, Integer id_libro, Integer id_socio);
     public List<Prestamo> leer();
     public String actualizar(Integer id_prestamo, Date fecha_prestamo, Date fecha_devolucion_prevista, Integer id_libro, Integer id_socio);
+    public String eliminar(Integer id_prestamo);
             
 }

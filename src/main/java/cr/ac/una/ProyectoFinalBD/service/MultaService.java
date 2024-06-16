@@ -33,5 +33,10 @@ public class MultaService implements IMultaService{
     public String actualizar (Integer id_multa, Double monto, Integer dias_atraso, Boolean cancelada) {
         return multaRepo.actualizar(id_multa, monto, dias_atraso, cancelada);
     }   
+    
+    @Override
+    public String eliminar(Integer id_multa){
+        return multaRepo.eliminar(id_multa);
+    }
 
 }

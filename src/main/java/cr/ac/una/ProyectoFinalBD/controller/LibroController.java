@@ -26,7 +26,6 @@ public class LibroController {
     @Autowired
     private LibroService libroService;
     
-    
     @GetMapping("/guardar")
     public String guardar(){
         
@@ -125,6 +124,19 @@ public class LibroController {
                 idGeneros);
         
         System.out.println("resultado = " + resultado);
+        return "/";
+    }
+    
+    @GetMapping("/eliminar")
+    public String eliminar(){
+        /*
+        @PathVariable("id_libro") Integer id_libro
+        */
+        
+        Integer id_libro = 2;
+        String resultado = libroService.eliminar(id_libro);
+        System.out.println("resultado = " + resultado);
+        
         return "/";
     }
     

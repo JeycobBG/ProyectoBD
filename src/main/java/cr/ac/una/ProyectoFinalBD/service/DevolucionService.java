@@ -37,4 +37,9 @@ public class DevolucionService implements IDevolucionService{
         return devolucionRepo.actualizar(id_prestamo, fecha_devolucion_efectuada);
     }
     
+    @Override
+    public String eliminar(Integer id_prestamo){
+        return devolucionRepo.eliminar(id_prestamo);
+    }
+    
 }
