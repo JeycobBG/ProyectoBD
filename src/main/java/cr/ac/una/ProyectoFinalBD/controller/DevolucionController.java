@@ -46,7 +46,7 @@ public class DevolucionController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        /*
+       
        String error = "";
        List<Devolucion> devoluciones = devolucionService.leer();
        
@@ -55,7 +55,7 @@ public class DevolucionController {
        }
        
        modelo.addAttribute("devoluciones", devoluciones);
-        */
+       
        return "Devolucion/MostrarDevolucion";
     }
     

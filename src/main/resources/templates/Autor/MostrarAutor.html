@@ -26,9 +26,9 @@
                 <th>Identificación</th>
                 <th>Código Postal</th>
                 <th>Dirección</th>
-                <th>Distrito</th>
                 <th>Teléfono</th>
                 <th>Email</th>
+                <th>Distrito</th>
                 <th>Bibliografía</th>
                 <th>Acciones</th>
             </tr>
@@ -40,8 +40,16 @@
                 <td th:text="${autor.persona.direccion.codigoPostal}"></td>
                 <td th:text="${autor.persona.direccion.descripcion}"></td>
                 <td th:text="${autor.persona.direccion.distrito.nombre}"></td>
-                <td th:text="${autor.persona.telefono.numero}"></td>
-                <td th:text="${autor.persona.correoElectronico.email}"></td>
+                <td>
+                    <ul th:if="${not #lists.isEmpty(autor.persona.telefono)}">
+                        <li th:each="tel : ${autor.persona.telefono}" th:text="${tel.numero}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul th:if="${not #lists.isEmpty(autor.persona.correoElectronico)}">
+                        <li th:each="email : ${autor.persona.correoElectronico}" th:text="${email.email}"></li>
+                    </ul>
+                </td>
                 <td th:text="${autor.bibliografia}"></td>               
                 <td><a class="editar-button" th:href="@{'/autor/actualizar?id=' + ${autor.id}}">Editar</a>
                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${autor.id} + '\')'">Eliminar</a></td>

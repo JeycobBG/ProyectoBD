@@ -21,13 +21,15 @@
             <tr>
                 <th>Fecha Devolución</th>
                 <th>Fecha Devolución Prevista</th>
-                <th>Id Préstamo</th>
+                <th>Libro Prestado</th>
+                <th>Socio</th>
                 <th>Acciones</th>   
             </tr>
             <tr th:each="devolucion : ${devoluciones}"> 
                 <td th:text="${devolucion.fechaDevolucionEfectuada}"></td>
                 <td th:text="${devolucion.prestamo.fechaDevolucionPrevista}"></td>
-                <td th:text="${devolucion.prestamo.id}"></td>
+                <td th:text="${devolucion.prestamo.libro.titulo}"></td>
+                <td th:text="${devolucion.prestamo.socio.persona.nombre}"></td>
                 <td><a class="editar-button" th:href="@{'/devolucion/actualizar?id=' + ${devolucion.id}}">Editar</a>
                 <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${devolucion.id} + '\')'">Eliminar</a></td>
             </tr>

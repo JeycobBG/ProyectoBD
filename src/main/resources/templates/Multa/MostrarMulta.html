@@ -22,14 +22,16 @@
                 <th>Monto</th>
                 <th>Días de Atraso</th>   
                 <th>Cancelada</th> 
-                <th>Id Préstamo</th> 
+                <th>Libro Prestado</th>
+                <th>Socio</th>
                 <th>Acciones</th>     
             </tr >
             <tr th:each="multa : ${multas}"> 
                 <td th:text="${multa.monto}"></td>
                 <td th:text="${multa.dias_atraso}"></td>
                 <td th:text="${multa.cancelada}"></td>
-                <td th:text="${multa.prestamo.id}"></td>
+                <td th:text="${multa.prestamo.libro.titulo}"></td>
+                <td th:text="${multa.prestamo.socio.persona.nombre}"></td>
                 <td><a class="editar-button" th:href="@{'/multa/actualizar?id=' + ${multa.id}}">Editar</a>
                 <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${multa.id} + '\')'">Eliminar</a></td>
             </tr>
