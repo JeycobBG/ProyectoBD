@@ -4,125 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-        }
-
-        .login-container {
-            background-color: #333;
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 360px;
-            text-align: center;
-            color: white;
-        }
-
-        .login-container h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: white;
-        }
-
-        .login-container label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: white;
-        }
-
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            color: #333;
-        }
-
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .footer a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: #0056b3;
-        }
-
-        .error {
-            color: red;
-            text-align: center;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Iniciar Sesión</h2>
-        <form id="loginForm">
-            <label for="username">Nombre de Usuario</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Ingresar</button>
-        </form>
-        <div class="footer">
-            <p><a href="#">¿Olvidaste tu contraseña?</a></p>
+    <div class="login-page">
+        <div class="book-image">
+            <img src="/images/Libro.jpg" alt="Biblioteca"> 
         </div>
-        <div id="errorMessage" class="error"></div>
+        <div class="login-container">
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <label for="username">Nombre de Usuario</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Ingresar</button>
+            </form>
+            <div id="errorMessage" class="error"></div>
+        </div>
     </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
-
-            if (username === 'admin' && password === '1234') {
-                alert('Inicio de sesión exitoso');
-                window.location.href = '/menu'; // Redirige a la página del menú principal
-            } else {
-                errorMessage.textContent = 'Nombre de usuario o contraseña incorrectos';
-            }
-        });
-    </script>
+    <script src="/js/loginValidation.js"></script>
 </body>
 </html>
-
-    

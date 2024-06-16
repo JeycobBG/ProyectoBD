@@ -4,6 +4,8 @@
     Author     : jamel
 */
 /* gallery.css */
+
+/* Ajustes para el título */
 .header-title {
     text-align: center;
     font-size: 45px;
@@ -15,19 +17,24 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 5px;  
-    margin: 10px 0;  
+    gap: 5px;
+    margin: 10px 0;
 }
 
 .image-gallery img {
-    width: calc(100% / 7 - 10px); 
-    height: auto; 
+    width: calc(100% / 7 - 10px);
+    height: auto;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out; 
+}
+
+.image-gallery img:hover {
+    transform: scale(1.1); 
 }
 
 @media (max-width: 800px) {
     .image-gallery img {
-        width: calc(50% - 10px); /* Dos imágenes por fila en pantallas más pequeñas */
+        width: calc(50% - 10px); 
     }
 }
 
@@ -36,4 +43,3 @@
         width: 100%; 
     }
 }
-

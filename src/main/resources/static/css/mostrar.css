@@ -1,0 +1,70 @@
+
+/* 
+    Created on : 16 jun 2024, 8:31:10
+    Author     : jamel
+*/
+
+/* Estilos generales de la tabla */
+.table-container {
+    margin: 20px auto;
+    width: 95%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina el espacio entre las celdas */
+}
+
+/* Cabecera de la tabla */
+th {
+    background-color: #333; 
+    color: white;
+    font-weight: bold;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+/* Celdas de la tabla */
+td {
+    padding: 10px 15px;
+    border-top: 1px solid #ddd; 
+    color: #333; 
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Botones dentro de la tabla */
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Botón Actualizar */
+.btn-update {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+}
+
+.btn-update:hover {
+    background-color: #45a049;
+}
+
+/* Botón Eliminar */
+.btn-delete {
+    background-color: #f44336; /* Rojo */
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #da190b;
+}

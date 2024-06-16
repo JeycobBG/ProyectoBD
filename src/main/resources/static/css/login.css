@@ -1,0 +1,96 @@
+
+/* 
+    Created on : 16 jun 2024, 8:52:48
+    Author     : jamel
+*/
+
+/* login.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #333; /* Fondo oscuro */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px; /* Ajusta el espacio entre la imagen y el formulario */
+    width: 80%; /* Controla el ancho total de la página de inicio de sesión */
+}
+
+.book-image img {
+    width: 400px; /* Reducimos el tamaño de la imagen */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-container {
+    background: white;
+    padding: 40px; /* Aumentamos el padding para hacer el formulario más grande */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    width: 400px; /* Aumentamos el ancho del formulario */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #003580;
+}
+
+/* Responsiveness: ajusta según sea necesario para dispositivos móviles */
+@media (max-width: 800px) {
+    .login-page {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .book-image img {
+        width: 80%; /* Ajusta para dispositivos móviles */
+    }
+
+    .login-container {
+        width: 90%; /* Ajusta para una mejor visualización en móviles */
+    }
+}
+
+.book-image img {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.book-image img:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el ratón */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Intensifica la sombra para un efecto más pronunciado */
+}
