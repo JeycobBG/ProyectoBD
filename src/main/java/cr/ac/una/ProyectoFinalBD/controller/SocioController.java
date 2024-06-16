@@ -131,6 +131,7 @@ public class SocioController {
     
     @GetMapping("/leer")
     public String read(Model modelo){
+        /*
         
         List<Socio> socios = socioService.read();
         
@@ -142,6 +143,7 @@ public class SocioController {
         }
         
         modelo.addAttribute("socios", socios);
+       */
         return "Socio/MostrarSocio";
     }
 }

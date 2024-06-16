@@ -46,6 +46,7 @@ public class DevolucionController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
+        /*
        String error = "";
        List<Devolucion> devoluciones = devolucionService.leer();
        
@@ -54,6 +55,7 @@ public class DevolucionController {
        }
        
        modelo.addAttribute("devoluciones", devoluciones);
+        */
        return "Devolucion/MostrarDevolucion";
     }
     
@@ -87,9 +89,4 @@ public class DevolucionController {
         return "Devolucion/CrearDevolucion";
     }
     
-    //Esto es una prueba para ver las tablas nada más Atte Jamel
-    @GetMapping("/mostrar")
-    public String verTabla(){
-        return "Devolucion/MostrarDevolucion";
-    }
 }
