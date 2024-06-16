@@ -32,20 +32,20 @@ public class AutorController {
             @RequestParam("email")String email,                       @RequestParam("bibliografia")String bibliografia
         */
         
-        String nombre = "autor3";
-        String primer_apellido = "apellido3";
-        String segundo_apellido = "apellido3";
-        String identificacion = "identificacion3";
-        String codigo_postal = "codigo3";
-        String descripcion_direccion = "direccion3";
+        String nombre = "eliminar";
+        String primer_apellido = "eliminar";
+        String segundo_apellido = "eliminar";
+        String identificacion = "eliminar";
+        String codigo_postal = "eliminar";
+        String descripcion_direccion = "eliminar";
         Integer id_distrito = 1;
         String numero_telefono = "44444444";
-        String email = "autor3@gmail.com";
-        String bibliografia = "bibliografia3";
+        String email = "eliminar@gmail.com";
+        String bibliografia = "eliminar";
         String error = "";
         
         
-        boolean resultado = autorService.add(nombre, primer_apellido, segundo_apellido,
+        String resultado = autorService.add(nombre, primer_apellido, segundo_apellido,
                 identificacion, codigo_postal, descripcion_direccion, id_distrito,
                 numero_telefono, email, bibliografia, error);
         
@@ -81,10 +81,25 @@ public class AutorController {
         String error = "";
         
         
-        boolean resultado = autorService.update(id_autor, nombre, primer_apellido, segundo_apellido,
+        String resultado = autorService.update(id_autor, nombre, primer_apellido, segundo_apellido,
                 identificacion, codigo_postal, descripcion_direccion, id_distrito,
                 numero_telefono, email, bibliografia, error);
         
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
+    
+    @GetMapping("/actualizar")
+    public String delete(){
+        /*
+        @PathVariable("id_autor") Integer id_autor
+        */
+        Integer id_autor = 1;
+        String error = "";
+        
+        String resultado = autorService.delete(id_autor, error);
         
         System.out.println("resultado = " + resultado);
         

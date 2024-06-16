@@ -34,15 +34,15 @@ public class EditorialController {
         @RequestParam("error")String error);
         */
         
-        String nombre = "editorial3";
+        String nombre = "eliminar";
         Date fecha_fundacion = Date.from(Instant.now());
-        String codigo_postal = "codigo3";
-        String descripcion_direccion = "descipcion3";
+        String codigo_postal = "eliminar";
+        String descripcion_direccion = "eliminar";
         Integer id_distrito = 1;
         String error = "";
         
         
-        boolean resultado = editorialService.add(nombre, fecha_fundacion, codigo_postal,
+        String resultado = editorialService.add(nombre, fecha_fundacion, codigo_postal,
                 descripcion_direccion, id_distrito, error);
         
         System.out.println("resultado = " + resultado);
@@ -72,8 +72,26 @@ public class EditorialController {
         String error = "";
         
         
-        boolean resultado = editorialService.update(id, nombre, fecha_fundacion, codigo_postal,
+        String resultado = editorialService.update(id, nombre, fecha_fundacion, codigo_postal,
                 descripcion_direccion, id_distrito, error);
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
+    
+    @GetMapping("/eliminar")
+    public String delete(){
+        
+        /*
+        @PathVariable("id") Integer id,
+        @RequestParam("error")String error);
+        */
+        
+        Integer id_editorial = 2;
+        String error = "";
+        
+        String resultado = editorialService.delete(id_editorial, error);
         
         System.out.println("resultado = " + resultado);
         

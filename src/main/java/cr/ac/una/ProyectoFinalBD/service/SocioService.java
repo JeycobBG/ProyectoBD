@@ -4,8 +4,10 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
-import cr.ac.una.ProyectoFinalBD.jpa.SocioRepository;
+import cr.ac.una.ProyectoFinalBD.domain.Socio;
+import cr.ac.una.ProyectoFinalBD.repositorio.ISocioRepositorio;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,45 +19,38 @@ import org.springframework.stereotype.Service;
 public class SocioService implements ISocioService{
 
     @Autowired
-    SocioRepository socioRepo;
+    ISocioRepositorio socioRepo;
     
     @Override
-    public boolean add(String nombre, String primer_apellido, String segundo_apellido,
+    public String add(String nombre, String primer_apellido, String segundo_apellido,
             String identificacion, String codigo_postal, String descripcion_direccion,
             Integer id_distrito, String numero_telefono, String email, Date fecha_registro,
             String error_message) {
-        try {
-            socioRepo.insertar(nombre, primer_apellido, segundo_apellido, identificacion,
+
+        return socioRepo.insertar(nombre, primer_apellido, segundo_apellido, identificacion,
                     codigo_postal, descripcion_direccion, id_distrito, numero_telefono, email,
                     fecha_registro, error_message);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
     }
     
     @Override
-    public boolean update(Integer id, String nombre, String primer_apellido, String segundo_apellido,
+    public String update(Integer id, String nombre, String primer_apellido, String segundo_apellido,
             String identificacion, String codigo_postal, String descripcion_direccion,
             Integer id_distrito, String numero_telefono, String email, Date fecha_registro,
             String error_message) {
-        try {
-            socioRepo.actualizar(id, nombre, primer_apellido, segundo_apellido, identificacion,
+        
+        return socioRepo.actualizar(id, nombre, primer_apellido, segundo_apellido, identificacion,
                     codigo_postal, descripcion_direccion, id_distrito, numero_telefono, email,
                     fecha_registro, error_message);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
     }
     
     @Override
-    public boolean delete(Integer id_socio, String error_message) {
-        try {
-            socioRepo.eliminar(id_socio, error_message);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
+    public String delete(Integer id_socio, String error_message) {
+ 
+        return socioRepo.eliminar(id_socio, error_message);
+    }
+
+    @Override
+    public List<Socio> read() {
+        return socioRepo.leer();
     }
 }

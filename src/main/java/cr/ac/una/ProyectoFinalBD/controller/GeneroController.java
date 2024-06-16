@@ -28,11 +28,11 @@ public class GeneroController {
             @RequestParam("descripcion")String descripcion
         */
         
-        String nombre = "nombre1";
-        String descripcion = "descripcion1";
+        String nombre = "eliminar";
+        String descripcion = "eliminar";
         String error = "";
 
-        boolean resultado = generoService.add(nombre, descripcion, error);
+        String resultado = generoService.add(nombre, descripcion, error);
         
         System.out.println("resultado = " + resultado);
         
@@ -52,7 +52,24 @@ public class GeneroController {
         String descripcion = "modificado";
         String error = "";
 
-        boolean resultado = generoService.update(id, nombre, descripcion, error);
+        String resultado = generoService.update(id, nombre, descripcion, error);
+        
+        System.out.println("resultado = " + resultado);
+        
+        return "/";
+    }
+    
+    @GetMapping("/eliminar")
+    public String delete(){
+        
+        /*
+        @PathVariable("id")Integer id,
+            @RequestParam("descripcion")String descripcion
+        */
+        Integer id = 1;
+        String error = "";
+
+        String resultado = generoService.delete(id, error);
         
         System.out.println("resultado = " + resultado);
         

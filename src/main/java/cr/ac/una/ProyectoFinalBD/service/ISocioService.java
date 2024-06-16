@@ -4,7 +4,9 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
+import cr.ac.una.ProyectoFinalBD.domain.Socio;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -12,7 +14,7 @@ import java.util.Date;
  */
 public interface ISocioService {
     
-    public boolean add(
+    public String add(
             String nombre,                     String primer_apellido,
             String segundo_apellido,String identificacion,
             String codigo_postal,       String descripcion_direccion,
@@ -20,7 +22,7 @@ public interface ISocioService {
             String email,                       Date fecha_registro,
             String error_message);
     
-    public boolean update(
+    public String update(
             Integer id,
             String nombre,                     String primer_apellido,
             String segundo_apellido,String identificacion,
@@ -29,8 +31,9 @@ public interface ISocioService {
             String email,                       Date fecha_registro,
             String error_message);
     
+    public List<Socio> read();
     
-    public boolean delete(
+    public String delete(
             Integer id_socio,
             String error_message);
 }

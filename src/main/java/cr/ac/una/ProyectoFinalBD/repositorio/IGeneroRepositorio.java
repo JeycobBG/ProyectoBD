@@ -2,24 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package cr.ac.una.ProyectoFinalBD.service;
+package cr.ac.una.ProyectoFinalBD.repositorio;
 
 /**
  *
  * @author JEYCOB
  */
-public interface IGeneroService {
+public interface IGeneroRepositorio {
     
-    public String add(
+    public String insertar(
             String nombre,                     
             String descripcion,
             String error);
     
-    public String update(
-            Integer id,
+    public String actualizar(
+            Integer id_genero,
             String nombre,                     
             String descripcion,
             String error);
     
-    public String delete(Integer id_genero, String error);
+    public String eliminar(Integer id_genero, String error);
 }
