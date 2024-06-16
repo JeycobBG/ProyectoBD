@@ -7,40 +7,73 @@
     <link rel="stylesheet" href="/css/crear.css">
 </head>
 <body>
-    <h2>Registrar un nuevo Autor</h2>
+    <div class="wrapper">
+        <div class="container">
+            <h2>Registrar un nuevo Autor</h2>
 
-    <div class="container">
-        <div>
             <form id="registrarAutorForm" action="/autor/guardar" method="post">
-                
-                <label for="persona">Persona:</label><br>
-                <select id="persona" name="persona" required>
-                    <option value="">Selecciona una persona</option>
-                    <option th:each="persona : ${personas}" 
-                            th:value="${persona.id}" 
-                            th:text="${persona.nombre}">
-                    </option>
-                </select><br><br>
-
-                <label for="bibliografia">Bibliografía:</label><br>
-                <textarea id="bibliografia" name="bibliografia" rows="4" cols="50" required></textarea><br><br>
-                
+                <div class="form-group">
+                    <label for="nombreCompleto">Nombre Completo:</label>
+                    <input type="text" id="nombreCompleto" name="nombreCompleto" required>
+                </div>
+                <div class="form-group">
+                    <label for="primerApellido">Primer Apellido:</label>
+                    <input type="text" id="primerApellido" name="primerApellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="segundoApellido">Segundo Apellido:</label>
+                    <input type="text" id="segundoApellido" name="segundoApellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="identificacion">Identificación:</label>
+                    <input type="text" id="identificacion" name="identificacion" required>
+                </div>
+                <div class="form-group">
+                    <label for="codigoPostal">Código Postal:</label>
+                    <input type="text" id="codigoPostal" name="codigoPostal" required>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" required>
+                </div>
+                <div class="form-group">
+                    <label for="distrito">Distrito:</label>
+                    <input type="text" id="distrito" name="distrito" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="bibliografia">Bibliografía:</label>
+                    <textarea id="bibliografia" name="bibliografia" rows="4" cols="50" required></textarea>
+                </div>
                 <input type="submit" value="Guardar">
             </form>
+
+            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
         </div>
     </div>
-    
-    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
-    
+
     <script>
         // Validación del formulario
         document.getElementById("registrarAutorForm").addEventListener("submit", function(event) {
-            var persona = document.getElementById("persona").value;
-            var bibliografia = document.getElementById("bibliografia").value;
-            
-            // Validaciones
-            if (persona.trim() === "" || bibliografia.trim() === "") {
+            var requiredFields = ["nombreCompleto", "primerApellido", "segundoApellido", "identificacion", "codigoPostal", "direccion", "distrito", "telefono", "email", "bibliografia"];
+            var valid = true;
+
+            requiredFields.forEach(function(field) {
+                var value = document.getElementById(field).value.trim();
+                if (value === "") {
+                    valid = false;
+                }
+            });
+
+            if (!valid) {
                 alert("Por favor complete todos los campos.");
                 event.preventDefault();
             }

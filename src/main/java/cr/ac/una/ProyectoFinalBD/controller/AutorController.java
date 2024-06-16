@@ -34,7 +34,7 @@ public class AutorController {
             @RequestParam("id_distrito")Integer id_distrito,          @RequestParam("numero_telefono") String numero_telefono,
             @RequestParam("email")String email,                       @RequestParam("bibliografia")String bibliografia
         */
-        
+        /*
         String nombre = "eliminar";
         String primer_apellido = "eliminar";
         String segundo_apellido = "eliminar";
@@ -53,7 +53,7 @@ public class AutorController {
                 numero_telefono, email, bibliografia, error);
         
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
         
         return "Autor/CrearAutor";
     }

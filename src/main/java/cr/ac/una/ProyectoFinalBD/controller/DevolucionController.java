@@ -34,14 +34,14 @@ public class DevolucionController {
             @RequestParam("error")String error,
             @RequestParam("advertencia_multa")String advertencia_multa
         */
-        
+       /* 
         Date fecha_devolucion_efectuada = Date.from(Instant.now());
         Integer id_prestamo = 4;
         String[] resultado = devolucionService.insertar(fecha_devolucion_efectuada, id_prestamo);
         
         System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
-        
-        return "/";
+        */
+        return "Devolucion/CrearDevolucion";
     }
     
     @GetMapping("/leer")
