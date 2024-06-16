@@ -15,7 +15,7 @@
         <div>
             <a href="/autor/guardar" class="button">Agregar un nuevo autor</a>
         </div>
->
+
     </div>
     <div>
         <table class="table table-bordered">
@@ -32,9 +32,19 @@
                 <th>Bibliografía</th>
                 <th>Acciones</th>
             </tr>
-            <tr th:each="autor : ${autores}">              
-                <td><a class="editar-button" th:href="@{'/autor/actualizar?id=' + ${autor.id}}">Editar</a></td>
-                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${autor.id} + '\')'">Eliminar</a></td>
+            <tr th:each="autor : ${autores}">    
+                <td th:text="${autor.persona.nombre}"></td>
+                <td th:text="${autor.persona.primerApellido}"></td>
+                <td th:text="${autor.persona.segundoApellido}"></td>
+                <td th:text="${autor.persona.identificacion}"></td>
+                <td th:text="${autor.persona.direccion.codigoPostal}"></td>
+                <td th:text="${autor.persona.direccion.descripcion}"></td>
+                <td th:text="${autor.persona.direccion.distrito.nombre}"></td>
+                <td th:text="${autor.persona.telefono.numero}"></td>
+                <td th:text="${autor.persona.correoElectronico.email}"></td>
+                <td th:text="${autor.bibliografia}"></td>               
+                <td><a class="editar-button" th:href="@{'/autor/actualizar?id=' + ${autor.id}}">Editar</a>
+               <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${autor.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
 

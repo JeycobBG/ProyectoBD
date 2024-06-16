@@ -26,11 +26,15 @@
                 <th>Acciones</th>     
             </tr >
             <tr th:each="multa : ${multas}"> 
-                <td><a class="editar-button" th:href="@{'/multa/actualizar?id=' + ${multa.id}}">Editar</a></td>
-                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${multa.id} + '\')'">Eliminar</a></td>
+                <td th:text="${multa.monto}"></td>
+                <td th:text="${multa.dias_atraso}"></td>
+                <td th:text="${multa.cancelada}"></td>
+                <td th:text="${multa.prestamo.id}"></td>
+                <td><a class="editar-button" th:href="@{'/multa/actualizar?id=' + ${multa.id}}">Editar</a>
+                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${multa.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
-
+        
         <script>
             function confirmarEliminacion(enlace, idMulta) {
                 if (confirm("¿Está seguro de que desea eliminar esta multa?")) {

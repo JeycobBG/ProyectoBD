@@ -26,11 +26,20 @@
                 <th>Cantidad</th>
                 <th>Id Autor</th>
                 <th>Id Editorial</th>
-                 <th>Id Género</th>  
+                <th>Id Género</th>  
+                <th>Acciones</th>
             </tr >
             <tr th:each="libro : ${libros}"> 
+                <td th:text="${libro.isbn}"></td>
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.sinopsis}"></td>
+                <td th:text="${libro.fechaPublicacion}"></td>
+                <td th:text="${libro.cantidad}"></td>
+                <td th:text="${libro.autor.id}"></td>
+                <td th:text="${libro.editorial.id}"></td>
+                <td th:text="${libro.generos.id}"></td>
                 <td><a class="editar-button" th:href="@{'/libro/actualizar?id=' + ${libro.id}}">Editar</a></td>
-                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${libro.id} + '\')'">Eliminar</a></td>
+                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${libro.id} + '\')'">Eliminar</a>
             </tr>
         </table>
 

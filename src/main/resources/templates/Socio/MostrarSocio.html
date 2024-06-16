@@ -32,7 +32,17 @@
                 <th>Bibliografía</th>
                 <th>Acciones</th>
             </tr>
-            <tr th:each="socio : ${socios}">              
+            <tr th:each="socio : ${socios}">  
+                <td th:text="${socio.persona.nombre}"></td>
+                <td th:text="${socio.persona.primerApellido}"></td>
+                <td th:text="${socio.persona.segundoApellido}"></td>
+                <td th:text="${socio.persona.identificacion}"></td>
+                <td th:text="${socio.persona.direccion.codigoPostal}"></td>
+                <td th:text="${socio.persona.direccion.descripcion}"></td>
+                <td th:text="${socio.persona.direccion.distrito.nombre}"></td>
+                <td th:text="${socio.persona.telefono.numero}"></td>
+                <td th:text="${socio.persona.correoElectronico.email}"></td>
+                <td th:text="${socio.bibliografia}"></td>    
                 <td><a class="editar-button" th:href="@{'/socio/actualizar?id=' + ${socio.id}}">Editar</a></td>
                 <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${socio.id} + '\')'">Eliminar</a></td>
             </tr>

@@ -24,8 +24,10 @@
                 <th>Acciones</th>     
             </tr >
             <tr th:each="genero : ${generos}"> 
-                <td><a class="editar-button" th:href="@{'/genero/actualizar?id=' + ${genero.id}}">Editar</a></td>
-                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${genero.id} + '\')'">Eliminar</a></td>
+                <td th:text="${genero.nombre}"></td>
+                <td th:text="${genero.descripcion}"></td>
+                <td><a class="editar-button" th:href="@{'/genero/actualizar?id=' + ${genero.id}}">Editar</a>
+                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${genero.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
 
