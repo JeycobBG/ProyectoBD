@@ -99,9 +99,12 @@ public class SocioRepositorio implements ISocioRepositorio{
     
     @Override
     @Transactional
-    public List<Socio> leer(){
+    public List<Socio> leer(String error){
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_leer_socio", Socio.class);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         query.execute();
+        
+        error = (String) query.getOutputParameterValue("error");
         return query.getResultList();
     }
     

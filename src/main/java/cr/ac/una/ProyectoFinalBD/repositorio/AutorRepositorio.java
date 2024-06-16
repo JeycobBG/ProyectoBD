@@ -108,6 +108,7 @@ public class AutorRepositorio implements IAutorRepositorio{
     }
 
     @Override
+    @Transactional
     public List<Autor> leer(String error) {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_leer_autor", Autor.class);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);

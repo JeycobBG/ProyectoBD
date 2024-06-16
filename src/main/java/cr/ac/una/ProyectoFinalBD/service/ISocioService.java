@@ -31,7 +31,7 @@ public interface ISocioService {
             String email,                       Date fecha_registro,
             String error_message);
     
-    public List<Socio> read();
+    public List<Socio> read(String error);
     
     public String delete(
             Integer id_socio,

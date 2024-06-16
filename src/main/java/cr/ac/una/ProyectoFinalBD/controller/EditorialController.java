@@ -130,7 +130,7 @@ public class EditorialController {
         List<Editorial> editoriales = editorialService.editorialConMasLibros(top_n, error);
      
         for(int i = 0; i < editoriales.size(); i++){
-            System.out.print("editorial: " + editoriales.get(i).getNombre());
+            System.out.print("editorial con mas libros: " + editoriales.get(i).getNombre());
         }
             
         
