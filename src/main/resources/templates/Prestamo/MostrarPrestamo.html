@@ -26,8 +26,12 @@
                 <th>Acciones</th>     
             </tr >
             <tr th:each="prestamo : ${prestamos}"> 
-                <td><a class="editar-button" th:href="@{'/prestamo/actualizar?id=' + ${prestamo.id}}">Editar</a></td>
-                <td><a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${prestamo.id} + '\')'">Eliminar</a></td>
+                <td th:text="${prestamo.fechaPrestamo}"></td>
+                <td th:text="${prestamo.fechaDevolucionPrevista}"></td>
+                <td th:text="${prestamo.libro.id}"></td>
+                <td th:text="${prestamo.socio.id}"></td>
+                <td><a class="editar-button" th:href="@{'/prestamo/actualizar?id=' + ${prestamo.id}}">Editar</a>
+                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${prestamo.id} + '\')'">Eliminar</a></td>
             </tr>
         </table>
 
