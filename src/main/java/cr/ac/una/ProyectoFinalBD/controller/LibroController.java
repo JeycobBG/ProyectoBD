@@ -38,7 +38,7 @@ public class LibroController {
             @RequestParam("id_autor") Integer idAutor,
             @RequestParam("id_editorial") Integer idEditorial,
             @RequestParam("id_generos") Integer idGeneros
-        */
+        *//*
             String isbn = "isbn3";
             String titulo = "titulo3";
             String sinopsis = "sinopsis3";
@@ -58,7 +58,7 @@ public class LibroController {
                 idEditorial,
                 idGeneros);
         
-        System.out.println("resultado = " + resultado);
+        System.out.println("resultado = " + resultado);*/
         return "Libro/CrearLibro";
     }
     

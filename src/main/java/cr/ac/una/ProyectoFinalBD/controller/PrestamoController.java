@@ -33,7 +33,7 @@ public class PrestamoController {
             @RequestParam("id_libro")Integer id_libro,
             @RequestParam("id_socio")Integer id_socio, 
             @RequestParam("error")String error);
-        */
+        *//*
         Date fecha_prestamo = Date.from(Instant.now());
         Date fecha_devolucion_prevista = Date.from(Instant.now());
         Integer id_libro = 3;
@@ -41,7 +41,7 @@ public class PrestamoController {
         
         String resultado = prestamoService.guardar(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio);
        
-        System.out.println("resultado = "+  resultado);
+        System.out.println("resultado = "+  resultado);*/
         
         return "Prestamo/CrearPrestamo";
     }

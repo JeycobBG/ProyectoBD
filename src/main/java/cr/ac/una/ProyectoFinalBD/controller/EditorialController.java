@@ -36,7 +36,7 @@ public class EditorialController {
         @RequestParam("id_distrito")Integer id_distrito, 
         @RequestParam("error")String error);
         */
-        
+        /*
         String nombre = "eliminar";
         Date fecha_fundacion = Date.from(Instant.now());
         String codigo_postal = "eliminar";
@@ -49,7 +49,7 @@ public class EditorialController {
                 descripcion_direccion, id_distrito, error);
         
         System.out.println("resultado = " + resultado);
-        
+        */
         return "Editorial/CrearEditorial";
     }
     
