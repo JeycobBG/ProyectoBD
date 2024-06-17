@@ -23,7 +23,7 @@ import jakarta.persistence.Table;
 public class Telefono {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_socio")
+    @Column(name = "id_telefono")
     private int id;
     
     private String numero;
