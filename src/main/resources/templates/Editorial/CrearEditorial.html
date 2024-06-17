@@ -2,47 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrar Editorial</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/crear.css">
 </head>
 <body>
-    <h2>Registrar una nueva editorial</h2>
-
-    <div class="container">
-        <div>
+    <div class="wrapper">
+        <div class="container">
             <form id="registrarEditorialForm" action="/editorial/guardar" method="post">
+                <h2 style="text-align: center;">Registrar una nueva editorial</h2>
 
                 <!-- Campo para el nombre de la editorial -->
-                <label for="nombre">Nombre de la editorial:</label><br>
-                <input type="text" id="nombre" name="nombre" required><br><br>
+                <div class="form-group">
+                    <label for="nombre">Nombre de la editorial:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
                 
                 <!-- Campo para la fecha de fundación -->
-                <label for="fechaFundacion">Fecha de fundación:</label><br>
-                <input type="date" id="fechaFundacion" name="fechaFundacion" required><br><br>
+                <div class="form-group">
+                    <label for="fechaFundacion">Fecha de fundación:</label>
+                    <input type="date" id="fechaFundacion" name="fechaFundacion" required>
+                </div>
+
+                <!-- Campo para el código postal -->
+                <div class="form-group">
+                    <label for="codigoPostal">Código Postal:</label>
+                    <input type="text" id="codigoPostal" name="codigoPostal" required>
+                </div>
                 
-                <!-- Combo box para seleccionar la dirección asociada -->
-                <label for="direccion">Dirección asociada:</label><br>
-                <select id="direccion" name="direccion" required>
-                    <option value="">Selecciona una dirección</option>
-                    <!-- Cargar dinámicamente las opciones de dirección desde el backend -->
-                    <option th:each="direccion : ${direcciones}" 
-                            th:value="${direccion.id}" 
-                            th:text="${direccion.detalle}">
-                    </option>
-                </select><br><br>
+                <!-- Campo para la descripción de la dirección -->
+                <div class="form-group">
+                    <label for="descripcionDireccion">Descripción de la dirección:</label>
+                    <input type="text" id="descripcionDireccion" name="descripcionDireccion" required>
+                </div>
+                
+                <!-- Combo box para seleccionar el distrito -->
+                <div class="form-group">
+                    <label for="distrito">Distrito:</label>
+                    <select id="distrito" name="distrito" required>
+                        <option value="">Selecciona un distrito</option>
+                        <!-- Aquí puedes cargar dinámicamente las opciones de distrito desde el backend -->
+                    </select>
+                </div>
                 
                 <input type="submit" value="Guardar">
             </form>
+
+            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
         </div>
     </div>
-    
-    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
     
     <script>
         // Validación del formulario
         document.getElementById("registrarEditorialForm").addEventListener("submit", function(event) {
             var nombre = document.getElementById("nombre").value;
             var fechaFundacion = document.getElementById("fechaFundacion").value;
-            var direccion = document.getElementById("direccion").value;
+            var codigoPostal = document.getElementById("codigoPostal").value;
+            var descripcionDireccion = document.getElementById("descripcionDireccion").value;
+            var distrito = document.getElementById("distrito").value;
             
             // Validar que el nombre de la editorial no esté vacío
             if (nombre.trim() === "") {
@@ -69,9 +87,21 @@
                 }
             }
             
-            // Validar que se haya seleccionado una dirección
-            if (direccion === "") {
-                alert("Por favor seleccione una dirección.");
+            // Validar que el código postal no esté vacío
+            if (codigoPostal.trim() === "") {
+                alert("Por favor ingrese el código postal.");
+                event.preventDefault();
+            }
+
+            // Validar que la descripción de la dirección no esté vacía
+            if (descripcionDireccion.trim() === "") {
+                alert("Por favor ingrese la descripción de la dirección.");
+                event.preventDefault();
+            }
+
+            // Validar que se haya seleccionado un distrito
+            if (distrito === "") {
+                alert("Por favor seleccione un distrito.");
                 event.preventDefault();
             }
         });

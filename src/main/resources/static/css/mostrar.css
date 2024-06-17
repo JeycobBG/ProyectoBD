@@ -26,12 +26,21 @@ body {
     background-color: #fff;
     margin-top: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    align-items: center;
 }
 
 .botonYBuscador form {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-grow: 1; /* Asegura que el formulario use el espacio máximo disponible */
+}
+
+.botonYBuscador .select-filtro {
+    font-size: 16px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    width: 200px; /* Ajusta el tamaño del ComboBox */
 }
 
 .botonYBuscador input[type="text"] {
@@ -120,5 +129,6 @@ tr:nth-child(even) {
 }
 
 .alert-error {
-    background-color: #f44336;
+    background-color: #f44336;
 }
+

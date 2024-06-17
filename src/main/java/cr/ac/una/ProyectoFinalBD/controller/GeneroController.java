@@ -30,7 +30,7 @@ public class GeneroController {
         @RequestParam("nombre")String nombre, 
             @RequestParam("descripcion")String descripcion
         */
-        
+        /*
         String nombre = "eliminar";
         String descripcion = "eliminar";
         String error = "";
@@ -38,7 +38,7 @@ public class GeneroController {
         String resultado = generoService.add(nombre, descripcion, error);
         
         System.out.println("resultado = " + resultado);
-        
+        */
         return "Genero/CrearGenero";
     }
     
