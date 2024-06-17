@@ -20,23 +20,19 @@
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>Nombre Completo</th>
-                <th>Primer Apellido</th>
-                <th>Segundo Apellido</th>
                 <th>Identificación</th>
+                <th>Nombre Completo</th>
                 <th>Código Postal</th>
                 <th>Dirección</th>
+                <th>Distrito</th>
                 <th>Teléfono</th>
                 <th>Email</th>
-                <th>Distrito</th>
                 <th>Bibliografía</th>
                 <th>Acciones</th>
             </tr>
             <tr th:each="autor : ${autores}">    
-                <td th:text="${autor.persona.nombre}"></td>
-                <td th:text="${autor.persona.primerApellido}"></td>
-                <td th:text="${autor.persona.segundoApellido}"></td>
                 <td th:text="${autor.persona.identificacion}"></td>
+                <td th:text="${autor.persona.nombre + ' ' + autor.persona.primerApellido + ' ' + autor.persona.segundoApellido}"></td>
                 <td th:text="${autor.persona.direccion.codigoPostal}"></td>
                 <td th:text="${autor.persona.direccion.descripcion}"></td>
                 <td th:text="${autor.persona.direccion.distrito.nombre}"></td>

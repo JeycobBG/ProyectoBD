@@ -35,7 +35,7 @@
                 <td th:text="${libro.sinopsis}"></td>
                 <td th:text="${libro.fechaPublicacion}"></td>
                 <td th:text="${libro.cantidad}"></td>
-                <td th:text="${libro.autor.persona.nombre}"></td>
+                <td th:text="${libro.autor.persona.nombre + ' ' + libro.autor.persona.primerApellido}"></td>
                 <td th:text="${libro.editorial.nombre}"></td>
                 <td>
                     <ul th:if="${not #lists.isEmpty(libro.generos)}">
