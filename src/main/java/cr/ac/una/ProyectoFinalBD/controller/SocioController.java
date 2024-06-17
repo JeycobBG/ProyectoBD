@@ -53,7 +53,6 @@ public class SocioController {
         System.out.println("resultado = " + resultado);
         return "redirect:/socio/leer";
     }
-   
     
     @GetMapping("/guardar")
     public String add(){
