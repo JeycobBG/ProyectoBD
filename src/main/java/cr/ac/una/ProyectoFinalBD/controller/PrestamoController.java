@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -25,23 +27,22 @@ public class PrestamoController {
     @Autowired
     PrestamoService prestamoService;
     
-    @GetMapping("/guardar")
-    public String guardar(){
-        /*
-            @RequestParam("fecha_prestamo")Date fecha_prestamo,
+    @PostMapping("/guardar")
+    public String guardar(@RequestParam("fecha_prestamo")Date fecha_prestamo,
             @RequestParam("fecha_devolucion_prevista")Date fecha_devolucion_prevista,
             @RequestParam("id_libro")Integer id_libro,
             @RequestParam("id_socio")Integer id_socio, 
-            @RequestParam("error")String error);
-        *//*
-        Date fecha_prestamo = Date.from(Instant.now());
-        Date fecha_devolucion_prevista = Date.from(Instant.now());
-        Integer id_libro = 3;
-        Integer id_socio = 1;
+            @RequestParam("error")String error){
+        
         
         String resultado = prestamoService.guardar(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio);
        
-        System.out.println("resultado = "+  resultado);*/
+        System.out.println("resultado = "+  resultado);
+        return "redirect:/prestamo/leer";
+    }
+    
+    @GetMapping("/guardar")
+    public String agregar(){
         
         return "Prestamo/CrearPrestamo";
     }

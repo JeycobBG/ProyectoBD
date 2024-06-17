@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -25,29 +27,14 @@ public class SocioController {
     @Autowired
     SocioService socioService;
     
-    @GetMapping("/guardar")
-    public String add(){
-        
-        /*
-        @RequestParam("nombre")String nombre,                     @RequestParam("primer_apellido")String primer_apellido,
+    @PostMapping("/guardar")
+    public String add(@RequestParam("nombre")String nombre,                     @RequestParam("primer_apellido")String primer_apellido,
             @RequestParam("segundo_apellido")String segundo_apellido, @RequestParam("identificacion") String identificacion,
             @RequestParam("codigo_postal")String codigo_postal,       @RequestParam("descripcion_direccion") String descripcion_direccion,
             @RequestParam("id_distrito")Integer id_distrito,          @RequestParam("numero_telefono") String numero_telefono,
-            @RequestParam("email")String email,                       @RequestParam("fecha_registro")Date fecha_registro
-        */
-        /*
-        String nombre = "eliminar";
-        String primer_apellido = "eliminar";
-        String segundo_apellido = "eliminar";
-        String identificacion = "eliminar";
-        String codigo_postal = "eliminar";
-        String descripcion_direccion = "eliminar";
-        Integer id_distrito = 1;
-        String numero_telefono = "33333333";
-        String email = "eliminar@gmail.com";
-        Date fecha_registro = Date.from(Instant.now());
-        String error_message = "";
+            @RequestParam("email")String email,                       @RequestParam("fecha_registro")Date fecha_registro){
         
+        String error_message = "";
         
         String resultado = socioService.add(
         nombre,
@@ -64,7 +51,12 @@ public class SocioController {
         );
         
         System.out.println("resultado = " + resultado);
-        */
+        return "redirect:/socio/leer";
+    }
+    
+    @GetMapping("/guardar")
+    public String add(){
+        
         return "Socio/CrearSocio";
     }
     

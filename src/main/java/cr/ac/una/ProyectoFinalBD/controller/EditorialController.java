@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -25,31 +27,24 @@ public class EditorialController {
     @Autowired
     EditorialService editorialService;
     
-    @GetMapping("/guardar")
-    public String add(){
-        
-        /*
-        @RequestParam("nombre")String nombre,                     
+    @PostMapping("/guardar")
+    public String add(@RequestParam("nombre")String nombre,                     
         @RequestParam("fecha_fundacion")Date fecha_fundacion,
         @RequestParam("codigo_postal")String codigo_postal, 
         @RequestParam("descripcion_direccion") String descripcion_direccion,
-        @RequestParam("id_distrito")Integer id_distrito, 
-        @RequestParam("error")String error);
-        */
-        /*
-        String nombre = "eliminar";
-        Date fecha_fundacion = Date.from(Instant.now());
-        String codigo_postal = "eliminar";
-        String descripcion_direccion = "eliminar";
-        Integer id_distrito = 1;
+        @RequestParam("id_distrito")Integer id_distrito){
+        
         String error = "";
-        
-        
         String resultado = editorialService.add(nombre, fecha_fundacion, codigo_postal,
                 descripcion_direccion, id_distrito, error);
         
         System.out.println("resultado = " + resultado);
-        */
+        return "redirect:/editorial/leer";
+    }
+    
+    @GetMapping()
+    public String agregar(){
+        
         return "Editorial/CrearEditorial";
     }
     

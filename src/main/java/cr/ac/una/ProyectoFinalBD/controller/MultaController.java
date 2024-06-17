@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -23,25 +25,21 @@ public class MultaController {
     @Autowired
     MultaService multaService;
     
-    @GetMapping("/guardar")
-    public String guardar(){
-        
-        /*
-            @RequestParam("monto")Double monto,
+    @PostMapping("/guardar")
+    public String guardar(@RequestParam("monto")Double monto,
             @RequestParam("dias_atraso")Integer dias_atraso,
             @RequestParam("cancelada")Boolean cancelada,
-            @RequestParam("id_prestamo")Integer id_prestamo, 
-            @RequestParam("error")String error
-        */
-        /*
-        Double monto = 8000.0;
-        Integer dias_atraso = 2;
-        Boolean cancelada = true;
-        Integer id_prestamo = 4;
+            @RequestParam("id_prestamo")Integer id_prestamo){
         
         String resultado = multaService.guardar(monto, dias_atraso, cancelada, id_prestamo);
         
-        System.out.println("resultado = " + resultado);*/
+        System.out.println("resultado = " + resultado);
+        return "redirect:/multa/leer";
+    }
+    
+    @GetMapping("/guardar")
+    public String guardar(){
+        
         return "Multa/CrearMulta";
     }
     

@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -25,22 +27,21 @@ public class DevolucionController {
     @Autowired
     DevolucionService devolucionService;
     
-    @GetMapping("/guardar")
-    public String guardar(){
-        
-        /*
-            @RequestParam("fecha_devolucion_efectuada")Data fecha_devolucion_efectuada,
+    @PostMapping("/guardar")
+    public String guardar(@RequestParam("fecha_devolucion_efectuada")Date fecha_devolucion_efectuada,
             @RequestParam("id_prestamo")Integer id_prestamo,
             @RequestParam("error")String error,
-            @RequestParam("advertencia_multa")String advertencia_multa
-        */
-       /* 
-        Date fecha_devolucion_efectuada = Date.from(Instant.now());
-        Integer id_prestamo = 4;
+            @RequestParam("advertencia_multa")String advertencia_multa){
+        
         String[] resultado = devolucionService.insertar(fecha_devolucion_efectuada, id_prestamo);
         
         System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
-        */
+        return "redirect:/devolucion/leer";
+    }
+    
+    @GetMapping("/guardar")
+    public String agregar(){
+        
         return "Devolucion/CrearDevolucion";
     }
     

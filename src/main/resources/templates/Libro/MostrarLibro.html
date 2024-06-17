@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/mostrar.css">
+        
     </head>
     <body>
         <div class="encabezado">
@@ -15,8 +16,9 @@
             <div>
                 <a href="/libro/guardar" class="button">Agregar un nuevo Libro</a>
             </div>
-            <form th:action="@{/filtrar}" th:method="get">
-                <select name="tipoFiltro" class="select-filtro">
+            <form th:action="@{/libro/filtrar}" th:method="get">
+                <label for="tipoFiltro" style="font-size: small;">Ingrese el filtro a escoger:</label>
+                <select id="tipoFiltro" name="tipoFiltro" class="select-filtro">
                     <option value="editorial">Editorial</option>
                     <option value="genero">Género</option>
                     <option value="ISBN">ISBN</option>
@@ -25,13 +27,13 @@
                     <option value="autor">Autor</option>
                     <option value="anioPublicacion">Año de Publicación</option>
                 </select>
-                <input type="text" name="valorFiltro" placeholder="Ingrese el filtro"/>
+                <input id="filtroInput" type="text" name="valorFiltro" placeholder="Ingrese el filtro"/>
                 <button type="submit">Enviar</button>
             </form>
         </div>
         
         <script src="/js/typeFilter.js"></script>
-
+        
         <div>
             <table class="table table-bordered">
                 <tr>
