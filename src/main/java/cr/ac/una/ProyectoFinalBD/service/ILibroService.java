@@ -26,7 +26,7 @@ public interface ILibroService {
     
     public List<Libro> librosPorISBN(String ISBN, String error);
     
-    public List<Libro> librosPorMasPrestamos(String error);
+    public List<Libro> librosPorMasPrestamos(Integer cantidad, String error);
     
     public List<Libro> librosPorTitulo(String titulo, String error);
     

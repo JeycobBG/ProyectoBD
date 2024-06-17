@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -23,22 +25,20 @@ public class GeneroController {
     @Autowired
     GeneroService generoService;
     
-    @GetMapping("/guardar")
-    public String add(){
+    @PostMapping("/guardar")
+    public String add(@RequestParam("nombre")String nombre, 
+            @RequestParam("descripcion")String descripcion){
         
-        /*
-        @RequestParam("nombre")String nombre, 
-            @RequestParam("descripcion")String descripcion
-        */
-        /*
-        String nombre = "eliminar";
-        String descripcion = "eliminar";
         String error = "";
-
         String resultado = generoService.add(nombre, descripcion, error);
         
         System.out.println("resultado = " + resultado);
-        */
+        return "redirect:/genero/leer";
+    }
+    
+    @GetMapping("/guardar")
+    public String agregar(){
+        
         return "Genero/CrearGenero";
     }
     
@@ -96,7 +96,6 @@ public class GeneroController {
         }
         
         modelo.addAttribute("generos", generos);  
-        
         return "Genero/MostrarGenero";
     }
     

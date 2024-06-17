@@ -58,8 +58,8 @@ public class LibroService implements ILibroService {
     }
 
     @Override
-    public List<Libro> librosPorMasPrestamos(String error) {
-        return libroRepo.librosPorMasPrestamos(error);
+    public List<Libro> librosPorMasPrestamos(Integer cantidad, String error) {
+        return libroRepo.librosPorMasPrestamos(cantidad, error);
     }
 
     @Override

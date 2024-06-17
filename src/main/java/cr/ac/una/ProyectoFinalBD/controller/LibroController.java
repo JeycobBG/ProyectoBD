@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,27 +30,16 @@ public class LibroController {
     @Autowired
     private LibroService libroService;
 
-    @GetMapping("/guardar")
-    public String guardar() {
-
-        /*
-        @RequestParam("ISBN") String isbn,
+    @PostMapping("/guardar")
+    public String guardar(@RequestParam("ISBN") String isbn,
             @RequestParam("titulo") String titulo,
             @RequestParam("sinopsis") String sinopsis,
             @RequestParam("fecha_publicacion") Date fechaPublicacion,
             @RequestParam("cantidad") Integer cantidad,
             @RequestParam("id_autor") Integer idAutor,
             @RequestParam("id_editorial") Integer idEditorial,
-            @RequestParam("id_generos") Integer idGeneros
-        *//*
-            String isbn = "isbn3";
-            String titulo = "titulo3";
-            String sinopsis = "sinopsis3";
-            Date fechaPublicacion = Date.from(Instant.now());
-            Integer cantidad = 3;
-            Integer idAutor = 11;
-            Integer idEditorial = 1;
-            String idGeneros = "1,2,3,4";
+            @RequestParam("id_generos") String idGeneros) {
+
             
         String resultado = libroService.insertar(
                 isbn,
@@ -61,7 +51,13 @@ public class LibroController {
                 idEditorial,
                 idGeneros);
         
-        System.out.println("resultado = " + resultado);*/
+        System.out.println("resultado = " + resultado);
+        return "redirect:/libro/leer";
+    }
+    
+    @GetMapping("/guardar")
+    public String agregar() {
+        
         return "Libro/CrearLibro";
     }
 
@@ -204,11 +200,11 @@ public class LibroController {
     }
 
     @GetMapping("/filtrarPorMasPrestamos")
-    public String filtrarPorMasPrestamos(Model modelo) {
+    public String filtrarPorMasPrestamos(@RequestParam("valorFiltro") String valorFiltro, Model modelo) {
 
         String error = "";
 
-        List<Libro> libros = libroService.librosPorMasPrestamos(error);
+        List<Libro> libros = libroService.librosPorMasPrestamos(Integer.parseInt(valorFiltro), error);
 
         for (Libro libro : libros) {
             System.out.println("libro por más prestamos: " + libro.getTitulo());
@@ -296,7 +292,7 @@ public class LibroController {
                     libros = libroService.librosPorISBN(valorFiltro, error);
                     break;
                 case "masPrestamos":
-                    libros = libroService.librosPorMasPrestamos(error);
+                    libros = libroService.librosPorMasPrestamos(Integer.parseInt(valorFiltro), error);
                     break;
                 case "titulo":
                     libros = libroService.librosPorTitulo(valorFiltro, error);
