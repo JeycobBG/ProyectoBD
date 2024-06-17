@@ -98,7 +98,7 @@ public class EditorialController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        
+        /*
         String error = "";
         
         List<Editorial> editoriales = editorialService.leer(error);
@@ -109,19 +109,18 @@ public class EditorialController {
             
         
         modelo.addAttribute("editoriales", editoriales);  
-        
+        */
         return "Editorial/MostrarEditorial";
     }
     
     // Filtro
     @GetMapping("/filtrarConMasLibros")
-    public String filtrarConMasLibros(Model modelo){
+    public String filtrarConMasLibros(@RequestParam(defaultValue = "5") Integer top_n, Model modelo){
      
         /*
         @RequestParam("top_n")Integer top_n
         */
         
-        Integer top_n = 1;
         String error = "";
         
         List<Editorial> editoriales = editorialService.editorialConMasLibros(top_n, error);
@@ -132,6 +131,6 @@ public class EditorialController {
             
         
         modelo.addAttribute("editoriales", editoriales);  
-        return "/";
+        return "Editorial/MostrarEditorial";
     }
 }

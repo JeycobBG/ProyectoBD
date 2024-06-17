@@ -63,6 +63,7 @@ public class LibroController {
 
     @GetMapping("/leer")
     public String leer(Model modelo) {
+        /*
 
         String error = "";
         List<Libro> libros = libroService.leer();
@@ -86,7 +87,7 @@ public class LibroController {
         }
 
         modelo.addAttribute("libros", libros);
-
+*/
         return "Libro/MostrarLibro";
     }
 

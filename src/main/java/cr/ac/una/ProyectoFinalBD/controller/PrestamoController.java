@@ -49,7 +49,7 @@ public class PrestamoController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        
+        /*
        List<Prestamo> prestamos = prestamoService.leer();
        
        for(Prestamo prest : prestamos){
@@ -58,7 +58,7 @@ public class PrestamoController {
        }
        
        modelo.addAttribute("prestamos", prestamos);
-        
+        */
        return "Prestamo/MostrarPrestamo";
         
     }

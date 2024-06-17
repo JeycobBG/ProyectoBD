@@ -4,20 +4,21 @@
         <title>Módulo Libro</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/mostrar.css">
-        
+        <link rel="stylesheet" href="/css/mostrarLibroCB.css">
+
     </head>
     <body>
-        <div class="encabezado">
+        <div class="encabezado">           
             <a href="/menu" class="boton-volver"></a>
             <h2 class="listado-titulo">Lista de Libros</h2>
+            <a href="/menu" class="button volver">Volver</a>
         </div>
         <div class="botonYBuscador">
             <div>
                 <a href="/libro/guardar" class="button">Agregar un nuevo Libro</a>
             </div>
             <form th:action="@{/libro/filtrar}" th:method="get">
-                <label for="tipoFiltro" style="font-size: small;">Ingrese el filtro a escoger:</label>
+                <label for="tipoFiltro" style="font-size: 20px;">Ingrese el filtro deseado:</label>
                 <select id="tipoFiltro" name="tipoFiltro" class="select-filtro">
                     <option value="editorial">Editorial</option>
                     <option value="genero">Género</option>
@@ -31,9 +32,9 @@
                 <button type="submit">Enviar</button>
             </form>
         </div>
-        
+
         <script src="/js/typeFilter.js"></script>
-        
+
         <div>
             <table class="table table-bordered">
                 <tr>

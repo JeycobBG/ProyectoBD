@@ -1,50 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Módulo Editorial</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/mostrar.css">
-</head>
-<body>
-    <div class="encabezado">
-        <a href="/menu" class="boton-volver"></a>
-        <h2 class="listado-titulo">Lista de Editoriales</h2>
-    </div>
-    <div class="botonYBuscador"> 
-        <div>
-            <a href="/editorial/guardar" class="button">Agregar una nueva editorial</a>
+    <head>
+        <title>Módulo Editorial</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/mostrarEditorialCB.css">
+    </head>
+    <body>
+        <div class="encabezado">
+            <a href="/menu" class="boton-volver"></a>
+            <h2 class="listado-titulo">Lista de Editoriales</h2>
+            <a href="/menu" class="button volver">Volver</a>
         </div>
-    </div>
-    <div>
-        <table class="table table-bordered">
-            <tr>
-                <th>Nombre</th>
-                <th>Fecha Fundación</th>
-                <th>Código Postal</th>
-                <th>Dirección</th>
-                <th>Acciones</th>     
-            </tr >
-            <tr th:each="editorial : ${editoriales}"> 
-                <td th:text="${editorial.nombre}"></td>
-                <td th:text="${editorial.fechaFundacionFormateada}"></td>
-                <td th:text="${editorial.direccion.codigoPostal}"></td>
-                <td th:text="${editorial.direccion.descripcion}"></td>
-                <td><a class="editar-button" th:href="@{'/editorial/actualizar?id=' + ${editorial.id}}">Editar</a>
-                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${editorial.id} + '\')'">Eliminar</a></td>
-            </tr>
-        </table>
+        <div class="botonYBuscador"> 
+            <div>
+                <a href="/editorial/guardar" class="button">Agregar una nueva editorial</a>
+            </div>
+            <form th:action="@{/editorial/filtrarConMasLibros}" th:method="get">
+                <select name="top_n" class="select-filtro">
+                    <option value="1">Top 1</option>
+                    <option value="3">Top 3</option>
+                    <option value="5" selected>Top 5</option>
+                    <option value="10">Top 10</option>
+                </select>
+                <button type="submit">Enviar</button>
+            </form>s
+        </div>
+        <div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha Fundación</th>
+                    <th>Código Postal</th>
+                    <th>Dirección</th>
+                    <th>Acciones</th>     
+                </tr >
+                <tr th:each="editorial : ${editoriales}"> 
+                    <td th:text="${editorial.nombre}"></td>
+                    <td th:text="${editorial.fechaFundacionFormateada}"></td>
+                    <td th:text="${editorial.direccion.codigoPostal}"></td>
+                    <td th:text="${editorial.direccion.descripcion}"></td>
+                    <td><a class="editar-button" th:href="@{'/editorial/actualizar?id=' + ${editorial.id}}">Editar</a>
+                        <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${editorial.id} + '\')'">Eliminar</a></td>
+                </tr>
+            </table>
 
-        <script>
-            function confirmarEliminacion(enlace, idEditorial) {
-                if (confirm("¿Está seguro de que desea eliminar esta editorial?")) {
-                    window.location.href = '/editorial/eliminar?id=' + idEditorial;
+            <script>
+                function confirmarEliminacion(enlace, idEditorial) {
+                    if (confirm("¿Está seguro de que desea eliminar esta editorial?")) {
+                        window.location.href = '/editorial/eliminar?id=' + idEditorial;
+                    }
                 }
-            }
-        </script>
-    </div>
+            </script>
+        </div>
 
-    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
-</body>
+        <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+        <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+    </body>
 </html>
