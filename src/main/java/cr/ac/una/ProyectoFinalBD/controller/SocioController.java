@@ -83,7 +83,6 @@ public class SocioController {
         ""
         );
         
-        System.out.println("resultado = " + resultado);
         return "/";
     }
     
