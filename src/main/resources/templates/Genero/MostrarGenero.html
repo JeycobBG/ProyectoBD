@@ -16,6 +16,9 @@
         <div>
             <a href="/genero/guardar" class="button">Agregar un nuevo Género</a>
         </div>
+        <form th:action="@{/genero/filtrarConMasLibrosPublicados}" th:method="get">
+            <button type="submit">Géneros con Más Libros Publicados</button>
+        </form>
     </div>
     <div>
         <table class="table table-bordered">

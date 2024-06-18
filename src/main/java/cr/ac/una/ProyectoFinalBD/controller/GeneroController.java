@@ -1,4 +1,3 @@
-
 package cr.ac.una.ProyectoFinalBD.controller;
 
 import cr.ac.una.ProyectoFinalBD.domain.Genero;
@@ -19,67 +18,68 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/genero")
 public class GeneroController {
+
     @Autowired
     GeneroService generoService;
-    
+
     @PostMapping("/guardar")
-    public String add(@RequestParam("nombre")String nombre, 
-            @RequestParam("descripcion")String descripcion){
-        
+    public String add(@RequestParam("nombre") String nombre,
+            @RequestParam("descripcion") String descripcion) {
+
         String error = "";
         String resultado = generoService.add(nombre, descripcion, error);
-        
+
         System.out.println("resultado = " + resultado);
         return "redirect:/genero/leer";
     }
-    
+
     @GetMapping("/guardar")
-    public String agregar(){
-        
+    public String agregar() {
+
         return "Genero/CrearGenero";
     }
-    
+
     @GetMapping("/actualizar")
-    public String update(){
-        
+    public String update() {
+
         /*
         @PathVariable("id")Integer id,
         @RequestParam("nombre")String nombre, 
             @RequestParam("descripcion")String descripcion
-        */
+         */
         Integer id = 1;
         String nombre = "modificado";
         String descripcion = "modificado";
         String error = "";
 
         String resultado = generoService.update(id, nombre, descripcion, error);
-        
+
         System.out.println("resultado = " + resultado);
-        
+
         return "/";
     }
-    
+
     @GetMapping("/eliminar")
-    public String delete(){
-        
+    public String delete() {
+
         /*
         @PathVariable("id")Integer id,
             @RequestParam("descripcion")String descripcion
-        */
+         */
         Integer id = 1;
         String error = "";
 
         String resultado = generoService.delete(id, error);
-        
+
         System.out.println("resultado = " + resultado);
-        
+
         return "/";
     }
-    
+
     @GetMapping("/leer")
-    public String leer(Model modelo){
-        
-     /*
+    public String leer(Model modelo) {
+
+        /*
         
         //@RequestParam("top_n")Integer top_n
         
@@ -93,28 +93,23 @@ public class GeneroController {
         }
         
         modelo.addAttribute("generos", generos);  
-        */
+         */
         return "Genero/MostrarGenero";
     }
-    
+
     // Filtro
+
     @GetMapping("/filtrarConMasLibrosPublicados")
-    public String filtrarConMasLibrosPublicados(Model modelo){
-     
-        /*
-        @RequestParam("top_n")Integer top_n
-        */
+    public String filtrarConMasLibrosPublicados(Model modelo, @RequestParam(value = "top_n", defaultValue = "5") Integer top_n) {
         
-        Integer top_n = 5;
         String error = "";
-        
-        List<Genero> generos = generoService.filtrarConMasLibrosPublicados(top_n, error);
-        
-        for(Genero genero: generos){
-            System.out.println("genero con más libros publicados: " + genero.getNombre());
+        List<Genero> generos = generoService.filtrarConMasLibrosPublicados(top_n, error)
+                ;
+        for (Genero genero : generos) {
+            System.out.println("género con más libros publicados: " + genero.getNombre());
         }
-        
-        modelo.addAttribute("generos", generos);  
-        return "/";
+        modelo.addAttribute("generos", generos);
+        return "Genero/MostrarGenero";  
     }
+
 }
