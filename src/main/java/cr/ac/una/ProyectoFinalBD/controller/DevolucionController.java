@@ -76,7 +76,7 @@ public class DevolucionController {
         
         System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
         
-        return "/";
+        return "Devolucion/Ac";
     }
     
     @GetMapping("/eliminar")
