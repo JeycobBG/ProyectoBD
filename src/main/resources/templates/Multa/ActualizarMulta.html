@@ -2,40 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Actualizar Multa</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+    <link href="/CSS/crear.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <h2>Actualizar Multa</h2>
-    
-    <a href="/multas/listar" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
     <div class="container">
         <div>
-            <form action="/multas/actualizarMulta" method="post">
+            <form id="actualizarMultaForm" action="/multa/actualizar" method="post">
                 
-                <input type="hidden" id="id" name="id" th:value="${multa.id}" />
+                <h2>Actualizar Multa</h2>
                 
+                <!-- Campo oculto para el ID de la multa -->
+                <input type="hidden" id="idMulta" th:field="${multa.id}" />
+
+                <!-- Campo para el monto de la multa -->
                 <label for="monto">Monto:</label><br>
-                <input type="number" id="monto" name="monto" th:value="${multa.monto}" step="0.01" required><br><br>
+                <input type="text" id="monto" th:field="${multa.monto}" pattern="[0-9]*" required><br><br>
                 
-                <label for="diasAtraso">Días de Atraso:</label><br>
-                <input type="number" id="diasAtraso" name="diasAtraso" th:value="${multa.diasAtraso}" required><br><br>
+                <!-- Campo para los días de atraso -->
+                <label for="dias_atraso">Días de Atraso:</label><br>
+                <input type="text" id="dias_atraso" th:field="${multa.diasAtraso}" pattern="[0-9]*" required><br><br>
                 
-                <label for="cancelada">¿Multa cancelada?</label><br>
-                <select id="cancelada" name="cancelada" required>
-                    <option value="true" th:selected="${multa.cancelada}">Sí</option>
-                    <option value="false" th:selected="${!multa.cancelada}">No</option>
+                <!-- Campo para indicar si la multa está cancelada -->
+                <label for="cancelada">Cancelada:</label><br>
+                <!-- Aumentar el tamaño del checkbox y agregar margen izquierdo -->
+                <input type="checkbox" id="cancelada" th:field="${multa.cancelada}" style="width: 20px; height: 20px; margin-left: 30px;"><br><br>
+                
+                <!-- Combo box para seleccionar el préstamo -->
+                <label for="prestamo">Préstamo:</label><br>
+                <select id="prestamo" th:field="${multa.prestamo.id}" required>
+                    <option value="">Selecciona un préstamo</option>
+                    <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
+                    <option th:each="prestamo : ${prestamos}" 
+                            th:value="${prestamo.id}" 
+                            th:text="${prestamo.id}">
+                    </option>
                 </select><br><br>
                 
-                <input type="submit" value="Actualizar Multa">
+                <input type="submit" value="Actualizar">
             </form>
         </div>
     </div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("actualizarMultaForm").addEventListener("submit", function(event) {
+            var monto = document.getElementById("monto").value;
+            var diasAtraso = document.getElementById("dias_atraso").value;
+            var prestamo = document.getElementById("prestamo").value;
+            
+            // Validaciones
+            if (monto.trim() === "" || diasAtraso.trim() === "" || prestamo === "") {
+                alert("Por favor complete todos los campos.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>

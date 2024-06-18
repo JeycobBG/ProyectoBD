@@ -2,46 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Actualizar Devolución</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/crear.css">
 </head>
 <body>
-    <h2>Actualizar Devolución</h2>
-    
-    <a href="/devoluciones/listar" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
-    <div class="container">
-        <div>
-            <form action="/devoluciones/actualizarDevolucion" method="post">
-                
-                <input type="hidden" id="id" name="id" th:value="${devolucion.id}" />
-                
-                <label for="fechaDevolucion">Fecha de Devolución:</label><br>
-                <input type="date" id="fechaDevolucion" name="fechaDevolucion" th:value="${devolucion.fechaDevolucionEfectuada}" required><br><br>
-                
-                <!-- Combo box para seleccionar el préstamo asociado -->
-                <label for="prestamo">Préstamo asociado:</label><br>
-                <select id="prestamo" name="prestamo" required>
-                    <option value="">Selecciona un préstamo</option>
-                    <!-- Aquí puedes cargar dinámicamente las opciones de préstamo desde tu backend -->
-                    <!-- Por ejemplo, podrías iterar sobre una lista de préstamos disponibles -->
-                    <!-- y generar opciones para cada uno -->
-                    <option value="prestamo1">Préstamo 1</option>
-                    <option value="prestamo2">Préstamo 2</option>
-                    <option value="prestamo3">Préstamo 3</option>
-                    <!-- Fin de las opciones de ejemplo -->
-                </select><br><br>
-                
-                <!-- Puedes agregar más campos según necesites para la devolución -->
-                
-                <input type="submit" value="Actualizar Devolución">
+    <div class="wrapper">
+        <div class="container">
+            <h2>Actualizar Devolución</h2>
+            
+            <form id="actualizarDevolucionForm" action="/devolucion/actualizar" method="post">
+                <!-- Campo oculto para el ID de la devolución -->
+                <input type="hidden" id="idDevolucion" th:field="${devolucion.id}" />
+
+                <div class="form-group">
+                    <label for="fechaDevolucionEfectuada">Fecha de Devolución Efectuada:</label>
+                    <input type="date" id="fechaDevolucionEfectuada" th:field="${devolucion.fechaDevolucionEfectuada}" required>
+                </div>
+                <div class="form-group">
+                    <label for="prestamo">Préstamo:</label>
+                    <select id="prestamo" th:field="${devolucion.prestamo.id}" required>
+                        <option value="">Selecciona un préstamo</option>
+                        <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
+                        <option th:each="prestamo : ${prestamos}" 
+                                th:value="${prestamo.id}" 
+                                th:text="${prestamo.detalle}">
+                        </option>
+                    </select>
+                </div>
+                <input type="submit" value="Actualizar">
             </form>
+
+            <div class="alert alert-success" id="exitoMessage" style="display: none;" th:if="${exito != null}" th:text="${exito}"></div>
+            <div class="alert alert-error" id="errorMessage" style="display: none;" th:if="${error != null}" th:text="${error}"></div>
         </div>
     </div>
+
+    <script>
+        // Validación del formulario
+        document.getElementById("actualizarDevolucionForm").addEventListener("submit", function(event) {
+            var fechaDevolucionEfectuada = document.getElementById("fechaDevolucionEfectuada").value;
+            var prestamo = document.getElementById("prestamo").value;
+            
+            // Validar que la fecha de devolución efectuada no esté vacía
+            if (fechaDevolucionEfectuada.trim() === "") {
+                alert("Por favor ingrese la fecha de devolución efectuada.");
+                event.preventDefault();
+            }
+
+            // Validar que se haya seleccionado un préstamo
+            if (prestamo === "") {
+                alert("Por favor seleccione un préstamo.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>

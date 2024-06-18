@@ -2,75 +2,99 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Actualizar Socio</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+    <link href="/CSS/crear.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <h2>Actualizar Socio</h2>
-    
-    <a href="/socios/listar" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
     <div class="container">
         <div>
-            <form id="actualizarSocioForm" action="/socios/actualizarSocio" method="post">
+            <h2>Actualizar Socio</h2>
+            
+            <form id="actualizarSocioForm" action="/socio/actualizar" method="post">
+                <!-- Campo oculto para el ID del socio -->
+                <input type="hidden" id="idSocio" th:field="${socio.id}" />
                 
-                <input type="hidden" id="id" name="id" th:value="${socio.id}" />
-                
-                <label for="fechaRegistro">Fecha de Registro:</label><br>
-                <input type="date" id="fechaRegistro" name="fechaRegistro" th:value="${socio.fechaRegistro}" required><br><br>
-                
-                <label for="persona">Seleccione una persona:</label><br>
-                <select id="persona" name="persona" required>
-                    <option value="">Seleccionar</option>
-                    <option th:each="persona : ${personas}" 
-                            th:value="${persona.id}" 
-                            th:text="${persona.nombre + ' ' + persona.primerApellido + ' ' + persona.segundoApellido}">
-                    </option>
-                </select><br><br>
+                <!-- Campo para el nombre -->
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" th:field="${socio.nombre}" required><br>
 
-                <label for="prestamo">Seleccione un préstamo:</label><br>
-                <select id="prestamo" name="prestamo" required>
-                    <option value="">Seleccionar</option>
-                    <option th:each="prestamo : ${prestamos}" 
-                            th:value="${prestamo.id}" 
-                            th:text="${prestamo.id}">
+                <!-- Campo para el primer apellido -->
+                <label for="primer_apellido">Primer Apellido:</label><br>
+                <input type="text" id="primer_apellido" th:field="${socio.primerApellido}" required><br>
+
+                <!-- Campo para el segundo apellido -->
+                <label for="segundo_apellido">Segundo Apellido:</label><br>
+                <input type="text" id="segundo_apellido" th:field="${socio.segundoApellido}" required><br>
+
+                <!-- Campo para la identificación -->
+                <label for="identificacion">Identificación:</label><br>
+                <input type="text" id="identificacion" th:field="${socio.identificacion}" required><br>
+
+                <!-- Campo para el código postal -->
+                <label for="codigo_postal">Código Postal:</label><br>
+                <input type="text" id="codigo_postal" th:field="${socio.codigoPostal}" pattern="[0-9]*" required><br>
+
+                <!-- Campo para la descripción de la dirección -->
+                <label for="descripcion_direccion">Descripción de la Dirección:</label><br>
+                <input type="text" id="descripcion_direccion" th:field="${socio.descripcionDireccion}" required><br>
+
+                <!-- Combo box para seleccionar el distrito -->
+                <label for="id_distrito">Distrito:</label><br>
+                <select id="id_distrito" th:field="${socio.distrito.id}" required>
+                    <option value="">Selecciona un distrito</option>
+                    <!-- Aquí puedes cargar dinámicamente las opciones de distrito desde el backend -->
+                    <option th:each="distrito : ${distritos}" 
+                            th:value="${distrito.id}" 
+                            th:text="${distrito.nombre}">
                     </option>
-                </select><br><br>
-                
-                <input type="submit" value="Actualizar Socio">
+                </select><br>
+
+                <!-- Campo para el número de teléfono -->
+                <label for="numero_telefono">Número de Teléfono:</label><br>
+                <input type="text" id="numero_telefono" th:field="${socio.numeroTelefono}" required><br>
+
+                <!-- Campo para el correo electrónico -->
+                <label for="email">Correo Electrónico:</label><br>
+                <input type="email" id="email" th:field="${socio.email}" required><br>
+
+                <!-- Campo para la fecha de registro -->
+                <label for="fecha_registro">Fecha de Registro:</label><br>
+                <input type="date" id="fecha_registro" th:field="${socio.fechaRegistro}" required><br>
+
+                <input type="submit" value="Actualizar">
             </form>
         </div>
     </div>
-    
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+
     <script>
         // Validación del formulario
         document.getElementById("actualizarSocioForm").addEventListener("submit", function(event) {
-            var fechaRegistro = document.getElementById("fechaRegistro").value;
-            var persona = document.getElementById("persona").value;
-            var prestamo = document.getElementById("prestamo").value;
-            
-            // Validar que la fecha de registro no sea en el futuro
-            var hoy = new Date().toISOString().split('T')[0];
-            if (fechaRegistro > hoy) {
-                alert("La fecha de registro no puede ser en el futuro.");
+            var codigoPostal = document.getElementById("codigo_postal").value;
+            var fechaRegistro = document.getElementById("fecha_registro").value;
+            var idDistrito = document.getElementById("id_distrito").value;
+
+            // Validar que el código postal solo contenga números
+            if (!/^[0-9]+$/.test(codigoPostal)) {
+                alert("El código postal debe contener solo números.");
                 event.preventDefault();
-            }
-            
-            // Validar que se haya seleccionado una persona
-            if (persona === "") {
-                alert("Por favor seleccione una persona.");
-                event.preventDefault();
+                return;
             }
 
-            // Validar que se haya seleccionado un préstamo
-            if (prestamo === "") {
-                alert("Por favor seleccione un préstamo.");
+            // Validar que la fecha de registro no sea en el futuro
+            var fechaHoy = new Date().toISOString().split("T")[0]; // Obtener la fecha de hoy en formato ISO
+            if (fechaRegistro > fechaHoy) {
+                alert("La fecha de registro no puede ser en el futuro.");
                 event.preventDefault();
+                return;
+            }
+
+            // Validar que se haya seleccionado un distrito
+            if (idDistrito === "") {
+                alert("Por favor selecciona un distrito.");
+                event.preventDefault();
+                return;
             }
         });
     </script>
