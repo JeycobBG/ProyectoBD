@@ -17,6 +17,7 @@
                 <a href="/editorial/guardar" class="button">Agregar una nueva editorial</a>
             </div>
             <form th:action="@{/editorial/filtrarConMasLibros}" th:method="get">
+                <label for="tipoFiltro" style="font-size: 18px;">Ingrese el filtro de editorial por más libros publicados:</label>
                 <select name="top_n" class="select-filtro">
                     <option value="1">Top 1</option>
                     <option value="3">Top 3</option>
@@ -24,7 +25,7 @@
                     <option value="10">Top 10</option>
                 </select>
                 <button type="submit">Enviar</button>
-            </form>s
+            </form>
         </div>
         <div>
             <table class="table table-bordered">

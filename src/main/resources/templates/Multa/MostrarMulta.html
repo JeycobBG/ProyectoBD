@@ -16,6 +16,9 @@
         <div>
             <a href="/multa/guardar" class="button">Agregar una nueva Multa</a>
         </div>
+        <form th:action="@{/multa/filtrarPorSociosMasMultados}" th:method="get">
+            <button type="submit">Ver Socios Más Multados</button>
+        </form>
     </div>
     <div>
         <table class="table table-bordered">
