@@ -44,4 +44,7 @@ public interface IAutorService {
     public String delete(Integer id_autor, String error);
     
     public List<Autor> leer(String error);
+    
+    public Autor buscar(Integer id);
+            
 }

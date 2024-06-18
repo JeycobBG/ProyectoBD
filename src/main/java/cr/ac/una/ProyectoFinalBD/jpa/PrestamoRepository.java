@@ -8,16 +8,16 @@ import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author JEYCOB
  */
-public interface PrestamoRepository extends CrudRepository<Prestamo, Integer>{
+public interface PrestamoRepository extends JpaRepository<Prestamo, Integer>{
     
     /*
     @fecha_prestamo DATE, 

@@ -5,8 +5,10 @@
 package cr.ac.una.ProyectoFinalBD.service;
 
 import cr.ac.una.ProyectoFinalBD.domain.Multa;
+import cr.ac.una.ProyectoFinalBD.jpa.MultaRepository;
 import cr.ac.una.ProyectoFinalBD.repositorio.IMultaRepositorio;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ import org.springframework.stereotype.Service;
 public class MultaService implements IMultaService{
     @Autowired
     IMultaRepositorio multaRepo;
+    
+    @Autowired
+    MultaRepository multaRepository;
 
     @Override
     public String guardar(Double monto, Integer dias_atraso, Boolean cancelada, Integer id_prestamo) {
@@ -38,10 +43,16 @@ public class MultaService implements IMultaService{
     public String eliminar(Integer id_multa){
         return multaRepo.eliminar(id_multa);
     }
+    
+    @Override
+    public Multa buscar(Integer id){
+        Optional<Multa> multaOptional = multaRepository.findById(id);
+        return multaOptional.get(); 
+    }
 
     @Override
-    public List<Multa> multasPorSociosMasMultados(String error) {
-        return multaRepo.multasPorSociosMasMultados(error);
+    public List<Multa> multasPorSociosMasMultados(Integer top_n, String error) {
+        return multaRepo.multasPorSociosMasMultados(top_n, error);
     }
 
 }

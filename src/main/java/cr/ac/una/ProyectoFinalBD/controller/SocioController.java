@@ -6,13 +6,13 @@ package cr.ac.una.ProyectoFinalBD.controller;
 
 import cr.ac.una.ProyectoFinalBD.domain.Socio;
 import cr.ac.una.ProyectoFinalBD.service.SocioService;
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,30 +60,13 @@ public class SocioController {
         return "Socio/CrearSocio";
     }
     
-    @GetMapping("/actualizar")
-    public String update(){
-        
-        /*
-        @PathVariable("id") Integer id,
+    @PostMapping("/actualizar")
+    public String update(@PathVariable("id") Integer id,
         @RequestParam("nombre")String nombre,                     @RequestParam("primer_apellido")String primer_apellido,
             @RequestParam("segundo_apellido")String segundo_apellido, @RequestParam("identificacion") String identificacion,
             @RequestParam("codigo_postal")String codigo_postal,       @RequestParam("descripcion_direccion") String descripcion_direccion,
             @RequestParam("id_distrito")Integer id_distrito,          @RequestParam("numero_telefono") String numero_telefono,
-            @RequestParam("email")String email,                       @RequestParam("fecha_registro")Date fecha_registro
-        */
-        Integer id = 1;
-        String nombre = "modificado";
-        String primer_apellido = "modificado";
-        String segundo_apellido = "modificado";
-        String identificacion = "modificado";
-        String codigo_postal = "modificado";
-        String descripcion_direccion = "modificado";
-        Integer id_distrito = 1;
-        String numero_telefono = "11111111";
-        String email = "modificado@gmail.com";
-        Date fecha_registro = Date.from(Instant.now());
-        String error_message = "";
-        
+            @RequestParam("email")String email,                       @RequestParam("fecha_registro")Date fecha_registro){
         
         String resultado = socioService.update(
         id,
@@ -97,11 +80,19 @@ public class SocioController {
         numero_telefono,
         email,
         fecha_registro,
-        error_message
+        ""
         );
         
         System.out.println("resultado = " + resultado);
         return "/";
+    }
+    
+    @GetMapping("/actualizar")
+    public String actualizar(@RequestParam("id") Integer id, Model modelo){
+        Socio socio = socioService.buscar(id);
+        
+        modelo.addAttribute("socio", socio);
+        return "Socio/ActualizarSocio";
     }
     
     @GetMapping("/eliminar")
@@ -124,7 +115,7 @@ public class SocioController {
     @GetMapping("/leer")
     public String read(Model modelo){
        
-        /*
+        
         
         String error = "";
         
@@ -138,7 +129,7 @@ public class SocioController {
         }
         
         modelo.addAttribute("socios", socios);
-       */
+       
         return "Socio/MostrarSocio";
     }
 }

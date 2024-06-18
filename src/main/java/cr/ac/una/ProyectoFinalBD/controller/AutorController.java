@@ -68,9 +68,11 @@ public class AutorController {
     }
     
     @GetMapping("/actualizar")
-    public String actualizar(){
+    public String actualizar(@RequestParam("id") Integer id, Model modelo){
+        Autor autor = autorService.buscar(id);
         
-        return "Autor/ActualizarLibro";
+        modelo.addAttribute("autor", autor);
+        return "Autor/ActualizarAutor";
     }
     
     @GetMapping("/eliminar")
@@ -90,7 +92,7 @@ public class AutorController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        /*
+        
         String error = "";
         
         List<Autor> autores = autorService.leer(error);
@@ -104,7 +106,7 @@ public class AutorController {
         
         
         modelo.addAttribute("autores", autores);
-*/
+
         return "Autor/MostrarAutor";
     }
 }

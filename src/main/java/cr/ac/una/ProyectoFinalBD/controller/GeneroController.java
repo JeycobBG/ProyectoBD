@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,24 +40,24 @@ public class GeneroController {
         return "Genero/CrearGenero";
     }
 
-    @GetMapping("/actualizar")
-    public String update() {
-
-        /*
-        @PathVariable("id")Integer id,
+    @PostMapping("/actualizar")
+    public String update(@PathVariable("id")Integer id,
         @RequestParam("nombre")String nombre, 
-            @RequestParam("descripcion")String descripcion
-         */
-        Integer id = 1;
-        String nombre = "modificado";
-        String descripcion = "modificado";
-        String error = "";
+            @RequestParam("descripcion")String descripcion) {
 
+        String error = "";
         String resultado = generoService.update(id, nombre, descripcion, error);
 
         System.out.println("resultado = " + resultado);
-
-        return "/";
+        return "redirect:/genero/leer";
+    }
+    
+    @GetMapping("/actualizar")
+    public String actualizar(@RequestParam("id") Integer id, Model modelo){
+        Genero genero = generoService.buscar(id);
+        
+        modelo.addAttribute("genero", genero);
+        return "Genero/ActualizarGenero";
     }
 
     @GetMapping("/eliminar")
@@ -79,7 +80,7 @@ public class GeneroController {
     @GetMapping("/leer")
     public String leer(Model modelo) {
 
-        /*
+        
         
         //@RequestParam("top_n")Integer top_n
         
@@ -93,7 +94,7 @@ public class GeneroController {
         }
         
         modelo.addAttribute("generos", generos);  
-         */
+         
         return "Genero/MostrarGenero";
     }
 

@@ -19,6 +19,6 @@ public interface IMultaRepositorio {
     public String eliminar(Integer id_multa);
     
     // Filtro
-    public List<Multa> multasPorSociosMasMultados(String error);
+    public List<Multa> multasPorSociosMasMultados(Integer top_n, String error);
     
 }

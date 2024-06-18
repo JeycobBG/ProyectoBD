@@ -6,13 +6,13 @@ package cr.ac.una.ProyectoFinalBD.controller;
 
 import cr.ac.una.ProyectoFinalBD.domain.Editorial;
 import cr.ac.una.ProyectoFinalBD.service.EditorialService;
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,34 +48,30 @@ public class EditorialController {
         return "Editorial/CrearEditorial";
     }
     
-    @GetMapping("/actualizar")
-    public String update(){
-        
-        /*
-        @PathVariable("id") Integer id,
+    @PostMapping("/actualizar")
+    public String update(@PathVariable("id") Integer id,
         @RequestParam("nombre")String nombre,                     
         @RequestParam("fecha_fundacion")Date fecha_fundacion,
         @RequestParam("codigo_postal")String codigo_postal, 
         @RequestParam("descripcion_direccion") String descripcion_direccion,
-        @RequestParam("id_distrito")Integer id_distrito, 
-        @RequestParam("error")String error);
-        */
+        @RequestParam("id_distrito")Integer id_distrito){
         
-        Integer id = 2;
-        String nombre = "modificado";
-        Date fecha_fundacion = Date.from(Instant.now());
-        String codigo_postal = "modificado";
-        String descripcion_direccion = "modificado";
-        Integer id_distrito = 1;
+        
         String error = "";
-        
         
         String resultado = editorialService.update(id, nombre, fecha_fundacion, codigo_postal,
                 descripcion_direccion, id_distrito, error);
         
         System.out.println("resultado = " + resultado);
+        return "redirect:/editorial/leer";
+    }
+    
+    @GetMapping("/actualizar")
+    public String actualizar(@RequestParam("id") Integer id, Model modelo){
+        Editorial editorial = editorialService.buscar(id);
         
-        return "/";
+        modelo.addAttribute("editorial", editorial);
+        return "Editorial/ActualizarEditorial";
     }
     
     @GetMapping("/eliminar")
@@ -98,7 +94,7 @@ public class EditorialController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        /*
+        
         String error = "";
         
         List<Editorial> editoriales = editorialService.leer(error);
@@ -109,7 +105,6 @@ public class EditorialController {
             
         
         modelo.addAttribute("editoriales", editoriales);  
-        */
         return "Editorial/MostrarEditorial";
     }
     

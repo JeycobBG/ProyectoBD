@@ -5,8 +5,9 @@
 package cr.ac.una.ProyectoFinalBD.controller;
 
 import cr.ac.una.ProyectoFinalBD.domain.Devolucion;
+import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
 import cr.ac.una.ProyectoFinalBD.service.DevolucionService;
-import java.time.Instant;
+import cr.ac.una.ProyectoFinalBD.service.PrestamoService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DevolucionController {
     @Autowired
     DevolucionService devolucionService;
+    
+    @Autowired
+    PrestamoService prestamoService;
     
     @PostMapping("/guardar")
     public String guardar(@RequestParam("fecha_devolucion_efectuada")Date fecha_devolucion_efectuada,
@@ -48,7 +52,7 @@ public class DevolucionController {
     @GetMapping("/leer")
     
     public String leer(Model modelo){
-       /*
+       
        String error = "";
        List<Devolucion> devoluciones = devolucionService.leer();
        
@@ -57,26 +61,28 @@ public class DevolucionController {
        }
        
        modelo.addAttribute("devoluciones", devoluciones);
-       */
+       
        return "Devolucion/MostrarDevolucion";
     }
     
-    @GetMapping("/actualizar")
-    public String actualizar(){
+    @PostMapping("/actualizar")
+    public String actualizar(@RequestParam("id_prestamo")Integer id_prestamo,
+            @RequestParam("fecha_devolucion")Date fecha_devolucion_efectuada){
         
-        /*
-            @RequestParam("id_prestamo")Integer id_prestamo,
-            @RequestParam("fecha_devolucion")Data fecha_devolucion,
-            @RequestParam("error")String error
-        */  
-        
-        Integer id_prestamo = 1;
-        Date fecha_devolucion_efectuada = Date.from(Instant.now());
         String[] resultado = devolucionService.actualizar(id_prestamo, fecha_devolucion_efectuada);
         
         System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
+        return "redirect:/devolucion/leer";
+    }
+    
+    @GetMapping("/actualizar")
+    public String actualizar(@RequestParam("id") Integer id, Model modelo){
+        Devolucion devolucion = devolucionService.buscar(id);
+        List<Prestamo> prestamos = prestamoService.leer();
         
-        return "Devolucion/Ac";
+        modelo.addAttribute("devolucion", devolucion);
+        modelo.addAttribute("prestamos", prestamos);
+        return "Devolucion/ActualizarDevolucion";
     }
     
     @GetMapping("/eliminar")

@@ -12,43 +12,44 @@
             <h2>Actualizar Autor</h2>
 
             <form id="actualizarAutorForm" action="/autor/actualizar" method="post">
-                <input type="hidden" id="idAutor" th:field="${autor.idAutor}" />
+                <input type="hidden" id="idAutor" th:field="${autor.id}" />
                 
                 <div class="form-group">
                     <label for="nombreCompleto">Nombre Completo:</label>
-                    <input type="text" id="nombreCompleto" th:field="${autor.nombreCompleto}" required>
+                    <input type="text" id="nombreCompleto" th:field="${autor.persona.nombre}" required>
                 </div>
                 <div class="form-group">
                     <label for="primerApellido">Primer Apellido:</label>
-                    <input type="text" id="primerApellido" th:field="${autor.primerApellido}" required>
+                    <input type="text" id="primerApellido" th:field="${autor.persona.primerApellido}" required>
                 </div>
                 <div class="form-group">
                     <label for="segundoApellido">Segundo Apellido:</label>
-                    <input type="text" id="segundoApellido" th:field="${autor.segundoApellido}" required>
+                    <input type="text" id="segundoApellido" th:field="${autor.persona.segundoApellido}" required>
                 </div>
                 <div class="form-group">
                     <label for="identificacion">Identificación:</label>
-                    <input type="text" id="identificacion" th:field="${autor.identificacion}" required>
+                    <input type="text" id="identificacion" th:field="${autor.persona.identificacion}" required>
                 </div>
                 <div class="form-group">
                     <label for="codigoPostal">Código Postal:</label>
-                    <input type="text" id="codigoPostal" th:field="${autor.codigoPostal}" required>
+                    <input type="text" id="codigoPostal" th:field="${autor.persona.direccion.codigoPostal}" required>
                 </div>
                 <div class="form-group">
                     <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" th:field="${autor.direccion}" required>
+                    <input type="text" id="direccion" th:field="${autor.persona.direccion.descripcion}" required>
                 </div>
+                <!--
                 <div class="form-group">
                     <label for="distrito">Distrito:</label>
                     <input type="text" id="distrito" th:field="${autor.distrito}" required>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="telefono">Teléfono:</label>
-                    <input type="text" id="telefono" th:field="${autor.telefono}" required>
+                    <input type="text" id="telefono" th:field="${autor.persona.telefono[0].numero}" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" th:field="${autor.email}" required>
+                    <input type="email" id="email" th:field="${autor.persona.correoElectronico[0].email}" required>
                 </div>
                 <div class="form-group">
                     <label for="bibliografia">Bibliografía:</label>
