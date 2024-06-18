@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Autor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/actualizar.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h2>Actualizar Autor</h2>
+
+            <form id="actualizarAutorForm" action="/autor/actualizar" method="post">
+                <input type="hidden" id="idAutor" th:field="${autor.idAutor}" />
+                
+                <div class="form-group">
+                    <label for="nombreCompleto">Nombre Completo:</label>
+                    <input type="text" id="nombreCompleto" th:field="${autor.nombreCompleto}" required>
+                </div>
+                <div class="form-group">
+                    <label for="primerApellido">Primer Apellido:</label>
+                    <input type="text" id="primerApellido" th:field="${autor.primerApellido}" required>
+                </div>
+                <div class="form-group">
+                    <label for="segundoApellido">Segundo Apellido:</label>
+                    <input type="text" id="segundoApellido" th:field="${autor.segundoApellido}" required>
+                </div>
+                <div class="form-group">
+                    <label for="identificacion">Identificación:</label>
+                    <input type="text" id="identificacion" th:field="${autor.identificacion}" required>
+                </div>
+                <div class="form-group">
+                    <label for="codigoPostal">Código Postal:</label>
+                    <input type="text" id="codigoPostal" th:field="${autor.codigoPostal}" required>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" th:field="${autor.direccion}" required>
+                </div>
+                <div class="form-group">
+                    <label for="distrito">Distrito:</label>
+                    <input type="text" id="distrito" th:field="${autor.distrito}" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" th:field="${autor.telefono}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" th:field="${autor.email}" required>
+                </div>
+                <div class="form-group">
+                    <label for="bibliografia">Bibliografía:</label>
+                    <textarea id="bibliografia" th:field="${autor.bibliografia}" rows="4" cols="50" required></textarea>
+                </div>
+                <input type="submit" value="Actualizar">
+            </form>
+
+            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+        </div>
+    </div>
+
+    <script>
+        // Validación del formulario
+        document.getElementById("actualizarAutorForm").addEventListener("submit", function(event) {
+            var requiredFields = ["nombreCompleto", "primerApellido", "segundoApellido", "identificacion", "codigoPostal", "direccion", "distrito", "telefono", "email", "bibliografia"];
+            var valid = true;
+
+            requiredFields.forEach(function(field) {
+                var value = document.getElementById(field).value.trim();
+                if (value === "") {
+                    valid = false;
+                }
+            });
+
+            if (!valid) {
+                alert("Por favor complete todos los campos.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

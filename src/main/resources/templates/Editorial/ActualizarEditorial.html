@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Editorial</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/actualizar.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <form id="actualizarEditorialForm" action="/editorial/actualizar" method="post">
+                <h2 style="text-align: center;">Actualizar Editorial</h2>
+
+                <!-- Campo oculto para el ID de la editorial -->
+                <input type="hidden" id="idEditorial" th:field="${editorial.idEditorial}" />
+
+                <!-- Campo para el nombre de la editorial -->
+                <div class="form-group">
+                    <label for="nombre">Nombre de la editorial:</label>
+                    <input type="text" id="nombre" th:field="${editorial.nombre}" required>
+                </div>
+                
+                <!-- Campo para la fecha de fundación -->
+                <div class="form-group">
+                    <label for="fechaFundacion">Fecha de fundación:</label>
+                    <input type="date" id="fechaFundacion" th:field="${editorial.fechaFundacion}" required>
+                </div>
+
+                <!-- Campo para el código postal -->
+                <div class="form-group">
+                    <label for="codigoPostal">Código Postal:</label>
+                    <input type="text" id="codigoPostal" th:field="${editorial.codigoPostal}" required>
+                </div>
+                
+                <!-- Campo para la descripción de la dirección -->
+                <div class="form-group">
+                    <label for="descripcionDireccion">Descripción de la dirección:</label>
+                    <input type="text" id="descripcionDireccion" th:field="${editorial.descripcionDireccion}" required>
+                </div>
+                
+                <!-- Combo box para seleccionar el distrito -->
+                <div class="form-group">
+                    <label for="distrito">Distrito:</label>
+                    <select id="distrito" th:field="${editorial.distrito}" required>
+                        <option value="">Selecciona un distrito</option>
+                        <!-- Aquí puedes cargar dinámicamente las opciones de distrito desde el backend -->
+                        <option th:each="distrito : ${distritos}" th:value="${distrito.id}" th:text="${distrito.nombre}"></option>
+                    </select>
+                </div>
+                
+                <input type="submit" value="Actualizar">
+            </form>
+
+            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("actualizarEditorialForm").addEventListener("submit", function(event) {
+            var nombre = document.getElementById("nombre").value;
+            var fechaFundacion = document.getElementById("fechaFundacion").value;
+            var codigoPostal = document.getElementById("codigoPostal").value;
+            var descripcionDireccion = document.getElementById("descripcionDireccion").value;
+            var distrito = document.getElementById("distrito").value;
+            
+            // Validar que el nombre de la editorial no esté vacío
+            if (nombre.trim() === "") {
+                alert("Por favor ingrese el nombre de la editorial.");
+                event.preventDefault();
+            }
+            
+            // Validar que la fecha de fundación no esté vacía
+            if (fechaFundacion.trim() === "") {
+                alert("Por favor ingrese la fecha de fundación.");
+                event.preventDefault();
+            } else {
+                // Obtener la fecha actual
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
+                var dd = String(today.getDate()).padStart(2, '0');
+                var currentDate = yyyy + '-' + mm + '-' + dd;
+                
+                // Validar que la fecha de fundación no sea en el futuro
+                if (fechaFundacion > currentDate) {
+                    alert("La fecha de fundación no puede ser en el futuro.");
+                    event.preventDefault();
+                }
+            }
+            
+            // Validar que el código postal no esté vacío
+            if (codigoPostal.trim() === "") {
+                alert("Por favor ingrese el código postal.");
+                event.preventDefault();
+            }
+
+            // Validar que la descripción de la dirección no esté vacía
+            if (descripcionDireccion.trim() === "") {
+                alert("Por favor ingrese la descripción de la dirección.");
+                event.preventDefault();
+            }
+
+            // Validar que se haya seleccionado un distrito
+            if (distrito === "") {
+                alert("Por favor seleccione un distrito.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

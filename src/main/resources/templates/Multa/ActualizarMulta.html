@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Multa</title>
+    <link href="/CSS/actualizar.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <form id="actualizarMultaForm" action="/multa/actualizar" method="post">
+                
+                <h2>Actualizar Multa</h2>
+                
+                <!-- Campo oculto para el ID de la multa -->
+                <input type="hidden" id="idMulta" th:field="${multa.id}" />
+
+                <!-- Campo para el monto de la multa -->
+                <label for="monto">Monto:</label><br>
+                <input type="text" id="monto" th:field="${multa.monto}" pattern="[0-9]*" required><br><br>
+                
+                <!-- Campo para los días de atraso -->
+                <label for="dias_atraso">Días de Atraso:</label><br>
+                <input type="text" id="dias_atraso" th:field="${multa.diasAtraso}" pattern="[0-9]*" required><br><br>
+                
+                <!-- Campo para indicar si la multa está cancelada -->
+                <label for="cancelada">Cancelada:</label><br>
+                <!-- Aumentar el tamaño del checkbox y agregar margen izquierdo -->
+                <input type="checkbox" id="cancelada" th:field="${multa.cancelada}" style="width: 20px; height: 20px; margin-left: 30px;"><br><br>
+                
+                <!-- Combo box para seleccionar el préstamo -->
+                <label for="prestamo">Préstamo:</label><br>
+                <select id="prestamo" th:field="${multa.prestamo.id}" required>
+                    <option value="">Selecciona un préstamo</option>
+                    <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
+                    <option th:each="prestamo : ${prestamos}" 
+                            th:value="${prestamo.id}" 
+                            th:text="${prestamo.id}">
+                    </option>
+                </select><br><br>
+                
+                <input type="submit" value="Actualizar">
+            </form>
+        </div>
+    </div>
+    
+    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+    
+    <script>
+        // Validación del formulario
+        document.getElementById("actualizarMultaForm").addEventListener("submit", function(event) {
+            var monto = document.getElementById("monto").value;
+            var diasAtraso = document.getElementById("dias_atraso").value;
+            var prestamo = document.getElementById("prestamo").value;
+            
+            // Validaciones
+            if (monto.trim() === "" || diasAtraso.trim() === "" || prestamo === "") {
+                alert("Por favor complete todos los campos.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

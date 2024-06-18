@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Género</title>
+    <link rel="stylesheet" href="/css/crear.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h2>Registrar un nuevo género</h2>
+
+            <form id="registrarGeneroForm" action="/genero/guardar" method="post">
+
+                <!-- Campo para el nombre del género -->
+                <div class="form-group">
+                    <label for="nombre">Nombre del género:</label><br>
+                    <input type="text" id="nombre" name="nombre" required><br><br>
+                </div>
+
+                <!-- Campo para la descripción del género -->
+                <div class="form-group">
+                    <label for="descripcion">Descripción del género:</label><br>
+                    <input type="text" id="descripcion" name="descripcion" required><br><br>
+                </div>
+
+                <input type="submit" value="Guardar">
+            </form>
+
+            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+        </div>
+    </div>
+
+    <script>
+        // Validación del formulario
+        document.getElementById("registrarGeneroForm").addEventListener("submit", function(event) {
+            var nombre = document.getElementById("nombre").value;
+            var descripcion = document.getElementById("descripcion").value;
+            
+            // Validar que el nombre del género no esté vacío
+            if (nombre.trim() === "") {
+                alert("Por favor ingrese el nombre del género.");
+                event.preventDefault();
+            }
+            
+            // Validar que la descripción no esté vacía
+            if (descripcion.trim() === "") {
+                alert("Por favor ingrese la descripción del género.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

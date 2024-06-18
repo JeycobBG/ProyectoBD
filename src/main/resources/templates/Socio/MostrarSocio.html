@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Socio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/mostrar.css">
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Socios</h2>
+        <a href="/menu" class="button volver">Volver</a>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/socio/guardar" class="button">Agregar un nuevo Socio</a>
+        </div>
+   
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Identificación</th>
+                <th>Nombre Completo</th>
+                <th>Código Postal</th>
+                <th>Dirección</th>
+                <th>Distrito</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Fecha Registro</th>
+                <th>Acciones</th>
+            </tr>
+            <tr th:each="socio : ${socios}">  
+                <td th:text="${socio.persona.identificacion}"></td>
+                <td th:text="${socio.persona.nombre + ' ' + socio.persona.primerApellido + ' ' + socio.persona.segundoApellido}"></td>
+                <td th:text="${socio.persona.direccion.codigoPostal}"></td>
+                <td th:text="${socio.persona.direccion.descripcion}"></td>
+                <td th:text="${socio.persona.direccion.distrito.nombre}"></td>
+                <td>
+                    <ul th:if="${not #lists.isEmpty(socio.persona.telefono)}">
+                        <li th:each="tel : ${socio.persona.telefono}" th:text="${tel.numero}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul th:if="${not #lists.isEmpty(socio.persona.correoElectronico)}">
+                        <li th:each="email : ${socio.persona.correoElectronico}" th:text="${email.email}"></li>
+                    </ul>
+                </td>
+                <td th:text="${socio.fechaRegistro}"></td>    
+                <td><a class="editar-button" th:href="@{'/socio/actualizar?id=' + ${socio.id}}">Editar</a>
+                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${socio.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+
+        <script>
+            function confirmarEliminacion(enlace, idSocio) {
+                if (confirm("¿Está seguro de que desea eliminar este socio?")) {
+                    window.location.href = '/socio/eliminar?id=' + idSocio;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
+</html>

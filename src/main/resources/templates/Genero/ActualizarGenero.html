@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Género</title>
+    <link rel="stylesheet" href="/css/actualizar.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h2>Actualizar Género</h2>
+
+            <form id="actualizarGeneroForm" action="/genero/actualizar" method="post">
+                
+                <!-- Campo oculto para el ID del género -->
+                <input type="hidden" id="idGenero" th:field="${genero.idGenero}" />
+
+                <!-- Campo para el nombre del género -->
+                <div class="form-group">
+                    <label for="nombre">Nombre del género:</label><br>
+                    <input type="text" id="nombre" th:field="${genero.nombre}" required><br><br>
+                </div>
+
+                <!-- Campo para la descripción del género -->
+                <div class="form-group">
+                    <label for="descripcion">Descripción del género:</label><br>
+                    <input type="text" id="descripcion" th:field="${genero.descripcion}" required><br><br>
+                </div>
+
+                <input type="submit" value="Actualizar">
+            </form>
+
+            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+        </div>
+    </div>
+
+    <script>
+        // Validación del formulario
+        document.getElementById("actualizarGeneroForm").addEventListener("submit", function(event) {
+            var nombre = document.getElementById("nombre").value;
+            var descripcion = document.getElementById("descripcion").value;
+            
+            // Validar que el nombre del género no esté vacío
+            if (nombre.trim() === "") {
+                alert("Por favor ingrese el nombre del género.");
+                event.preventDefault();
+            }
+            
+            // Validar que la descripción no esté vacía
+            if (descripcion.trim() === "") {
+                alert("Por favor ingrese la descripción del género.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

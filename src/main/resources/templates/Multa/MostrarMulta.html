@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Multa</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/mostrar.css">
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Multas</h2>
+        <a href="/menu" class="button volver">Volver</a>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/multa/guardar" class="button">Agregar una nueva Multa</a>
+        </div>
+        <form th:action="@{/multa/filtrarPorSociosMasMultados}" th:method="get">
+            <button type="submit">Ver Socios Más Multados</button>
+        </form>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Monto</th>
+                <th>Días de Atraso</th>   
+                <th>Cancelada</th> 
+                <th>Libro Prestado</th>
+                <th>Socio</th>
+                <th>Acciones</th>     
+            </tr >
+            <tr th:each="multa : ${multas}"> 
+                <td th:text="${multa.monto}"></td>
+                <td th:text="${multa.dias_atraso}"></td>
+                <td th:text="${multa.cancelada}"></td>
+                <td th:text="${multa.prestamo.libro.titulo}"></td>
+                <td th:text="${multa.prestamo.socio.persona.nombre + ' ' + multa.prestamo.socio.persona.primerApellido + ' ' + multa.prestamo.socio.persona.segundoApellido}"></td>
+                <td><a class="editar-button" th:href="@{'/multa/actualizar?id=' + ${multa.id}}">Editar</a>
+                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${multa.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+        
+        <script>
+            function confirmarEliminacion(enlace, idMulta) {
+                if (confirm("¿Está seguro de que desea eliminar esta multa?")) {
+                    window.location.href = '/multa/eliminar?id=' + idMulta;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
+</html>

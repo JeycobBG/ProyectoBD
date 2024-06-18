@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Módulo Préstamo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/mostrar.css">
+</head>
+<body>
+    <div class="encabezado">
+        <a href="/menu" class="boton-volver"></a>
+        <h2 class="listado-titulo">Lista de Préstamos</h2>
+        <a href="/menu" class="button volver">Volver</a>
+    </div>
+    <div class="botonYBuscador"> 
+        <div>
+            <a href="/prestamo/guardar" class="button">Agregar un nuevo préstamo</a>
+        </div>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Fecha Préstamo</th>
+                <th>Fecha Devolución Prevista</th> 
+                <th>Identif. Socio</th> 
+                <th>Nombre Socio</th> 
+                <th>Libro</th> 
+                <th>Acciones</th>     
+            </tr >
+            <tr th:each="prestamo : ${prestamos}"> 
+                <td th:text="${prestamo.fechaPrestamo}"></td>
+                <td th:text="${prestamo.fechaDevolucionPrevista}"></td>
+                <td th:text="${prestamo.socio.persona.identificacion}"></td>
+                <td th:text="${prestamo.socio.persona.nombre + ' ' + prestamo.socio.persona.primerApellido + ' ' + prestamo.socio.persona.segundoApellido}"></td>
+                <td th:text="${prestamo.libro.titulo}"></td>
+                <td><a class="editar-button" th:href="@{'/prestamo/actualizar?id=' + ${prestamo.id}}">Editar</a>
+                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${prestamo.id} + '\')'">Eliminar</a></td>
+            </tr>
+        </table>
+
+        <script>
+            function confirmarEliminacion(enlace, idPrestamo) {
+                if (confirm("¿Está seguro de que desea eliminar este préstamo?")) {
+                    window.location.href = '/prestamo/eliminar?id=' + idPrestamo;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+</body>
+</html>
