@@ -25,8 +25,8 @@
                 <input type="checkbox" id="cancelada" name="cancelada" style="width: 20px; height: 20px; margin-left: 30px;"><br><br>
                 
                 <!-- Combo box para seleccionar el préstamo -->
-                <label for="prestamo">Préstamo:</label><br>
-                <select id="prestamo" name="prestamo" required>
+                <label for="id_prestamo">Préstamo:</label><br>
+                <select id="id_prestamo" name="id_prestamo" required>
                     <option value="">Selecciona un préstamo</option>
                     <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
                     <option th:each="prestamo : ${prestamos}" 
@@ -48,7 +48,7 @@
         document.getElementById("registrarMultaForm").addEventListener("submit", function(event) {
             var monto = document.getElementById("monto").value;
             var diasAtraso = document.getElementById("dias_atraso").value;
-            var prestamo = document.getElementById("prestamo").value;
+            var prestamo = document.getElementById("id_prestamo").value;
             
             // Validaciones
             if (monto.trim() === "" || diasAtraso.trim() === "" || prestamo === "") {
