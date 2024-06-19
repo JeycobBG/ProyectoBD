@@ -17,8 +17,9 @@
                 <a href="/editorial/guardar" class="button">Agregar una nueva editorial</a>
             </div>
             <form th:action="@{/editorial/filtrarConMasLibros}" th:method="get">
-                <label for="tipoFiltro" style="font-size: 18px;">Editorial con más libros publicados:</label>
+                <label for="tipoFiltro" style="font-size: 18px;">Seleccione el filtro deseado:</label>
                 <select name="top_n" class="select-filtro">
+                    <option disabled selected>Cantidad de Editoriales</option>
                     <option value="1">Top 1</option>
                     <option value="3">Top 3</option>
                     <option value="5" selected>Top 5</option>

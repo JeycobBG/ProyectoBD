@@ -4,7 +4,7 @@
     <title>Módulo Multa</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/mostrar.css">
+    <link rel="stylesheet" href="/css/mostrarMultaCB.css">
 </head>
 <body>
     <div class="encabezado">
@@ -17,7 +17,15 @@
             <a href="/multa/guardar" class="button">Agregar una nueva Multa</a>
         </div>
         <form th:action="@{/multa/filtrarPorSociosMasMultados}" th:method="get">
-            <button type="submit">Ver Socios Más Multados</button>
+           <label for="tipoFiltro" style="font-size: 18px;">Seleccione el filtro deseado:</label>
+            <select name="top_n" class="select-filtro">
+                    <option disabled selected>Socio más multado</option>
+                    <option value="1">Top 1</option>
+                    <option value="3">Top 3</option>
+                    <option value="5" selected>Top 5</option>
+                    <option value="10">Top 10</option>
+                </select>
+            <button type="submit">Enviar</button>
         </form>
     </div>
     <div>

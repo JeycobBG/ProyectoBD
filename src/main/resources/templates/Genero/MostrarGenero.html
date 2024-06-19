@@ -1,55 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Módulo Género</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/mostrar.css">
-</head>
-<body>
-    <div class="encabezado">
-        <a href="/menu" class="boton-volver"></a>
-        <h2 class="listado-titulo">Lista de Géneros</h2>
-        <a href="/menu" class="button volver">Volver</a>
-    </div>
-    <div class="botonYBuscador"> 
-        <div>
-            <a href="/genero/guardar" class="button">Agregar un nuevo Género</a>
+    <head>
+        <title>Módulo Género</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/mostrarGeneroCB.css">
+    </head>
+    <body>
+        <div class="encabezado">
+            <a href="/menu" class="boton-volver"></a>
+            <h2 class="listado-titulo">Lista de Géneros</h2>
+            <a href="/menu" class="button volver">Volver</a>
         </div>
-        <form th:action="@{/genero/filtrarConMasLibrosPublicados}" th:method="get">
-            <button type="submit">Géneros con Más Libros Publicados</button>
+        <div class="botonYBuscador"> 
+            <div>
+                <a href="/genero/guardar" class="button">Agregar un nuevo Género</a>
+            </div>
+           <form th:action="@{/genero/filtrarConMasLibrosPublicados}" th:method="get">
+            <label for="tipoFiltro" style="font-size: 18px;">Seleccione el filtro deseado:</label>
+            <select name="top_n" class="select-filtro">
+                    <option disabled selected>Cantidad de Géneros</option>
+                    <option value="1">Top 1</option>
+                    <option value="3">Top 3</option>
+                    <option value="5" selected>Top 5</option>
+                    <option value="10">Top 10</option>
+                </select>
+            <button type="submit">Enviar</button>
         </form>
-    </div>
-    <div>
-        <table class="table table-bordered">
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>    
-                <th>Acciones</th>     
-            </tr >
-            <tr th:each="genero : ${generos}"> 
-                <td th:text="${genero.nombre}"></td>
-                <td th:text="${genero.descripcion}"></td>
-                <td>
-                    <form method="post" th:action="@{/genero/actualizarForm}">
-                        <input type="hidden" th:name="id" th:value="${genero.id}" />
-                        <button type="submit" class="editar-button">Editar</button>
-                    </form>
-                    <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${genero.id} + '\')'">Eliminar</a>
-                </td>
-            </tr>
-        </table>
+        </div>
+        <div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>    
+                    <th>Acciones</th>     
+                </tr >
+                <tr th:each="genero : ${generos}"> 
+                    <td th:text="${genero.nombre}"></td>
+                    <td th:text="${genero.descripcion}"></td>
+                    <td>
+                        <form method="post" th:action="@{/genero/actualizarForm}">
+                            <input type="hidden" th:name="id" th:value="${genero.id}" />
+                            <button type="submit" class="editar-button">Editar</button>
+                        </form>
+                        <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${genero.id} + '\')'">Eliminar</a>
+                    </td>
+                </tr>
+            </table>
 
-        <script>
-            function confirmarEliminacion(enlace, idGenero) {
-                if (confirm("¿Está seguro de que desea eliminar esta Género?")) {
-                    window.location.href = '/genero/eliminar?id=' + idGenero;
+            <script>
+                function confirmarEliminacion(enlace, idGenero) {
+                    if (confirm("¿Está seguro de que desea eliminar esta Género?")) {
+                        window.location.href = '/genero/eliminar?id=' + idGenero;
+                    }
                 }
-            }
-        </script>
-    </div>
+            </script>
+        </div>
 
-    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
-</body>
+        <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+        <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+    </body>
 </html>
