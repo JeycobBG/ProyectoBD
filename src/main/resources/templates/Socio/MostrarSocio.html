@@ -53,18 +53,11 @@
                         <input type="hidden" th:name="id" th:value="${socio.id}" />
                         <button type="submit" class="editar-button">Editar</button>
                     </form>
-                    <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${socio.id} + '\')'">Eliminar</a>
+                    <a href="javascript:void(0);" class="eliminar-button" th:onclick="'confirmarEliminacion(\'socio\', ' + ${socio.id} + ');'">Eliminar</a>
                 </td>
             </tr>
         </table>
-
-        <script>
-            function confirmarEliminacion(enlace, idSocio) {
-                if (confirm("¿Está seguro de que desea eliminar este socio?")) {
-                    window.location.href = '/socio/eliminar?id=' + idSocio;
-                }
-            }
-        </script>
+         <script src="/js/deleteConfirmation.js"></script>
     </div>
 
     <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
