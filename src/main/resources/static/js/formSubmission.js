@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById('registrarAutorForm'); // Asegúrate de que este ID coincida con el ID de tu formulario
+    const form = document.getElementById('registrarForm'); // Asegúrate de que este ID coincida con el ID de tu formulario
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault(); // Previene el envío normal del formulario
