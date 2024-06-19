@@ -84,7 +84,7 @@ public class SocioController {
         ""
         );
         
-        return "/";
+        return "redirect:/socio/leer";
     }
     
     @PostMapping("/actualizarForm")

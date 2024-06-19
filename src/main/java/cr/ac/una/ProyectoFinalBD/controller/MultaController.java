@@ -77,7 +77,7 @@ public class MultaController {
         
         String resultado = multaService.actualizar(id_multa, monto, dias_atraso, cancelada);
         System.out.println("resultado = " + resultado);
-        return "/";
+        return "redirect:/multa/leer";
     }
     
     @PostMapping("/actualizarForm")

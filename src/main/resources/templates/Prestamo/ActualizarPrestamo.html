@@ -14,13 +14,13 @@
                 <input type="hidden" id="id" name="id" th:value="${prestamo.id}" />
                 
                 <label for="fechaPrestamo">Fecha de Préstamo:</label><br>
-                <input type="date" id="fecha_prestamo" name="fecha_prestamo" th:field="${prestamo.fechaPrestamo}" required><br>
+                <input type="date" id="fecha_prestamo" name="fecha_prestamo" th:value="${prestamo.fechaPrestamo}" required><br>
 
                 <label for="fechaDevolucionPrevista">Fecha de Devolución Prevista:</label><br>
-                <input type="date" id="fecha_devolucion_prevista" name="fecha_devolucion_prevista" th:field="${prestamo.fechaDevolucionPrevista}" required><br>
+                <input type="date" id="fecha_devolucion_prevista" name="fecha_devolucion_prevista" th:value="${prestamo.fechaDevolucionPrevista}" required><br>
 
                 <label for="libro">Libro:</label><br>
-                <select id="libro" name="id_libro" th:field="${prestamo.libro.id}" required>
+                <select id="libro" name="id_libro" th:value="${prestamo.libro.id}" required>
                     <!-- Cargar dinámicamente los libros desde el backend -->
                     <option th:each="libro : ${libros}" 
                             th:value="${libro.id}" 
@@ -29,7 +29,7 @@
                 </select><br>
 
                 <label for="socio">Socio:</label><br>
-                <select id="socio" name="id_socio" th:field="${prestamo.socio.id}" required>
+                <select id="socio" name="id_socio" th:value="${prestamo.socio.id}" required>
                     <!-- Cargar dinámicamente los socios desde el backend -->
                     <option th:each="socio : ${socios}" 
                             th:value="${socio.id}" 

@@ -85,7 +85,7 @@ public class PrestamoController {
         
         String resultado = prestamoService.actualizar(id_prestamo, fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio);
         System.out.println("resultado = "+  resultado);
-        return "/";
+        return "redirect:/prestamo/leer";
     }
     
     @PostMapping("/actualizarForm")

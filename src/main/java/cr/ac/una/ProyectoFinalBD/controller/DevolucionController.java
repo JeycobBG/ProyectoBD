@@ -64,7 +64,7 @@ public class DevolucionController {
     
     @PostMapping("/actualizar")
     public String actualizar(@RequestParam("id_prestamo")Integer id_prestamo,
-            @RequestParam("fecha_devolucion") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_efectuada){
+            @RequestParam("fecha_devolucion_efectuada") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_efectuada){
         
         String[] resultado = devolucionService.actualizar(id_prestamo, fecha_devolucion_efectuada);
         

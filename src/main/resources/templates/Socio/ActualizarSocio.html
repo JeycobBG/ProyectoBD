@@ -15,50 +15,42 @@
                 
                 <!-- Campo para el nombre -->
                 <label for="nombre">Nombre:</label><br>
-                <input type="text" id="nombre" name="nombre" th:field="${socio.persona.nombre}" required><br>
+                <input type="text" id="nombre" name="nombre" th:value="${socio.persona.nombre}" required><br>
 
                 <!-- Campo para el primer apellido -->
                 <label for="primer_apellido">Primer Apellido:</label><br>
-                <input type="text" id="primer_apellido" name="primer_apellido" th:field="${socio.persona.primerApellido}" required><br>
+                <input type="text" id="primer_apellido" name="primer_apellido" th:value="${socio.persona.primerApellido}" required><br>
 
                 <!-- Campo para el segundo apellido -->
                 <label for="segundo_apellido">Segundo Apellido:</label><br>
-                <input type="text" id="segundo_apellido" name="segundo_apellido" th:field="${socio.persona.segundoApellido}" required><br>
+                <input type="text" id="segundo_apellido" name="segundo_apellido" th:value="${socio.persona.segundoApellido}" required><br>
 
                 <!-- Campo para la identificación -->
                 <label for="identificacion">Identificación:</label><br>
-                <input type="text" id="identificacion" name="identificacion" th:field="${socio.persona.identificacion}" required><br>
+                <input type="text" id="identificacion" name="identificacion" th:value="${socio.persona.identificacion}" required><br>
 
                 <!-- Campo para el código postal -->
                 <label for="codigo_postal">Código Postal:</label><br>
-                <input type="text" id="codigo_postal" name="codigo_postal" th:field="${socio.persona.direccion.codigoPostal}" pattern="[0-9]*" required><br>
+                <input type="text" id="codigo_postal" name="codigo_postal" th:value="${socio.persona.direccion.codigoPostal}" pattern="[0-9]*" required><br>
 
                 <!-- Campo para la descripción de la dirección -->
                 <label for="descripcion_direccion">Dirección:</label><br>
-                <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:field="${socio.persona.direccion.descripcion}" required><br>
-                <!--
-                <!-- Combo box para seleccionar el distrito 
-                <label for="id_distrito">Distrito:</label><br>
-                <select id="id_distrito" th:field="${socio.distrito.id}" required>
-                    <option value="">Selecciona un distrito</option>
-                    <!-- Aquí puedes cargar dinámicamente las opciones de distrito desde el backend 
-                    <option th:each="distrito : ${distritos}" 
-                            th:value="${distrito.id}" 
-                            th:text="${distrito.nombre}">
-                    </option>
-                </select><br>-->
-
+                <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:value="${socio.persona.direccion.descripcion}" required><br>
+                <div class="form-group">
+                    <label for="distrito">Distrito:</label>
+                    <input type="text" id="id_distrito" name="id_distrito" th:value="${socio.persona.direccion.distrito.id}" required>
+                </div> 
                 <!-- Campo para el número de teléfono -->
                 <label for="numero_telefono">Número de Teléfono:</label><br>
-                <input type="text" id="numero_telefono" name="numero_telefono" th:field="${socio.persona.telefono[0].numero}" required><br>
+                <input type="text" id="numero_telefono" name="numero_telefono" th:value="${socio.persona.telefono[0].numero}" required><br>
 
                 <!-- Campo para el correo electrónico -->
                 <label for="email">Correo Electrónico:</label><br>
-                <input type="email" id="email" name="email" th:field="${socio.persona.correoElectronico[0].email}" required><br>
+                <input type="email" id="email" name="email" th:value="${socio.persona.correoElectronico[0].email}" required><br>
 
                 <!-- Campo para la fecha de registro -->
                 <label for="fecha_registro">Fecha de Registro:</label><br>
-                <input type="date" id="fecha_registro" name="fecha_registro" th:field="${socio.fechaRegistro}" required><br>
+                <input type="date" id="fecha_registro" name="fecha_registro" th:value="${socio.fechaRegistro}" required><br>
 
                 <input type="submit" value="Actualizar">
             </form>
