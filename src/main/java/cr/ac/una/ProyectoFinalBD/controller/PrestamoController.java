@@ -13,6 +13,7 @@ import cr.ac.una.ProyectoFinalBD.service.SocioService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,11 +39,10 @@ public class PrestamoController {
     SocioService socioService;
     
     @PostMapping("/guardar")
-    public String guardar(@RequestParam("fecha_prestamo")Date fecha_prestamo,
-            @RequestParam("fecha_devolucion_prevista")Date fecha_devolucion_prevista,
+    public String guardar(@RequestParam("fecha_prestamo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_prestamo,
+            @RequestParam("fecha_devolucion_prevista") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_prevista,
             @RequestParam("id_libro")Integer id_libro,
-            @RequestParam("id_socio")Integer id_socio, 
-            @RequestParam("error")String error){
+            @RequestParam("id_socio")Integer id_socio){
         
         
         String resultado = prestamoService.guardar(fecha_prestamo,fecha_devolucion_prevista, id_libro, id_socio);
@@ -52,14 +52,18 @@ public class PrestamoController {
     }
     
     @GetMapping("/guardar")
-    public String agregar(){
+    public String agregar(Model modelo){
+        List<Libro> libros = libroService.leer();
+        List<Socio> socios = socioService.read("");
+        
+        modelo.addAttribute("libros", libros);
+        modelo.addAttribute("socios", socios);
         
         return "Prestamo/CrearPrestamo";
     }
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        
        List<Prestamo> prestamos = prestamoService.leer();
        
        for(Prestamo prest : prestamos){
@@ -68,15 +72,14 @@ public class PrestamoController {
        }
        
        modelo.addAttribute("prestamos", prestamos);
-        
        return "Prestamo/MostrarPrestamo";
         
     }
     
     @PostMapping("/actualizar")
     public String actualizar(@PathVariable("id") Integer id_prestamo,
-            @RequestParam("fecha_prestamo")Date fecha_prestamo,
-            @RequestParam("fecha_devolucion_prevista")Date fecha_devolucion_prevista,
+            @RequestParam("fecha_prestamo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_prestamo,
+            @RequestParam("fecha_devolucion_prevista") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_prevista,
             @RequestParam("id_libro")Integer id_libro,
             @RequestParam("id_socio")Integer id_socio){
         

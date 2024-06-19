@@ -44,7 +44,9 @@ public class MultaController {
     }
     
     @GetMapping("/guardar")
-    public String guardar(){
+    public String guardar(Model modelo){
+        List<Prestamo> prestamos = prestamoService.leer();
+        modelo.addAttribute("prestamos", prestamos);
         
         return "Multa/CrearMulta";
     }

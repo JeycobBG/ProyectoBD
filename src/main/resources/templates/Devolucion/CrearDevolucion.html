@@ -19,11 +19,9 @@
                 <div class="form-group">s
                     <label for="id_prestamo">Préstamo:</label>
                     <select id="id_prestamo" name="id_prestamo" required>
-                        <option value="">Selecciona un préstamo</option>
-                        <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
                         <option th:each="prestamo : ${prestamos}" 
                                 th:value="${prestamo.id}" 
-                                th:text="${prestamo.detalle}">
+                                th:text="${prestamo.id}">
                         </option>
                     </select>
                 </div>

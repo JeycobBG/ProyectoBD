@@ -11,6 +11,7 @@ import cr.ac.una.ProyectoFinalBD.service.PrestamoService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,10 +33,8 @@ public class DevolucionController {
     PrestamoService prestamoService;
     
     @PostMapping("/guardar")
-    public String guardar(@RequestParam("fecha_devolucion_efectuada")Date fecha_devolucion_efectuada,
-            @RequestParam("id_prestamo")Integer id_prestamo,
-            @RequestParam("error")String error,
-            @RequestParam("advertencia_multa")String advertencia_multa){
+    public String guardar(@RequestParam("fecha_devolucion_efectuada") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_efectuada,
+            @RequestParam("id_prestamo")Integer id_prestamo){
         
         String[] resultado = devolucionService.insertar(fecha_devolucion_efectuada, id_prestamo);
         
@@ -44,7 +43,9 @@ public class DevolucionController {
     }
     
     @GetMapping("/guardar")
-    public String agregar(){
+    public String agregar(Model modelo){
+        List<Prestamo> prestamos = prestamoService.leer();
+        modelo.addAttribute("prestamos", prestamos);
         
         return "Devolucion/CrearDevolucion";
     }
@@ -63,7 +64,7 @@ public class DevolucionController {
     
     @PostMapping("/actualizar")
     public String actualizar(@RequestParam("id_prestamo")Integer id_prestamo,
-            @RequestParam("fecha_devolucion")Date fecha_devolucion_efectuada){
+            @RequestParam("fecha_devolucion") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_efectuada){
         
         String[] resultado = devolucionService.actualizar(id_prestamo, fecha_devolucion_efectuada);
         

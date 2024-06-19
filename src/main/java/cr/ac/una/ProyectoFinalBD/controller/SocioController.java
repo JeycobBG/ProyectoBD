@@ -9,6 +9,7 @@ import cr.ac.una.ProyectoFinalBD.service.SocioService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,7 @@ public class SocioController {
             @RequestParam("segundo_apellido")String segundo_apellido, @RequestParam("identificacion") String identificacion,
             @RequestParam("codigo_postal")String codigo_postal,       @RequestParam("descripcion_direccion") String descripcion_direccion,
             @RequestParam("id_distrito")Integer id_distrito,          @RequestParam("numero_telefono") String numero_telefono,
-            @RequestParam("email")String email,                       @RequestParam("fecha_registro")Date fecha_registro){
+            @RequestParam("email")String email,                       @RequestParam("fecha_registro") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_registro){
         
         String error_message = "";
         
@@ -66,7 +67,7 @@ public class SocioController {
             @RequestParam("segundo_apellido")String segundo_apellido, @RequestParam("identificacion") String identificacion,
             @RequestParam("codigo_postal")String codigo_postal,       @RequestParam("descripcion_direccion") String descripcion_direccion,
             @RequestParam("id_distrito")Integer id_distrito,          @RequestParam("numero_telefono") String numero_telefono,
-            @RequestParam("email")String email,                       @RequestParam("fecha_registro")Date fecha_registro){
+            @RequestParam("email")String email,                       @RequestParam("fecha_registro") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_registro){
         
         String resultado = socioService.update(
         id,

@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -100,4 +101,20 @@ public class Prestamo {
     public void setDevolucion(Devolucion devolucion) {
         this.devolucion = devolucion;
     }   
+    
+    public String getFechaDevolucionPrevistaFormateada() {
+        if (fechaDevolucionPrevista != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            return formatter.format(fechaDevolucionPrevista);
+        }
+        return "";
+    }
+    
+    public String getFechaPestamoFormateada() {
+        if (fechaPrestamo != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            return formatter.format(fechaPrestamo);
+        }
+        return "";
+    }
 }

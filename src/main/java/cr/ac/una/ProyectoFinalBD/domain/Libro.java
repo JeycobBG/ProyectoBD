@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -141,4 +142,12 @@ public class Libro {
     public void setPrestamos(List<Prestamo> prestamos) {
         this.prestamos = prestamos;
     }   
+    
+    public String getFechaPublicacionFormateada() {
+        if (fechaPublicacion != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            return formatter.format(fechaPublicacion);
+        }
+        return "";
+    }
 }

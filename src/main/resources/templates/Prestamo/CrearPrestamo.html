@@ -19,23 +19,19 @@
 
                 <label for="id_libro">Libro:</label><br>
                 <select id="id_libro" name="id_libro" required>
-                    <option value="">Selecciona un libro</option>
-                    <!-- Falta corregir estoo -->
-                    
-                    <option value="1">Libro 1</option>
-                    <option value="2">Libro 2</option>
-                    <option value="3">Libro 3</option>
-                </select><br>
+                    <option th:each="libro : ${libros}" 
+                            th:value="${libro.id}" 
+                            th:text="${libro.titulo}">
+                    </option>
+                </select>
 
                 <label for="id_socio">Socio:</label><br>
                 <select id="id_socio" name="id_socio" required>
-                    <option value="">Selecciona un socio</option>
-                    <!-- Falta coregir estoo -->
-                    
-                    <option value="1">Socio 1</option>
-                    <option value="2">Socio 2</option>
-                    <option value="3">Socio 3</option>
-                </select><br>
+                    <option th:each="socio : ${socios}" 
+                            th:value="${socio.id}" 
+                            th:text="${socio.persona.nombre + ' ' + socio.persona.primerApellido}">
+                    </option>
+                </select>
 
                 <input type="submit" value="Guardar">
             </form>

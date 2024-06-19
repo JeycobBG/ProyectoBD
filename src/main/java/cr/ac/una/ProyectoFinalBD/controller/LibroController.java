@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +49,7 @@ public class LibroController {
     public String guardar(@RequestParam("ISBN") String isbn,
             @RequestParam("titulo") String titulo,
             @RequestParam("sinopsis") String sinopsis,
-            @RequestParam("fecha_publicacion") Date fechaPublicacion,
+            @RequestParam("fecha_publicacion") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaPublicacion,
             @RequestParam("cantidad") Integer cantidad,
             @RequestParam("id_autor") Integer idAutor,
             @RequestParam("id_editorial") Integer idEditorial,
@@ -70,36 +71,21 @@ public class LibroController {
     }
     
     @GetMapping("/guardar")
-    public String agregar() {
+    public String agregar(Model modelo) {
+        List<Autor> autores = autorService.leer("");
+        List<Editorial> editoriales = editorialService.leer("");
+        List<Genero> generos = generoService.leer("");
+                
+        modelo.addAttribute("autores", autores);
+        modelo.addAttribute("editoriales", editoriales);
+        modelo.addAttribute("generos", generos);
         
         return "Libro/CrearLibro";
     }
 
     @GetMapping("/leer")
     public String leer(Model modelo) {
-        
-
-        String error = "";
         List<Libro> libros = libroService.leer();
-
-        if (error.isBlank()) {
-            modelo.addAttribute("libros", libros);
-
-            for (Libro lib : libros) {
-                List<Genero> generos = lib.getGeneros();
-                System.out.print("Nuevo libro> " + lib.getTitulo() + " con generos: ");
-
-                for (Genero gen : generos) {
-                    System.out.print(gen.getNombre() + ", ");
-                }
-
-                System.out.print("\n");
-            }
-        } else {
-            modelo.addAttribute("error", error);
-            System.out.println("error = " + error);
-        }
-
         modelo.addAttribute("libros", libros);
         return "Libro/MostrarLibro";
     }
@@ -115,6 +101,7 @@ public class LibroController {
         modelo.addAttribute("autores", autores);
         modelo.addAttribute("editoriales", editoriales);
         modelo.addAttribute("generos", generos);
+        
         return "Libro/ActualizarLibro";
     }
     
@@ -123,7 +110,7 @@ public class LibroController {
         @RequestParam("ISBN") String isbn,
             @RequestParam("titulo") String titulo,
             @RequestParam("sinopsis") String sinopsis,
-            @RequestParam("fecha_publicacion") Date fechaPublicacion,
+            @RequestParam("fecha_publicacion") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaPublicacion,
             @RequestParam("cantidad") Integer cantidad,
             @RequestParam("id_autor") Integer idAutor,
             @RequestParam("id_editorial") Integer idEditorial,

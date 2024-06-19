@@ -9,7 +9,7 @@
         <div class="container">
             <h2>Registrar un nuevo libro</h2>
 
-            <form id="registrarLibroForm" action="/libro/guardar" method="post">
+            <form id="registrarLibroForm" action="/libro/guardar" method="post" onsubmit="concatenarIds()">
 
                 <!-- Campo para el ISBN del libro -->
                 <div class="form-group">
@@ -45,12 +45,9 @@
                 <div class="form-group">
                     <label for="id_autor">Autor:</label>
                     <select id="id_autor" name="id_autor" required>
-                        <option value="">Selecciona un autor</option>
-                        <!-- Falta corregir estooo -->
-                        
                         <option th:each="autor : ${autores}" 
                                 th:value="${autor.id}" 
-                                th:text="${autor.nombre}">
+                                th:text="${autor.persona.nombre}">
                         </option>
                     </select>
                 </div>
@@ -59,9 +56,6 @@
                 <div class="form-group">
                     <label for="id_editorial">Editorial:</label>
                     <select id="id_editorial" name="id_editorial" required>
-                        <option value="">Selecciona una editorial</option>
-                        <!-- Falta corregir estooo -->
-                        
                         <option th:each="editorial : ${editoriales}" 
                                 th:value="${editorial.id}" 
                                 th:text="${editorial.nombre}">
@@ -72,16 +66,14 @@
                 <!-- Combo box para seleccionar los géneros -->
                 <div class="form-group">
                     <label for="id_generos">Géneros:</label>
-                    <select id="id_generos" name="id_generos" multiple required>
-                        <option value="">Selecciona uno o más géneros</option>
-                        <!-- Falta corregir estoo -->
-                        s
+                    <select id="generos" name="generos" multiple required>
                         <option th:each="genero : ${generos}" 
                                 th:value="${genero.id}" 
                                 th:text="${genero.nombre}">
                         </option>
                     </select>
                 </div>
+                <input type="hidden" id="id_generos" name="id_generos" />
                 
                 <input type="submit" value="Guardar">
             </form>
@@ -124,6 +116,18 @@
                 }
             }
         });
+        
+        //Concatenar ids:
+        function concatenarIds() {
+            const select = document.getElementById('generos');
+            let selectedIds = [];
+            for (let option of select.options) {
+                if (option.selected) {
+                    selectedIds.push(option.value);
+                }
+            }
+            document.getElementById('id_generos').value = selectedIds.join(',');
+        }
     </script>
 </body>
 </html>

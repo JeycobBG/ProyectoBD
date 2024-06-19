@@ -9,6 +9,7 @@ import cr.ac.una.ProyectoFinalBD.service.EditorialService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class EditorialController {
     
     @PostMapping("/guardar")
     public String add(@RequestParam("nombre")String nombre,                     
-        @RequestParam("fecha_fundacion")Date fecha_fundacion,
+        @RequestParam("fecha_fundacion") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_fundacion,
         @RequestParam("codigo_postal")String codigo_postal, 
         @RequestParam("descripcion_direccion") String descripcion_direccion,
         @RequestParam("id_distrito")Integer id_distrito){
@@ -51,7 +52,7 @@ public class EditorialController {
     @PostMapping("/actualizar")
     public String update(@PathVariable("id") Integer id,
         @RequestParam("nombre")String nombre,                     
-        @RequestParam("fecha_fundacion")Date fecha_fundacion,
+        @RequestParam("fecha_fundacion") @DateTimeFormat(pattern = "yyyy-MM-dd")Date fecha_fundacion,
         @RequestParam("codigo_postal")String codigo_postal, 
         @RequestParam("descripcion_direccion") String descripcion_direccion,
         @RequestParam("id_distrito")Integer id_distrito){
