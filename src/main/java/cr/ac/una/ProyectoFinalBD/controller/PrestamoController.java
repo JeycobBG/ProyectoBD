@@ -77,7 +77,7 @@ public class PrestamoController {
     }
     
     @PostMapping("/actualizar")
-    public String actualizar(@PathVariable("id") Integer id_prestamo,
+    public String actualizar(@RequestParam("id") Integer id_prestamo,
             @RequestParam("fecha_prestamo") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_prestamo,
             @RequestParam("fecha_devolucion_prevista") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_prevista,
             @RequestParam("id_libro")Integer id_libro,

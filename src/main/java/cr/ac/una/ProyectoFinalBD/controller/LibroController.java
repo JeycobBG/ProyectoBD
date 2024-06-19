@@ -106,7 +106,7 @@ public class LibroController {
     }
     
     @PostMapping("/actualizar")
-    public String actualizar (@PathVariable("id_libro") Integer id_libro,
+    public String actualizar (@RequestParam("id") Integer id_libro,
         @RequestParam("ISBN") String isbn,
             @RequestParam("titulo") String titulo,
             @RequestParam("sinopsis") String sinopsis,

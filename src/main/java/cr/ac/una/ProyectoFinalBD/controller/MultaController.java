@@ -68,7 +68,7 @@ public class MultaController {
     }
     
     @PostMapping("/actualizar")
-    public String actualizar(@PathVariable("id") Integer id_multa,
+    public String actualizar(@RequestParam("id") Integer id_multa,
             @RequestParam("monto")Double monto,
             @RequestParam("dias_atraso")Integer dias_atraso,
             @RequestParam("cancelada")Boolean cancelada,

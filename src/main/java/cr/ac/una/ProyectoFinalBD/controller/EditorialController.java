@@ -50,18 +50,15 @@ public class EditorialController {
     }
     
     @PostMapping("/actualizar")
-    public String update(@PathVariable("id") Integer id,
+    public String update(@RequestParam("id") Integer id,
         @RequestParam("nombre")String nombre,                     
         @RequestParam("fecha_fundacion") @DateTimeFormat(pattern = "yyyy-MM-dd")Date fecha_fundacion,
         @RequestParam("codigo_postal")String codigo_postal, 
         @RequestParam("descripcion_direccion") String descripcion_direccion,
         @RequestParam("id_distrito")Integer id_distrito){
         
-        
-        String error = "";
-        
         String resultado = editorialService.update(id, nombre, fecha_fundacion, codigo_postal,
-                descripcion_direccion, id_distrito, error);
+                descripcion_direccion, id_distrito, "");
         
         System.out.println("resultado = " + resultado);
         return "redirect:/editorial/leer";

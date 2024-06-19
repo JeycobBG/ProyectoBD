@@ -49,8 +49,8 @@ public class AutorController {
     }
     
     @PostMapping("/actualizar")
-    public String update(@PathVariable("id_autor") Integer id_autor,
-        @RequestParam("nombre")String nombre,                     @RequestParam("primer_apellido")String primer_apellido,
+    public String update(@RequestParam("id") Integer id_autor,
+            @RequestParam("nombre")String nombre,                     @RequestParam("primer_apellido")String primer_apellido,
             @RequestParam("segundo_apellido")String segundo_apellido, @RequestParam("identificacion") String identificacion,
             @RequestParam("codigo_postal")String codigo_postal,       @RequestParam("descripcion_direccion") String descripcion_direccion,
             @RequestParam("id_distrito")Integer id_distrito,          @RequestParam("numero_telefono") String numero_telefono,

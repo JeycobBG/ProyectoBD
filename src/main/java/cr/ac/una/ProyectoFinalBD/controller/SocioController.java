@@ -62,7 +62,7 @@ public class SocioController {
     }
     
     @PostMapping("/actualizar")
-    public String update(@PathVariable("id") Integer id,
+    public String update(@RequestParam("id") Integer id,
         @RequestParam("nombre")String nombre,                     @RequestParam("primer_apellido")String primer_apellido,
             @RequestParam("segundo_apellido")String segundo_apellido, @RequestParam("identificacion") String identificacion,
             @RequestParam("codigo_postal")String codigo_postal,       @RequestParam("descripcion_direccion") String descripcion_direccion,

@@ -12,18 +12,18 @@
             <form id="actualizarGeneroForm" action="/genero/actualizar" method="post">
                 
                 <!-- Campo oculto para el ID del género -->
-                <input type="hidden" id="idGenero" th:field="${genero.id}" />
+                <input type="hidden" id="id" name="id" th:value="${genero.id}" />
 
                 <!-- Campo para el nombre del género -->
                 <div class="form-group">
                     <label for="nombre">Nombre del género:</label><br>
-                    <input type="text" id="nombre" th:field="${genero.nombre}" required><br><br>
+                    <input type="text" id="nombre" name="nombre" th:field="${genero.nombre}" required><br><br>
                 </div>
 
                 <!-- Campo para la descripción del género -->
                 <div class="form-group">
                     <label for="descripcion">Descripción del género:</label><br>
-                    <input type="text" id="descripcion" th:field="${genero.descripcion}" required><br><br>
+                    <input type="text" id="descripcion" name="descripcion" th:field="${genero.descripcion}" required><br><br>
                 </div>
 
                 <input type="submit" value="Actualizar">

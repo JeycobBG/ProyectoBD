@@ -41,7 +41,7 @@ public class GeneroController {
     }
 
     @PostMapping("/actualizar")
-    public String update(@PathVariable("id")Integer id,
+    public String update(@RequestParam("id")Integer id,
         @RequestParam("nombre")String nombre, 
             @RequestParam("descripcion")String descripcion) {
 

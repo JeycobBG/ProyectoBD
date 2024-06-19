@@ -13,15 +13,15 @@
             
             <form id="actualizarDevolucionForm" action="/devolucion/actualizar" method="post">
                 <!-- Campo oculto para el ID de la devolución -->
-                <input type="hidden" id="idDevolucion" th:field="${devolucion.id}" />
+                <input type="hidden" id="id" name="id" th:value="${devolucion.id}" />
 
                 <div class="form-group">
                     <label for="fechaDevolucionEfectuada">Fecha de Devolución Efectuada:</label>
-                    <input type="date" id="fechaDevolucionEfectuada" th:field="${devolucion.fechaDevolucionEfectuada}" required>
+                    <input type="date" id="fecha_devolucion_efectuada" name="fecha_devolucion_efectuada" th:field="${devolucion.fechaDevolucionEfectuada}" required>
                 </div>
                 <div class="form-group">
                     <label for="prestamo">Préstamo:</label>
-                    <select id="prestamo" th:field="${devolucion.prestamo.id}" required>
+                    <select id="prestamo" name="id_prestamo" th:field="${devolucion.prestamo.id}" required>
                         <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
                         <option th:each="prestamo : ${prestamos}" 
                                 th:value="${prestamo.id}" 

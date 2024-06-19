@@ -12,24 +12,24 @@
                 <h2>Actualizar Multa</h2>
                 
                 <!-- Campo oculto para el ID de la multa -->
-                <input type="hidden" id="idMulta" th:field="${multa.id}" />
+                <input type="hidden" id="id" name="id" th:value="${multa.id}" />
 
                 <!-- Campo para el monto de la multa -->
                 <label for="monto">Monto:</label><br>
-                <input type="text" id="monto" th:field="${multa.monto}" pattern="[0-9]*" required><br><br>
+                <input type="text" id="monto" name="monto" th:field="${multa.monto}" pattern="[0-9]*" required><br><br>
                 
                 <!-- Campo para los días de atraso -->
                 <label for="dias_atraso">Días de Atraso:</label><br>
-                <input type="text" id="dias_atraso" th:field="${multa.dias_atraso}" pattern="[0-9]*" required><br><br>
+                <input type="text" id="dias_atraso" name="dias_atraso" th:field="${multa.dias_atraso}" pattern="[0-9]*" required><br><br>
                 
                 <!-- Campo para indicar si la multa está cancelada -->
                 <label for="cancelada">Cancelada:</label><br>
                 <!-- Aumentar el tamaño del checkbox y agregar margen izquierdo -->
-                <input type="checkbox" id="cancelada" th:field="${multa.cancelada}" style="width: 20px; height: 20px; margin-left: 30px;"><br><br>
+                <input type="checkbox" id="cancelada" name="cancelada" th:field="${multa.cancelada}" style="width: 20px; height: 20px; margin-left: 30px;"><br><br>
                 
                 <!-- Combo box para seleccionar el préstamo -->
                 <label for="prestamo">Préstamo:</label><br>
-                <select id="prestamo" th:field="${multa.prestamo.id}" required>>
+                <select id="prestamo" name="id_prestamo" th:field="${multa.prestamo.id}" required>>
                     <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
                     <option th:each="prestamo : ${prestamos}" 
                             th:value="${prestamo.id}" 
