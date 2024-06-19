@@ -86,7 +86,7 @@ public class SocioController {
         return "/";
     }
     
-    @GetMapping("/actualizar")
+    @PostMapping("/actualizarForm")
     public String actualizar(@RequestParam("id") Integer id, Model modelo){
         Socio socio = socioService.buscar(id);
         

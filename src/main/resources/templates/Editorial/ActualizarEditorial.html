@@ -35,7 +35,7 @@
                 
                 <!-- Campo para la descripción de la dirección -->
                 <div class="form-group">
-                    <label for="descripcionDireccion">Descripción de la dirección:</label>
+                    <label for="descripcionDireccion">Dirección:</label>
                     <input type="text" id="descripcionDireccion" th:field="${editorial.direccion.descripcion}" required>
                 </div>
                 <!--
@@ -46,8 +46,8 @@
                         <option value="">Selecciona un distrito</option>
                         <!-- Aquí puedes cargar dinámicamente las opciones de distrito desde el backend -
                         <option th:each="distrito : ${distritos}" th:value="${distrito.id}" th:text="${distrito.nombre}"></option>
-                    </select>-->
-                </div>
+                    </select>
+                </div>-->
                 
                 <input type="submit" value="Actualizar">
             </form>

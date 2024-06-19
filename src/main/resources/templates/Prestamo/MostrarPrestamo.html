@@ -33,8 +33,13 @@
                 <td th:text="${prestamo.socio.persona.identificacion}"></td>
                 <td th:text="${prestamo.socio.persona.nombre + ' ' + prestamo.socio.persona.primerApellido + ' ' + prestamo.socio.persona.segundoApellido}"></td>
                 <td th:text="${prestamo.libro.titulo}"></td>
-                <td><a class="editar-button" th:href="@{'/prestamo/actualizar?id=' + ${prestamo.id}}">Editar</a>
-                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${prestamo.id} + '\')'">Eliminar</a></td>
+                <td>
+                    <form method="post" th:action="@{/prestamo/actualizarForm}">
+                        <input type="hidden" th:name="id" th:value="${prestamo.id}" />
+                        <button type="submit" class="editar-button">Editar</button>
+                    </form>
+                    <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${prestamo.id} + '\')'">Eliminar</a>
+                </td>
             </tr>
         </table>
 

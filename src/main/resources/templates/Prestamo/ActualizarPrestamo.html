@@ -21,7 +21,6 @@
 
                 <label for="libro">Libro:</label><br>
                 <select id="libro" th:field="${prestamo.libro.id}" required>
-                    <option value="">Selecciona un libro</option>
                     <!-- Cargar dinámicamente los libros desde el backend -->
                     <option th:each="libro : ${libros}" 
                             th:value="${libro.id}" 
@@ -31,11 +30,10 @@
 
                 <label for="socio">Socio:</label><br>
                 <select id="socio" th:field="${prestamo.socio.id}" required>
-                    <option value="">Selecciona un socio</option>
                     <!-- Cargar dinámicamente los socios desde el backend -->
                     <option th:each="socio : ${socios}" 
                             th:value="${socio.id}" 
-                            th:text="${socio.nombre}">
+                            th:text="${socio.persona.nombre}">
                     </option>
                 </select><br>
 

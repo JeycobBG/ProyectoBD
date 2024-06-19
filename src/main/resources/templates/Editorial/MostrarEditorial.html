@@ -41,8 +41,13 @@
                     <td th:text="${editorial.fechaFundacionFormateada}"></td>
                     <td th:text="${editorial.direccion.codigoPostal}"></td>
                     <td th:text="${editorial.direccion.descripcion}"></td>
-                    <td><a class="editar-button" th:href="@{'/editorial/actualizar?id=' + ${editorial.id}}">Editar</a>
-                        <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${editorial.id} + '\')'">Eliminar</a></td>
+                    <td>
+                        <form method="post" th:action="@{/editorial/actualizarForm}">
+                            <input type="hidden" th:name="id" th:value="${editorial.id}" />
+                            <button type="submit" class="editar-button">Editar</button>
+                        </form>
+                        <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${editorial.id} + '\')'">Eliminar</a>
+                    </td>
                 </tr>
             </table>
 

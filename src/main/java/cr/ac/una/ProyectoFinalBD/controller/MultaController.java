@@ -78,7 +78,7 @@ public class MultaController {
         return "/";
     }
     
-    @GetMapping("/actualizar")
+    @PostMapping("/actualizarForm")
     public String actualizar(@RequestParam("id") Integer id, Model modelo){
         Multa multa = multaService.buscar(id);
         List<Prestamo> prestamos = prestamoService.leer();

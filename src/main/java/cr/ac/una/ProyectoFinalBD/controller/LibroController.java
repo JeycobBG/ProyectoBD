@@ -104,7 +104,7 @@ public class LibroController {
         return "Libro/MostrarLibro";
     }
 
-    @GetMapping("/actualizar")
+    @PostMapping("/actualizarForm")
     public String actualizar(@RequestParam("id") Integer id, Model modelo) {
         Libro libro = libroService.buscar(id);
         List<Autor> autores = autorService.leer("");

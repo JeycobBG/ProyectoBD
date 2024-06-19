@@ -42,7 +42,7 @@ public class EditorialController {
         return "redirect:/editorial/leer";
     }
     
-    @GetMapping()
+    @GetMapping("/guardar")
     public String agregar(){
         
         return "Editorial/CrearEditorial";
@@ -66,7 +66,7 @@ public class EditorialController {
         return "redirect:/editorial/leer";
     }
     
-    @GetMapping("/actualizar")
+    @PostMapping("/actualizarForm")
     public String actualizar(@RequestParam("id") Integer id, Model modelo){
         Editorial editorial = editorialService.buscar(id);
         

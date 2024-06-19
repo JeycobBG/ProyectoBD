@@ -22,11 +22,10 @@
                 <div class="form-group">
                     <label for="prestamo">Préstamo:</label>
                     <select id="prestamo" th:field="${devolucion.prestamo.id}" required>
-                        <option value="">Selecciona un préstamo</option>
                         <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
                         <option th:each="prestamo : ${prestamos}" 
                                 th:value="${prestamo.id}" 
-                                th:text="${prestamo.detalle}">
+                                th:text="${prestamo.id}">
                         </option>
                     </select>
                 </div>

@@ -48,8 +48,13 @@
                     </ul>
                 </td>
                 <td th:text="${autor.bibliografia}"></td>               
-                <td><a class="editar-button" th:href="@{'/autor/actualizar?id=' + ${autor.id}}">Editar</a>
-               <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${autor.id} + '\')'">Eliminar</a></td>
+                <td>
+                    <form method="post" th:action="@{/autor/actualizarForm}">
+                        <input type="hidden" th:name="id" th:value="${autor.id}" />
+                        <button type="submit" class="editar-button">Editar</button>
+                    </form>
+                    <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${autor.id} + '\')'">Eliminar</a>
+                </td>
             </tr>
         </table>
 

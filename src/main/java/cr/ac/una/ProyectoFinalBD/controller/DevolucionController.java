@@ -50,7 +50,6 @@ public class DevolucionController {
     }
     
     @GetMapping("/leer")
-    
     public String leer(Model modelo){
        
        String error = "";
@@ -75,7 +74,7 @@ public class DevolucionController {
         return "redirect:/devolucion/leer";
     }
     
-    @GetMapping("/actualizar")
+    @PostMapping("/actualizarForm")
     public String actualizar(@RequestParam("id") Integer id, Model modelo){
         Devolucion devolucion = devolucionService.buscar(id);
         List<Prestamo> prestamos = prestamoService.leer();

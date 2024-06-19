@@ -34,7 +34,7 @@
                 <!-- Campo para la fecha de publicación del libro -->
                 <div class="form-group">
                     <label for="fechaPublicacion">Fecha de Publicación:</label>
-                    <input type="date" id="fechaPublicacion" th:field="${libro.fechaPublicacion}" required>
+                    <input type="date" id="fechaPublicacion" th:value="${#dates.format(libro.fechaPublicacion, 'dd-MM-yyyy')}" required>
                 </div>
 
                 <!-- Campo para la cantidad de libros disponibles -->
@@ -47,11 +47,10 @@
                 <div class="form-group">
                     <label for="autor">Autor:</label>
                     <select id="autor" th:field="${libro.autor.id}" required>
-                        <option value="">Selecciona un autor</option>
                         <!-- Cargar dinámicamente las opciones de autor desde el backend -->
                         <option th:each="autor : ${autores}" 
                                 th:value="${autor.id}" 
-                                th:text="${autor.nombre}">
+                                th:text="${autor.persona.nombre}">
                         </option>
                     </select>
                 </div>
@@ -60,7 +59,6 @@
                 <div class="form-group">
                     <label for="editorial">Editorial:</label>
                     <select id="editorial" th:field="${libro.editorial.id}" required>
-                        <option value="">Selecciona una editorial</option>
                         <!-- Cargar dinámicamente las opciones de editorial desde el backend -->
                         <option th:each="editorial : ${editoriales}" 
                                 th:value="${editorial.id}" 
@@ -74,7 +72,6 @@
                     <label for="generos">Géneros:</label>
                     <!--
                     <select id="generos" th:field="*{generos}" multiple required>
-                        <option value="">Selecciona uno o más géneros</option>
                         <!-- Cargar dinámicamente las opciones de géneros desde el backend 
                         <option th:each="genero : ${generos}" 
                                 th:value="${genero.id}" 
@@ -84,6 +81,7 @@
                 </div>
 
                 <input type="submit" value="Actualizar">
+
             </form>
 
             <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>

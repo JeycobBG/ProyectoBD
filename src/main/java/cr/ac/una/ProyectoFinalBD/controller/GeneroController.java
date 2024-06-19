@@ -52,7 +52,7 @@ public class GeneroController {
         return "redirect:/genero/leer";
     }
     
-    @GetMapping("/actualizar")
+    @PostMapping("/actualizarForm")
     public String actualizar(@RequestParam("id") Integer id, Model modelo){
         Genero genero = generoService.buscar(id);
         

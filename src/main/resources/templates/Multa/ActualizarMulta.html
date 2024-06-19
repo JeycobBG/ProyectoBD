@@ -29,8 +29,7 @@
                 
                 <!-- Combo box para seleccionar el préstamo -->
                 <label for="prestamo">Préstamo:</label><br>
-                <select id="prestamo" th:field="${multa.prestamo.id}" required>
-                    <option value="">Selecciona un préstamo</option>
+                <select id="prestamo" th:field="${multa.prestamo.id}" required>>
                     <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
                     <option th:each="prestamo : ${prestamos}" 
                             th:value="${prestamo.id}" 

@@ -36,8 +36,13 @@
                 <td th:text="${multa.cancelada}"></td>
                 <td th:text="${multa.prestamo.libro.titulo}"></td>
                 <td th:text="${multa.prestamo.socio.persona.nombre + ' ' + multa.prestamo.socio.persona.primerApellido + ' ' + multa.prestamo.socio.persona.segundoApellido}"></td>
-                <td><a class="editar-button" th:href="@{'/multa/actualizar?id=' + ${multa.id}}">Editar</a>
-                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${multa.id} + '\')'">Eliminar</a></td>
+                <td>
+                    <form method="post" th:action="@{/multa/actualizarForm}">
+                        <input type="hidden" th:name="id" th:value="${multa.id}" />
+                        <button type="submit" class="editar-button">Editar</button>
+                    </form>
+                    <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${multa.id} + '\')'">Eliminar</a>
+                </td>
             </tr>
         </table>
         

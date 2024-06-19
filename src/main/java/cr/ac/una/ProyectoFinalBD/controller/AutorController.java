@@ -67,7 +67,7 @@ public class AutorController {
         return "/";
     }
     
-    @GetMapping("/actualizar")
+    @PostMapping("/actualizarForm")
     public String actualizar(@RequestParam("id") Integer id, Model modelo){
         Autor autor = autorService.buscar(id);
         

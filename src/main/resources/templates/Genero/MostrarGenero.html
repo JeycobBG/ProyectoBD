@@ -30,8 +30,13 @@
             <tr th:each="genero : ${generos}"> 
                 <td th:text="${genero.nombre}"></td>
                 <td th:text="${genero.descripcion}"></td>
-                <td><a class="editar-button" th:href="@{'/genero/actualizar?id=' + ${genero.id}}">Editar</a>
-                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${genero.id} + '\')'">Eliminar</a></td>
+                <td>
+                    <form method="post" th:action="@{/genero/actualizarForm}">
+                        <input type="hidden" th:name="id" th:value="${genero.id}" />
+                        <button type="submit" class="editar-button">Editar</button>
+                    </form>
+                    <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${genero.id} + '\')'">Eliminar</a>
+                </td>
             </tr>
         </table>
 

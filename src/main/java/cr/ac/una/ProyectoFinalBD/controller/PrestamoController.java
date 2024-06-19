@@ -85,7 +85,7 @@ public class PrestamoController {
         return "/";
     }
     
-    @GetMapping("/actualizar")
+    @PostMapping("/actualizarForm")
     public String actualizar(@RequestParam("id") Integer id, Model modelo){
         Prestamo prestamo = prestamoService.buscar(id);
         List<Libro> libros = libroService.leer();
