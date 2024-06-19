@@ -38,22 +38,10 @@
         </div>
     </div>
     
-    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+    <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
     <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
     
-    <script>
-        // Validación del formulario
-        document.getElementById("registrarMultaForm").addEventListener("submit", function(event) {
-            var monto = document.getElementById("monto").value;
-            var diasAtraso = document.getElementById("dias_atraso").value;
-            var prestamo = document.getElementById("id_prestamo").value;
-            
-            // Validaciones
-            if (monto.trim() === "" || diasAtraso.trim() === "" || prestamo === "") {
-                alert("Por favor complete todos los campos.");
-                event.preventDefault();
-            }
-        });
-    </script>
+    <script src="/js/multaValidator.js"></script>
+    <script src="/js/formSubmission.js"></script>
 </body>
 </html>
