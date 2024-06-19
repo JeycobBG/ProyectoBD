@@ -95,20 +95,10 @@ public class SocioController {
     }
     
     @GetMapping("/eliminar")
-    public String delete(){
-        
-        /*
-        @PathVariable("id")Integer id_socio
-        */
-        
-        Integer id_socio = 4;
-        String error_message = "";
-        
-        String resultado = socioService.delete(id_socio, error_message);
-        
+    public String delete(@RequestParam("id")Integer id){
+        String resultado = socioService.delete(id, "");
         System.out.println("resultado = " + resultado);
-        
-        return "/";
+        return "redirect:/socio/leer";
     }
     
     @GetMapping("/leer")

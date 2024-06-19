@@ -93,6 +93,8 @@ public class MultaRepositorio implements IMultaRepositorio {
         query.registerStoredProcedureParameter("top_n", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         
+        query.setParameter("top_n", top_n);
+        
         query.execute();
         System.out.println((String) query.getOutputParameterValue("error"));
         

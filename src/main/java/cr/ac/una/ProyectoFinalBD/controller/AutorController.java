@@ -64,7 +64,7 @@ public class AutorController {
         
         
         System.out.println("resultado = " + resultado);
-        return "/";
+        return "redirect:/autor/leer";
     }
     
     @PostMapping("/actualizarForm")
@@ -76,26 +76,15 @@ public class AutorController {
     }
     
     @GetMapping("/eliminar")
-    public String delete(){
-        /*
-        @PathVariable("id_autor") Integer id_autor
-        */
-        Integer id_autor = 1;
-        String error = "";
-        
-        String resultado = autorService.delete(id_autor, error);
-        
+    public String delete(@RequestParam("id") Integer id){
+        String resultado = autorService.delete(id, "");
         System.out.println("resultado = " + resultado);
-        
-        return "/";
+        return "redirect:/autor/leer";
     }
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        
-        String error = "";
-        
-        List<Autor> autores = autorService.leer(error);
+        List<Autor> autores = autorService.leer("");
         
         for(Autor autor: autores){
             System.out.println("autor: " + autor.getPersona().getNombre());
@@ -103,10 +92,7 @@ public class AutorController {
             System.out.println("\n");
         }
         
-        
-        
         modelo.addAttribute("autores", autores);
-
         return "Autor/MostrarAutor";
     }
 }

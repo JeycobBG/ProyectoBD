@@ -61,20 +61,10 @@ public class GeneroController {
     }
 
     @GetMapping("/eliminar")
-    public String delete() {
-
-        /*
-        @PathVariable("id")Integer id,
-            @RequestParam("descripcion")String descripcion
-         */
-        Integer id = 1;
-        String error = "";
-
-        String resultado = generoService.delete(id, error);
-
+    public String delete(@RequestParam("id")Integer id) {
+        String resultado = generoService.delete(id, "");
         System.out.println("resultado = " + resultado);
-
-        return "/";
+        return "redirect:/genero/leer";
     }
 
     @GetMapping("/leer")
@@ -101,14 +91,13 @@ public class GeneroController {
     // Filtro
 
     @GetMapping("/filtrarConMasLibrosPublicados")
-    public String filtrarConMasLibrosPublicados(Model modelo, @RequestParam(value = "top_n", defaultValue = "5") Integer top_n) {
+    public String filtrarConMasLibrosPublicados(Model modelo, @RequestParam(value = "top_n") Integer top_n) {
+        List<Genero> generos = generoService.filtrarConMasLibrosPublicados(top_n, "");
         
-        String error = "";
-        List<Genero> generos = generoService.filtrarConMasLibrosPublicados(top_n, error)
-                ;
         for (Genero genero : generos) {
             System.out.println("género con más libros publicados: " + genero.getNombre());
         }
+        
         modelo.addAttribute("generos", generos);
         return "Genero/MostrarGenero";  
     }

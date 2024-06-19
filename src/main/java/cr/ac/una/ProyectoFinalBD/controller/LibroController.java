@@ -146,16 +146,10 @@ public class LibroController {
     }
 
     @GetMapping("/eliminar")
-    public String eliminar() {
-        /*
-        @PathVariable("id_libro") Integer id_libro
-         */
-
-        Integer id_libro = 2;
-        String resultado = libroService.eliminar(id_libro);
+    public String eliminar(@RequestParam("id") Integer id) {
+        String resultado = libroService.eliminar(id);
         System.out.println("resultado = " + resultado);
-
-        return "/";
+        return "redirect:/libro/leer";
     }
 
     // filtros -----------------------------------------------------------------

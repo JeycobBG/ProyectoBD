@@ -89,24 +89,16 @@ public class MultaController {
     }
     
     @GetMapping("/eliminar")
-    public String eliminar(){
-        /*
-        @PathVariable("id") Integer id_multa,
-        */
-        Integer id_multa = 1;
-        String resultado = multaService.eliminar(id_multa);
+    public String eliminar(@RequestParam("id") Integer id){
+        String resultado = multaService.eliminar(id);
         System.out.print("resultado = " + resultado);
-        
-        return "/";
+        return "redirect:/multa/leer";
     }
     
     // Filtro
     @GetMapping("/filtrarPorSociosMasMultados")
-    public String filtrarPorSociosMasMultados(Model modelo, @RequestParam(value = "top_n", defaultValue = "5") Integer top_n){
-        
-        String error = "";
-        
-        List<Multa> multas = multaService.multasPorSociosMasMultados(top_n, error);
+    public String filtrarPorSociosMasMultados(Model modelo, @RequestParam(value = "top_n") Integer top_n){
+        List<Multa> multas = multaService.multasPorSociosMasMultados(top_n, "");
         
         for(Multa multa: multas){
             System.out.println("editorial: " + multa.getMonto());

@@ -51,8 +51,6 @@ public class DevolucionController {
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-       
-       String error = "";
        List<Devolucion> devoluciones = devolucionService.leer();
        
        for(Devolucion dev : devoluciones){
@@ -60,7 +58,6 @@ public class DevolucionController {
        }
        
        modelo.addAttribute("devoluciones", devoluciones);
-       
        return "Devolucion/MostrarDevolucion";
     }
     
@@ -85,15 +82,11 @@ public class DevolucionController {
     }
     
     @GetMapping("/eliminar")
-    public String eliminar(){
-        /*
-        @PathVariable("id_prestamo") Integer id_prestamo
-        */
-        Integer id_prestamo = 1;
-        String resultado = devolucionService.eliminar(id_prestamo);
+    public String eliminar(@RequestParam("id") Integer id){
+        Devolucion devolucion = devolucionService.buscar(id);
+        String resultado = devolucionService.eliminar(devolucion.getPrestamo().getId());
         System.out.println("resultado = " + resultado);
-        
-        return "Devolucion/CrearDevolucion";
+        return "redirect:/devolucion/leer";
     }
     
 }
