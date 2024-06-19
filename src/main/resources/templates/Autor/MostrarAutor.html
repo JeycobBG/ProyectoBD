@@ -1,73 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Módulo Autor</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/mostrar.css">
-</head>
-<body>
-    <div class="encabezado">
-        <a href="/menu" class="boton-volver"></a>
-        <h2 class="listado-titulo">Lista de Autores</h2>
-        <a href="/menu" class="button volver">Volver</a>
-    </div>
-    <div class="botonYBuscador"> 
+    <head>
+        <title>Módulo Autor</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/mostrar.css">
+    </head>
+    <body>
+        <div class="encabezado">
+            <a href="/menu" class="boton-volver"></a>
+            <h2 class="listado-titulo">Lista de Autores</h2>
+            <a href="/menu" class="button volver">Volver</a>
+        </div>
+        <div class="botonYBuscador"> 
+            <div>
+                <a href="/autor/guardar" class="button">Agregar un nuevo autor</a>
+            </div>
+
+        </div>
         <div>
-            <a href="/autor/guardar" class="button">Agregar un nuevo autor</a>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Identificación</th>
+                    <th>Nombre Completo</th>
+                    <th>Código Postal</th>
+                    <th>Dirección</th>
+                    <th>Distrito</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Bibliografía</th>
+                    <th>Acciones</th>
+                </tr>
+                <tr th:each="autor : ${autores}">    
+                    <td th:text="${autor.persona.identificacion}"></td>
+                    <td th:text="${autor.persona.nombre + ' ' + autor.persona.primerApellido + ' ' + autor.persona.segundoApellido}"></td>
+                    <td th:text="${autor.persona.direccion.codigoPostal}"></td>
+                    <td th:text="${autor.persona.direccion.descripcion}"></td>
+                    <td th:text="${autor.persona.direccion.distrito.nombre}"></td>
+                    <td>
+                        <ul th:if="${not #lists.isEmpty(autor.persona.telefono)}">
+                            <li th:each="tel : ${autor.persona.telefono}" th:text="${tel.numero}"></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul th:if="${not #lists.isEmpty(autor.persona.correoElectronico)}">
+                            <li th:each="email : ${autor.persona.correoElectronico}" th:text="${email.email}"></li>
+                        </ul>
+                            </td>
+                    <td th:text="${autor.bibliografia}"></td>               
+                    <td>
+                        <form method="post" th:action="@{/autor/actualizarForm}">
+                            <input type="hidden" th:name="id" th:value="${autor.id}" />
+                            <button type="submit" class="editar-button">Editar</button>
+                        </form>
+                        <a href="javascript:void(0);" class="eliminar-button" th:onclick="'confirmarEliminacion(\'autor\', ' + ${autor.id} + ');'">Eliminar</a>
+                    </td>
+                </tr>
+            </table>
+            <script src="/js/deleteConfirmation.js"></script>
         </div>
 
-    </div>
-    <div>
-        <table class="table table-bordered">
-            <tr>
-                <th>Identificación</th>
-                <th>Nombre Completo</th>
-                <th>Código Postal</th>
-                <th>Dirección</th>
-                <th>Distrito</th>
-                <th>Teléfono</th>
-                <th>Email</th>
-                <th>Bibliografía</th>
-                <th>Acciones</th>
-            </tr>
-            <tr th:each="autor : ${autores}">    
-                <td th:text="${autor.persona.identificacion}"></td>
-                <td th:text="${autor.persona.nombre + ' ' + autor.persona.primerApellido + ' ' + autor.persona.segundoApellido}"></td>
-                <td th:text="${autor.persona.direccion.codigoPostal}"></td>
-                <td th:text="${autor.persona.direccion.descripcion}"></td>
-                <td th:text="${autor.persona.direccion.distrito.nombre}"></td>
-                <td>
-                    <ul th:if="${not #lists.isEmpty(autor.persona.telefono)}">
-                        <li th:each="tel : ${autor.persona.telefono}" th:text="${tel.numero}"></li>
-                    </ul>
-                </td>
-                <td>
-                    <ul th:if="${not #lists.isEmpty(autor.persona.correoElectronico)}">
-                        <li th:each="email : ${autor.persona.correoElectronico}" th:text="${email.email}"></li>
-                    </ul>
-                </td>
-                <td th:text="${autor.bibliografia}"></td>               
-                <td>
-                    <form method="post" th:action="@{/autor/actualizarForm}">
-                        <input type="hidden" th:name="id" th:value="${autor.id}" />
-                        <button type="submit" class="editar-button">Editar</button>
-                    </form>
-                    <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${autor.id} + '\')'">Eliminar</a>
-                </td>
-            </tr>
-        </table>
-
-        <script>
-            function confirmarEliminacion(enlace, idAutor) {
-                if (confirm("¿Está seguro de que desea eliminar este autor?")) {
-                    window.location.href = '/autor/eliminar?id=' + idAutor;
-                }
-            }
-        </script>
-    </div>
-
-    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
-</body>
+        <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+        <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+    </body>
 </html>
