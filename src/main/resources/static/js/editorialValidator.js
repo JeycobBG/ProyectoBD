@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     var fechaFundacionInput = document.getElementById("fecha_fundacion");
     var today = new Date().toISOString().split('T')[0];
@@ -6,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.getElementById("registrarEditorialForm").addEventListener("submit", function (event) {
+    var valid = true; // Variable para rastrear la validez del formulario
+
     var nombre = document.getElementById("nombre").value;
     var fechaFundacion = document.getElementById("fecha_fundacion").value;
     var codigoPostal = document.getElementById("codigoPostal").value;
@@ -20,30 +21,37 @@ document.getElementById("registrarEditorialForm").addEventListener("submit", fun
 
     if (fechaFundacion.trim() === "") {
         alert("Por favor ingrese la fecha de fundación.");
+        valid = false;
         event.preventDefault();
     } else {
         var today = new Date().toISOString().split('T')[0];
 
         if (fechaFundacion > today) {
             alert("La fecha de fundación no puede ser en el futuro.");
+            valid = false;
             event.preventDefault();
         }
     }
 
     if (!/^[0-9]+$/.test(codigoPostal)) {
-        mensajeError.textContent = "El código postal debe contener solo números.";
+        alert("El código postal debe contener solo números.");
         valid = false;
         event.preventDefault();
     }
 
-
     if (descripcionDireccion.trim() === "") {
         alert("Por favor ingrese la descripción de la dirección.");
+        valid = false;
         event.preventDefault();
     }
 
     if (distrito === "") {
         alert("Por favor seleccione un distrito.");
+        valid = false;
         event.preventDefault();
+    }
+
+    if (valid) {
+        alert("Editorial registrado correctamente.");
     }
 });

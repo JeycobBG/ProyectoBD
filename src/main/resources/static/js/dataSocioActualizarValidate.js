@@ -1,15 +1,16 @@
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("actualizarSocioForm");
-    var mensajeExito = document.getElementById('mensajeExito'); // Asegúrate de tener este elemento en tu HTML
-    var mensajeError = document.getElementById('mensajeError'); // Para mostrar mensajes de error
+    var mensajeExito = document.getElementById('mensajeExito'); 
+    var mensajeError = document.getElementById('mensajeError'); 
 
     if (form) {
         form.addEventListener("submit", function(event) {
-            var nombre = document.getElementById("nombre").value.trim();
-            var primerApellido = document.getElementById("primer_apellido").value.trim();
-            var segundoApellido = document.getElementById("segundo_apellido").value.trim();
-            var identificacion = document.getElementById("identificacion").value.trim();
-            var codigoPostal = document.getElementById("codigo_postal").value.trim();
+            var requiredFields = [
+                { id: "nombre", message: "Nombre y apellidos deben contener solo letras." },
+                { id: "primer_apellido", message: "Nombre y apellidos deben contener solo letras." },
+                { id: "segundo_apellido", message: "Nombre y apellidos deben contener solo letras." },
+                { id: "codigo_postal", message: "El código postal debe contener solo números." }
+            ];
             var valid = true;
 
             if (mensajeExito) mensajeExito.style.display = 'none';
@@ -17,19 +18,22 @@ document.addEventListener("DOMContentLoaded", function() {
                 mensajeError.textContent = '';
                 mensajeError.style.display = 'none';
             }
-            
-            if (!/^[a-zA-Z\s]+$/.test(nombre) || !/^[a-zA-Z\s]+$/.test(primerApellido) ||
-                !/^[a-zA-Z\s]+$/.test(segundoApellido)) {
-                mensajeError.textContent = "Nombre y apellidos deben contener solo letras.";
-                valid = false;
-                event.preventDefault();
-            }
 
-            if (!/^[0-9]+$/.test(codigoPostal)) {
-                mensajeError.textContent += (mensajeError.textContent.length ? " " : "") + "El código postal debe contener solo números.";
-                valid = false;
-                event.preventDefault();
-            }
+            requiredFields.forEach(function(field) {
+                var value = document.getElementById(field.id).value.trim();
+                if (!/^[a-zA-Z\s]+$/.test(value) && field.id.includes("nombre")) {
+                    mensajeError.textContent = field.message;
+                    valid = false;
+                    event.preventDefault();
+                } else if (!/^[0-9]+$/.test(value) && field.id.includes("codigo_postal")) {
+                    if (mensajeError.textContent.length > 0) {
+                        mensajeError.textContent += " ";
+                    }
+                    mensajeError.textContent += field.message;
+                    valid = false;
+                    event.preventDefault();
+                }
+            });
 
             if (!valid && mensajeError) {
                 mensajeError.style.display = 'block';

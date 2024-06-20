@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.getElementById("registrarForm").addEventListener("submit", function(event) {
+    var valid = true; // Variable para rastrear la validez del formulario
+    
     var isbn = document.getElementById("ISBN").value;
     var titulo = document.getElementById("titulo").value;
     var sinopsis = document.getElementById("sinopsis").value;
@@ -19,17 +21,25 @@ document.getElementById("registrarForm").addEventListener("submit", function(eve
         editorial === "" || generos.length === 0) {
         alert("Por favor complete todos los campos.");
         event.preventDefault();
+        valid = false;
     } else {
         if (isNaN(cantidad)) {
             alert("La cantidad debe ser un número.");
             event.preventDefault();
+            valid = false;
         }
 
         var today = new Date().toISOString().split('T')[0];
         if (fechaPublicacion > today) {
             alert("La fecha de publicación no puede ser una fecha futura.");
             event.preventDefault();
+            valid = false;
         }
+    }
+
+    // Mostrar mensaje de éxito si el formulario es válido
+    if (valid) {
+        alert("El formulario se envió correctamente.");
     }
 });
 

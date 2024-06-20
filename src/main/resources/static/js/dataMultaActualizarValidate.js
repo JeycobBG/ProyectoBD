@@ -5,9 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (form) {
         form.addEventListener("submit", function(event) {
-            var monto = document.getElementById("monto").value.trim();
-            var diasAtraso = document.getElementById("dias_atraso").value.trim();
-            var prestamo = document.getElementById("prestamo").value.trim();
+            var requiredFields = [
+                { id: "monto", message: "Por favor complete todos los campos." },
+                { id: "dias_atraso", message: "Por favor complete todos los campos." },
+                { id: "prestamo", message: "Por favor complete todos los campos." }
+            ];
             var valid = true;
 
             if (mensajeExito) mensajeExito.style.display = 'none';
@@ -16,11 +18,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 mensajeError.style.display = 'none';
             }
 
-            if (monto === "" || diasAtraso === "" || prestamo === "") {
-                mensajeError.textContent = "Por favor complete todos los campos.";
-                valid = false;
-                event.preventDefault();
-            }
+            requiredFields.forEach(function(field) {
+                var value = document.getElementById(field.id).value.trim();
+                if (value === "") {
+                    mensajeError.textContent = field.message;
+                    valid = false;
+                    event.preventDefault();
+                }
+            });
 
             if (!valid && mensajeError) {
                 mensajeError.style.display = 'block';

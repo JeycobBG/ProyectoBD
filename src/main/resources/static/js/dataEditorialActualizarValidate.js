@@ -2,55 +2,45 @@ document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("actualizarEditorialForm");
     if (form) {
         form.addEventListener("submit", function (event) {
+            var requiredFields = [
+                { id: "nombre", message: "El nombre de la editorial no debe contener números." },
+                { id: "fecha_fundacion", message: "Por favor ingrese la fecha de fundación." },
+                { id: "codigo_postal", message: "El código postal debe contener solo números." },
+                { id: "descripcion_direccion", message: "Por favor ingrese la descripción de la dirección." },
+                { id: "id_distrito", message: "Por favor seleccione un distrito." }
+            ];
             var valid = true;
             var mensajeExito = document.getElementById('mensajeExito'); 
 
             if (mensajeExito)
                 mensajeExito.style.display = 'none';
 
-            var nombre = document.getElementById("nombre").value.trim();
-            var fechaFundacion = document.getElementById("fecha_fundacion").value.trim();
-            var codigoPostal = document.getElementById("codigo_postal").value.trim();
-            var descripcionDireccion = document.getElementById("descripcion_direccion").value.trim();
-            var distrito = document.getElementById("id_distrito").value.trim();
-
-            if (/[\d]/.test(nombre)) {
-                alert("El nombre de la editorial no debe contener números.");
-                valid = false;
-                event.preventDefault();
-            }
-
-            if (!/^[0-9]+$/.test(codigoPostal)) {
-                alert("El código postal debe contener solo números.");
-                valid = false;
-                event.preventDefault();
-            }
-
-            if (fechaFundacion === "") {
-                alert("Por favor ingrese la fecha de fundación.");
-                valid = false;
-                event.preventDefault();
-            } else {
-                var today = new Date();
-                var inputDate = new Date(fechaFundacion);
-                if (inputDate > today) {
-                    alert("La fecha de fundación no puede ser en el futuro.");
-                    valid = false;
-                    event.preventDefault();
+            requiredFields.forEach(function(field) {
+                var value = document.getElementById(field.id).value.trim();
+                if (field.id === "fecha_fundacion") {
+                    var today = new Date();
+                    var inputDate = new Date(value);
+                    if (value === "" || inputDate > today) {
+                        alert(field.message);
+                        valid = false;
+                        event.preventDefault();
+                    }
+                } else {
+                    if (field.id === "codigo_postal") {
+                        if (!/^[0-9]+$/.test(value)) {
+                            alert(field.message);
+                            valid = false;
+                            event.preventDefault();
+                        }
+                    } else {
+                        if (value === "") {
+                            alert(field.message);
+                            valid = false;
+                            event.preventDefault();
+                        }
+                    }
                 }
-            }
-
-            if (descripcionDireccion === "") {
-                alert("Por favor ingrese la descripción de la dirección.");
-                valid = false;
-                event.preventDefault();
-            }
-
-            if (distrito === "") {
-                alert("Por favor seleccione un distrito.");
-                valid = false;
-                event.preventDefault();
-            }
+            });
 
             if (valid && mensajeExito) {
                 mensajeExito.innerText = "Actualizado con éxito.";

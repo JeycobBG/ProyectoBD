@@ -5,30 +5,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (form) {
         form.addEventListener("submit", function(event) {
-            var nombre = document.getElementById("nombre").value.trim();
-            var descripcion = document.getElementById("descripcion").value.trim();
+            var requiredFields = [
+                { id: "nombre", message: "Por favor ingrese el nombre del género." },
+                { id: "descripcion", message: "Por favor ingrese la descripción del género." }
+            ];
             var valid = true;
 
             if (mensajeExito) mensajeExito.style.display = 'none';
             if (mensajeError) mensajeError.textContent = '';
 
-            if (nombre === "") {
-                if (mensajeError) mensajeError.textContent = "Por favor ingrese el nombre del género.";
-                valid = false;
-                event.preventDefault();
-            }
-            
-            if (/[\d]/.test(nombre)) {
-                alert("El nombre del género no debe contener números.");
-                valid = false;
-                event.preventDefault();
-            }
-
-            if (descripcion === "") {
-                if (mensajeError) mensajeError.textContent = "Por favor ingrese la descripción del género.";
-                valid = false;
-                event.preventDefault();
-            }
+            requiredFields.forEach(function(field) {
+                var value = document.getElementById(field.id).value.trim();
+                if (field.id === "nombre") {
+                    if (value === "") {
+                        if (mensajeError) mensajeError.textContent = field.message;
+                        valid = false;
+                        event.preventDefault();
+                    } else if (/[\d]/.test(value)) {
+                        alert("El nombre del género no debe contener números.");
+                        valid = false;
+                        event.preventDefault();
+                    }
+                } else {
+                    if (value === "") {
+                        if (mensajeError) mensajeError.textContent = field.message;
+                        valid = false;
+                        event.preventDefault();
+                    }
+                }
+            });
 
             if (valid && mensajeExito) {
                 mensajeExito.textContent = "Actualizado con éxito.";

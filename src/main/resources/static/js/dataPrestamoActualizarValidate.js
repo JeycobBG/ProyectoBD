@@ -23,7 +23,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             if (fechaDevolucionPrevista < fechaPrestamo) {
-                mensajeError.textContent += (mensajeError.textContent.length ? " " : "") + "La fecha de devolución prevista no puede ser antes de la fecha de préstamo.";
+                if (mensajeError.textContent.length > 0) {
+                    mensajeError.textContent += " ";
+                }
+                mensajeError.textContent += "La fecha de devolución prevista no puede ser antes de la fecha de préstamo.";
                 valid = false;
                 event.preventDefault();
             }
