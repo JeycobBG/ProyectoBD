@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("actualizarEditorialForm");
     if (form) {
@@ -10,10 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 mensajeExito.style.display = 'none';
 
             var nombre = document.getElementById("nombre").value.trim();
-            var fechaFundacion = document.getElementById("fechaFundacion").value.trim();
-            var codigoPostal = document.getElementById("codigoPostal").value.trim();
-            var descripcionDireccion = document.getElementById("descripcionDireccion").value.trim();
-            var distrito = document.getElementById("distrito").value.trim();
+            var fechaFundacion = document.getElementById("fecha_fundacion").value.trim();
+            var codigoPostal = document.getElementById("codigo_postal").value.trim();
+            var descripcionDireccion = document.getElementById("descripcion_direccion").value.trim();
+            var distrito = document.getElementById("id_distrito").value.trim();
 
             if (/[\d]/.test(nombre)) {
                 alert("El nombre de la editorial no debe contener números.");

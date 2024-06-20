@@ -1,5 +1,3 @@
-
-// Validación del formulario
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("actualizarGeneroForm");
     var mensajeExito = document.getElementById('mensajeExito'); 
