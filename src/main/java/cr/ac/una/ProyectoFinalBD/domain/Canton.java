@@ -31,7 +31,7 @@ public class Canton {
     
     private String nombre;
     
-    @OneToMany(mappedBy = "canton", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "canton", fetch = FetchType.EAGER)
     private List<Distrito> distrito;
     
     @ManyToOne()

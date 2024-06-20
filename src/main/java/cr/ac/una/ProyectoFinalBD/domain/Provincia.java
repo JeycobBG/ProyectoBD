@@ -29,9 +29,9 @@ public class Provincia {
     
     private String nombre;
     
-    @OneToMany(mappedBy = "provincia", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "provincia", fetch = FetchType.EAGER)
     private List<Canton> canton;
-
+    
     public Provincia() {
         canton = new ArrayList<>();
     }
