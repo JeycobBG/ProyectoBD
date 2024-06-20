@@ -1,57 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Actualizar Género</title>
-    <link rel="stylesheet" href="/css/actualizar.css">
-</head>
-<body>
-    <div class="wrapper">
-        <div class="container">
-            <h2>Actualizar Género</h2>
+    <head>
+        <title>Actualizar Género</title>
+        <link rel="stylesheet" href="/css/actualizar.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                <h2>Actualizar Género</h2>
 
-            <form id="actualizarGeneroForm" action="/genero/actualizar" method="post">
-                
-                <!-- Campo oculto para el ID del género -->
-                <input type="hidden" id="id" name="id" th:value="${genero.id}" />
+                <form id="actualizarGeneroForm" action="/genero/actualizar" method="post">
 
-                <!-- Campo para el nombre del género -->
-                <div class="form-group">
-                    <label for="nombre">Nombre del género:</label><br>
-                    <input type="text" id="nombre" name="nombre" th:value="${genero.nombre}" required><br><br>
-                </div>
+                    <!-- Campo oculto para el ID del género -->
+                    <input type="hidden" id="id" name="id" th:value="${genero.id}" />
 
-                <!-- Campo para la descripción del género -->
-                <div class="form-group">
-                    <label for="descripcion">Descripción del género:</label><br>
-                    <input type="text" id="descripcion" name="descripcion" th:value="${genero.descripcion}" required><br><br>
-                </div>
+                    <!-- Campo para el nombre del género -->
+                    <div class="form-group">
+                        <label for="nombre">Nombre del género:</label><br>
+                        <input type="text" id="nombre" name="nombre" th:value="${genero.nombre}" required><br><br>
+                    </div>
 
-                <input type="submit" value="Actualizar">
-            </form>
+                    <!-- Campo para la descripción del género -->
+                    <div class="form-group">
+                        <label for="descripcion">Descripción del género:</label><br>
+                        <input type="text" id="descripcion" name="descripcion" th:value="${genero.descripcion}" required><br><br>
+                    </div>
 
-            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
-            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+                    <input type="submit" value="Actualizar">
+                </form>
+
+                <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+                <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
+
+            </div>
         </div>
-    </div>
-
-    <script>
-        // Validación del formulario
-        document.getElementById("actualizarGeneroForm").addEventListener("submit", function(event) {
-            var nombre = document.getElementById("nombre").value;
-            var descripcion = document.getElementById("descripcion").value;
-            
-            // Validar que el nombre del género no esté vacío
-            if (nombre.trim() === "") {
-                alert("Por favor ingrese el nombre del género.");
-                event.preventDefault();
-            }
-            
-            // Validar que la descripción no esté vacía
-            if (descripcion.trim() === "") {
-                alert("Por favor ingrese la descripción del género.");
-                event.preventDefault();
-            }
-        });
-    </script>
-</body>
+        <script src="/js/dataGeneroActualizarValidate.js"></script>
+    </body>
 </html>

@@ -57,29 +57,10 @@
                 <input type="submit" value="Actualizar">
             </form>
 
-            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+            <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
             <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
         </div>
-    </div>
-
-    <script>
-        // Validación del formulario
-        document.getElementById("actualizarAutorForm").addEventListener("submit", function(event) {
-            var requiredFields = ["nombreCompleto", "primerApellido", "segundoApellido", "identificacion", "codigoPostal", "direccion", "distrito", "telefono", "email", "bibliografia"];
-            var valid = true;
-
-            requiredFields.forEach(function(field) {
-                var value = document.getElementById(field).value.trim();
-                if (value === "") {
-                    valid = false;
-                }
-            });
-
-            if (!valid) {
-                alert("Por favor complete todos los campos.");
-                event.preventDefault();
-            }
-        });
-    </script>
+    </div>s
+    <script src="/js/dataAutorActualizarValidate.js"></script>
 </body>
 </html>

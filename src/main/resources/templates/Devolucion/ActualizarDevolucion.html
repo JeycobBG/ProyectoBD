@@ -32,29 +32,10 @@
                 <input type="submit" value="Actualizar">
             </form>
 
-            <div class="alert alert-success" id="exitoMessage" style="display: none;" th:if="${exito != null}" th:text="${exito}"></div>
+            <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
             <div class="alert alert-error" id="errorMessage" style="display: none;" th:if="${error != null}" th:text="${error}"></div>
         </div>
     </div>
-
-    <script>
-        // Validación del formulario
-        document.getElementById("actualizarDevolucionForm").addEventListener("submit", function(event) {
-            var fechaDevolucionEfectuada = document.getElementById("fechaDevolucionEfectuada").value;
-            var prestamo = document.getElementById("prestamo").value;
-            
-            // Validar que la fecha de devolución efectuada no esté vacía
-            if (fechaDevolucionEfectuada.trim() === "") {
-                alert("Por favor ingrese la fecha de devolución efectuada.");
-                event.preventDefault();
-            }
-
-            // Validar que se haya seleccionado un préstamo
-            if (prestamo === "") {
-                alert("Por favor seleccione un préstamo.");
-                event.preventDefault();
-            }
-        });
-    </script>
+    <script src="/js/dataDevolucionValidate.js"></script>
 </body>
 </html>
