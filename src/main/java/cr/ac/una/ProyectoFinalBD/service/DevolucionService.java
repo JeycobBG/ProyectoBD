@@ -5,9 +5,11 @@
 package cr.ac.una.ProyectoFinalBD.service;
 
 import cr.ac.una.ProyectoFinalBD.domain.Devolucion;
+import cr.ac.una.ProyectoFinalBD.jpa.DevolucionRepository;
 import cr.ac.una.ProyectoFinalBD.repositorio.IDevolucionRepositorio;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class DevolucionService implements IDevolucionService{
 
     @Autowired
     IDevolucionRepositorio devolucionRepo;
+    
+    @Autowired
+    DevolucionRepository devolucionRepository;
     
     @Override
     public String[] insertar(Date fecha_devolucion_efectuada, Integer id_prestamo) {
@@ -40,6 +45,12 @@ public class DevolucionService implements IDevolucionService{
     @Override
     public String eliminar(Integer id_prestamo){
         return devolucionRepo.eliminar(id_prestamo);
+    }
+    
+    @Override
+    public Devolucion buscar(Integer id){
+        Optional<Devolucion> devolucionOptional = devolucionRepository.findById(id);
+        return devolucionOptional.get(); 
     }
     
 }

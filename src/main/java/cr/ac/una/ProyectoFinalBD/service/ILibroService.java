@@ -12,12 +12,13 @@ import java.util.List;
  *
  * @author JEYCOB
  */
-public interface ILibroService {
+public interface ILibroService{
    
     public String insertar(String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos);
     public List<Libro> leer();
     public String actualizar(Integer id_libro, String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos);
     public String eliminar(Integer id_libro);
+    public Libro buscar(Integer id);
     
     //filtros
     public List<Libro> librosPorEditorial(String editorial, String error);

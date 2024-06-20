@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -56,5 +57,13 @@ public class Devolucion {
 
     public void setPrestamo(Prestamo prestamo) {
         this.prestamo = prestamo;
+    }
+    
+    public String getDevolucionEfectuadaFormateada() {
+        if (fechaDevolucionEfectuada != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            return formatter.format(fechaDevolucionEfectuada);
+        }
+        return "";
     }
 }

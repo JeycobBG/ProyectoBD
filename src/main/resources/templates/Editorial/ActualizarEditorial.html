@@ -13,41 +13,35 @@
                 <h2 style="text-align: center;">Actualizar Editorial</h2>
 
                 <!-- Campo oculto para el ID de la editorial -->
-                <input type="hidden" id="idEditorial" th:field="${editorial.idEditorial}" />
+                <input type="hidden" id="id" name="id" th:value="${editorial.id}" />
 
                 <!-- Campo para el nombre de la editorial -->
                 <div class="form-group">
                     <label for="nombre">Nombre de la editorial:</label>
-                    <input type="text" id="nombre" th:field="${editorial.nombre}" required>
+                    <input type="text" id="nombre" name="nombre" th:value="${editorial.nombre}" required>
                 </div>
                 
                 <!-- Campo para la fecha de fundación -->
                 <div class="form-group">
                     <label for="fechaFundacion">Fecha de fundación:</label>
-                    <input type="date" id="fechaFundacion" th:field="${editorial.fechaFundacion}" required>
+                    <input type="date" id="fecha_fundacion" name="fecha_fundacion" th:value="${editorial.fechaFundacion}" required>
                 </div>
 
                 <!-- Campo para el código postal -->
                 <div class="form-group">
                     <label for="codigoPostal">Código Postal:</label>
-                    <input type="text" id="codigoPostal" th:field="${editorial.codigoPostal}" required>
+                    <input type="text" id="codigo_postal" name="codigo_postal" th:value="${editorial.direccion.codigoPostal}" required>
                 </div>
                 
                 <!-- Campo para la descripción de la dirección -->
                 <div class="form-group">
-                    <label for="descripcionDireccion">Descripción de la dirección:</label>
-                    <input type="text" id="descripcionDireccion" th:field="${editorial.descripcionDireccion}" required>
+                    <label for="descripcionDireccion">Dirección:</label>
+                    <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:value="${editorial.direccion.descripcion}" required>
                 </div>
-                
-                <!-- Combo box para seleccionar el distrito -->
                 <div class="form-group">
                     <label for="distrito">Distrito:</label>
-                    <select id="distrito" th:field="${editorial.distrito}" required>
-                        <option value="">Selecciona un distrito</option>
-                        <!-- Aquí puedes cargar dinámicamente las opciones de distrito desde el backend -->
-                        <option th:each="distrito : ${distritos}" th:value="${distrito.id}" th:text="${distrito.nombre}"></option>
-                    </select>
-                </div>
+                    <input type="text" id="id_distrito" name="id_distrito" th:value="${editorial.direccion.distrito.id}" required>
+                </div> 
                 
                 <input type="submit" value="Actualizar">
             </form>

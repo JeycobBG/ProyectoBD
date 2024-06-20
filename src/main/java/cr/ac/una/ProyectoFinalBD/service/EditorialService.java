@@ -5,9 +5,11 @@
 package cr.ac.una.ProyectoFinalBD.service;
 
 import cr.ac.una.ProyectoFinalBD.domain.Editorial;
+import cr.ac.una.ProyectoFinalBD.jpa.EditorialRepository;
 import cr.ac.una.ProyectoFinalBD.repositorio.IEditorialRepositorio;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class EditorialService implements IEditorialService{
 
     @Autowired
     IEditorialRepositorio editorialRepo;
+    
+    @Autowired
+    EditorialRepository editorialRepository;
     
     @Override
     public String add(String nombre, Date fecha_fundacion, String codigo_postal,
@@ -46,6 +51,12 @@ public class EditorialService implements IEditorialService{
     @Override
     public List<Editorial> leer(String error) {
         return editorialRepo.leer(error);
+    }
+    
+    @Override 
+    public Editorial buscar(Integer id){
+        Optional<Editorial> editorialOptional = editorialRepository.findById(id);
+        return editorialOptional.get(); 
     }
     
     

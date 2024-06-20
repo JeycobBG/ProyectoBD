@@ -9,59 +9,56 @@
         <div class="container">
             <h2>Actualizar Libro</h2>
 
-            <form id="actualizarLibroForm" action="/libro/actualizar" method="post">
-
+            <form id="actualizarLibroForm" action="/libro/actualizar/" method="post">
                 <!-- Campo oculto para el ID del libro -->
-                <input type="hidden" id="idLibro" th:field="${libro.idLibro}" />
-                
+                <input type="hidden" id="id" name="id" th:value="${libro.id}" />
+
                 <!-- Campo para el ISBN del libro -->
                 <div class="form-group">
                     <label for="isbn">ISBN:</label>
-                    <input type="text" id="isbn" th:field="${libro.isbn}" required>
+                    <input type="text" id="ISBN" name="ISBN" th:value="${libro.isbn}" required>
                 </div>
-                
+
                 <!-- Campo para el título del libro -->
                 <div class="form-group">
                     <label for="titulo">Título:</label>
-                    <input type="text" id="titulo" th:field="${libro.titulo}" required>
+                    <input type="text" id="titulo" name="titulo" th:value="${libro.titulo}" required>
                 </div>
-                
+
                 <!-- Campo para la sinopsis del libro -->
                 <div class="form-group">
                     <label for="sinopsis">Sinopsis:</label>
-                    <textarea id="sinopsis" th:field="${libro.sinopsis}" required></textarea>
+                    <textarea id="sinopsis" name="sinopsis" th:value="${libro.sinopsis}" required></textarea>
                 </div>
-                
+
                 <!-- Campo para la fecha de publicación del libro -->
                 <div class="form-group">
                     <label for="fechaPublicacion">Fecha de Publicación:</label>
-                    <input type="date" id="fechaPublicacion" th:field="${libro.fechaPublicacion}" required>
+                    <input type="date" id="fecha_publicacion" name="fecha_publicacion" th:value="${#dates.format(libro.fechaPublicacion, 'dd-MM-yyyy')}" required>
                 </div>
-                
+
                 <!-- Campo para la cantidad de libros disponibles -->
                 <div class="form-group">
                     <label for="cantidad">Cantidad:</label>
-                    <input type="text" id="cantidad" th:field="${libro.cantidad}" required pattern="[0-9]+" title="Por favor ingrese solo números">
+                    <input type="text" id="cantidad" name="cantidad" th:value="${libro.cantidad}" required pattern="[0-9]+" title="Por favor ingrese solo números">
                 </div>
-                
+
                 <!-- Combo box para seleccionar el autor -->
                 <div class="form-group">
                     <label for="autor">Autor:</label>
-                    <select id="autor" th:field="${libro.autor.id}" required>
-                        <option value="">Selecciona un autor</option>
+                    <select id="autor" name="id_autor" th:value="${libro.autor.id}" required>
                         <!-- Cargar dinámicamente las opciones de autor desde el backend -->
                         <option th:each="autor : ${autores}" 
                                 th:value="${autor.id}" 
-                                th:text="${autor.nombre}">
+                                th:text="${autor.persona.nombre}">
                         </option>
                     </select>
                 </div>
-                
+
                 <!-- Combo box para seleccionar la editorial -->
                 <div class="form-group">
                     <label for="editorial">Editorial:</label>
-                    <select id="editorial" th:field="${libro.editorial.id}" required>
-                        <option value="">Selecciona una editorial</option>
+                    <select id="editorial" name="id_editorial" th:value="${libro.editorial.id}" required>
                         <!-- Cargar dinámicamente las opciones de editorial desde el backend -->
                         <option th:each="editorial : ${editoriales}" 
                                 th:value="${editorial.id}" 
@@ -69,21 +66,22 @@
                         </option>
                     </select>
                 </div>
-                
+
                 <!-- Combo box para seleccionar los géneros -->
                 <div class="form-group">
                     <label for="generos">Géneros:</label>
-                    <select id="generos" th:field="${libro.generos}" multiple required>
-                        <option value="">Selecciona uno o más géneros</option>
-                        <!-- Cargar dinámicamente las opciones de géneros desde el backend -->
+                    <!--
+                    <select id="generos" th:field="*{generos}" multiple required>
+                        <!-- Cargar dinámicamente las opciones de géneros desde el backend 
                         <option th:each="genero : ${generos}" 
                                 th:value="${genero.id}" 
                                 th:text="${genero.nombre}">
                         </option>
-                    </select>
+                    </select> -->
                 </div>
-                
+
                 <input type="submit" value="Actualizar">
+
             </form>
 
             <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>

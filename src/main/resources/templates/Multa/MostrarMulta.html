@@ -4,7 +4,7 @@
     <title>Módulo Multa</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/mostrar.css">
+    <link rel="stylesheet" href="/css/mostrarMultaCB.css">
 </head>
 <body>
     <div class="encabezado">
@@ -12,12 +12,23 @@
         <h2 class="listado-titulo">Lista de Multas</h2>
         <a href="/menu" class="button volver">Volver</a>
     </div>
+    
+    <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+    
     <div class="botonYBuscador"> 
         <div>
             <a href="/multa/guardar" class="button">Agregar una nueva Multa</a>
         </div>
         <form th:action="@{/multa/filtrarPorSociosMasMultados}" th:method="get">
-            <button type="submit">Ver Socios Más Multados</button>
+           <label for="tipoFiltro" style="font-size: 18px;">Seleccione el filtro deseado:</label>
+            <select name="top_n" class="select-filtro">
+                    <option disabled selected>Socio más multado</option>
+                    <option value="1">Top 1</option>
+                    <option value="3">Top 3</option>
+                    <option value="5" selected>Top 5</option>
+                    <option value="10">Top 10</option>
+                </select>
+            <button type="submit">Enviar</button>
         </form>
     </div>
     <div>
@@ -36,18 +47,16 @@
                 <td th:text="${multa.cancelada}"></td>
                 <td th:text="${multa.prestamo.libro.titulo}"></td>
                 <td th:text="${multa.prestamo.socio.persona.nombre + ' ' + multa.prestamo.socio.persona.primerApellido + ' ' + multa.prestamo.socio.persona.segundoApellido}"></td>
-                <td><a class="editar-button" th:href="@{'/multa/actualizar?id=' + ${multa.id}}">Editar</a>
-                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${multa.id} + '\')'">Eliminar</a></td>
+                <td>
+                    <form method="post" th:action="@{/multa/actualizarForm}">
+                        <input type="hidden" th:name="id" th:value="${multa.id}" />
+                        <button type="submit" class="editar-button">Editar</button>
+                    </form>
+                        <a href="javascript:void(0);" class="eliminar-button" th:onclick="'confirmarEliminacion(\'multa\', ' + ${multa.id} + ');'">Eliminar</a>
+                </td>
             </tr>
         </table>
-        
-        <script>
-            function confirmarEliminacion(enlace, idMulta) {
-                if (confirm("¿Está seguro de que desea eliminar esta multa?")) {
-                    window.location.href = '/multa/eliminar?id=' + idMulta;
-                }
-            }
-        </script>
+        <script src="/js/deleteConfirmation.js"></script>
     </div>
 
     <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>

@@ -12,13 +12,17 @@
             <h2 class="listado-titulo">Lista de Editoriales</h2>
             <a href="/menu" class="button volver">Volver</a>
         </div>
+        
+        <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+        
         <div class="botonYBuscador"> 
             <div>
                 <a href="/editorial/guardar" class="button">Agregar una nueva editorial</a>
             </div>
             <form th:action="@{/editorial/filtrarConMasLibros}" th:method="get">
-                <label for="tipoFiltro" style="font-size: 18px;">Editorial con más libros publicados:</label>
+                <label for="tipoFiltro" style="font-size: 18px;">Seleccione el filtro deseado:</label>
                 <select name="top_n" class="select-filtro">
+                    <option disabled selected>Cantidad de Editoriales</option>
                     <option value="1">Top 1</option>
                     <option value="3">Top 3</option>
                     <option value="5" selected>Top 5</option>
@@ -41,18 +45,16 @@
                     <td th:text="${editorial.fechaFundacionFormateada}"></td>
                     <td th:text="${editorial.direccion.codigoPostal}"></td>
                     <td th:text="${editorial.direccion.descripcion}"></td>
-                    <td><a class="editar-button" th:href="@{'/editorial/actualizar?id=' + ${editorial.id}}">Editar</a>
-                        <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${editorial.id} + '\')'">Eliminar</a></td>
+                    <td>
+                        <form method="post" th:action="@{/editorial/actualizarForm}">
+                            <input type="hidden" th:name="id" th:value="${editorial.id}" />
+                            <button type="submit" class="editar-button">Editar</button>
+                        </form>
+                        <a href="javascript:void(0);" class="eliminar-button" th:onclick="'confirmarEliminacion(\'editorial\', ' + ${editorial.id} + ');'">Eliminar</a>
+                    </td>
                 </tr>
             </table>
-
-            <script>
-                function confirmarEliminacion(enlace, idEditorial) {
-                    if (confirm("¿Está seguro de que desea eliminar esta editorial?")) {
-                        window.location.href = '/editorial/eliminar?id=' + idEditorial;
-                    }
-                }
-            </script>
+            <script src="/js/deleteConfirmation.js"></script>
         </div>
 
         <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>

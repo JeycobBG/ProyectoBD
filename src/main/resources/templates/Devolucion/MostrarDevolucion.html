@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Módulo Devolución</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/mostrar.css">
-</head>
-<body>
-    <div class="encabezado">
-        <a href="/menu" class="boton-volver"></a>
-        <h2 class="listado-titulo">Lista de Devoluciones</h2>
-        <a href="/menu" class="button volver">Volver</a>
-    </div>
-    <div class="botonYBuscador"> 
-        <div>
-            <a href="/devolucion/guardar" class="button">Agregar una nueva devolución</a>
+    <head>
+        <title>Módulo Devolución</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/mostrar.css">
+    </head>
+    <body>
+        <div class="encabezado">
+            <a href="/menu" class="boton-volver"></a>
+            <h2 class="listado-titulo">Lista de Devoluciones</h2>
+            <a href="/menu" class="button volver">Volver</a>
         </div>
-    </div>
-    <div>
-        <table class="table table-bordered">
-            <tr>
-                <th>Fecha Devolución</th>
-                <th>Fecha Devolución Prevista</th>
-                <th>Libro Prestado</th>
-                <th>Socio</th>
-                <th>Acciones</th>   
-            </tr>
-            <tr th:each="devolucion : ${devoluciones}"> 
-                <td th:text="${devolucion.fechaDevolucionEfectuada}"></td>
-                <td th:text="${devolucion.prestamo.fechaDevolucionPrevista}"></td>
-                <td th:text="${devolucion.prestamo.libro.titulo}"></td>
-                <td th:text="${devolucion.prestamo.socio.persona.nombre + ' ' + devolucion.prestamo.socio.persona.primerApellido + ' ' + devolucion.prestamo.socio.persona.segundoApellido}"></td>
-                <td><a class="editar-button" th:href="@{'/devolucion/actualizar?id=' + ${devolucion.id}}">Editar</a>
-                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${devolucion.id} + '\')'">Eliminar</a></td>
-            </tr>
-        </table>
+        
+        <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+        
+        <div class="botonYBuscador"> 
+            <div>
+                <a href="/devolucion/guardar" class="button">Agregar una nueva devolución</a>
+            </div>
+        </div>
+        <div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Fecha Devolución</th>
+                    <th>Fecha Devolución Prevista</th>
+                    <th>Libro Prestado</th>
+                    <th>Socio</th>
+                    <th>Acciones</th>   
+                </tr>
+                <tr th:each="devolucion : ${devoluciones}"> 
+                    <td th:text="${devolucion.fechaDevolucionEfectuada}"></td>
+                    <td th:text="${devolucion.prestamo.fechaDevolucionPrevista}"></td>
+                    <td th:text="${devolucion.prestamo.libro.titulo}"></td>
+                    <td th:text="${devolucion.prestamo.socio.persona.nombre + ' ' + devolucion.prestamo.socio.persona.primerApellido + ' ' + devolucion.prestamo.socio.persona.segundoApellido}"></td>
+                    <td>
+                        <form method="post" th:action="@{/devolucion/actualizarForm}">
+                            <input type="hidden" th:name="id" th:value="${devolucion.id}" />
+                            <button type="submit" class="editar-button">Editar</button>
+                        </form>
+                        <a href="javascript:void(0);" class="eliminar-button" th:onclick="'confirmarEliminacion(\'devolucion\', ' + ${devolucion.id} + ');'">Eliminar</a>
+                    </td>
+                </tr>
+            </table>
+            <script src="/js/deleteConfirmation.js"></script>
+        </div>
 
-        <script>
-            function confirmarEliminacion(enlace, idDevolucion) {
-                if (confirm("¿Está seguro de que desea eliminar esta devolución?")) {
-                    window.location.href = '/devolucion/eliminar?id=' + idDevolucion;
-                }
-            }
-        </script>
-    </div>
-
-    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
-</body>
+        <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+        <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+    </body>
 </html>

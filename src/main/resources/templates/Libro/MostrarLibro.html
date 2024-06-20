@@ -13,6 +13,9 @@
             <h2 class="listado-titulo">Lista de Libros</h2>
             <a href="/menu" class="button volver">Volver</a>
         </div>
+        
+        <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+        
         <div class="botonYBuscador">
             <div>
                 <a href="/libro/guardar" class="button">Agregar un nuevo Libro</a>
@@ -61,18 +64,16 @@
                             <li th:each="gen : ${libro.generos}" th:text="${gen.nombre}"></li>
                         </ul>
                     </td>
-                    <td><a class="editar-button" th:href="@{'/libro/actualizar?id=' + ${libro.id}}">Editar</a>
-                        <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${libro.id} + '\')'">Eliminar</a>
+                    <td>
+                        <form method="post" th:action="@{/libro/actualizarForm}" th:object="${libro}">
+                            <input type="hidden" th:name="id" th:value="${libro.id}" />
+                            <button type="submit" class="editar-button">Editar</button>
+                        </form>
+                        <a href="javascript:void(0);" class="eliminar-button" th:onclick="'confirmarEliminacion(\'libro\', ' + ${libro.id} + ');'">Eliminar</a>
+                    </td>
                 </tr>
             </table>
-
-            <script>
-                function confirmarEliminacion(enlace, idLibro) {
-                    if (confirm("¿Está seguro de que desea eliminar este Libro?")) {
-                        window.location.href = '/libro/eliminar?id=' + idLibro;
-                    }
-                }
-            </script>
+            <script src="/js/deleteConfirmation.js"></script>
         </div>
 
         <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>

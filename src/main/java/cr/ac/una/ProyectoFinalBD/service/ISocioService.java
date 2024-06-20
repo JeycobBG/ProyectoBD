@@ -36,4 +36,7 @@ public interface ISocioService {
     public String delete(
             Integer id_socio,
             String error_message);
+    
+    public Socio buscar(Integer id);
+    
 }

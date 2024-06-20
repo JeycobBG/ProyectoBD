@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,8 +48,8 @@ public class AutorController {
     }
     
     @PostMapping("/actualizar")
-    public String update(@PathVariable("id_autor") Integer id_autor,
-        @RequestParam("nombre")String nombre,                     @RequestParam("primer_apellido")String primer_apellido,
+    public String update(@RequestParam("id") Integer id_autor,
+            @RequestParam("nombre")String nombre,                     @RequestParam("primer_apellido")String primer_apellido,
             @RequestParam("segundo_apellido")String segundo_apellido, @RequestParam("identificacion") String identificacion,
             @RequestParam("codigo_postal")String codigo_postal,       @RequestParam("descripcion_direccion") String descripcion_direccion,
             @RequestParam("id_distrito")Integer id_distrito,          @RequestParam("numero_telefono") String numero_telefono,
@@ -64,36 +63,27 @@ public class AutorController {
         
         
         System.out.println("resultado = " + resultado);
-        return "/";
+        return "redirect:/autor/leer";
     }
     
-    @GetMapping("/actualizar")
-    public String actualizar(){
+    @PostMapping("/actualizarForm")
+    public String actualizar(@RequestParam("id") Integer id, Model modelo){
+        Autor autor = autorService.buscar(id);
         
-        return "Autor/ActualizarLibro";
+        modelo.addAttribute("autor", autor);
+        return "Autor/ActualizarAutor";
     }
     
     @GetMapping("/eliminar")
-    public String delete(){
-        /*
-        @PathVariable("id_autor") Integer id_autor
-        */
-        Integer id_autor = 1;
-        String error = "";
-        
-        String resultado = autorService.delete(id_autor, error);
-        
+    public String delete(@RequestParam("id") Integer id){
+        String resultado = autorService.delete(id, "");
         System.out.println("resultado = " + resultado);
-        
-        return "/";
+        return "redirect:/autor/leer";
     }
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-        /*
-        String error = "";
-        
-        List<Autor> autores = autorService.leer(error);
+        List<Autor> autores = autorService.leer("");
         
         for(Autor autor: autores){
             System.out.println("autor: " + autor.getPersona().getNombre());
@@ -101,10 +91,7 @@ public class AutorController {
             System.out.println("\n");
         }
         
-        
-        
         modelo.addAttribute("autores", autores);
-*/
         return "Autor/MostrarAutor";
     }
 }

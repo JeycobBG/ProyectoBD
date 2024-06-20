@@ -4,17 +4,23 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Autor;
+import cr.ac.una.ProyectoFinalBD.domain.Editorial;
 import cr.ac.una.ProyectoFinalBD.domain.Genero;
 import cr.ac.una.ProyectoFinalBD.domain.Libro;
+import cr.ac.una.ProyectoFinalBD.service.AutorService;
+import cr.ac.una.ProyectoFinalBD.service.EditorialService;
+import cr.ac.una.ProyectoFinalBD.service.GeneroService;
 import cr.ac.una.ProyectoFinalBD.service.LibroService;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,12 +35,21 @@ public class LibroController {
 
     @Autowired
     private LibroService libroService;
+    
+    @Autowired
+    AutorService autorService;
+    
+    @Autowired
+    EditorialService editorialService;
+    
+    @Autowired
+    GeneroService generoService;
 
     @PostMapping("/guardar")
     public String guardar(@RequestParam("ISBN") String isbn,
             @RequestParam("titulo") String titulo,
             @RequestParam("sinopsis") String sinopsis,
-            @RequestParam("fecha_publicacion") Date fechaPublicacion,
+            @RequestParam("fecha_publicacion") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaPublicacion,
             @RequestParam("cantidad") Integer cantidad,
             @RequestParam("id_autor") Integer idAutor,
             @RequestParam("id_editorial") Integer idEditorial,
@@ -56,65 +71,52 @@ public class LibroController {
     }
     
     @GetMapping("/guardar")
-    public String agregar() {
+    public String agregar(Model modelo) {
+        List<Autor> autores = autorService.leer("");
+        List<Editorial> editoriales = editorialService.leer("");
+        List<Genero> generos = generoService.leer("");
+                
+        modelo.addAttribute("autores", autores);
+        modelo.addAttribute("editoriales", editoriales);
+        modelo.addAttribute("generos", generos);
         
         return "Libro/CrearLibro";
     }
 
     @GetMapping("/leer")
     public String leer(Model modelo) {
-        /*
-
-        String error = "";
         List<Libro> libros = libroService.leer();
-
-        if (error.isBlank()) {
-            modelo.addAttribute("libros", libros);
-
-            for (Libro lib : libros) {
-                List<Genero> generos = lib.getGeneros();
-                System.out.print("Nuevo libro> " + lib.getTitulo() + " con generos: ");
-
-                for (Genero gen : generos) {
-                    System.out.print(gen.getNombre() + ", ");
-                }
-
-                System.out.print("\n");
-            }
-        } else {
-            modelo.addAttribute("error", error);
-            System.out.println("error = " + error);
-        }
-
         modelo.addAttribute("libros", libros);
-*/
         return "Libro/MostrarLibro";
     }
 
-    @GetMapping("/actualizar")
-    public String actualizar() {
-
-        /*
-        @PathVariable("id_libro") Integer id_libro,
+    @PostMapping("/actualizarForm")
+    public String actualizar(@RequestParam("id") Integer id, Model modelo) {
+        Libro libro = libroService.buscar(id);
+        List<Autor> autores = autorService.leer("");
+        List<Editorial> editoriales = editorialService.leer("");
+        List<Genero> generos = generoService.leer("");
+                
+        modelo.addAttribute("libro", libro);
+        modelo.addAttribute("autores", autores);
+        modelo.addAttribute("editoriales", editoriales);
+        modelo.addAttribute("generos", generos);
+        
+        return "Libro/ActualizarLibro";
+    }
+    
+    @PostMapping("/actualizar")
+    public String actualizar (@RequestParam("id") Integer id_libro,
         @RequestParam("ISBN") String isbn,
             @RequestParam("titulo") String titulo,
             @RequestParam("sinopsis") String sinopsis,
-            @RequestParam("fecha_publicacion") Date fechaPublicacion,
+            @RequestParam("fecha_publicacion") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaPublicacion,
             @RequestParam("cantidad") Integer cantidad,
             @RequestParam("id_autor") Integer idAutor,
             @RequestParam("id_editorial") Integer idEditorial,
-            @RequestParam("id_generos") Integer idGeneros
-         */
-        Integer id_libro = 1;
-        String isbn = "Modificado";
-        String titulo = "Modificado";
-        String sinopsis = "Modificado";
-        Date fechaPublicacion = Date.from(Instant.now());
-        Integer cantidad = 1;
-        Integer idAutor = 1;
-        Integer idEditorial = 1;
-        String idGeneros = "1,2,3,4";
-
+            @RequestParam("id_generos") String idGeneros){
+        
+        
         String resultado = libroService.actualizar(
                 id_libro,
                 isbn,
@@ -125,22 +127,16 @@ public class LibroController {
                 idAutor,
                 idEditorial,
                 idGeneros);
-
+        
         System.out.println("resultado = " + resultado);
-        return "/";
+        return "redirect:/libro/leer";
     }
 
     @GetMapping("/eliminar")
-    public String eliminar() {
-        /*
-        @PathVariable("id_libro") Integer id_libro
-         */
-
-        Integer id_libro = 2;
-        String resultado = libroService.eliminar(id_libro);
+    public String eliminar(@RequestParam("id") Integer id) {
+        String resultado = libroService.eliminar(id);
         System.out.println("resultado = " + resultado);
-
-        return "/";
+        return "redirect:/libro/leer";
     }
 
     // filtros -----------------------------------------------------------------

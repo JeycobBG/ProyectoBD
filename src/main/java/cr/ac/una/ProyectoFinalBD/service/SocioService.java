@@ -5,9 +5,11 @@
 package cr.ac.una.ProyectoFinalBD.service;
 
 import cr.ac.una.ProyectoFinalBD.domain.Socio;
+import cr.ac.una.ProyectoFinalBD.jpa.SocioRepository;
 import cr.ac.una.ProyectoFinalBD.repositorio.ISocioRepositorio;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class SocioService implements ISocioService{
 
     @Autowired
     ISocioRepositorio socioRepo;
+    
+    @Autowired
+    SocioRepository socioRepository;
     
     @Override
     public String add(String nombre, String primer_apellido, String segundo_apellido,
@@ -47,6 +52,12 @@ public class SocioService implements ISocioService{
     public String delete(Integer id_socio, String error_message) {
  
         return socioRepo.eliminar(id_socio, error_message);
+    }
+    
+    @Override 
+    public Socio buscar(Integer id){
+        Optional<Socio> socioOptional = socioRepository.findById(id);
+        return socioOptional.get();
     }
 
     @Override

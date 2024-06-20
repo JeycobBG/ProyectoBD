@@ -9,12 +9,12 @@
         <div class="container">
             <h2>Registrar un nuevo libro</h2>
 
-            <form id="registrarLibroForm" action="/libro/guardar" method="post">
+            <form id="registrarForm" action="/libro/guardar" method="post" onsubmit="concatenarIds()">
 
                 <!-- Campo para el ISBN del libro -->
                 <div class="form-group">
-                    <label for="isbn">ISBN:</label>
-                    <input type="text" id="isbn" name="isbn" required>
+                    <label for="ISBN">ISBN:</label>
+                    <input type="text" id="ISBN" name="ISBN" required>
                 </div>
                 
                 <!-- Campo para el título del libro -->
@@ -31,8 +31,8 @@
                 
                 <!-- Campo para la fecha de publicación del libro -->
                 <div class="form-group">
-                    <label for="fechaPublicacion">Fecha de Publicación:</label>
-                    <input type="date" id="fechaPublicacion" name="fechaPublicacion" required>
+                    <label for="fecha_publicacion">Fecha de Publicación:</label>
+                    <input type="date" id="fecha_publicacion" name="fecha_publicacion" required>
                 </div>
                 
                 <!-- Campo para la cantidad de libros disponibles -->
@@ -43,23 +43,19 @@
                 
                 <!-- Combo box para seleccionar el autor -->
                 <div class="form-group">
-                    <label for="autor">Autor:</label>
-                    <select id="autor" name="autor" required>
-                        <option value="">Selecciona un autor</option>
-                        <!-- Cargar dinámicamente las opciones de autor desde el backend -->
+                    <label for="id_autor">Autor:</label>
+                    <select id="id_autor" name="id_autor" required>
                         <option th:each="autor : ${autores}" 
                                 th:value="${autor.id}" 
-                                th:text="${autor.nombre}">
+                                th:text="${autor.persona.nombre}">
                         </option>
                     </select>
                 </div>
                 
                 <!-- Combo box para seleccionar la editorial -->
                 <div class="form-group">
-                    <label for="editorial">Editorial:</label>
-                    <select id="editorial" name="editorial" required>
-                        <option value="">Selecciona una editorial</option>
-                        <!-- Cargar dinámicamente las opciones de editorial desde el backend -->
+                    <label for="id_editorial">Editorial:</label>
+                    <select id="id_editorial" name="id_editorial" required>
                         <option th:each="editorial : ${editoriales}" 
                                 th:value="${editorial.id}" 
                                 th:text="${editorial.nombre}">
@@ -69,58 +65,24 @@
                 
                 <!-- Combo box para seleccionar los géneros -->
                 <div class="form-group">
-                    <label for="generos">Géneros:</label>
+                    <label for="id_generos">Géneros:</label>
                     <select id="generos" name="generos" multiple required>
-                        <option value="">Selecciona uno o más géneros</option>
-                        <!-- Cargar dinámicamente las opciones de géneros desde el backend -->
                         <option th:each="genero : ${generos}" 
                                 th:value="${genero.id}" 
                                 th:text="${genero.nombre}">
                         </option>
                     </select>
                 </div>
+                <input type="hidden" id="id_generos" name="id_generos" />
                 
                 <input type="submit" value="Guardar">
             </form>
 
-            <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
+            <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
             <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
         </div>
     </div>
-    
-    <script>
-        // Validación del formulario
-        document.getElementById("registrarLibroForm").addEventListener("submit", function(event) {
-            var isbn = document.getElementById("isbn").value;
-            var titulo = document.getElementById("titulo").value;
-            var sinopsis = document.getElementById("sinopsis").value;
-            var fechaPublicacion = document.getElementById("fechaPublicacion").value;
-            var cantidad = document.getElementById("cantidad").value;
-            var autor = document.getElementById("autor").value;
-            var editorial = document.getElementById("editorial").value;
-            var generos = document.getElementById("generos").selectedOptions;
-            
-            // Validaciones
-            if (isbn.trim() === "" || titulo.trim() === "" || sinopsis.trim() === "" || 
-                fechaPublicacion.trim() === "" || cantidad.trim() === "" || autor === "" || 
-                editorial === "" || generos.length === 0) {
-                alert("Por favor complete todos los campos.");
-                event.preventDefault();
-            } else {
-                // Validar que la cantidad sea un número
-                if (isNaN(cantidad)) {
-                    alert("La cantidad debe ser un número.");
-                    event.preventDefault();
-                }
-
-                // Validar que la fecha de publicación no sea una fecha futura
-                var currentDate = new Date().toISOString().split('T')[0];
-                if (fechaPublicacion > currentDate) {
-                    alert("La fecha de publicación no puede ser una fecha futura.");
-                    event.preventDefault();
-                }
-            }
-        });
-    </script>
+    <script src="/js/libroValidator.js"></script>
+    <script src="/js/formSubmission.js"></script>
 </body>
 </html>

@@ -12,47 +12,47 @@
             <h2>Actualizar Autor</h2>
 
             <form id="actualizarAutorForm" action="/autor/actualizar" method="post">
-                <input type="hidden" id="idAutor" th:field="${autor.idAutor}" />
+                <input type="hidden" id="id" name="id" th:value="${autor.id}" />
                 
                 <div class="form-group">
-                    <label for="nombreCompleto">Nombre Completo:</label>
-                    <input type="text" id="nombreCompleto" th:field="${autor.nombreCompleto}" required>
+                    <label for="nombreCompleto">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" th:value="${autor.persona.nombre}" required>
                 </div>
                 <div class="form-group">
                     <label for="primerApellido">Primer Apellido:</label>
-                    <input type="text" id="primerApellido" th:field="${autor.primerApellido}" required>
+                    <input type="text" id="primer_apellido" name="primer_apellido" th:value="${autor.persona.primerApellido}" required>
                 </div>
                 <div class="form-group">
                     <label for="segundoApellido">Segundo Apellido:</label>
-                    <input type="text" id="segundoApellido" th:field="${autor.segundoApellido}" required>
+                    <input type="text" id="segundo_apellido" name="segundo_apellido" th:value="${autor.persona.segundoApellido}" required>
                 </div>
                 <div class="form-group">
                     <label for="identificacion">Identificación:</label>
-                    <input type="text" id="identificacion" th:field="${autor.identificacion}" required>
+                    <input type="text" id="identificacion" name="identificacion" th:value="${autor.persona.identificacion}" required>
                 </div>
                 <div class="form-group">
                     <label for="codigoPostal">Código Postal:</label>
-                    <input type="text" id="codigoPostal" th:field="${autor.codigoPostal}" required>
+                    <input type="text" id="codigo_postal" name="codigo_postal" th:value="${autor.persona.direccion.codigoPostal}" required>
                 </div>
                 <div class="form-group">
                     <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" th:field="${autor.direccion}" required>
+                    <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:value="${autor.persona.direccion.descripcion}" required>
                 </div>
                 <div class="form-group">
                     <label for="distrito">Distrito:</label>
-                    <input type="text" id="distrito" th:field="${autor.distrito}" required>
-                </div>
+                    <input type="text" id="id_distrito" name="id_distrito" th:value="${autor.persona.direccion.distrito.id}" required>
+                </div> 
                 <div class="form-group">
                     <label for="telefono">Teléfono:</label>
-                    <input type="text" id="telefono" th:field="${autor.telefono}" required>
+                    <input type="text" id="numero_telefono" name="numero_telefono" th:value="${autor.persona.telefono[0].numero}" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" th:field="${autor.email}" required>
+                    <input type="email" id="email" name="email" th:value="${autor.persona.correoElectronico[0].email}" required>
                 </div>
                 <div class="form-group">
                     <label for="bibliografia">Bibliografía:</label>
-                    <textarea id="bibliografia" th:field="${autor.bibliografia}" rows="4" cols="50" required></textarea>
+                    <textarea id="bibliografia" name="bibliografia" th:value="${autor.bibliografia}" rows="4" cols="50" required></textarea>
                 </div>
                 <input type="submit" value="Actualizar">
             </form>

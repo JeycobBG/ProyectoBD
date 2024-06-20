@@ -5,8 +5,10 @@
 package cr.ac.una.ProyectoFinalBD.service;
 
 import cr.ac.una.ProyectoFinalBD.domain.Autor;
+import cr.ac.una.ProyectoFinalBD.jpa.AutorRepository;
 import cr.ac.una.ProyectoFinalBD.repositorio.IAutorRepositorio;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class AutorService implements IAutorService{
     
     @Autowired
     IAutorRepositorio autorRepo;
+    
+    @Autowired
+    AutorRepository autorRepository;
 
     @Override
     public String add(String nombre, String primer_apellido, String segundo_apellido,
@@ -53,5 +58,10 @@ public class AutorService implements IAutorService{
         return autorRepo.leer(error);
     }
     
+    @Override 
+    public Autor buscar(Integer id){
+        Optional<Autor> autorOptional = autorRepository.findById(id);
+        return autorOptional.get(); 
+    }
     
 }
