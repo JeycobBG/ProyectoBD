@@ -31,8 +31,8 @@
                 <th>Acciones</th>     
             </tr >
             <tr th:each="prestamo : ${prestamos}"> 
-                <td th:text="${prestamo.fechaPrestamo}"></td>
-                <td th:text="${prestamo.fechaDevolucionPrevista}"></td>
+                <td th:text="${prestamo.fechaPrestamoFormateada}"></td>
+                <td th:text="${prestamo.fechaDevolucionPrevistaFormateada}"></td>
                 <td th:text="${prestamo.socio.persona.identificacion}"></td>
                 <td th:text="${prestamo.socio.persona.nombre + ' ' + prestamo.socio.persona.primerApellido + ' ' + prestamo.socio.persona.segundoApellido}"></td>
                 <td th:text="${prestamo.libro.titulo}"></td>

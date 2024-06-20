@@ -14,6 +14,9 @@
         </div>
         
         <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+        <div th:if="${mensajeError}" th:text="${mensajeError}" id="mensajeError" class="alert alert-error" style="display: none;"></div>
+        <div th:if="${mensajeAlerta}" th:text="${mensajeAlerta}" id="mensajeAlerta" class="alert alert-warning" style="display: none;"></div>
+
         
         <div class="botonYBuscador"> 
             <div>
@@ -31,7 +34,7 @@
                 </tr>
                 <tr th:each="devolucion : ${devoluciones}"> 
                     <td th:text="${devolucion.fechaDevolucionEfectuada}"></td>
-                    <td th:text="${devolucion.prestamo.fechaDevolucionPrevista}"></td>
+                    <td th:text="${devolucion.prestamo.fechaDevolucionPrevistaFormateada}"></td>
                     <td th:text="${devolucion.prestamo.libro.titulo}"></td>
                     <td th:text="${devolucion.prestamo.socio.persona.nombre + ' ' + devolucion.prestamo.socio.persona.primerApellido + ' ' + devolucion.prestamo.socio.persona.segundoApellido}"></td>
                     <td>
@@ -47,6 +50,7 @@
         </div>
 
         <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
+        <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
         <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
     </body>
 </html>

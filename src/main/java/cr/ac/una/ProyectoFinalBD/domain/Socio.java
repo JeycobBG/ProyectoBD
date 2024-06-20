@@ -14,9 +14,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +31,7 @@ public class Socio {
     @Column(name = "id_socio")
     private int id;
     
-    private Date fechaRegistro;
+    private LocalDate fechaRegistro;
     
     @ManyToOne
     @JoinColumn(name = "id_persona")
@@ -52,11 +52,11 @@ public class Socio {
         this.id = id;
     }
 
-    public Date getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
+    public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
@@ -78,8 +78,8 @@ public class Socio {
     
     public String getFechaRegistroFormateada() {
         if (fechaRegistro != null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            return formatter.format(fechaRegistro);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return fechaRegistro.format(formatter);
         }
         return "";
     }

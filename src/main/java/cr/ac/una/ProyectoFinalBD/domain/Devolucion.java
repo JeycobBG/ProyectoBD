@@ -12,8 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -27,7 +27,7 @@ public class Devolucion {
     @Column(name = "id_devolucion")
     private int id;
     
-    private Date fechaDevolucionEfectuada;
+    private LocalDate fechaDevolucionEfectuada;
     
     @OneToOne
     @JoinColumn(name = "id_prestamo")
@@ -43,11 +43,11 @@ public class Devolucion {
         this.id = id;
     }
 
-    public Date getFechaDevolucionEfectuada() {
+    public LocalDate getFechaDevolucionEfectuada() {
         return fechaDevolucionEfectuada;
     }
 
-    public void setFechaDevolucionEfectuada(Date fechaDevolucionEfectuada) {
+    public void setFechaDevolucionEfectuada(LocalDate fechaDevolucionEfectuada) {
         this.fechaDevolucionEfectuada = fechaDevolucionEfectuada;
     }
 
@@ -61,8 +61,8 @@ public class Devolucion {
     
     public String getDevolucionEfectuadaFormateada() {
         if (fechaDevolucionEfectuada != null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            return formatter.format(fechaDevolucionEfectuada);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return fechaDevolucionEfectuada.format(formatter);
         }
         return "";
     }
