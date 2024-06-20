@@ -1,65 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Actualizar Préstamo</title>
-    <link href="/CSS/actualizar.css" rel="stylesheet" type="text/css"/>
-</head>
-<body>
-    <div class="container">
-        <div>
-            <h2>Actualizar Préstamo</h2>
-            
-            <form id="actualizarPrestamoForm" action="/prestamo/actualizar" method="post">
-                <!-- Campo oculto para el ID del préstamo -->
-                <input type="hidden" id="id" name="id" th:value="${prestamo.id}" />
-                
-                <label for="fechaPrestamo">Fecha de Préstamo:</label><br>
-                <input type="date" id="fecha_prestamo" name="fecha_prestamo" th:value="${prestamo.fechaPrestamo}" required><br>
+    <head>
+        <title>Actualizar Préstamo</title>
+        <link href="/CSS/actualizar.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <h2>Actualizar Préstamo</h2>
 
-                <label for="fechaDevolucionPrevista">Fecha de Devolución Prevista:</label><br>
-                <input type="date" id="fecha_devolucion_prevista" name="fecha_devolucion_prevista" th:value="${prestamo.fechaDevolucionPrevista}" required><br>
+                <form id="actualizarPrestamoForm" action="/prestamo/actualizar" method="post">
+                    <!-- Campo oculto para el ID del préstamo -->
+                    <input type="hidden" id="id" name="id" th:value="${prestamo.id}" />
 
-                <label for="libro">Libro:</label><br>
-                <select id="libro" name="id_libro" th:value="${prestamo.libro.id}" required>
-                    <!-- Cargar dinámicamente los libros desde el backend -->
-                    <option th:each="libro : ${libros}" 
-                            th:value="${libro.id}" 
-                            th:text="${libro.titulo}">
-                    </option>
-                </select><br>
+                    <label for="fechaPrestamo">Fecha de Préstamo:</label><br>
+                    <input type="date" id="fecha_prestamo" name="fecha_prestamo" th:value="${prestamo.fechaPrestamo}" required><br>
 
-                <label for="socio">Socio:</label><br>
-                <select id="socio" name="id_socio" th:value="${prestamo.socio.id}" required>
-                    <!-- Cargar dinámicamente los socios desde el backend -->
-                    <option th:each="socio : ${socios}" 
-                            th:value="${socio.id}" 
-                            th:text="${socio.persona.nombre}">
-                    </option>
-                </select><br>
+                    <label for="fechaDevolucionPrevista">Fecha de Devolución Prevista:</label><br>
+                    <input type="date" id="fecha_devolucion_prevista" name="fecha_devolucion_prevista" th:value="${prestamo.fechaDevolucionPrevista}" required><br>
 
-                <input type="submit" value="Actualizar">
-            </form>
+                    <label for="libro">Libro:</label><br>
+                    <select id="libro" name="id_libro" th:value="${prestamo.libro.id}" required>
+                        <!-- Cargar dinámicamente los libros desde el backend -->
+                        <option th:each="libro : ${libros}" 
+                                th:value="${libro.id}" 
+                                th:text="${libro.titulo}">
+                        </option>
+                    </select><br>
+
+                    <label for="socio">Socio:</label><br>
+                    <select id="socio" name="id_socio" th:value="${prestamo.socio.id}" required>
+                        <!-- Cargar dinámicamente los socios desde el backend -->
+                        <option th:each="socio : ${socios}" 
+                                th:value="${socio.id}" 
+                                th:text="${socio.persona.nombre}">
+                        </option>
+                    </select><br>
+
+                    <input type="submit" value="Actualizar">
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+        <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+        <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
 
-    <script>
-        // Validación del formulario
-        document.getElementById("actualizarPrestamoForm").addEventListener("submit", function(event) {
-            var fechaPrestamo = document.getElementById("fechaPrestamo").value;
-            var fechaDevolucionPrevista = document.getElementById("fechaDevolucionPrevista").value;
-
-            // Obtener la fecha actual
-            var fechaActual = new Date().toISOString().split('T')[0];
-
-            // Validar que la fecha de préstamo no sea en el futuro
-            if (fechaPrestamo > fechaActual) {
-                alert("La fecha de préstamo no puede ser en el futuro.");
-                event.preventDefault();
-            }
-        });
-    </script>
-</body>
+        <script src="/js/dataPrestamoActualizarValidate.js"></script>
+    </body>
 </html>

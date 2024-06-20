@@ -1,6 +1,8 @@
+
 document.addEventListener("DOMContentLoaded", function() {
-    var form = document.getElementById("registrarSocioForm");
-    var mensajeError = document.getElementById('mensajeError'); // Asegúrate de tener este elemento en tu HTML para mostrar errores
+    var form = document.getElementById("actualizarSocioForm");
+    var mensajeExito = document.getElementById('mensajeExito'); // Asegúrate de tener este elemento en tu HTML
+    var mensajeError = document.getElementById('mensajeError'); // Para mostrar mensajes de error
 
     if (form) {
         form.addEventListener("submit", function(event) {
@@ -9,15 +11,14 @@ document.addEventListener("DOMContentLoaded", function() {
             var segundoApellido = document.getElementById("segundo_apellido").value.trim();
             var identificacion = document.getElementById("identificacion").value.trim();
             var codigoPostal = document.getElementById("codigo_postal").value.trim();
-            var fechaRegistro = document.getElementById("fecha_registro").value;
-            var idDistrito = document.getElementById("id_distrito").value.trim();
             var valid = true;
 
+            if (mensajeExito) mensajeExito.style.display = 'none';
             if (mensajeError) {
                 mensajeError.textContent = '';
                 mensajeError.style.display = 'none';
             }
-
+            
             if (!/^[a-zA-Z\s]+$/.test(nombre) || !/^[a-zA-Z\s]+$/.test(primerApellido) ||
                 !/^[a-zA-Z\s]+$/.test(segundoApellido)) {
                 mensajeError.textContent = "Nombre y apellidos deben contener solo letras.";
@@ -26,20 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             if (!/^[0-9]+$/.test(codigoPostal)) {
-                mensajeError.textContent = "El código postal debe contener solo números.";
-                valid = false;
-                event.preventDefault();
-            }
-
-            var fechaHoy = new Date().toISOString().split("T")[0]; 
-            if (fechaRegistro > fechaHoy) {
-                mensajeError.textContent = "La fecha de registro no puede ser en el futuro.";
-                valid = false;
-                event.preventDefault();
-            }
-
-            if (idDistrito === "") {
-                mensajeError.textContent += (mensajeError.textContent.length ? " " : "") + "Por favor selecciona un distrito.";
+                mensajeError.textContent += (mensajeError.textContent.length ? " " : "") + "El código postal debe contener solo números.";
                 valid = false;
                 event.preventDefault();
             }
@@ -47,7 +35,12 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!valid && mensajeError) {
                 mensajeError.style.display = 'block';
             }
-       
+
+            // Mostrar mensaje de éxito si todo es válido
+            if (valid && mensajeExito) {
+                mensajeExito.textContent = "Actualizado con éxito.";
+                mensajeExito.style.display = 'block';
+            }
         });
     }
 });

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fechaFundacionInput.setAttribute('max', today);
 });
 
-document.getElementById("registrarEditorialForm").addEventListener("submit", function(event) {
+document.getElementById("registrarEditorialForm").addEventListener("submit", function (event) {
     var nombre = document.getElementById("nombre").value;
     var fechaFundacion = document.getElementById("fecha_fundacion").value;
     var codigoPostal = document.getElementById("codigoPostal").value;
@@ -28,10 +28,12 @@ document.getElementById("registrarEditorialForm").addEventListener("submit", fun
         }
     }
 
-    if (codigoPostal.trim() === "") {
-        alert("Por favor ingrese el código postal.");
+    if (!/^[0-9]+$/.test(codigoPostal)) {
+        mensajeError.textContent = "El código postal debe contener solo números.";
+        valid = false;
         event.preventDefault();
     }
+
 
     if (descripcionDireccion.trim() === "") {
         alert("Por favor ingrese la descripción de la dirección.");
