@@ -9,7 +9,7 @@
             <div class="container">
                 <h2>Actualizar Libro</h2>
 
-                <form id="actualizarLibroForm" action="/libro/actualizar/" method="post">
+                <form id="actualizarLibroForm" action="/libro/actualizar" method="post" onsubmit="concatenarIds()">
                     <!-- Campo oculto para el ID del libro -->
                     <input type="hidden" id="id" name="id" th:value="${libro.id}" />
 
@@ -66,31 +66,27 @@
                             </option>
                         </select>
                     </div>
-
-                    <!-- Combo box para seleccionar los géneros -->
-                    <div class="form-group">
-                        <label for="generos">Géneros:</label>
-                        <!--
-                        <select id="generos" th:field="*{generos}" multiple required>
-                        <!-- Cargar dinámicamente las opciones de géneros desde el backend 
-                        <option th:each="genero : ${generos}" 
-                                th:value="${genero.id}" 
-                                th:text="${genero.nombre}">
+                <div class="form-group">
+                    <label for="id_generos">Géneros:</label>
+                    <select id="generos" name="generos" multiple required>
+                        <option th:each="genero : ${generos}"
+                                th:value="${genero.id}"
+                                th:text="${genero.nombre}"
+                                th:selected="${libro.generos.contains(genero)}">
                         </option>
-                    </select> -->
-                    </div>
-
+                    </select>
+                    <input type="hidden" id="id_generos" name="id_generos" />
+                </div>
                     <input type="submit" value="Actualizar">
-
                 </form>
 
                 <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
                 <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
-            <div class="volver-container">
-                <button class="volver-btn" onclick="window.history.back()">Volver</button>
-            </div>
+
             </div>
         </div>
         <script src="/js/dataLibroActualizarValidate.js"></script>
-    </body>
+        <script src="/js/libroValidator.js"></script>
+
+    </body>
 </html>
