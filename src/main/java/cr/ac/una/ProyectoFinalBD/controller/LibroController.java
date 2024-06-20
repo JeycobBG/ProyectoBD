@@ -240,7 +240,7 @@ public class LibroController {
         String primer_apellido_autor = "apellido2";
         String error = "";
 
-        List<Libro> libros = libroService.librosPorAutor(nombre_autor, primer_apellido_autor, error);
+        List<Libro> libros = libroService.librosPorAutor(nombre_autor, error);
 
         for (Libro libro : libros) {
             System.out.println("libro por autor: " + libro.getTitulo());
@@ -294,7 +294,7 @@ public class LibroController {
                     libros = libroService.librosPorTitulo(valorFiltro, error);
                     break;
                 case "autor":
-                    libros = libroService.librosPorAutor(valorFiltro, valorFiltro, error);
+                    libros = libroService.librosPorAutor(valorFiltro, error);
                     break;
                 case "anioPublicacion":
                     libros = libroService.librosPorAnioPublicacion(Integer.parseInt(valorFiltro), error);

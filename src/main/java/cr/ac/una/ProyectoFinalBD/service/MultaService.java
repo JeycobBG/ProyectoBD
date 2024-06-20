@@ -49,10 +49,5 @@ public class MultaService implements IMultaService{
         Optional<Multa> multaOptional = multaRepository.findById(id);
         return multaOptional.get(); 
     }
-
-    @Override
-    public List<Multa> multasPorSociosMasMultados(Integer top_n, String error) {
-        return multaRepo.multasPorSociosMasMultados(top_n, error);
-    }
-
+    
 }

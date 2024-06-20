@@ -18,7 +18,4 @@ public interface IMultaRepositorio {
     public String actualizar(Integer id_multa, Double monto, Integer dias_atraso, Boolean cancelada);
     public String eliminar(Integer id_multa);
     
-    // Filtro
-    public List<Multa> multasPorSociosMasMultados(Integer top_n, String error);
-    
 }

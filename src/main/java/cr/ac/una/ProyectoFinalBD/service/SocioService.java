@@ -64,4 +64,10 @@ public class SocioService implements ISocioService{
     public List<Socio> read(String error) {
         return socioRepo.leer(error);
     }
+    
+    @Override
+    public List<Socio> filtrarPorSociosMasMultados(Integer top_n, String error) {
+        return socioRepo.multasPorSociosMasMultados(top_n, error);
+    }
+    
 }

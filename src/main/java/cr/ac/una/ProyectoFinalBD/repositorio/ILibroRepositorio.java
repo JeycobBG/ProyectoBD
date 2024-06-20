@@ -30,7 +30,7 @@ public interface ILibroRepositorio {
     
     public List<Libro> librosPorTitulo(String titulo, String error);
     
-    public List<Libro> librosPorAutor(String nombre_autor, String primer_apellido_autor, String error);
+    public List<Libro> librosPorAutor(String nombre_autor, String error);
     
     public List<Libro> librosPorAnioPublicacion(Integer anio_publicacion, String error);
 }

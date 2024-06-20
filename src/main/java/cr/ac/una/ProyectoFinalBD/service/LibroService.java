@@ -79,8 +79,8 @@ public class LibroService implements ILibroService {
     }
 
     @Override
-    public List<Libro> librosPorAutor(String nombre_autor, String primer_apellido_autor, String error) {
-        return libroRepo.librosPorAutor(nombre_autor, primer_apellido_autor, error);
+    public List<Libro> librosPorAutor(String nombre_autor, String error) {
+        return libroRepo.librosPorAutor(nombre_autor, error);
     }
 
     @Override

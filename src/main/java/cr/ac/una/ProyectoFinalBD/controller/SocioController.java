@@ -4,6 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.controller;
 
+import cr.ac.una.ProyectoFinalBD.domain.Multa;
 import cr.ac.una.ProyectoFinalBD.domain.Socio;
 import cr.ac.una.ProyectoFinalBD.service.SocioService;
 import java.util.Date;
@@ -13,7 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -122,4 +122,14 @@ public class SocioController {
        
         return "Socio/MostrarSocio";
     }
+    
+    // Filtro
+    @GetMapping("/filtrarPorSociosMasMultados")
+    public String filtrarPorSociosMasMultados(Model modelo, @RequestParam(value = "top_n") Integer top_n){
+        List<Socio> socios = socioService.filtrarPorSociosMasMultados(top_n, "");
+        
+        modelo.addAttribute("socios", socios);  
+        return "Socio/MostrarSocio";
+    }
+    
 }

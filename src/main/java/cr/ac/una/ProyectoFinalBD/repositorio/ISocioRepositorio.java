@@ -27,4 +27,6 @@ public interface ISocioRepositorio {
     List<Socio> leer(String error);
     
     String eliminar(Integer id_socio, String error_message);
+    public List<Socio> multasPorSociosMasMultados(Integer top_n, String error);
+            
 }

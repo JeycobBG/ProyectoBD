@@ -4,6 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.repositorio;
 
+import cr.ac.una.ProyectoFinalBD.domain.Multa;
 import cr.ac.una.ProyectoFinalBD.domain.Socio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
@@ -119,6 +120,21 @@ public class SocioRepositorio implements ISocioRepositorio{
         
         query.execute();
         return error_message = (String) query.getOutputParameterValue("error_message");
+    }
+    
+    @Override
+    @Transactional
+    public List<Socio> multasPorSociosMasMultados(Integer top_n, String error){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_multa_por_socio_mas_multados", Multa.class);
+        query.registerStoredProcedureParameter("top_n", Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("top_n", top_n);
+        
+        query.execute();
+        System.out.println((String) query.getOutputParameterValue("error"));
+        
+        return query.getResultList();
     }
     
 }

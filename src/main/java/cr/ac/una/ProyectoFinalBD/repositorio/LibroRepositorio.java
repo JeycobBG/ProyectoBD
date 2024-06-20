@@ -181,14 +181,12 @@ public class LibroRepositorio implements ILibroRepositorio{
     
     @Override
     @Transactional
-    public List<Libro> librosPorAutor(String nombre_autor, String primer_apellido_autor, String error){
+    public List<Libro> librosPorAutor(String nombre_autor, String error){
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_autor", Libro.class);
         query.registerStoredProcedureParameter("nombre_autor", String.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter("primer_apellido_autor", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         
-        query.setParameter("nombre_autor", nombre_autor);
-        query.setParameter("primer_apellido_autor", primer_apellido_autor);
+         query.setParameter("nombre_autor", nombre_autor);
         
         query.execute();
         System.out.println((String) query.getOutputParameterValue("error"));
