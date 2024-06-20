@@ -36,11 +36,11 @@ public class DevolucionRepositorio implements IDevolucionRepositorio{
         query.setParameter("fecha_devolucion_efectuada", fecha_devolucion_efectuada);
         query.setParameter("id_prestamo", id_prestamo);
 
-        query.execute();
         String error = (String) query.getOutputParameterValue("error");
-        String advertencia_multa = (String) query.getOutputParameterValue("advertencia_multa");
-        String[] resultado = {error, advertencia_multa};
-        return resultado;
+        String advertenciaMulta = (String) query.getOutputParameterValue("advertencia_multa");
+        
+        query.execute();
+        return new String[]{error, advertenciaMulta};
     }
     
     @Transactional

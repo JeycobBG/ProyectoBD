@@ -33,7 +33,7 @@
                         <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
                         <option th:each="prestamo : ${prestamos}" 
                                 th:value="${prestamo.id}" 
-                                th:text="${prestamo.id}">
+                                th:text="${prestamo.fechaPrestamoFormateada + ' - ' + prestamo.socio.persona.identificacion + ' - ' + prestamo.libro.titulo}">
                         </option>
                     </select><br><br>
 

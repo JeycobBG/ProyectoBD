@@ -16,9 +16,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +36,9 @@ public class Libro {
     private String isbn;
     private String titulo;
     private String sinopsis;
-    private Date fechaPublicacion;
+    
+    private LocalDate fechaPublicacion;
+    
     private int cantidad;
     
     @ManyToOne
@@ -95,11 +97,11 @@ public class Libro {
         this.sinopsis = sinopsis;
     }
 
-    public Date getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
@@ -145,8 +147,8 @@ public class Libro {
     
     public String getFechaPublicacionFormateada() {
         if (fechaPublicacion != null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            return formatter.format(fechaPublicacion);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return fechaPublicacion.format(formatter);
         }
         return "";
     }

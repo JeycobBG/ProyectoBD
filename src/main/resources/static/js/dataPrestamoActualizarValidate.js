@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("actualizarPrestamoForm");
     var mensajeExito = document.getElementById('mensajeExito'); 
@@ -24,17 +23,18 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             if (fechaDevolucionPrevista < fechaPrestamo) {
-                mensajeError.textContent += (mensajeError.textContent.length ? " " : "") + "La fecha de devolución prevista no puede ser antes de la fecha de préstamo.";
+                if (mensajeError.textContent.length > 0) {
+                    mensajeError.textContent += " ";
+                }
+                mensajeError.textContent += "La fecha de devolución prevista no puede ser antes de la fecha de préstamo.";
                 valid = false;
                 event.preventDefault();
             }
 
-            // Mostrar mensaje de error si hay errores
             if (!valid && mensajeError) {
                 mensajeError.style.display = 'block';
             }
 
-            // Mostrar mensaje de éxito si todo es válido
             if (valid && mensajeExito) {
                 mensajeExito.textContent = "Actualizado con éxito.";
                 mensajeExito.style.display = 'block';

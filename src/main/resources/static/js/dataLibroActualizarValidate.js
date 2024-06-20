@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("actualizarLibroForm");
     var mensajeExito = document.getElementById('mensajeExito'); 
@@ -6,14 +5,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (form) {
         form.addEventListener("submit", function(event) {
-            var isbn = document.getElementById("isbn").value.trim();
-            var titulo = document.getElementById("titulo").value.trim();
-            var sinopsis = document.getElementById("sinopsis").value.trim();
-            var fechaPublicacion = document.getElementById("fechaPublicacion").value.trim();
-            var cantidad = document.getElementById("cantidad").value.trim();
-            var autor = document.getElementById("autor").value.trim();
-            var editorial = document.getElementById("editorial").value.trim();
-            var generos = document.getElementById("generos").selectedOptions;
+            var requiredFields = [
+                { id: "isbn", message: "Por favor complete todos los campos." },
+                { id: "titulo", message: "Por favor complete todos los campos." },
+                { id: "sinopsis", message: "Por favor complete todos los campos." },
+                { id: "fecha_publicacion", message: "Por favor complete todos los campos." },
+                { id: "cantidad", message: "Por favor complete todos los campos." },
+                { id: "autor", message: "Por favor complete todos los campos." },
+                { id: "editorial", message: "Por favor complete todos los campos." },
+                { id: "generos", message: "Por favor complete todos los campos." }
+            ];
             var valid = true;
 
             if (mensajeExito) mensajeExito.style.display = 'none';
@@ -22,26 +23,29 @@ document.addEventListener("DOMContentLoaded", function() {
                 mensajeError.style.display = 'none';
             }
 
-            // Validaciones
-            if (isbn === "" || titulo === "" || sinopsis === "" || fechaPublicacion === "" ||
-                cantidad === "" || autor === "" || editorial === "" || generos.length === 0) {
-                mensajeError.textContent = "Por favor complete todos los campos.";
-                valid = false;
-                event.preventDefault();
-            } else {
-               
-                if (isNaN(cantidad)) {
-                    mensajeError.textContent = "La cantidad debe ser un número.";
+            requiredFields.forEach(function(field) {
+                var value = document.getElementById(field.id).value.trim();
+                if (value === "") {
+                    mensajeError.textContent = field.message;
                     valid = false;
                     event.preventDefault();
                 }
+            });
 
+            var cantidad = document.getElementById("cantidad").value.trim();
+            var fechaPublicacion = document.getElementById("fecha_publicacion").value.trim();
+
+            if (!isNaN(cantidad) && fechaPublicacion !== "") {
                 var currentDate = new Date().toISOString().split('T')[0];
                 if (fechaPublicacion > currentDate) {
                     mensajeError.textContent = "La fecha de publicación no puede ser una fecha futura.";
                     valid = false;
                     event.preventDefault();
                 }
+            } else {
+                mensajeError.textContent = "La cantidad debe ser un número.";
+                valid = false;
+                event.preventDefault();
             }
 
             if (!valid && mensajeError) {
@@ -53,5 +57,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 mensajeExito.style.display = 'block';
             }
         });
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    var generosAsociados = '';
+    var selectGeneros = document.getElementById("generos");
+
+    for (var i = 0; i < selectGeneros.options.length; i++) {
+        var option = selectGeneros.options[i];
+        if (generosAsociados.includes(option.value)) {
+            option.selected = true;
+        }
     }
 });

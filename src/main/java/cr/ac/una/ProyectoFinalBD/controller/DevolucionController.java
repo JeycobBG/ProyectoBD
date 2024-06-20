@@ -8,6 +8,7 @@ import cr.ac.una.ProyectoFinalBD.domain.Devolucion;
 import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
 import cr.ac.una.ProyectoFinalBD.service.DevolucionService;
 import cr.ac.una.ProyectoFinalBD.service.PrestamoService;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,19 +35,30 @@ public class DevolucionController {
     
     @PostMapping("/guardar")
     public String guardar(@RequestParam("fecha_devolucion_efectuada") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_efectuada,
-            @RequestParam("id_prestamo")Integer id_prestamo){
+            @RequestParam("id_prestamo")Integer id_prestamo, Model modelo){
         
         String[] resultado = devolucionService.insertar(fecha_devolucion_efectuada, id_prestamo);
         
-        System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
+        if(resultado[1]!=null){
+            System.out.print("Error: " + resultado[1] + "\n");
+            modelo.addAttribute("mensajeAlerta", resultado[1]);
+        }
+        
         return "redirect:/devolucion/leer";
     }
     
     @GetMapping("/guardar")
     public String agregar(Model modelo){
         List<Prestamo> prestamos = prestamoService.leer();
-        modelo.addAttribute("prestamos", prestamos);
+        List<Prestamo> prestamosSinDevolucion = new ArrayList<>();
         
+        for(Prestamo pres : prestamos){
+            if(pres.getDevolucion() == null){
+                prestamosSinDevolucion.add(pres);
+            }
+        }
+             
+        modelo.addAttribute("prestamos", prestamosSinDevolucion); 
         return "Devolucion/CrearDevolucion";
     }
     
@@ -74,11 +86,18 @@ public class DevolucionController {
     
     @PostMapping("/actualizarForm")
     public String actualizar(@RequestParam("id") Integer id, Model modelo){
-        Devolucion devolucion = devolucionService.buscar(id);
-        List<Prestamo> prestamos = prestamoService.leer();
+        Devolucion devolucion = devolucionService.buscar(id);         
+        List<Prestamo> prestamos = prestamoService.leer();         
+        List<Prestamo> prestamosSinDevolucion = new ArrayList<>();
         
-        modelo.addAttribute("devolucion", devolucion);
-        modelo.addAttribute("prestamos", prestamos);
+        for(Prestamo pres : prestamos){
+            if(pres.getDevolucion() == null){
+                prestamosSinDevolucion.add(pres);
+            }
+        }
+        
+        modelo.addAttribute("devolucion", devolucion);        
+        modelo.addAttribute("prestamos", prestamosSinDevolucion); 
         return "Devolucion/ActualizarDevolucion";
     }
     

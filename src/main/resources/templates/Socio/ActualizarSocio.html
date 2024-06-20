@@ -38,24 +38,14 @@
                 <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:value="${socio.persona.direccion.descripcion}" required><br>
 
                 <div class="form-group">
-                    <label for="distrito">Distrito:</label>
-                    <input type="text" id="id_distrito" name="id_distrito" th:value="${socio.persona.direccion.distrito.id}" required>
-                </div> 
-
-                <!-- Campo para el número de teléfono -->
-                <label for="numero_telefono">Número de Teléfono:</label><br>
-                <input type="text" id="numero_telefono" name="numero_telefono" th:value="${socio.persona.telefono[0].numero}" required><br>
-
-                <!-- Campo para el correo electrónico -->
-                <label for="email">Correo Electrónico:</label><br>
-                <input type="email" id="email" name="email" th:value="${socio.persona.correoElectronico[0].email}" required><br>
-
-                <!-- Campo para la fecha de registro -->
-                <label for="fecha_registro">Fecha de Registro:</label><br>
-                <input type="date" id="fecha_registro" name="fecha_registro" th:value="${socio.fechaRegistro}" required><br>
-
-                <input type="submit" value="Actualizar">
+                    <button type="submit">Actualizar</button>
+                </div>
+                
             </form>
+            <div id="mensajeExito" style="display:none;color:green;"></div>
+                <div id="mensajeError" style="display:none;color:red;"></div>
+            <div id="mensajeExito" style="display:none;color:green;"></div>
+                <div id="mensajeError" style="display:none;color:red;"></div>
         </div>
         
         <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>

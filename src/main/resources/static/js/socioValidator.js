@@ -1,53 +1,49 @@
-document.addEventListener("DOMContentLoaded", function() {
-        var form = document.getElementById("registrarForm");
-    var mensajeError = document.getElementById('mensajeError'); // Asegúrate de tener este elemento en tu HTML para mostrar errores
+document.addEventListener("DOMContentLoaded", function () {
+    var fechaRegistroInput = document.getElementById("fecha_registro");
+    var today = new Date().toISOString().split('T')[0];
+    fechaRegistroInput.setAttribute('max', today);
+});
 
-    if (form) {
-        form.addEventListener("submit", function(event) {
-            var nombre = document.getElementById("nombre").value.trim();
-            var primerApellido = document.getElementById("primer_apellido").value.trim();
-            var segundoApellido = document.getElementById("segundo_apellido").value.trim();
-            var identificacion = document.getElementById("identificacion").value.trim();
-            var codigoPostal = document.getElementById("codigo_postal").value.trim();
-            var fechaRegistro = document.getElementById("fecha_registro").value;
-            var idDistrito = document.getElementById("id_distrito").value.trim();
-            var valid = true;
+document.getElementById("registrarForm").addEventListener("submit", function (event) {
+    var valid = true; // Variable para rastrear la validez del formulario
+    
+    var nombre = document.getElementById("nombre").value;
+    var primerApellido = document.getElementById("primer_apellido").value;
+    var segundoApellido = document.getElementById("segundo_apellido").value;
+    var identificacion = document.getElementById("identificacion").value;
+    var codigoPostal = document.getElementById("codigo_postal").value;
+    var descripcionDireccion = document.getElementById("descripcion_direccion").value;
+    var distrito = document.getElementById("id_distrito").value;
+    var numeroTelefono = document.getElementById("numero_telefono").value;
+    var email = document.getElementById("email").value;
+    var fechaRegistro = document.getElementById("fecha_registro").value;
 
-            if (mensajeError) {
-                mensajeError.textContent = '';
-                mensajeError.style.display = 'none';
-            }
+    // Validar campos vacíos
+    if (nombre.trim() === "" || primerApellido.trim() === "" || segundoApellido.trim() === "" || identificacion.trim() === "" ||
+        codigoPostal.trim() === "" || descripcionDireccion.trim() === "" || distrito.trim() === "" || numeroTelefono.trim() === "" ||
+        email.trim() === "" || fechaRegistro.trim() === "") {
+        alert("Por favor complete todos los campos.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            if (!/^[a-zA-Z\s]+$/.test(nombre) || !/^[a-zA-Z\s]+$/.test(primerApellido) ||
-                !/^[a-zA-Z\s]+$/.test(segundoApellido)) {
-                mensajeError.textContent = "Nombre y apellidos deben contener solo letras.";
-                valid = false;
-                event.preventDefault();
-            }
+    // Validar que la fecha de registro no sea futura
+    var today = new Date().toISOString().split('T')[0];
+    if (fechaRegistro > today) {
+        alert("La fecha de registro no puede ser en el futuro.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            if (!/^[0-9]+$/.test(codigoPostal)) {
-                mensajeError.textContent = "El código postal debe contener solo números.";
-                valid = false;
-                event.preventDefault();
-            }
+    // Validar que el código postal contenga solo números
+    if (!/^\d+$/.test(codigoPostal)) {
+        alert("El código postal debe contener solo números.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            var fechaHoy = new Date().toISOString().split("T")[0]; 
-            if (fechaRegistro > fechaHoy) {
-                mensajeError.textContent = "La fecha de registro no puede ser en el futuro.";
-                valid = false;
-                event.preventDefault();
-            }
-
-            if (idDistrito === "") {
-                mensajeError.textContent += (mensajeError.textContent.length ? " " : "") + "Por favor selecciona un distrito.";
-                valid = false;
-                event.preventDefault();
-            }
-
-            if (!valid && mensajeError) {
-                mensajeError.style.display = 'block';
-            }
-       
-        });
+    // Mostrar mensaje de éxito si el formulario es válido
+    if (valid) {
+        alert("El socio se registró correctamente.");
     }
 });
