@@ -78,18 +78,6 @@
                     <input type="hidden" id="id_generos" name="id_generos" />
                 </div>
                 <div class="form-group">
-                    <label for="editorial">Editorial:</label>
-                    <select id="editorial" name="id_editorial" th:value="${libro.editorial.id}" required>
-                        <option th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}"></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="generos">Géneros:</label>
-                    <select id="generos" name="ids_generos" multiple required>
-                        <option th:each="genero : ${generos}" th:value="${genero.id}" th:text="${genero.nombre}"></option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <button type="submit">Actualizar</button>
                 </div>
                 

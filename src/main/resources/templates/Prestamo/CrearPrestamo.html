@@ -29,7 +29,7 @@
                 <select id="id_socio" name="id_socio" required>
                     <option th:each="socio : ${socios}" 
                             th:value="${socio.id}" 
-                            th:text="${socio.persona.nombre + ' ' + socio.persona.primerApellido}">
+                            th:text="${prestamo.fechaPrestamoFormateada + ' - ' + prestamo.socio.persona.identificacion + ' - ' + prestamo.libro.titulo}">
                     </option>
                 </select>
 
