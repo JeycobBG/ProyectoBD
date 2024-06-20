@@ -29,7 +29,7 @@
 
                     <!-- Combo box para seleccionar el préstamo -->
                     <label for="prestamo">Préstamo:</label><br>
-                    <select id="prestamo" name="id_prestamo" th:value="${multa.prestamo.id}" required>>
+                    <select id="prestamo" name="id_prestamo" th:value="${multa.prestamo.id}" required>
                         <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
                         <option th:each="prestamo : ${prestamos}" 
                                 th:value="${prestamo.id}" 
@@ -40,12 +40,12 @@
                     <input type="submit" value="Actualizar">
                 </form>
             </div>
-        </div>
 
-        <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
-        <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
-        <div class="volver-container">
-            <button class="volver-btn" onclick="window.history.back()">Volver</button>
+            <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+            <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
+            <div class="volver-container">
+                <button class="volver-btn" onclick="window.history.back()">Volver</button>
+            </div>
         </div>
         
         <script src="/js/dataMultaActualizarValidate.js"></script>

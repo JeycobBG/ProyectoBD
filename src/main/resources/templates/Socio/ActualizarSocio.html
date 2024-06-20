@@ -1,68 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Actualizar Socio</title>
-        <link href="/CSS/actualizar.css" rel="stylesheet" type="text/css"/>
-    </head>
-    <body>
-        <div class="container">
-            <div>
-                <h2>Actualizar Socio</h2>
+<head>
+    <title>Actualizar Socio</title>
+    <link href="/CSS/actualizar.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h2>Actualizar Socio</h2>
 
-                <form id="actualizarSocioForm" action="/socio/actualizar" method="post">
-                    <!-- Campo oculto para el ID del socio -->
-                    <input type="hidden" id="id" name="id" th:value="${socio.id}" />
+            <form id="actualizarSocioForm" action="/socio/actualizar" method="post">
+                <!-- Campo oculto para el ID del socio -->
+                <input type="hidden" id="id" name="id" th:value="${socio.id}" />
 
-                    <!-- Campo para el nombre -->
-                    <label for="nombre">Nombre:</label><br>
-                    <input type="text" id="nombre" name="nombre" th:value="${socio.persona.nombre}" required><br>
+                <!-- Campo para el nombre -->
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" th:value="${socio.persona.nombre}" required><br>
 
-                    <!-- Campo para el primer apellido -->
-                    <label for="primer_apellido">Primer Apellido:</label><br>
-                    <input type="text" id="primer_apellido" name="primer_apellido" th:value="${socio.persona.primerApellido}" required><br>
+                <!-- Campo para el primer apellido -->
+                <label for="primer_apellido">Primer Apellido:</label><br>
+                <input type="text" id="primer_apellido" name="primer_apellido" th:value="${socio.persona.primerApellido}" required><br>
 
-                    <!-- Campo para el segundo apellido -->
-                    <label for="segundo_apellido">Segundo Apellido:</label><br>
-                    <input type="text" id="segundo_apellido" name="segundo_apellido" th:value="${socio.persona.segundoApellido}" required><br>
+                <!-- Campo para el segundo apellido -->
+                <label for="segundo_apellido">Segundo Apellido:</label><br>
+                <input type="text" id="segundo_apellido" name="segundo_apellido" th:value="${socio.persona.segundoApellido}" required><br>
 
-                    <!-- Campo para la identificación -->
-                    <label for="identificacion">Identificación:</label><br>
-                    <input type="text" id="identificacion" name="identificacion" th:value="${socio.persona.identificacion}" required><br>
+                <!-- Campo para la identificación -->
+                <label for="identificacion">Identificación:</label><br>
+                <input type="text" id="identificacion" name="identificacion" th:value="${socio.persona.identificacion}" required><br>
 
-                    <!-- Campo para el código postal -->
-                    <label for="codigo_postal">Código Postal:</label><br>
-                    <input type="text" id="codigo_postal" name="codigo_postal" th:value="${socio.persona.direccion.codigoPostal}" pattern="[0-9]*" required><br>
+                <!-- Campo para el código postal -->
+                <label for="codigo_postal">Código Postal:</label><br>
+                <input type="text" id="codigo_postal" name="codigo_postal" th:value="${socio.persona.direccion.codigoPostal}" pattern="[0-9]*" required><br>
 
-                    <!-- Campo para la descripción de la dirección -->
-                    <label for="descripcion_direccion">Dirección:</label><br>
-                    <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:value="${socio.persona.direccion.descripcion}" required><br>
-                    <div class="form-group">
-                        <label for="distrito">Distrito:</label>
-                        <input type="text" id="id_distrito" name="id_distrito" th:value="${socio.persona.direccion.distrito.id}" required>
-                    </div> 
-                    <!-- Campo para el número de teléfono -->
-                    <label for="numero_telefono">Número de Teléfono:</label><br>
-                    <input type="text" id="numero_telefono" name="numero_telefono" th:value="${socio.persona.telefono[0].numero}" required><br>
+                <!-- Campo para la descripción de la dirección -->
+                <label for="descripcion_direccion">Dirección:</label><br>
+                <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:value="${socio.persona.direccion.descripcion}" required><br>
 
-                    <!-- Campo para el correo electrónico -->
-                    <label for="email">Correo Electrónico:</label><br>
-                    <input type="email" id="email" name="email" th:value="${socio.persona.correoElectronico[0].email}" required><br>
+                <div class="form-group">
+                    <label for="distrito">Distrito:</label>
+                    <input type="text" id="id_distrito" name="id_distrito" th:value="${socio.persona.direccion.distrito.id}" required>
+                </div> 
 
-                    <!-- Campo para la fecha de registro -->
-                    <label for="fecha_registro">Fecha de Registro:</label><br>
-                    <input type="date" id="fecha_registro" name="fecha_registro" th:value="${socio.fechaRegistro}" required><br>
+                <!-- Campo para el número de teléfono -->
+                <label for="numero_telefono">Número de Teléfono:</label><br>
+                <input type="text" id="numero_telefono" name="numero_telefono" th:value="${socio.persona.telefono[0].numero}" required><br>
 
-                    <input type="submit" value="Actualizar">
-                </form>
-            </div>
+                <!-- Campo para el correo electrónico -->
+                <label for="email">Correo Electrónico:</label><br>
+                <input type="email" id="email" name="email" th:value="${socio.persona.correoElectronico[0].email}" required><br>
+
+                <!-- Campo para la fecha de registro -->
+                <label for="fecha_registro">Fecha de Registro:</label><br>
+                <input type="date" id="fecha_registro" name="fecha_registro" th:value="${socio.fechaRegistro}" required><br>
+
+                <input type="submit" value="Actualizar">
+            </form>
         </div>
-
+        
         <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
         <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
 
-            <div class="volver-container">
-                <button class="volver-btn" onclick="window.history.back()">Volver</button>
-            </div>
-        <script src="/js/dataSocioActualizarValidate.js"></script>
-    </body>
+        <div class="volver-container">
+            <button class="volver-btn" onclick="window.history.back()">Volver</button>
+        </div>
+    </div>
+
+    <script src="/js/dataSocioActualizarValidate.js"></script>
+</body>
 </html>
