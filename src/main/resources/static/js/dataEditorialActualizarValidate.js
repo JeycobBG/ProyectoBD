@@ -1,51 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var form = document.getElementById("actualizarEditorialForm");
-    if (form) {
-        form.addEventListener("submit", function (event) {
-            var requiredFields = [
-                { id: "nombre", message: "El nombre de la editorial no debe contener números." },
-                { id: "fecha_fundacion", message: "Por favor ingrese la fecha de fundación." },
-                { id: "codigo_postal", message: "El código postal debe contener solo números." },
-                { id: "descripcion_direccion", message: "Por favor ingrese la descripción de la dirección." },
-                { id: "id_distrito", message: "Por favor seleccione un distrito." }
-            ];
-            var valid = true;
-            var mensajeExito = document.getElementById('mensajeExito'); 
+    // No se necesita ninguna acción específica en el evento DOMContentLoaded para este formulario.
+});
 
-            if (mensajeExito)
-                mensajeExito.style.display = 'none';
+document.getElementById("actualizarEditorialForm").addEventListener("submit", function (event) {
+    var valid = true; // Variable para rastrear la validez del formulario
+    
+    // Obtener los valores de los campos
+    var nombre = document.getElementById("nombre").value;
+    var fechaFundacion = document.getElementById("fecha_fundacion").value;
+    var codigoPostal = document.getElementById("codigo_postal").value;
+    var descripcionDireccion = document.getElementById("descripcion_direccion").value;
+    var idDistrito = document.getElementById("id_distrito").value;
 
-            requiredFields.forEach(function(field) {
-                var value = document.getElementById(field.id).value.trim();
-                if (field.id === "fecha_fundacion") {
-                    var today = new Date();
-                    var inputDate = new Date(value);
-                    if (value === "" || inputDate > today) {
-                        alert(field.message);
-                        valid = false;
-                        event.preventDefault();
-                    }
-                } else {
-                    if (field.id === "codigo_postal") {
-                        if (!/^[0-9]+$/.test(value)) {
-                            alert(field.message);
-                            valid = false;
-                            event.preventDefault();
-                        }
-                    } else {
-                        if (value === "") {
-                            alert(field.message);
-                            valid = false;
-                            event.preventDefault();
-                        }
-                    }
-                }
-            });
+    // Validar campos vacíos
+    if (nombre.trim() === "" || fechaFundacion.trim() === "" || codigoPostal.trim() === "" || descripcionDireccion.trim() === "" || idDistrito.trim() === "") {
+        alert("Por favor complete todos los campos.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            if (valid && mensajeExito) {
-                mensajeExito.innerText = "Actualizado con éxito.";
-                mensajeExito.style.display = 'block';
-            }
-        });
+    // Validar formato de código postal (solo dígitos)
+    var codigoPostalPattern = /^\d+$/;
+    if (!codigoPostalPattern.test(codigoPostal)) {
+        alert("El código postal debe contener solo números.");
+        event.preventDefault();
+        valid = false;
+    }
+
+    // Mostrar mensaje de éxito si el formulario es válido
+    if (valid) {
+        alert("La editorial se actualizó correctamente.");
     }
 });
