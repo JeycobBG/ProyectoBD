@@ -153,11 +153,12 @@ public class LibroRepositorio implements ILibroRepositorio{
     
     @Override
     @Transactional
-    public List<Libro> librosPorMasPrestamos(Integer cantidad, String error){
+    public List<Libro> librosPorMasPrestamos(Integer top_n, String error){
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_libro_por_mas_prestamos", Libro.class);
         query.registerStoredProcedureParameter("top_n", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
         
+        query.setParameter("top_n", top_n);
         query.execute();
         System.out.println((String) query.getOutputParameterValue("error"));
         

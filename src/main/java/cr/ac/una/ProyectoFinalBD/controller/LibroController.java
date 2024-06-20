@@ -198,10 +198,9 @@ public class LibroController {
 
     @GetMapping("/filtrarPorMasPrestamos")
     public String filtrarPorMasPrestamos(@RequestParam("valorFiltro") String valorFiltro, Model modelo) {
-
         String error = "";
 
-        List<Libro> libros = libroService.librosPorMasPrestamos(Integer.parseInt(valorFiltro), error);
+        List<Libro> libros = libroService.librosPorMasPrestamos(Integer.valueOf(valorFiltro), error);
 
         for (Libro libro : libros) {
             System.out.println("libro por más prestamos: " + libro.getTitulo());
@@ -289,7 +288,8 @@ public class LibroController {
                     libros = libroService.librosPorISBN(valorFiltro, error);
                     break;
                 case "masPrestamos":
-                    libros = libroService.librosPorMasPrestamos(Integer.parseInt(valorFiltro), error);
+                    System.out.println("Valor del filtro:" + valorFiltro);
+                    libros = libroService.librosPorMasPrestamos(Integer.valueOf(valorFiltro), error);
                     break;
                 case "titulo":
                     libros = libroService.librosPorTitulo(valorFiltro, error);
