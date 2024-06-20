@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("actualizarPrestamoForm");
     var mensajeExito = document.getElementById('mensajeExito'); 
@@ -29,12 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 event.preventDefault();
             }
 
-            // Mostrar mensaje de error si hay errores
             if (!valid && mensajeError) {
                 mensajeError.style.display = 'block';
             }
 
-            // Mostrar mensaje de éxito si todo es válido
             if (valid && mensajeExito) {
                 mensajeExito.textContent = "Actualizado con éxito.";
                 mensajeExito.style.display = 'block';

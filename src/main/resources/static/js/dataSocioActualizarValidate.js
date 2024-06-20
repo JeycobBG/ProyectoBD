@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("actualizarSocioForm");
     var mensajeExito = document.getElementById('mensajeExito'); // Asegúrate de tener este elemento en tu HTML
@@ -36,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 mensajeError.style.display = 'block';
             }
 
-            // Mostrar mensaje de éxito si todo es válido
             if (valid && mensajeExito) {
                 mensajeExito.textContent = "Actualizado con éxito.";
                 mensajeExito.style.display = 'block';

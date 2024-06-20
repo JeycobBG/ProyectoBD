@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("actualizarMultaForm");
     var mensajeExito = document.getElementById('mensajeExito'); 
