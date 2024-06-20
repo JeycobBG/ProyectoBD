@@ -45,3 +45,16 @@ function validateName(input) {
     const re = /^[a-zA-Z\s]+$/;
     return re.test(input);
 }
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    var generosAsociados = '';
+    var selectGeneros = document.getElementById("generos");
+
+    for (var i = 0; i < selectGeneros.options.length; i++) {
+        var option = selectGeneros.options[i];
+        if (generosAsociados.includes(option.value)) {
+            option.selected = true;
+        }
+    }
+});

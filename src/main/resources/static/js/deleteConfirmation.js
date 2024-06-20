@@ -2,11 +2,13 @@
 
 function confirmarEliminacion(tipo, id) {
     let mensaje = "¿Está seguro de que desea eliminar este " + tipo + "?";
+    let redireccion = "/"+tipo+"/leer";
     if (confirm(mensaje)) {
         fetch('/' + tipo + '/eliminar?id=' + id, { method: 'GET' })
             .then(response => {
                 if (response.ok) {
                     mostrarMensajeExito(tipo);
+                    window.location=redireccion;
                 } else {
                     alert("Hubo un error al eliminar el " + tipo);
                 }

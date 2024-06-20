@@ -25,6 +25,7 @@ public class Distrito {
     @Column(name = "id_distrito")
     private int id;
     
+    @Column(name = "nombre")
     private String nombre;
     
     @ManyToOne()
