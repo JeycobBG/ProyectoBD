@@ -1,44 +1,23 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var form = document.getElementById("actualizarGeneroForm");
-    var mensajeExito = document.getElementById('mensajeExito'); 
-    var mensajeError = document.getElementById('mensajeError'); 
+document.addEventListener("DOMContentLoaded", function () {
+    // No es necesario establecer ninguna validación específica en el evento DOMContentLoaded para este formulario.
+});
 
-    if (form) {
-        form.addEventListener("submit", function(event) {
-            var requiredFields = [
-                { id: "nombre", message: "Por favor ingrese el nombre del género." },
-                { id: "descripcion", message: "Por favor ingrese la descripción del género." }
-            ];
-            var valid = true;
+document.getElementById("actualizarGeneroForm").addEventListener("submit", function (event) {
+    var valid = true; // Variable para rastrear la validez del formulario
+    
+    // Obtener los valores de los campos
+    var nombre = document.getElementById("nombre").value;
+    var descripcion = document.getElementById("descripcion").value;
 
-            if (mensajeExito) mensajeExito.style.display = 'none';
-            if (mensajeError) mensajeError.textContent = '';
+    // Validar campos vacíos
+    if (nombre.trim() === "" || descripcion.trim() === "") {
+        alert("Por favor complete todos los campos.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            requiredFields.forEach(function(field) {
-                var value = document.getElementById(field.id).value.trim();
-                if (field.id === "nombre") {
-                    if (value === "") {
-                        if (mensajeError) mensajeError.textContent = field.message;
-                        valid = false;
-                        event.preventDefault();
-                    } else if (/[\d]/.test(value)) {
-                        alert("El nombre del género no debe contener números.");
-                        valid = false;
-                        event.preventDefault();
-                    }
-                } else {
-                    if (value === "") {
-                        if (mensajeError) mensajeError.textContent = field.message;
-                        valid = false;
-                        event.preventDefault();
-                    }
-                }
-            });
-
-            if (valid && mensajeExito) {
-                mensajeExito.textContent = "Actualizado con éxito.";
-                mensajeExito.style.display = 'block';
-            }
-        });
+    // Mostrar mensaje de éxito si el formulario es válido
+    if (valid) {
+        alert("El género se actualizó correctamente.");
     }
 });

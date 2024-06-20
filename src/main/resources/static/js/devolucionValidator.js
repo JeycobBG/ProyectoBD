@@ -1,29 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var fechaDevolucionEfectuadaInput = document.getElementById("fecha_devolucion_efectuada");
+    var fechaDevolucionInput = document.getElementById("fecha_devolucion_efectuada");
     var today = new Date().toISOString().split('T')[0];
-    fechaDevolucionEfectuadaInput.setAttribute('max', today);
+    fechaDevolucionInput.setAttribute('max', today);
 });
 
 document.getElementById("registrarForm").addEventListener("submit", function (event) {
     var valid = true; // Variable para rastrear la validez del formulario
-
-    var fechaDevolucionEfectuada = document.getElementById("fecha_devolucion_efectuada").value;
+    
+    var fechaDevolucion = document.getElementById("fecha_devolucion_efectuada").value;
     var idPrestamo = document.getElementById("id_prestamo").value;
 
-    if (idPrestamo === "") {
-        alert("Por favor seleccione un préstamo.");
-        valid = false;
+    // Validar campos vacíos
+    if (fechaDevolucion.trim() === "" || idPrestamo.trim() === "") {
+        alert("Por favor complete todos los campos.");
         event.preventDefault();
+        valid = false;
     }
 
-    var fechaHoy = new Date().toISOString().split('T')[0];
-    if (fechaDevolucionEfectuada > fechaHoy) {
-        alert("La fecha de devolución efectuada no puede ser en el futuro.");
-        valid = false;
+    // Validar que la fecha de devolución no sea futura
+    var today = new Date().toISOString().split('T')[0];
+    if (fechaDevolucion > today) {
+        alert("La fecha de devolución no puede ser en el futuro.");
         event.preventDefault();
+        valid = false;
     }
 
+    // Mostrar mensaje de éxito si el formulario es válido
     if (valid) {
-        alert("Formulario enviado correctamente.");
+        alert("La devolución se registró correctamente.");
     }
 });

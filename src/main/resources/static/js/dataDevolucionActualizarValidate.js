@@ -1,30 +1,22 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var form = document.getElementById("actualizarDevolucionForm");
-    if (form) {
-        form.addEventListener("submit", function(event) {
-            var requiredFields = [
-                { id: "fecha_devolucion_efectuada", message: "Por favor ingrese la fecha de devolución efectuada." },
-                { id: "prestamo", message: "Por favor seleccione un préstamo." }
-            ];
-            var valid = true;
-            var message = "";
-            var mensajeExito = document.getElementById('mensajeExito'); 
+document.addEventListener("DOMContentLoaded", function () {
+    // No se necesita ninguna acción específica en el evento DOMContentLoaded para este formulario.
+});
 
-            if (mensajeExito) mensajeExito.style.display = 'none';
+document.getElementById("actualizarDevolucionForm").addEventListener("submit", function (event) {
+    var valid = true; // Variable para rastrear la validez del formulario
+    
+    // Obtener los valores de los campos
+    var fechaDevolucionEfectuada = document.getElementById("fecha_devolucion_efectuada").value;
+    var idPrestamo = document.getElementById("prestamo").value;
 
-            requiredFields.forEach(function(field) {
-                var value = document.getElementById(field.id).value.trim();
-                if (!value) {
-                    alert(field.message);
-                    valid = false;
-                    event.preventDefault();
-                }
-            });
+    // Validar campos vacíos
+    if (fechaDevolucionEfectuada.trim() === "" || idPrestamo.trim() === "") {
+        alert("Por favor complete todos los campos.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            if (valid && mensajeExito) {
-                mensajeExito.innerText = "Actualizado con éxito.";
-                mensajeExito.style.display = 'block';
-            }
-        });
+    if (valid) {
+        alert("La devolución se actualizó correctamente.");
     }
 });

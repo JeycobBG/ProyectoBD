@@ -14,12 +14,9 @@
         </div>
         
         <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
-        <div th:if="${mensajeError}" th:text="${mensajeError}" id="mensajeError" class="alert alert-error" style="display: none;"></div>
-        <div th:if="${mensajeAlerta}" class="alert alert-warning">
-            ACA ESTOY
+        <div th:if="${mensajeAlerta}" class="alert alert-warning" style="display: block; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 15px; border-radius: 5px;">
             <p th:text="${mensajeAlerta}"></p>
         </div>
-
         
         <div class="botonYBuscador"> 
             <div>

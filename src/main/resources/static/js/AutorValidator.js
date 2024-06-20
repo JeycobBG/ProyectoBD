@@ -1,29 +1,33 @@
-document.getElementById("registrarForm").addEventListener("submit", function (event) {
+// Validación del formulario
+document.getElementById("registrarForm").addEventListener("submit", function(event) {
+    var requiredFields = [
+        { id: "nombre", validator: validateName },
+        { id: "primer_apellido", validator: validateName },
+        { id: "segundo_apellido", validator: validateName },
+        { id: "identificacion", validator: function(input) { return input.trim() !== ''; } },
+        { id: "codigo_postal", validator: validatePostalCode },
+        { id: "descripcion_direccion", validator: function(input) { return input.trim() !== ''; } },
+        { id: "id_distrito", validator: function(input) { return input.trim() !== ''; } },
+        { id: "numero_telefono", validator: validatePhoneNumber },
+        { id: "email", validator: function(input) { return input.trim() !== ''; } },
+        { id: "bibliografia", validator: function(input) { return input.trim() !== ''; } }
+    ];
     var valid = true;
-    var requiredFields = ["nombre", "primer_apellido", "segundo_apellido", "identificacion", "codigo_postal", "descripcion_direccion", "id_distrito", "numero_telefono", "email", "bibliografia"];
-    
-    // Validación de completitud
-    requiredFields.forEach(function (field) {
-        var value = document.getElementById(field).value.trim();
-        if (value === "") {
+    var message = "";
+
+    requiredFields.forEach(function(field) {
+        var value = document.getElementById(field.id).value;
+        if (!field.validator(value)) {
             valid = false;
+            message += "Por favor revise el campo: " + field.id.replace(/_/g, " ") + ".\n";
         }
     });
 
-    // Validaciones de formato específicas
-    if (!validateName(document.getElementById('nombre').value) ||
-            !validateName(document.getElementById('primer_apellido').value) ||
-            !validateName(document.getElementById('segundo_apellido').value) ||
-            !validatePostalCode(document.getElementById('codigo_postal').value) ||
-            !validatePhoneNumber(document.getElementById('numero_telefono').value)) {
-        valid = false;
-    }
-
     if (!valid) {
-        alert("Por favor complete todos los campos correctamente.");
+        alert(message); // Se muestra una alerta con todos los errores de validación
         event.preventDefault();
     } else {
-        alert("Autor registrado correctamente.");
+        alert("Autor con éxito."); // Mensaje de éxito si todo es válido
     }
 });
 

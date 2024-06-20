@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -35,13 +36,13 @@ public class DevolucionController {
     
     @PostMapping("/guardar")
     public String guardar(@RequestParam("fecha_devolucion_efectuada") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_efectuada,
-            @RequestParam("id_prestamo")Integer id_prestamo, Model modelo){
+            @RequestParam("id_prestamo")Integer id_prestamo, Model modelo, RedirectAttributes flash){
         
         String[] resultado = devolucionService.insertar(fecha_devolucion_efectuada, id_prestamo);
         
         if(resultado[1]!=null){
             System.out.print("Error: " + resultado[1] + "\n");
-            modelo.addAttribute("mensajeAlerta", resultado[1]);
+            flash.addFlashAttribute("mensajeAlerta", resultado[1]);
         }
         
         return "redirect:/devolucion/leer";
@@ -63,7 +64,7 @@ public class DevolucionController {
     }
     
     @GetMapping("/leer")
-    public String leer(Model modelo){
+    public String leer(Model modelo, RedirectAttributes flash){
        List<Devolucion> devoluciones = devolucionService.leer();
        
        for(Devolucion dev : devoluciones){
