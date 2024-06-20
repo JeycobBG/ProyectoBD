@@ -27,15 +27,11 @@
                     <!-- Aumentar el tamaño del checkbox y agregar margen izquierdo -->
                     <input type="checkbox" id="cancelada" name="cancelada" th:value="${multa.cancelada}" style="width: 20px; height: 20px; margin-left: 30px;"><br><br>
 
-                    <!-- Combo box para seleccionar el préstamo -->
-                    <label for="prestamo">Préstamo:</label><br>
-                    <select id="prestamo" name="id_prestamo" th:value="${multa.prestamo.id}" required>
-                        <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
-                        <option th:each="prestamo : ${prestamos}" 
-                                th:value="${prestamo.id}" 
-                                th:text="${prestamo.fechaPrestamoFormateada + ' - ' + prestamo.socio.persona.identificacion + ' - ' + prestamo.libro.titulo}">
-                        </option>
-                    </select><br><br>
+                    <div class="form-group">
+                        <label for="prestamo">Préstamo:</label>
+                        <input type="text" id="prestamo" name="prestamo" th:value="${multa.prestamo.fechaPrestamoFormateada + ' - ' + multa.prestamo.socio.persona.identificacion + ' - ' + multa.prestamo.libro.titulo}" readonly />
+                        <input type="hidden" id="id_prestamo" name="id_prestamo" th:value="${multa.prestamo.id}" />
+                    </div>
 
                     <input type="submit" value="Actualizar">
                 </form>
