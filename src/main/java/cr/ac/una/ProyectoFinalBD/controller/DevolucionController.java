@@ -34,11 +34,20 @@ public class DevolucionController {
     
     @PostMapping("/guardar")
     public String guardar(@RequestParam("fecha_devolucion_efectuada") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_efectuada,
-            @RequestParam("id_prestamo")Integer id_prestamo){
+            @RequestParam("id_prestamo")Integer id_prestamo, Model modelo){
         
         String[] resultado = devolucionService.insertar(fecha_devolucion_efectuada, id_prestamo);
         
-        System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
+        if(resultado[0]!=null){
+            System.out.print("Error: " + resultado[0] + "\n");
+            modelo.addAttribute("mensajeError", resultado[0]);
+        }
+        
+        if(resultado[1]!=null){
+            System.out.print("Error: " + resultado[1] + "\n");
+            modelo.addAttribute("mensajeError", resultado[1]);
+        }
+        
         return "redirect:/devolucion/leer";
     }
     

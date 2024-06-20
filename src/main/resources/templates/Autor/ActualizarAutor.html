@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <label for="bibliografia">Bibliografía:</label>
-                    <textarea id="bibliografia" name="bibliografia" th:value="${autor.bibliografia}" rows="4" cols="50" required></textarea>
+                    <textarea id="bibliografia" name="bibliografia" th:text="${autor.bibliografia}" rows="4" cols="50" required></textarea>
                 </div>
                 <input type="submit" value="Actualizar">
             </form>

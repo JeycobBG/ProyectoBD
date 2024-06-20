@@ -16,9 +16,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,8 +33,8 @@ public class Prestamo {
     @Column(name = "id_prestamo")
     private int id;
     
-    private Date fechaPrestamo;
-    private Date fechaDevolucionPrevista;
+    private LocalDate fechaPrestamo;
+    private LocalDate fechaDevolucionPrevista;
     
     @ManyToOne()
     @JoinColumn(name = "id_libro")
@@ -62,19 +62,19 @@ public class Prestamo {
         this.id = id;
     }
 
-    public Date getFechaPrestamo() {
+    public LocalDate getFechaPrestamo() {
         return fechaPrestamo;
     }
 
-    public void setFechaPrestamo(Date fechaPrestamo) {
+    public void setFechaPrestamo(LocalDate fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
     }
 
-    public Date getFechaDevolucionPrevista() {
+    public LocalDate getFechaDevolucionPrevista() {
         return fechaDevolucionPrevista;
     }
 
-    public void setFechaDevolucionPrevista(Date fechaDevolucionPrevista) {
+    public void setFechaDevolucionPrevista(LocalDate fechaDevolucionPrevista) {
         this.fechaDevolucionPrevista = fechaDevolucionPrevista;
     }
 
@@ -104,16 +104,16 @@ public class Prestamo {
     
     public String getFechaDevolucionPrevistaFormateada() {
         if (fechaDevolucionPrevista != null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            return formatter.format(fechaDevolucionPrevista);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return fechaDevolucionPrevista.format(formatter);
         }
         return "";
     }
     
-    public String getFechaPestamoFormateada() {
+    public String getFechaPrestamoFormateada() {
         if (fechaPrestamo != null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            return formatter.format(fechaPrestamo);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return fechaPrestamo.format(formatter);
         }
         return "";
     }
