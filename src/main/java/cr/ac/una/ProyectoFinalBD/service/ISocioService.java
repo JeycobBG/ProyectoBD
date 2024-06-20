@@ -38,6 +38,6 @@ public interface ISocioService {
             String error_message);
     
     public Socio buscar(Integer id);
-    public List<Socio> filtrarPorSociosMasMultados(Integer top_n, String error);
+    public List<Socio> sociosPorMasMultados(Integer top_n, String error);
     
 }

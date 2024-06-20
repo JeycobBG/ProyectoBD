@@ -66,8 +66,8 @@ public class SocioService implements ISocioService{
     }
     
     @Override
-    public List<Socio> filtrarPorSociosMasMultados(Integer top_n, String error) {
-        return socioRepo.multasPorSociosMasMultados(top_n, error);
+    public List<Socio> sociosPorMasMultados(Integer top_n, String error) {
+        return socioRepo.sociosPorMasMultados(top_n, error);
     }
     
 }

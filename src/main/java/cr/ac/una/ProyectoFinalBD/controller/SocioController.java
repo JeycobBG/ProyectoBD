@@ -126,7 +126,7 @@ public class SocioController {
     // Filtro
     @GetMapping("/filtrarPorSociosMasMultados")
     public String filtrarPorSociosMasMultados(Model modelo, @RequestParam(value = "top_n") Integer top_n){
-        List<Socio> socios = socioService.filtrarPorSociosMasMultados(top_n, "");
+        List<Socio> socios = socioService.sociosPorMasMultados(top_n, "");
         
         modelo.addAttribute("socios", socios);  
         return "Socio/MostrarSocio";

@@ -124,7 +124,7 @@ public class SocioRepositorio implements ISocioRepositorio{
     
     @Override
     @Transactional
-    public List<Socio> multasPorSociosMasMultados(Integer top_n, String error){
+    public List<Socio> sociosPorMasMultados(Integer top_n, String error){
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_multa_por_socio_mas_multados", Multa.class);
         query.registerStoredProcedureParameter("top_n", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
