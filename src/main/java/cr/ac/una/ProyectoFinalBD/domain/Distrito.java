@@ -42,11 +42,11 @@ public class Distrito {
         this.id = id;
     }
 
-    public String getDistrito() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setDistrito(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
