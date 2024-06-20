@@ -1,40 +1,35 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var form = document.getElementById("actualizarMultaForm");
-    var mensajeExito = document.getElementById('mensajeExito'); 
-    var mensajeError = document.getElementById('mensajeError'); 
+document.addEventListener("DOMContentLoaded", function () {
+    // No es necesario establecer ninguna validación específica en el evento DOMContentLoaded para este formulario.
+});
 
-    if (form) {
-        form.addEventListener("submit", function(event) {
-            var requiredFields = [
-                { id: "monto", message: "Por favor complete todos los campos." },
-                { id: "dias_atraso", message: "Por favor complete todos los campos." },
-                { id: "prestamo", message: "Por favor complete todos los campos." }
-            ];
-            var valid = true;
+document.getElementById("actualizarMultaForm").addEventListener("submit", function (event) {
+    var valid = true; // Variable para rastrear la validez del formulario
+    
+    var monto = document.getElementById("monto").value;
+    var diasAtraso = document.getElementById("dias_atraso").value;
 
-            if (mensajeExito) mensajeExito.style.display = 'none';
-            if (mensajeError) {
-                mensajeError.textContent = '';
-                mensajeError.style.display = 'none';
-            }
+    // Validar campos vacíos
+    if (monto.trim() === "" || diasAtraso.trim() === "") {
+        alert("Por favor complete todos los campos.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            requiredFields.forEach(function(field) {
-                var value = document.getElementById(field.id).value.trim();
-                if (value === "") {
-                    mensajeError.textContent = field.message;
-                    valid = false;
-                    event.preventDefault();
-                }
-            });
+    // Validar que el monto y los días de atraso contengan solo números
+    if (!/^\d+$/.test(monto)) {
+        alert("El monto debe contener solo números.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            if (!valid && mensajeError) {
-                mensajeError.style.display = 'block';
-            }
+    if (!/^\d+$/.test(diasAtraso)) {
+        alert("Los días de atraso deben contener solo números.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            if (valid && mensajeExito) {
-                mensajeExito.textContent = "Actualizado con éxito.";
-                mensajeExito.style.display = 'block';
-            }
-        });
+    // Mostrar mensaje de éxito si el formulario es válido
+    if (valid) {
+        alert("La multa se actualizó correctamente.");
     }
 });

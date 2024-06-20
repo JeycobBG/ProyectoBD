@@ -1,48 +1,34 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var form = document.getElementById("actualizarSocioForm");
-    var mensajeExito = document.getElementById('mensajeExito'); 
-    var mensajeError = document.getElementById('mensajeError'); 
+document.addEventListener("DOMContentLoaded", function () {
+    // No es necesario establecer ninguna validación específica en el evento DOMContentLoaded para este formulario.
+});
 
-    if (form) {
-        form.addEventListener("submit", function(event) {
-            var requiredFields = [
-                { id: "nombre", message: "Nombre y apellidos deben contener solo letras." },
-                { id: "primer_apellido", message: "Nombre y apellidos deben contener solo letras." },
-                { id: "segundo_apellido", message: "Nombre y apellidos deben contener solo letras." },
-                { id: "codigo_postal", message: "El código postal debe contener solo números." }
-            ];
-            var valid = true;
+document.getElementById("actualizarSocioForm").addEventListener("submit", function (event) {
+    var valid = true; // Variable para rastrear la validez del formulario
+    
+    var nombre = document.getElementById("nombre").value;
+    var primerApellido = document.getElementById("primer_apellido").value;
+    var segundoApellido = document.getElementById("segundo_apellido").value;
+    var identificacion = document.getElementById("identificacion").value;
+    var codigoPostal = document.getElementById("codigo_postal").value;
+    var descripcionDireccion = document.getElementById("descripcion_direccion").value;
 
-            if (mensajeExito) mensajeExito.style.display = 'none';
-            if (mensajeError) {
-                mensajeError.textContent = '';
-                mensajeError.style.display = 'none';
-            }
+    // Validar campos vacíos
+    if (nombre.trim() === "" || primerApellido.trim() === "" || segundoApellido.trim() === "" ||
+        identificacion.trim() === "" || codigoPostal.trim() === "" || descripcionDireccion.trim() === "") {
+        alert("Por favor complete todos los campos.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            requiredFields.forEach(function(field) {
-                var value = document.getElementById(field.id).value.trim();
-                if (!/^[a-zA-Z\s]+$/.test(value) && field.id.includes("nombre")) {
-                    mensajeError.textContent = field.message;
-                    valid = false;
-                    event.preventDefault();
-                } else if (!/^[0-9]+$/.test(value) && field.id.includes("codigo_postal")) {
-                    if (mensajeError.textContent.length > 0) {
-                        mensajeError.textContent += " ";
-                    }
-                    mensajeError.textContent += field.message;
-                    valid = false;
-                    event.preventDefault();
-                }
-            });
+    // Validar que el código postal contenga solo números
+    if (!/^\d+$/.test(codigoPostal)) {
+        alert("El código postal debe contener solo números.");
+        event.preventDefault();
+        valid = false;
+    }
 
-            if (!valid && mensajeError) {
-                mensajeError.style.display = 'block';
-            }
-
-            if (valid && mensajeExito) {
-                mensajeExito.textContent = "Actualizado con éxito.";
-                mensajeExito.style.display = 'block';
-            }
-        });
+    // Mostrar mensaje de éxito si el formulario es válido
+    if (valid) {
+        alert("El socio se actualizó correctamente.");
     }
 });

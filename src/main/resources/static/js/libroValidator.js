@@ -4,44 +4,47 @@ document.addEventListener("DOMContentLoaded", function () {
     fechaPublicacionInput.setAttribute('max', today);
 });
 
-document.getElementById("registrarForm").addEventListener("submit", function(event) {
+document.getElementById("registrarForm").addEventListener("submit", function (event) {
     var valid = true; // Variable para rastrear la validez del formulario
     
-    var isbn = document.getElementById("ISBN").value;
+    var ISBN = document.getElementById("ISBN").value;
     var titulo = document.getElementById("titulo").value;
     var sinopsis = document.getElementById("sinopsis").value;
     var fechaPublicacion = document.getElementById("fecha_publicacion").value;
     var cantidad = document.getElementById("cantidad").value;
-    var autor = document.getElementById("id_autor").value;
-    var editorial = document.getElementById("id_editorial").value;
-    var generos = document.getElementById("generos").selectedOptions;
+    var idAutor = document.getElementById("id_autor").value;
+    var idEditorial = document.getElementById("id_editorial").value;
+    var idGeneros = document.getElementById("id_generos").value;
 
-    if (isbn.trim() === "" || titulo.trim() === "" || sinopsis.trim() === "" || 
-        fechaPublicacion.trim() === "" || cantidad.trim() === "" || autor === "" || 
-        editorial === "" || generos.length === 0) {
+    // Validar campos vacíos
+    if (ISBN.trim() === "" || titulo.trim() === "" || sinopsis.trim() === "" || fechaPublicacion.trim() === "" ||
+        cantidad.trim() === "" || idAutor.trim() === "" || idEditorial.trim() === "" || idGeneros.trim() === "") {
         alert("Por favor complete todos los campos.");
         event.preventDefault();
         valid = false;
-    } else {
-        if (isNaN(cantidad)) {
-            alert("La cantidad debe ser un número.");
-            event.preventDefault();
-            valid = false;
-        }
+    }
 
-        var today = new Date().toISOString().split('T')[0];
-        if (fechaPublicacion > today) {
-            alert("La fecha de publicación no puede ser una fecha futura.");
-            event.preventDefault();
-            valid = false;
-        }
+    // Validar que la fecha de publicación no sea futura
+    var today = new Date().toISOString().split('T')[0];
+    if (fechaPublicacion > today) {
+        alert("La fecha de publicación no puede ser en el futuro.");
+        event.preventDefault();
+        valid = false;
+    }
+
+    // Validar que la cantidad sea un número entero positivo
+    if (!/^\d+$/.test(cantidad)) {
+        alert("La cantidad debe ser un número entero positivo.");
+        event.preventDefault();
+        valid = false;
     }
 
     // Mostrar mensaje de éxito si el formulario es válido
     if (valid) {
-        alert("El formulario se envió correctamente.");
+        alert("El libro se registró correctamente.");
     }
 });
+
 
 function concatenarIds() {
     const select = document.getElementById('generos');
