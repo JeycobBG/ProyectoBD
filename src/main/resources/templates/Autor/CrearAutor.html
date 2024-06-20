@@ -57,6 +57,9 @@
 
             <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
             <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+            <div class="volver-container">
+                <button class="volver-btn" onclick="window.history.back()">Volver</button>
+            </div>
         </div>
     </div>
     <script src="/js/dateAutorValidator.js"></script>
