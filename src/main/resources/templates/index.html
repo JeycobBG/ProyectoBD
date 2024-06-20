@@ -1,63 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Menú de Navegación</title>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/css/navbar.css">
-        <link rel="stylesheet" href="/css/gallery.css">  
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Navegación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> <!-- Incluye Swiper CSS -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/gallery.css">  
+</head>
+<body>
 
-        <div class="navbar">
-            <ul>                                                                                         
-                <li><a href="/autor/leer">Autor</a>
-                </li>
+    <div class="navbar">
+        <ul>                                                                                         
+            <li><a href="/autor/leer">Autor</a></li>
+            <li><a href="/libro/leer">Libro</a></li>
+            <li><a href="/editorial/leer">Editorial</a></li>
+            <li><a href="/genero/leer">Género</a></li>
+            <li><a href="/socio/leer">Socio</a></li>
+            <li><a href="/prestamo/leer">Préstamo</a></li>
+            <li><a href="/multa/leer">Multa</a></li>
+            <li><a href="/devolucion/leer">Devolución</a></li>
+        </ul>
+    </div>
+    
+    <h1 class="header-title">Bienvenidos a la Biblioteca </h1>
 
-                <li><a href="/libro/leer">Libro</a>
-                </li>
-
-                <li><a href="/editorial/leer">Editorial</a>
-                </li>
-
-                <li><a href="/genero/leer">Género</a>
-                </li>
-
-                <li><a href="/socio/leer">Socio</a>
-                </li>
-
-                <li><a href="/prestamo/leer">Préstamo</a>
-                </li>    
-
-                <li><a href="/multa/leer">Multa</a>
-                </li>
-
-                <li><a href="/devolucion/leer">Devolución</a>
-                </li>
-
-            </ul>
+    <!-- Inicia el contenedor de Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide"><img src="/images/Principito.jpg" alt="El Principito"></div>
+            <div class="swiper-slide"><img src="/images/Quijote.jpg" alt="Don Quijote"></div>
+            <div class="swiper-slide"><img src="/images/Rico.jpg" alt="Piense y Hágase Rico"></div>
+            <div class="swiper-slide"><img src="/images/Viento.jpg" alt="Lo Que El Viento Se Llevó"></div>
+            <div class="swiper-slide"><img src="/images/Harry.jpg" alt="Harry Potter"></div>     
+            <div class="swiper-slide"><img src="/images/DaVinci.jpg" alt="DaVinci"></div>
+            <div class="swiper-slide"><img src="/images/Crepusculo.jpg" alt="Crepusculo"></div>
+            <div class="swiper-slide"><img src="/images/Biblia.jpg" alt="La Biblia"></div>
+            <div class="swiper-slide"><img src="/images/Anillos.jpg" alt="El señor de los anillos"></div>
+            <div class="swiper-slide"><img src="/images/Alicia.jpg" alt="Alicia en el pais de las maravillas"></div>
+            <div class="swiper-slide"><img src="/images/Heidi.jpg" alt="Heidi"></div>
+            <div class="swiper-slide"><img src="/images/Pinocho.jpg" alt="Pinocho"></div>
+            <div class="swiper-slide"><img src="/images/Orgullo.jpg" alt="Orgullo y Prejuicio"></div>
+            <div class="swiper-slide"><img src="/images/Odisea.jpg" alt="La Odisea"></div>
+ 
+            <!-- Añade más slides según sea necesario -->
         </div>
-        
-        <h1 class="header-title">Bienvenidos a la Biblioteca </h1>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+    <!-- Finaliza el contenedor de Swiper -->
 
-        <div class="image-gallery">
-            <img src="/images/Principito.jpg" alt="El Principito">
-            <img src="/images/Quijote.jpg" alt="Don Quijote">
-            <img src="/images/Rico.jpg" alt="Piense y Hágase Rico">
-            <img src="/images/Viento.jpg" alt="Lo Que El Viento Se Llevó">
-            <img src="/images/Harry.jpg" alt="Harry Potter">
-            <img src="/images/DaVinci.jpg" alt="El Código Da Vinci">
-            <img src="/images/Crepusculo.jpg" alt="Crepúsculo">
-            <img src="/images/Biblia.jpg" alt="Santa Biblia">
-            <img src="/images/Anillos.jpg" alt="El Señor De Los Anillos">
-            <img src="/images/Alicia.jpg" alt="Alicia En El País De Las Maravillas">
-            <img src="/images/Heidi.jpg" alt="Heidi">
-            <img src="/images/Pinocho.jpg" alt="Pinocho">
-            <img src="/images/Orgullo.jpg" alt="Orgullo y Prejuicio">
-            <img src="/images/Odisea.jpg" alt="Odisea">
-            
-        </div>
-
-         </body>
+    <!-- Script de Swiper -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },
+        });
+    </script>
+</body>
 </html>
