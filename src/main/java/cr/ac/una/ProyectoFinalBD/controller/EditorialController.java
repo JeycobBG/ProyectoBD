@@ -6,13 +6,14 @@ package cr.ac.una.ProyectoFinalBD.controller;
 
 import cr.ac.una.ProyectoFinalBD.domain.Editorial;
 import cr.ac.una.ProyectoFinalBD.service.EditorialService;
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,7 @@ public class EditorialController {
     
     @PostMapping("/guardar")
     public String add(@RequestParam("nombre")String nombre,                     
-        @RequestParam("fecha_fundacion")Date fecha_fundacion,
+        @RequestParam("fecha_fundacion") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_fundacion,
         @RequestParam("codigo_postal")String codigo_postal, 
         @RequestParam("descripcion_direccion") String descripcion_direccion,
         @RequestParam("id_distrito")Integer id_distrito){
@@ -42,58 +43,40 @@ public class EditorialController {
         return "redirect:/editorial/leer";
     }
     
-    @GetMapping()
+    @GetMapping("/guardar")
     public String agregar(){
         
         return "Editorial/CrearEditorial";
     }
     
-    @GetMapping("/actualizar")
-    public String update(){
-        
-        /*
-        @PathVariable("id") Integer id,
+    @PostMapping("/actualizar")
+    public String update(@RequestParam("id") Integer id,
         @RequestParam("nombre")String nombre,                     
-        @RequestParam("fecha_fundacion")Date fecha_fundacion,
+        @RequestParam("fecha_fundacion") @DateTimeFormat(pattern = "yyyy-MM-dd")Date fecha_fundacion,
         @RequestParam("codigo_postal")String codigo_postal, 
         @RequestParam("descripcion_direccion") String descripcion_direccion,
-        @RequestParam("id_distrito")Integer id_distrito, 
-        @RequestParam("error")String error);
-        */
-        
-        Integer id = 2;
-        String nombre = "modificado";
-        Date fecha_fundacion = Date.from(Instant.now());
-        String codigo_postal = "modificado";
-        String descripcion_direccion = "modificado";
-        Integer id_distrito = 1;
-        String error = "";
-        
+        @RequestParam("id_distrito")Integer id_distrito){
         
         String resultado = editorialService.update(id, nombre, fecha_fundacion, codigo_postal,
-                descripcion_direccion, id_distrito, error);
+                descripcion_direccion, id_distrito, "");
         
         System.out.println("resultado = " + resultado);
+        return "redirect:/editorial/leer";
+    }
+    
+    @PostMapping("/actualizarForm")
+    public String actualizar(@RequestParam("id") Integer id, Model modelo){
+        Editorial editorial = editorialService.buscar(id);
         
-        return "/";
+        modelo.addAttribute("editorial", editorial);
+        return "Editorial/ActualizarEditorial";
     }
     
     @GetMapping("/eliminar")
-    public String delete(){
-        
-        /*
-        @PathVariable("id") Integer id,
-        @RequestParam("error")String error);
-        */
-        
-        Integer id_editorial = 2;
-        String error = "";
-        
-        String resultado = editorialService.delete(id_editorial, error);
-        
+    public String delete(@RequestParam("id") Integer id){
+        String resultado = editorialService.delete(id, ""); 
         System.out.println("resultado = " + resultado);
-        
-        return "/";
+        return "redirect:/editorial/leer";
     }
     
     @GetMapping("/leer")
@@ -109,29 +92,19 @@ public class EditorialController {
             
         
         modelo.addAttribute("editoriales", editoriales);  
-        
         return "Editorial/MostrarEditorial";
     }
     
     // Filtro
     @GetMapping("/filtrarConMasLibros")
-    public String filtrarConMasLibros(Model modelo){
-     
-        /*
-        @RequestParam("top_n")Integer top_n
-        */
-        
-        Integer top_n = 1;
-        String error = "";
-        
-        List<Editorial> editoriales = editorialService.editorialConMasLibros(top_n, error);
+    public String filtrarConMasLibros(@RequestParam(defaultValue = "5") Integer top_n, Model modelo){
+        List<Editorial> editoriales = editorialService.editorialConMasLibros(top_n, "");
      
         for(int i = 0; i < editoriales.size(); i++){
             System.out.print("editorial con mas libros: " + editoriales.get(i).getNombre());
         }
             
-        
         modelo.addAttribute("editoriales", editoriales);  
-        return "/";
+        return "Editorial/MostrarEditorial";
     }
 }

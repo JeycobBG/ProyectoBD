@@ -5,9 +5,11 @@
 package cr.ac.una.ProyectoFinalBD.service;
 
 import cr.ac.una.ProyectoFinalBD.domain.Libro;
+import cr.ac.una.ProyectoFinalBD.jpa.LibroRepository;
 import cr.ac.una.ProyectoFinalBD.repositorio.ILibroRepositorio;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class LibroService implements ILibroService {
     
     @Autowired
     private ILibroRepositorio libroRepo;
+    
+    @Autowired
+    private LibroRepository libroRepository;
     
     @Override
     public String insertar(String ISBN, String titulo, String sinopsis, Date fecha_publicacion, Integer cantidad, Integer id_autor, Integer id_editorial, String id_generos){
@@ -40,6 +45,12 @@ public class LibroService implements ILibroService {
     @Override
     public String eliminar(Integer id_libro){
         return libroRepo.eliminar(id_libro);
+    }
+    
+    @Override
+    public Libro buscar(Integer id) {
+        Optional<Libro> libroOptional = libroRepository.findById(id);
+        return libroOptional.get();
     }
 
     @Override

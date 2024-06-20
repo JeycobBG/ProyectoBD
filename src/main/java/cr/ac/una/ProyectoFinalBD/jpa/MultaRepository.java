@@ -6,17 +6,16 @@ package cr.ac.una.ProyectoFinalBD.jpa;
 
 import cr.ac.una.ProyectoFinalBD.domain.Multa;
 import jakarta.transaction.Transactional;
-import java.util.Date;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author JEYCOB
  */
-public interface MultaRepository extends CrudRepository<Multa, Integer>{
+public interface MultaRepository extends JpaRepository<Multa, Integer>{
     
     /*
         @monto DECIMAL(10,2),

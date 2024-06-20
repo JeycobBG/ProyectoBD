@@ -7,7 +7,7 @@
 <body>
     <div class="container">
         <div>
-            <form id="registrarMultaForm" action="/multa/guardar" method="post">
+            <form id="registrarForm" action="/multa/guardar" method="post">
                 
                 <h2>Registrar una nueva Multa</h2>
                 
@@ -25,10 +25,8 @@
                 <input type="checkbox" id="cancelada" name="cancelada" style="width: 20px; height: 20px; margin-left: 30px;"><br><br>
                 
                 <!-- Combo box para seleccionar el préstamo -->
-                <label for="prestamo">Préstamo:</label><br>
-                <select id="prestamo" name="prestamo" required>
-                    <option value="">Selecciona un préstamo</option>
-                    <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
+                <label for="id_prestamo">Préstamo:</label><br>
+                <select id="id_prestamo" name="id_prestamo" required>
                     <option th:each="prestamo : ${prestamos}" 
                             th:value="${prestamo.id}" 
                             th:text="${prestamo.id}">
@@ -38,24 +36,14 @@
                 <input type="submit" value="Guardar">
             </form>
         </div>
+        <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+        <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div> 
+        <div class="volver-container">
+            <button class="volver-btn" onclick="window.history.back()">Volver</button>
+        </div>
     </div>
-    
-    <div class="alert alert-success" th:if="${exito != null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
-    
-    <script>
-        // Validación del formulario
-        document.getElementById("registrarMultaForm").addEventListener("submit", function(event) {
-            var monto = document.getElementById("monto").value;
-            var diasAtraso = document.getElementById("dias_atraso").value;
-            var prestamo = document.getElementById("prestamo").value;
-            
-            // Validaciones
-            if (monto.trim() === "" || diasAtraso.trim() === "" || prestamo === "") {
-                alert("Por favor complete todos los campos.");
-                event.preventDefault();
-            }
-        });
-    </script>
+
+    <script src="/js/multaValidator.js"></script>
+    <script src="/js/formSubmission.js"></script>
 </body>
 </html>

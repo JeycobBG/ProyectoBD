@@ -10,7 +10,11 @@
     <div class="encabezado">
         <a href="/menu" class="boton-volver"></a>
         <h2 class="listado-titulo">Lista de Préstamos</h2>
+        <a href="/menu" class="button volver">Volver</a>
     </div>
+    
+    <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+    
     <div class="botonYBuscador"> 
         <div>
             <a href="/prestamo/guardar" class="button">Agregar un nuevo préstamo</a>
@@ -32,18 +36,16 @@
                 <td th:text="${prestamo.socio.persona.identificacion}"></td>
                 <td th:text="${prestamo.socio.persona.nombre + ' ' + prestamo.socio.persona.primerApellido + ' ' + prestamo.socio.persona.segundoApellido}"></td>
                 <td th:text="${prestamo.libro.titulo}"></td>
-                <td><a class="editar-button" th:href="@{'/prestamo/actualizar?id=' + ${prestamo.id}}">Editar</a>
-                <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${prestamo.id} + '\')'">Eliminar</a></td>
+                <td>
+                    <form method="post" th:action="@{/prestamo/actualizarForm}">
+                        <input type="hidden" th:name="id" th:value="${prestamo.id}" />
+                        <button type="submit" class="editar-button">Editar</button>
+                    </form>
+                    <a href="javascript:void(0);" class="eliminar-button" th:onclick="'confirmarEliminacion(\'prestamo\', ' + ${prestamo.id} + ');'">Eliminar</a>
+                </td>
             </tr>
         </table>
-
-        <script>
-            function confirmarEliminacion(enlace, idPrestamo) {
-                if (confirm("¿Está seguro de que desea eliminar este préstamo?")) {
-                    window.location.href = '/prestamo/eliminar?id=' + idPrestamo;
-                }
-            }
-        </script>
+         <script src="/js/deleteConfirmation.js"></script>
     </div>
 
     <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>

@@ -6,17 +6,16 @@ package cr.ac.una.ProyectoFinalBD.jpa;
 
 import cr.ac.una.ProyectoFinalBD.domain.Genero;
 import jakarta.transaction.Transactional;
-import java.util.Date;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author JEYCOB
  */
-public interface GeneroRepository extends CrudRepository<Genero, Integer>{
+public interface GeneroRepository extends JpaRepository<Genero, Integer>{
     
     
     /*

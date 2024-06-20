@@ -2,49 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Actualizar Editorial</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/actualizar.css">
 </head>
 <body>
-    <h2>Actualizar Editorial</h2>
-    
-    <a href="/editoriales/listar" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
-    <div class="container">
-        <div>
-            <form action="/editoriales/actualizarEditorial" method="post">
-                
+    <div class="wrapper">
+        <div class="container">
+            <form id="actualizarEditorialForm" action="/editorial/actualizar" method="post">
+                <h2 style="text-align: center;">Actualizar Editorial</h2>
+
+                <!-- Campo oculto para el ID de la editorial -->
                 <input type="hidden" id="id" name="id" th:value="${editorial.id}" />
+
+                <!-- Campo para el nombre de la editorial -->
+                <div class="form-group">
+                    <label for="nombre">Nombre de la editorial:</label>
+                    <input type="text" id="nombre" name="nombre" th:value="${editorial.nombre}" required>
+                </div>
                 
-                <label for="nombre">Nombre de la Editorial:</label><br>
-                <input type="text" id="nombre" name="nombre" th:value="${editorial.nombre}" required><br><br>
+                <!-- Campo para la fecha de fundación -->
+                <div class="form-group">
+                    <label for="fechaFundacion">Fecha de fundación:</label>
+                    <input type="date" id="fecha_fundacion" name="fecha_fundacion" th:value="${editorial.fechaFundacion}" required>
+                </div>
+
+                <!-- Campo para el código postal -->
+                <div class="form-group">
+                    <label for="codigoPostal">Código Postal:</label>
+                    <input type="text" id="codigo_postal" name="codigo_postal" th:value="${editorial.direccion.codigoPostal}" required>
+                </div>
                 
-                <label for="fechaFundacion">Fecha de Fundación:</label><br>
-                <input type="date" id="fechaFundacion" name="fechaFundacion" th:value="${editorial.fechaFundacion}" required><br><br>
+                <!-- Campo para la descripción de la dirección -->
+                <div class="form-group">
+                    <label for="descripcionDireccion">Dirección:</label>
+                    <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:value="${editorial.direccion.descripcion}" required>
+                </div>
+                <div class="form-group">
+                    <label for="distrito">Distrito:</label>
+                    <input type="text" id="id_distrito" name="id_distrito" th:value="${editorial.direccion.distrito.id}" required>
+                </div> 
                 
-                <!-- Combo box para seleccionar la dirección asociada -->
-                <label for="direccion">Dirección asociada:</label><br>
-                <select id="direccion" name="direccion" required>
-                    <option value="">Selecciona una dirección</option>
-                    <!-- Aquí puedes cargar dinámicamente las opciones de dirección desde tu backend -->
-                    <!-- Por ejemplo, podrías iterar sobre una lista de direcciones disponibles -->
-                    <!-- y generar opciones para cada una -->
-                    <option value="direccion1">Dirección 1</option>
-                    <option value="direccion2">Dirección 2</option>
-                    <option value="direccion3">Dirección 3</option>
-                    <!-- Fin de las opciones de ejemplo -->
-                </select><br><br>
-                
-                <!-- Puedes agregar más campos según necesites para la editorial -->
-                
-                <input type="submit" value="Actualizar Editorial">
+                <input type="submit" value="Actualizar">
             </form>
+
+            <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+            <div class="volver-container">
+                <button class="volver-btn" onclick="window.history.back()">Volver</button>
+            </div>
         </div>
     </div>
+     <script src="/js/dataEditorialActualizarValidate.js"></script>
 </body>
 </html>

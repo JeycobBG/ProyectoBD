@@ -4,20 +4,24 @@
         <title>Módulo Libro</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/mostrar.css">
-        
+        <link rel="stylesheet" href="/css/mostrarLibroCB.css">
+
     </head>
     <body>
-        <div class="encabezado">
+        <div class="encabezado">           
             <a href="/menu" class="boton-volver"></a>
             <h2 class="listado-titulo">Lista de Libros</h2>
+            <a href="/menu" class="button volver">Volver</a>
         </div>
+        
+        <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+        
         <div class="botonYBuscador">
             <div>
                 <a href="/libro/guardar" class="button">Agregar un nuevo Libro</a>
             </div>
             <form th:action="@{/libro/filtrar}" th:method="get">
-                <label for="tipoFiltro" style="font-size: small;">Ingrese el filtro a escoger:</label>
+                <label for="tipoFiltro" style="font-size: 18px;">Ingrese el filtro deseado:</label>
                 <select id="tipoFiltro" name="tipoFiltro" class="select-filtro">
                     <option value="editorial">Editorial</option>
                     <option value="genero">Género</option>
@@ -31,9 +35,9 @@
                 <button type="submit">Enviar</button>
             </form>
         </div>
-        
+
         <script src="/js/typeFilter.js"></script>
-        
+
         <div>
             <table class="table table-bordered">
                 <tr>
@@ -60,18 +64,16 @@
                             <li th:each="gen : ${libro.generos}" th:text="${gen.nombre}"></li>
                         </ul>
                     </td>
-                    <td><a class="editar-button" th:href="@{'/libro/actualizar?id=' + ${libro.id}}">Editar</a>
-                        <a class="eliminar-button" href="#" th:onclick="'confirmarEliminacion(this, \'' + ${libro.id} + '\')'">Eliminar</a>
+                    <td>
+                        <form method="post" th:action="@{/libro/actualizarForm}" th:object="${libro}">
+                            <input type="hidden" th:name="id" th:value="${libro.id}" />
+                            <button type="submit" class="editar-button">Editar</button>
+                        </form>
+                        <a href="javascript:void(0);" class="eliminar-button" th:onclick="'confirmarEliminacion(\'libro\', ' + ${libro.id} + ');'">Eliminar</a>
+                    </td>
                 </tr>
             </table>
-
-            <script>
-                function confirmarEliminacion(enlace, idLibro) {
-                    if (confirm("¿Está seguro de que desea eliminar este Libro?")) {
-                        window.location.href = '/libro/eliminar?id=' + idLibro;
-                    }
-                }
-            </script>
+            <script src="/js/deleteConfirmation.js"></script>
         </div>
 
         <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>

@@ -23,7 +23,7 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_autor")
-    private int id;
+    private Integer id;
     
     private String bibliografia;
     

@@ -9,55 +9,41 @@
         <div>
             <h2>Registrar un nuevo Préstamo</h2>
             
-            <form id="registrarPrestamoForm" action="/prestamo/guardar" method="post">
+            <form id="registrarForm" action="/prestamo/guardar" method="post">
 
-                <label for="fechaPrestamo">Fecha de Préstamo:</label><br>
-                <input type="date" id="fechaPrestamo" name="fechaPrestamo" required><br>
+                <label for="fecha_prestamo">Fecha de Préstamo:</label><br>
+                <input type="date" id="fecha_prestamo" name="fecha_prestamo" required><br>
 
-                <label for="fechaDevolucionPrevista">Fecha de Devolución Prevista:</label><br>
-                <input type="date" id="fechaDevolucionPrevista" name="fechaDevolucionPrevista" required><br>
+                <label for="fecha_devolucion_prevista">Fecha de Devolución Prevista:</label><br>
+                <input type="date" id="fecha_devolucion_prevista" name="fecha_devolucion_prevista" required><br>
 
-                <label for="libro">Libro:</label><br>
-                <select id="libro" name="libro" required>
-                    <option value="">Selecciona un libro</option>
-                    <!-- Aquí puedes cargar dinámicamente los libros desde el backend -->
-                    <option value="1">Libro 1</option>
-                    <option value="2">Libro 2</option>
-                    <option value="3">Libro 3</option>
-                </select><br>
+                <label for="id_libro">Libro:</label><br>
+                <select id="id_libro" name="id_libro" required>
+                    <option th:each="libro : ${libros}" 
+                            th:value="${libro.id}" 
+                            th:text="${libro.titulo}">
+                    </option>
+                </select>
 
-                <label for="socio">Socio:</label><br>
-                <select id="socio" name="socio" required>
-                    <option value="">Selecciona un socio</option>
-                    <!-- Aquí puedes cargar dinámicamente los socios desde el backend -->
-                    <option value="1">Socio 1</option>
-                    <option value="2">Socio 2</option>
-                    <option value="3">Socio 3</option>
-                </select><br>
+                <label for="id_socio">Socio:</label><br>
+                <select id="id_socio" name="id_socio" required>
+                    <option th:each="socio : ${socios}" 
+                            th:value="${socio.id}" 
+                            th:text="${socio.persona.nombre + ' ' + socio.persona.primerApellido}">
+                    </option>
+                </select>
 
                 <input type="submit" value="Guardar">
             </form>
         </div>
+        <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+        <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
+        <div class="volver-container">
+            <button class="volver-btn" onclick="window.history.back()">Volver</button>
+        </div>
     </div>
 
-    <div class="alert alert-success" th:if="${exito!=null}" th:text="${exito}"></div>
-    <div class="alert alert-error" th:if="${error!=null}" th:text="${error}"></div>
-
-    <script>
-        // Validación del formulario
-        document.getElementById("registrarPrestamoForm").addEventListener("submit", function(event) {
-            var fechaPrestamo = document.getElementById("fechaPrestamo").value;
-            var fechaDevolucionPrevista = document.getElementById("fechaDevolucionPrevista").value;
-
-            // Obtener la fecha actual
-            var fechaActual = new Date().toISOString().split('T')[0];
-
-            // Validar que la fecha de préstamo no sea en el futuro
-            if (fechaPrestamo > fechaActual) {
-                alert("La fecha de préstamo no puede ser en el futuro.");
-                event.preventDefault();
-            }
-        });
-    </script>
+    <script src="/js/prestamoValidator.js"></script>
+    <script src="/js/formSubmission.js"></script>
 </body>
 </html>

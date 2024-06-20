@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Actualizar Multa</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
-</head>
-<body>
-    <h2>Actualizar Multa</h2>
-    
-    <a href="/multas/listar" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
-    <div class="container">
-        <div>
-            <form action="/multas/actualizarMulta" method="post">
-                
-                <input type="hidden" id="id" name="id" th:value="${multa.id}" />
-                
-                <label for="monto">Monto:</label><br>
-                <input type="number" id="monto" name="monto" th:value="${multa.monto}" step="0.01" required><br><br>
-                
-                <label for="diasAtraso">Días de Atraso:</label><br>
-                <input type="number" id="diasAtraso" name="diasAtraso" th:value="${multa.diasAtraso}" required><br><br>
-                
-                <label for="cancelada">¿Multa cancelada?</label><br>
-                <select id="cancelada" name="cancelada" required>
-                    <option value="true" th:selected="${multa.cancelada}">Sí</option>
-                    <option value="false" th:selected="${!multa.cancelada}">No</option>
-                </select><br><br>
-                
-                <input type="submit" value="Actualizar Multa">
-            </form>
+    <head>
+        <title>Actualizar Multa</title>
+        <link href="/CSS/actualizar.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <form id="actualizarMultaForm" action="/multa/actualizar" method="post">
+
+                    <h2>Actualizar Multa</h2>
+
+                    <!-- Campo oculto para el ID de la multa -->
+                    <input type="hidden" id="id" name="id" th:value="${multa.id}" />
+
+                    <!-- Campo para el monto de la multa -->
+                    <label for="monto">Monto:</label><br>
+                    <input type="text" id="monto" name="monto" th:value="${multa.monto}" pattern="[0-9]*" required><br><br>
+
+                    <!-- Campo para los días de atraso -->
+                    <label for="dias_atraso">Días de Atraso:</label><br>
+                    <input type="text" id="dias_atraso" name="dias_atraso" th:value="${multa.dias_atraso}" pattern="[0-9]*" required><br><br>
+
+                    <!-- Campo para indicar si la multa está cancelada -->
+                    <label for="cancelada">Cancelada:</label><br>
+                    <!-- Aumentar el tamaño del checkbox y agregar margen izquierdo -->
+                    <input type="checkbox" id="cancelada" name="cancelada" th:value="${multa.cancelada}" style="width: 20px; height: 20px; margin-left: 30px;"><br><br>
+
+                    <!-- Combo box para seleccionar el préstamo -->
+                    <label for="prestamo">Préstamo:</label><br>
+                    <select id="prestamo" name="id_prestamo" th:value="${multa.prestamo.id}" required>
+                        <!-- Cargar dinámicamente las opciones de préstamo desde el backend -->
+                        <option th:each="prestamo : ${prestamos}" 
+                                th:value="${prestamo.id}" 
+                                th:text="${prestamo.id}">
+                        </option>
+                    </select><br><br>
+
+                    <input type="submit" value="Actualizar">
+                </form>
+            </div>
+
+            <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+            <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
+            <div class="volver-container">
+                <button class="volver-btn" onclick="window.history.back()">Volver</button>
+            </div>
         </div>
-    </div>
-</body>
+        
+        <script src="/js/dataMultaActualizarValidate.js"></script>
+    </body>
 </html>

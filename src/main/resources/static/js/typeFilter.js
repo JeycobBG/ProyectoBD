@@ -1,3 +1,4 @@
+
 document.getElementById('tipoFiltro').addEventListener('change', function() {
     var selectedOption = this.options[this.selectedIndex].text;
     var placeholderText = 'Ingrese ' + selectedOption.toLowerCase();

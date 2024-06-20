@@ -28,8 +28,9 @@ public interface IMultaService {
             Boolean cancelada);
     
     public String eliminar(Integer id_multa);
+    public Multa buscar(Integer id);
     
     // Filtro
-    public List<Multa> multasPorSociosMasMultados(String error);
+    public List<Multa> multasPorSociosMasMultados(Integer top_n, String error);
     
 }

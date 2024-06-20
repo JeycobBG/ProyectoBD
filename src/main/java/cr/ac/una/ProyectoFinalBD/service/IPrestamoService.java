@@ -30,4 +30,7 @@ public interface IPrestamoService {
             Integer id_socio);
     
     public String eliminar(Integer id_prestamo);
+    
+    public Prestamo buscar(Integer id);
+    
 }

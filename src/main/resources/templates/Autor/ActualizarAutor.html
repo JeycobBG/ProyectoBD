@@ -1,34 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Actualizar Autor</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar Autor</title>
+    <link rel="stylesheet" href="/css/actualizar.css">
 </head>
 <body>
-    <h1>Actualizar Autor</h1>
-    
-    <form action="/autores/actualizarAutor" method="post">
-        <input type="hidden" name="id" th:value="${autor.id}" />
+    <div class="wrapper">
+        <div class="container">
+            <h2>Actualizar Autor</h2>
 
-        <label for="bibliografia">Bibliografía:</label><br>
-        <input type="text" id="bibliografia" name="bibliografia" th:value="${autor.bibliografia}" required><br><br>
+            <form id="actualizarAutorForm" action="/autor/actualizar" method="post">
+                <input type="hidden" id="id" name="id" th:value="${autor.id}" />
+                
+                <div class="form-group">
+                    <label for="nombreCompleto">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" th:value="${autor.persona.nombre}" required>
+                </div>
+                <div class="form-group">
+                    <label for="primerApellido">Primer Apellido:</label>
+                    <input type="text" id="primer_apellido" name="primer_apellido" th:value="${autor.persona.primerApellido}" required>
+                </div>
+                <div class="form-group">
+                    <label for="segundoApellido">Segundo Apellido:</label>
+                    <input type="text" id="segundo_apellido" name="segundo_apellido" th:value="${autor.persona.segundoApellido}" required>
+                </div>
+                <div class="form-group">
+                    <label for="identificacion">Identificación:</label>
+                    <input type="text" id="identificacion" name="identificacion" th:value="${autor.persona.identificacion}" required>
+                </div>
+                <div class="form-group">
+                    <label for="codigoPostal">Código Postal:</label>
+                    <input type="text" id="codigo_postal" name="codigo_postal" th:value="${autor.persona.direccion.codigoPostal}" required>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:value="${autor.persona.direccion.descripcion}" required>
+                </div>
+                <div class="form-group">
+                    <label for="distrito">Distrito:</label>
+                    <input type="text" id="id_distrito" name="id_distrito" th:value="${autor.persona.direccion.distrito.id}" required>
+                </div> 
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="numero_telefono" name="numero_telefono" th:value="${autor.persona.telefono[0].numero}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" th:value="${autor.persona.correoElectronico[0].email}" required>
+                </div>
+                <div class="form-group">
+                    <label for="bibliografia">Bibliografía:</label>
+                    <textarea id="bibliografia" name="bibliografia" th:value="${autor.bibliografia}" rows="4" cols="50" required></textarea>
+                </div>
+                <input type="submit" value="Actualizar">
+            </form>
 
-
-        <label for="persona">Persona asociada:</label><br>
-        <select id="persona" name="persona" required>
-            <option value="">Selecciona una persona</option>
-
-            <option value="persona1">Persona 1</option>
-            <option value="persona2">Persona 2</option>
-            <option value="persona3">Persona 3</option>
-            <!-- Fin de las opciones de ejemplo -->
-        </select><br><br>
-
-        <input type="submit" value="Guardar cambios">
-    </form>
-
-    <script>
-    </script>
+            <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+            <div class="alert alert-error" th:if="${error != null}" th:text="${error}"></div>
+            <div class="volver-container">
+                <button class="volver-btn" onclick="window.history.back()">Volver</button>
+            </div>
+        </div>
+    </div>
+    <script src="/js/dataAutorActualizarValidate.js"></script>
 </body>
 </html>

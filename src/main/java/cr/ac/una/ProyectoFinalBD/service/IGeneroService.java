@@ -25,8 +25,8 @@ public interface IGeneroService {
             String error);
     
     public List<Genero> leer(String error);
-    
     public String delete(Integer id_genero, String error);
+    public Genero buscar(Integer id);
     
     //filtros
     public List<Genero> filtrarConMasLibrosPublicados(Integer top_n, String error);

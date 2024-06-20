@@ -7,16 +7,16 @@ package cr.ac.una.ProyectoFinalBD.jpa;
 import cr.ac.una.ProyectoFinalBD.domain.Socio;
 import jakarta.transaction.Transactional;
 import java.util.Date;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author JEYCOB
  */
-public interface SocioRepository extends CrudRepository<Socio, Integer>{
+public interface SocioRepository extends JpaRepository<Socio, Integer>{
     
     /*
     @primer_apellido NVARCHAR(63),

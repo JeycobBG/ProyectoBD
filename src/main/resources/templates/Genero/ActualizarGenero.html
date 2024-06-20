@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Actualizar Género</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
-</head>
-<body>
-    <h2>Actualizar Género</h2>
-    
-    <a href="/generos/listar" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
-    <div class="container">
-        <div>
-            <form action="/generos/actualizarGenero" method="post">
-                
-                <input type="hidden" id="id" name="id" th:value="${genero.id}" />
-                
-                <label for="nombre">Nombre del Género:</label><br>
-                <input type="text" id="nombre" name="nombre" th:value="${genero.nombre}" required><br><br>
-                
-                <label for="descripcion">Descripción:</label><br>
-                <input type="text" id="descripcion" name="descripcion" th:value="${genero.descripcion}" required><br><br>
-                
-                <!-- Puedes agregar más campos según necesites para el género -->
-                
-                <input type="submit" value="Actualizar Género">
-            </form>
+    <head>
+        <title>Actualizar Género</title>
+        <link rel="stylesheet" href="/css/actualizar.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                <h2>Actualizar Género</h2>
+
+                <form id="actualizarGeneroForm" action="/genero/actualizar" method="post">
+
+                    <!-- Campo oculto para el ID del género -->
+                    <input type="hidden" id="id" name="id" th:value="${genero.id}" />
+
+                    <!-- Campo para el nombre del género -->
+                    <div class="form-group">
+                        <label for="nombre">Nombre del género:</label><br>
+                        <input type="text" id="nombre" name="nombre" th:value="${genero.nombre}" required><br><br>
+                    </div>
+
+                    <!-- Campo para la descripción del género -->
+                    <div class="form-group">
+                        <label for="descripcion">Descripción del género:</label><br>
+                        <input type="text" id="descripcion" name="descripcion" th:value="${genero.descripcion}" required><br><br>
+                    </div>
+
+                    <input type="submit" value="Actualizar">
+                </form>
+
+                <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+                <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
+                <div class="volver-container">
+                <button class="volver-btn" onclick="window.history.back()">Volver</button>
+                </div>
+            </div>
         </div>
-    </div>
-</body>
+        <script src="/js/dataGeneroActualizarValidate.js"></script>
+    </body>
 </html>

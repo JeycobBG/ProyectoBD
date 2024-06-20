@@ -16,7 +16,9 @@ body {
     background-color: #333;
     color: white;
     padding: 20px;
-    text-align: center;
+    display: flex;  
+    justify-content: space-between; 
+    align-items: center;  
 }
 
 .botonYBuscador {
@@ -63,6 +65,22 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
+.button.volver {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    background-color: #666;  /* Color de fondo del botón */
+    color: white;  /* Color del texto */
+    text-decoration: none;  /* Elimina el subrayado de los enlaces */
+    border-radius: 5px;  /* Bordes redondeados */
+    transition: background-color 0.3s;  /* Efecto suave al cambiar el color de fondo */
+}
+
+.button.volver:hover {
+    background-color: #555;  /* Cambia el color de fondo al pasar el ratón por encima */
+}
+
 
 .botonYBuscador button:hover {
     background-color: #45a049;

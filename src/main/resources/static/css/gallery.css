@@ -32,7 +32,7 @@
     transform: scale(1.1); 
 }
 
-@media (max-width: 800px) {
+@media (max-width: 400px) {
     .image-gallery img {
         width: calc(50% - 10px); 
     }
@@ -42,4 +42,33 @@
     .image-gallery img {
         width: 100%; 
     }
+}
+
+
+/* Ajustes generales para el contenedor del carrusel */
+.swiper-container {
+    width: 50%; /* Ajusta el ancho del carrusel al 100% del contenedor padre */
+    height: auto; /* Permite que la altura se ajuste automáticamente */
+}
+
+/* Ajustes para las diapositivas dentro del carrusel */
+.swiper-slide {
+    width: 25%; /* Divide el carrusel en 4 partes iguales */
+    height: auto; /* Ajusta la altura automáticamente */
+    padding: 10px; /* Agrega algo de espacio alrededor de cada diapositiva */
+}
+
+/* Ajustes para mejorar la legibilidad y el diseño general */
+.swiper-slide img {
+    width: 100%; /* Hace que la imagen ocupe todo el espacio disponible de la diapositiva */
+    height: auto; /* Mantiene la relación de aspecto de la imagen */
+}
+
+/* Ajustes para la navegación y la paginación */
+.swiper-button-next,.swiper-button-prev {
+    --swiper-navigation-color: #000; /* Cambia el color de los botones de navegación */
+}
+
+.swiper-pagination {
+    --swiper-pagination-color: #000; /* Cambia el color de la paginación */
 }

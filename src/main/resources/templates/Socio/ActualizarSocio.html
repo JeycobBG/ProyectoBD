@@ -2,77 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Actualizar Socio</title>
-    <link href="/CSS/Registrar_Form.css" rel="stylesheet" type="text/css"/>
+    <link href="/CSS/actualizar.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <h2>Actualizar Socio</h2>
-    
-    <a href="/socios/listar" class="boton-volver">
-    <img src="/img/volver.png" alt="Volver" width="20" height="20">
-    </a>    
-    
-    <a href="/usuarios/menuPrincipal" class="boton-volver">
-    <img src="/img/home.png" alt="Volver" width="20" height="20">
-    </a>
-    
     <div class="container">
         <div>
-            <form id="actualizarSocioForm" action="/socios/actualizarSocio" method="post">
-                
-                <input type="hidden" id="id" name="id" th:value="${socio.id}" />
-                
-                <label for="fechaRegistro">Fecha de Registro:</label><br>
-                <input type="date" id="fechaRegistro" name="fechaRegistro" th:value="${socio.fechaRegistro}" required><br><br>
-                
-                <label for="persona">Seleccione una persona:</label><br>
-                <select id="persona" name="persona" required>
-                    <option value="">Seleccionar</option>
-                    <option th:each="persona : ${personas}" 
-                            th:value="${persona.id}" 
-                            th:text="${persona.nombre + ' ' + persona.primerApellido + ' ' + persona.segundoApellido}">
-                    </option>
-                </select><br><br>
+            <h2>Actualizar Socio</h2>
 
-                <label for="prestamo">Seleccione un préstamo:</label><br>
-                <select id="prestamo" name="prestamo" required>
-                    <option value="">Seleccionar</option>
-                    <option th:each="prestamo : ${prestamos}" 
-                            th:value="${prestamo.id}" 
-                            th:text="${prestamo.id}">
-                    </option>
-                </select><br><br>
-                
-                <input type="submit" value="Actualizar Socio">
+            <form id="actualizarSocioForm" action="/socio/actualizar" method="post">
+                <!-- Campo oculto para el ID del socio -->
+                <input type="hidden" id="id" name="id" th:value="${socio.id}" />
+
+                <!-- Campo para el nombre -->
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" th:value="${socio.persona.nombre}" required><br>
+
+                <!-- Campo para el primer apellido -->
+                <label for="primer_apellido">Primer Apellido:</label><br>
+                <input type="text" id="primer_apellido" name="primer_apellido" th:value="${socio.persona.primerApellido}" required><br>
+
+                <!-- Campo para el segundo apellido -->
+                <label for="segundo_apellido">Segundo Apellido:</label><br>
+                <input type="text" id="segundo_apellido" name="segundo_apellido" th:value="${socio.persona.segundoApellido}" required><br>
+
+                <!-- Campo para la identificación -->
+                <label for="identificacion">Identificación:</label><br>
+                <input type="text" id="identificacion" name="identificacion" th:value="${socio.persona.identificacion}" required><br>
+
+                <!-- Campo para el código postal -->
+                <label for="codigo_postal">Código Postal:</label><br>
+                <input type="text" id="codigo_postal" name="codigo_postal" th:value="${socio.persona.direccion.codigoPostal}" pattern="[0-9]*" required><br>
+
+                <!-- Campo para la descripción de la dirección -->
+                <label for="descripcion_direccion">Dirección:</label><br>
+                <input type="text" id="descripcion_direccion" name="descripcion_direccion" th:value="${socio.persona.direccion.descripcion}" required><br>
+
+                <div class="form-group">
+                    <label for="distrito">Distrito:</label>
+                    <input type="text" id="id_distrito" name="id_distrito" th:value="${socio.persona.direccion.distrito.id}" required>
+                </div> 
+
+                <!-- Campo para el número de teléfono -->
+                <label for="numero_telefono">Número de Teléfono:</label><br>
+                <input type="text" id="numero_telefono" name="numero_telefono" th:value="${socio.persona.telefono[0].numero}" required><br>
+
+                <!-- Campo para el correo electrónico -->
+                <label for="email">Correo Electrónico:</label><br>
+                <input type="email" id="email" name="email" th:value="${socio.persona.correoElectronico[0].email}" required><br>
+
+                <!-- Campo para la fecha de registro -->
+                <label for="fecha_registro">Fecha de Registro:</label><br>
+                <input type="date" id="fecha_registro" name="fecha_registro" th:value="${socio.fechaRegistro}" required><br>
+
+                <input type="submit" value="Actualizar">
             </form>
         </div>
-    </div>
-    
-    <script>
-        // Validación del formulario
-        document.getElementById("actualizarSocioForm").addEventListener("submit", function(event) {
-            var fechaRegistro = document.getElementById("fechaRegistro").value;
-            var persona = document.getElementById("persona").value;
-            var prestamo = document.getElementById("prestamo").value;
-            
-            // Validar que la fecha de registro no sea en el futuro
-            var hoy = new Date().toISOString().split('T')[0];
-            if (fechaRegistro > hoy) {
-                alert("La fecha de registro no puede ser en el futuro.");
-                event.preventDefault();
-            }
-            
-            // Validar que se haya seleccionado una persona
-            if (persona === "") {
-                alert("Por favor seleccione una persona.");
-                event.preventDefault();
-            }
+        
+        <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
+        <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
 
-            // Validar que se haya seleccionado un préstamo
-            if (prestamo === "") {
-                alert("Por favor seleccione un préstamo.");
-                event.preventDefault();
-            }
-        });
-    </script>
+        <div class="volver-container">
+            <button class="volver-btn" onclick="window.history.back()">Volver</button>
+        </div>
+    </div>
+
+    <script src="/js/dataSocioActualizarValidate.js"></script>
 </body>
 </html>

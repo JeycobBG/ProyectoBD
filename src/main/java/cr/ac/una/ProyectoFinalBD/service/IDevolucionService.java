@@ -18,5 +18,6 @@ public interface IDevolucionService {
     public List<Devolucion> leer();
     public String[] actualizar(Integer id_prestamo, Date fecha_devolucion_efectuada);
     public String eliminar(Integer id_prestamo);
+    public Devolucion buscar(Integer id);
     
 }

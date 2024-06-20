@@ -5,8 +5,10 @@
 package cr.ac.una.ProyectoFinalBD.service;
 
 import cr.ac.una.ProyectoFinalBD.domain.Genero;
+import cr.ac.una.ProyectoFinalBD.jpa.GeneroRepository;
 import cr.ac.una.ProyectoFinalBD.repositorio.IGeneroRepositorio;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class GeneroService implements IGeneroService{
 
     @Autowired
     IGeneroRepositorio generoRepo;
+    
+    @Autowired
+    GeneroRepository generoRepository;
     
     @Override
     public String add(String nombre, String descripcion, String error) {
@@ -50,4 +55,11 @@ public class GeneroService implements IGeneroService{
     public List<Genero> leer(String error) {
         return generoRepo.leer(error);
     }
+    
+    @Override
+    public Genero buscar(Integer id){
+        Optional<Genero> generoOptional = generoRepository.findById(id);
+        return generoOptional.get(); 
+    }
+    
 }

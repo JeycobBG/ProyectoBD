@@ -5,11 +5,13 @@
 package cr.ac.una.ProyectoFinalBD.controller;
 
 import cr.ac.una.ProyectoFinalBD.domain.Devolucion;
+import cr.ac.una.ProyectoFinalBD.domain.Prestamo;
 import cr.ac.una.ProyectoFinalBD.service.DevolucionService;
-import java.time.Instant;
+import cr.ac.una.ProyectoFinalBD.service.PrestamoService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +29,12 @@ public class DevolucionController {
     @Autowired
     DevolucionService devolucionService;
     
+    @Autowired
+    PrestamoService prestamoService;
+    
     @PostMapping("/guardar")
-    public String guardar(@RequestParam("fecha_devolucion_efectuada")Date fecha_devolucion_efectuada,
-            @RequestParam("id_prestamo")Integer id_prestamo,
-            @RequestParam("error")String error,
-            @RequestParam("advertencia_multa")String advertencia_multa){
+    public String guardar(@RequestParam("fecha_devolucion_efectuada") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_efectuada,
+            @RequestParam("id_prestamo")Integer id_prestamo){
         
         String[] resultado = devolucionService.insertar(fecha_devolucion_efectuada, id_prestamo);
         
@@ -40,15 +43,15 @@ public class DevolucionController {
     }
     
     @GetMapping("/guardar")
-    public String agregar(){
+    public String agregar(Model modelo){
+        List<Prestamo> prestamos = prestamoService.leer();
+        modelo.addAttribute("prestamos", prestamos);
         
         return "Devolucion/CrearDevolucion";
     }
     
     @GetMapping("/leer")
     public String leer(Model modelo){
-       
-       String error = "";
        List<Devolucion> devoluciones = devolucionService.leer();
        
        for(Devolucion dev : devoluciones){
@@ -56,38 +59,35 @@ public class DevolucionController {
        }
        
        modelo.addAttribute("devoluciones", devoluciones);
-       
        return "Devolucion/MostrarDevolucion";
     }
     
-    @GetMapping("/actualizar")
-    public String actualizar(){
+    @PostMapping("/actualizar")
+    public String actualizar(@RequestParam("id_prestamo")Integer id_prestamo,
+            @RequestParam("fecha_devolucion_efectuada") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha_devolucion_efectuada){
         
-        /*
-            @RequestParam("id_prestamo")Integer id_prestamo,
-            @RequestParam("fecha_devolucion")Data fecha_devolucion,
-            @RequestParam("error")String error
-        */  
-        
-        Integer id_prestamo = 1;
-        Date fecha_devolucion_efectuada = Date.from(Instant.now());
         String[] resultado = devolucionService.actualizar(id_prestamo, fecha_devolucion_efectuada);
         
         System.out.println("resultado = " + resultado[0] + " advertencia? " + resultado[1]);
+        return "redirect:/devolucion/leer";
+    }
+    
+    @PostMapping("/actualizarForm")
+    public String actualizar(@RequestParam("id") Integer id, Model modelo){
+        Devolucion devolucion = devolucionService.buscar(id);
+        List<Prestamo> prestamos = prestamoService.leer();
         
-        return "/";
+        modelo.addAttribute("devolucion", devolucion);
+        modelo.addAttribute("prestamos", prestamos);
+        return "Devolucion/ActualizarDevolucion";
     }
     
     @GetMapping("/eliminar")
-    public String eliminar(){
-        /*
-        @PathVariable("id_prestamo") Integer id_prestamo
-        */
-        Integer id_prestamo = 1;
-        String resultado = devolucionService.eliminar(id_prestamo);
+    public String eliminar(@RequestParam("id") Integer id){
+        Devolucion devolucion = devolucionService.buscar(id);
+        String resultado = devolucionService.eliminar(devolucion.getPrestamo().getId());
         System.out.println("resultado = " + resultado);
-        
-        return "Devolucion/CrearDevolucion";
+        return "redirect:/devolucion/leer";
     }
     
 }

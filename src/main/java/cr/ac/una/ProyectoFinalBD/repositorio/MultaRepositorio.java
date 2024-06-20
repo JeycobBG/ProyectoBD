@@ -88,9 +88,12 @@ public class MultaRepositorio implements IMultaRepositorio {
 
     @Override
     @Transactional
-    public List<Multa> multasPorSociosMasMultados(String error){
+    public List<Multa> multasPorSociosMasMultados(Integer top_n, String error){
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_filtrar_multa_por_socio_mas_multados", Multa.class);
+        query.registerStoredProcedureParameter("top_n", Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
+        
+        query.setParameter("top_n", top_n);
         
         query.execute();
         System.out.println((String) query.getOutputParameterValue("error"));
