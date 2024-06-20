@@ -1,9 +1,8 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("actualizarDevolucionForm");
     if (form) {
         form.addEventListener("submit", function(event) {
-            var fechaDevolucionEfectuada = document.getElementById("fechaDevolucionEfectuada").value.trim();
+            var fechaDevolucionEfectuada = document.getElementById("fecha_devolucion_efectuada").value.trim();
             var prestamo = document.getElementById("prestamo").value.trim();
             var valid = true;
             var mensajeExito = document.getElementById('mensajeExito'); 
