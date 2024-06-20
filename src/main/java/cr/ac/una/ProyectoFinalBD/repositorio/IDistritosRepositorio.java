@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package cr.ac.una.ProyectoFinalBD.service;
+package cr.ac.una.ProyectoFinalBD.repositorio;
 
-import cr.ac.una.ProyectoFinalBD.domain.Provincia;
+import cr.ac.una.ProyectoFinalBD.domain.Distrito;
 import java.util.List;
 
 /**
  *
  * @author JEYCOB
  */
-public interface IProvinciasService {
+public interface IDistritosRepositorio {
     
-    List<Provincia> cargarProvincias(String error);
+    List<Distrito> cargarDistritos(String error);
 }

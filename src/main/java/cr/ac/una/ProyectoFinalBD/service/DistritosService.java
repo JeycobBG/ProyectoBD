@@ -4,8 +4,8 @@
  */
 package cr.ac.una.ProyectoFinalBD.service;
 
-import cr.ac.una.ProyectoFinalBD.domain.Provincia;
-import cr.ac.una.ProyectoFinalBD.repositorio.ProvinciasRepositorio;
+import cr.ac.una.ProyectoFinalBD.domain.Distrito;
+import cr.ac.una.ProyectoFinalBD.repositorio.DistritosRepositorio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +15,14 @@ import org.springframework.stereotype.Service;
  * @author JEYCOB
  */
 @Service
-public class ProvinciasService implements IProvinciasService{
+public class DistritosService implements IDistritosService{
 
     @Autowired
-    ProvinciasRepositorio provinciasRepo;
+    DistritosRepositorio provinciasRepo;
     
     @Override
-    public List<Provincia> cargarProvincias(String error) {
-        return provinciasRepo.cargarProvincias(error);
+    public List<Distrito> cargarDistritos(String error) {
+        return provinciasRepo.cargarDistritos(error);
     }
     
 }

@@ -4,7 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.repositorio;
 
-import cr.ac.una.ProyectoFinalBD.domain.Provincia;
+import cr.ac.una.ProyectoFinalBD.domain.Distrito;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureQuery;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
  * @author JEYCOB
  */
 @Repository
-public class ProvinciasRepositorio implements IProvinciasRepositorio{
+public class DistritosRepositorio implements IDistritosRepositorio{
     
     @Autowired
     private EntityManager entityManager;
@@ -26,8 +26,8 @@ public class ProvinciasRepositorio implements IProvinciasRepositorio{
     
     @Override
     @Transactional
-    public List<Provincia> cargarProvincias(String error) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_cargar_provincias", Provincia.class);
+    public List<Distrito> cargarDistritos(String error) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_cargar_provincias", Distrito.class);
         query.registerStoredProcedureParameter("error", String.class, ParameterMode.OUT);
 
         query.execute();

@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', async function() {
     
     // Obtener toda la información de provincias, cantones y distritos de una vez
-    const response = await fetch('http://localhost:7000/provincias/cargar');
+    const response = await fetch('http://localhost:7001/distritos/cargar');
     console.log(response.json());
     
     const data = await response.json();
     
     const DataDiv = document.getElementById('data'); //si esto se carga, es porque es el de actualizar
 
-    const provinciaSelect = document.getElementById('provincia');
-    const cantonSelect = document.getElementById('canton');
-    const distritoSelect = document.getElementById('distrito');
+    const provinciaSelect = document.getElementById('id_provincia');
+    const cantonSelect = document.getElementById('id_canton');
+    const distritoSelect = document.getElementById('id_distrito');
     
     // Función para seleccionar la opción en un select según el label
     const seleccionarOptionPorLabel = (select, label) => {

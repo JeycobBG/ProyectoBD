@@ -25,6 +25,7 @@ public class Distrito {
     @Column(name = "id_distrito")
     private int id;
     
+    @Column(name = "nombre")
     private String nombre;
     
     @ManyToOne()
@@ -41,11 +42,11 @@ public class Distrito {
         this.id = id;
     }
 
-    public String getNombre() {
+    public String getDistrito() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setDistrito(String nombre) {
         this.nombre = nombre;
     }
 

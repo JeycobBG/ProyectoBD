@@ -3,6 +3,7 @@
     <head>
         <title>Actualizar Libro</title>
         <link rel="stylesheet" href="/css/actualizar.css">
+        <script text="text/javascript" th:src="@{/js/cargarProvincias.js}"></script>
     </head>
     <body>
         <div class="wrapper">
@@ -69,28 +70,24 @@
 
                     <!-- Combo box para seleccionar los géneros -->
                     <div class="form-group">
-                        <label for="generos">Géneros:</label>
-                        <!--
-                        <select id="generos" th:field="*{generos}" multiple required>
-                        <!-- Cargar dinámicamente las opciones de géneros desde el backend 
-                        <option th:each="genero : ${generos}" 
-                                th:value="${genero.id}" 
-                                th:text="${genero.nombre}">
+                    <label for="generos">Géneros:</label>
+                    <select id="generos" name="generos" multiple required>
+                        <option th:each="genero : ${todosLosGeneros}"
+                                th:value="${genero.id}"
+                                th:text="${genero.nombre}"
+                                th:selected="${libro.generos.contains(genero)}">
                         </option>
-                    </select> -->
-                    </div>
-
+                    </select>
+                </div>
                     <input type="submit" value="Actualizar">
-
                 </form>
 
                 <div id="mensajeExito" class="alert alert-success" style="display: none;"></div>
                 <div id="mensajeError" class="alert alert-error" style="display: none;"></div>
-            <div class="volver-container">
-                <button class="volver-btn" onclick="window.history.back()">Volver</button>
-            </div>
+
             </div>
         </div>
         <script src="/js/dataLibroActualizarValidate.js"></script>
+
     </body>
 </html>

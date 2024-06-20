@@ -4,6 +4,7 @@
  */
 package cr.ac.una.ProyectoFinalBD.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,9 +28,11 @@ public class Provincia {
     @Column(name = "id_provincia")
     private int id;
     
+    @Column(name = "nombre")
     private String nombre;
     
     @OneToMany(mappedBy = "provincia", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Canton> canton;
     
     public Provincia() {
@@ -44,11 +47,11 @@ public class Provincia {
         this.id = id;
     }
 
-    public String getNombre() {
+    public String getProvincia() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setProvincia(String nombre) {
         this.nombre = nombre;
     }
 
