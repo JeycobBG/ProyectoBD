@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fechaPublicacionInput.setAttribute('max', today);
 });
 
-document.getElementById("registrarLibroForm").addEventListener("submit", function(event) {
+document.getElementById("registrarForm").addEventListener("submit", function(event) {
     var isbn = document.getElementById("ISBN").value;
     var titulo = document.getElementById("titulo").value;
     var sinopsis = document.getElementById("sinopsis").value;

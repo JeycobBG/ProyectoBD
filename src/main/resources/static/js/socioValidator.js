@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var form = document.getElementById("registrarSocioForm");
+        var form = document.getElementById("registrarForm");
     var mensajeError = document.getElementById('mensajeError'); // Asegúrate de tener este elemento en tu HTML para mostrar errores
 
     if (form) {

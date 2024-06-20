@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     var fechaFundacionInput = document.getElementById("fecha_fundacion");
     var today = new Date().toISOString().split('T')[0];
@@ -11,8 +12,9 @@ document.getElementById("registrarEditorialForm").addEventListener("submit", fun
     var descripcionDireccion = document.getElementById("descripcionDireccion").value;
     var distrito = document.getElementById("distrito").value;
 
-    if (nombre.trim() === "") {
-        alert("Por favor ingrese el nombre de la editorial.");
+    if (/[\d]/.test(nombre)) {
+        alert("El nombre de la editorial no debe contener números.");
+        valid = false;
         event.preventDefault();
     }
 

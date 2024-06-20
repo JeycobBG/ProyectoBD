@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (form) {
         form.addEventListener("submit", function(event) {
-            var fechaPrestamo = document.getElementById("fechaPrestamo").value;
-            var fechaDevolucionPrevista = document.getElementById("fechaDevolucionPrevista").value;
+            var fechaPrestamo = document.getElementById("fecha_prestamo").value;
+            var fechaDevolucionPrevista = document.getElementById("fecha_devolucion_prevista").value;
             var fechaActual = new Date().toISOString().split('T')[0]; // Obtener la fecha actual
             var valid = true;
 

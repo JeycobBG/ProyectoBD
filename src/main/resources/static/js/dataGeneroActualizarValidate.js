@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 valid = false;
                 event.preventDefault();
             }
+            
+            if (/[\d]/.test(nombre)) {
+                alert("El nombre del género no debe contener números.");
+                valid = false;
+                event.preventDefault();
+            }
 
             if (descripcion === "") {
                 if (mensajeError) mensajeError.textContent = "Por favor ingrese la descripción del género.";

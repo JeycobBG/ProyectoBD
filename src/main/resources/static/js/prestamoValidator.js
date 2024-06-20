@@ -1,10 +1,11 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     var fechaPrestamoInput = document.getElementById("fecha_prestamo");
     var today = new Date().toISOString().split('T')[0];
     fechaPrestamoInput.setAttribute('max', today);
 });
 
-document.getElementById("registrarPrestamoForm").addEventListener("submit", function (event) {
+document.getElementById("registrarForm").addEventListener("submit", function (event) {
     var fechaPrestamo = document.getElementById("fecha_prestamo").value;
     var fechaDevolucionPrevista = document.getElementById("fecha_devolucion_prevista").value;
 
